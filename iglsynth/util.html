@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities &mdash; iglsynth 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Solver Module" href="solver.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver.html">Solver Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#graph">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sub-graph">Sub-Graph</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Utilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/util.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="graph">
+<h2>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h2>
+<p>A graph is defined as</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(G = \langle V, E, vprops, eprops, gprops \rangle\)</span></div></blockquote>
+<p>where</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(V\)</span> is a set of vertices.</li>
+<li><span class="math notranslate nohighlight">\(E\)</span> is a set of edges.</li>
+<li><span class="math notranslate nohighlight">\(vprops\)</span> are vertex properties. Each vertex property maps the set of vertices to its property value.</li>
+<li><span class="math notranslate nohighlight">\(eprops\)</span> are edge properties. Each edge property maps the set of edges to its property value.</li>
+<li><span class="math notranslate nohighlight">\(gprops\)</span> are graph properties. A graph property is like a global variable for entire graph.</li>
+</ul>
+<p>The properties <span class="math notranslate nohighlight">\(vprops\)</span>, <span class="math notranslate nohighlight">\(eprops\)</span> and <span class="math notranslate nohighlight">\(gprops\)</span> can be one of the following types.</p>
+<dl class="data">
+<dt id="iglsynth.util.VALID_PROPERTY_TYPES">
+<code class="descclassname">iglsynth.util.</code><code class="descname">VALID_PROPERTY_TYPES</code><em class="property"> (str) = {&quot;bool&quot;, &quot;int&quot;, &quot;float&quot;, &quot;string&quot;, &quot;object&quot;}</em><a class="headerlink" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The API for <a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> is as follows.</p>
+<dl class="class">
+<dt id="iglsynth.util.Graph">
+<em class="property">class </em><code class="descclassname">iglsynth.util.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>vprops: Iterable[Tuple[str</em>, <em>str]] = ()</em>, <em>eprops: Iterable[Tuple[str</em>, <em>str]] = ()</em>, <em>gprops: Iterable[Tuple[str</em>, <em>str]] = ()</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a discrete graph <span class="math notranslate nohighlight">\(G = (V, E, vprops, eprops, gprops)\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vprops</strong> (<em>Iterable</em><em>[</em><em>Tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – An iterable of 2-tuple of (vertex-property-name, vertex-property-type). The type must be a string
+from values of dictionary <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+<li><strong>eprops</strong> (<em>Iterable</em><em>[</em><em>Tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – An iterable of 2-tuple of (vertex-property-name, vertex-property-type). The type must be a string
+from values of dictionary <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+<li><strong>gprops</strong> (<em>Iterable</em><em>[</em><em>Tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – An iterable of 2-tuple of (vertex-property-name, vertex-property-type). The type must be a string
+from values of dictionary <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="iglsynth.util.Graph.Edge">
+<em class="property">class </em><code class="descname">Edge</code><span class="sig-paren">(</span><em>graph</em>, <em>gt_edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.Edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>[INTERNAL CLASS] Represents an edge in <a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a>. It is a wrapper around the edge data structure of
+internal graph library.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>graph</strong> – A <a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object.</li>
+<li><strong>gt_edge</strong> – A <code class="docutils literal notranslate"><span class="pre">graph_tool.Edge</span></code> object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">DO NOT INSTANTIATE. This class must not be instantiated by users.</p>
+</div>
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.Edge.source">
+<code class="descname">source</code><a class="headerlink" href="#iglsynth.util.Graph.Edge.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vertex id of source vertex of edge.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.Edge.target">
+<code class="descname">target</code><a class="headerlink" href="#iglsynth.util.Graph.Edge.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vertex id of source target of edge.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_edge">
+<code class="descname">add_edge</code><span class="sig-paren">(</span><em>uid: int</em>, <em>vid: int</em><span class="sig-paren">)</span> &#x2192; iglsynth.util.graph.Graph.Edge<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an edge in the graph. Both the vertices must be present in the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>uid</strong> (<em>int</em>) – Vertex ID of source vertex.</li>
+<li><strong>vid</strong> – Vertex ID of target vertex.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><a class="reference internal" href="#iglsynth.util.Graph.Edge" title="iglsynth.util.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object representing the edge.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>AssertionError</strong> – When at least one of the vertex is not in the graph.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_edge_property">
+<code class="descname">add_edge_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = 'object'</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_edge_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_edge_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new edge property for the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – Name of the property. The given name must be unique among all vertex/edge/graph properties.</li>
+<li><strong>of_type</strong> – One of the supported types of properties. See
+<a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>NameError</strong> – If given name is already a property.</li>
+<li><strong>TypeError</strong> – If the given type is invalid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_edges">
+<code class="descname">add_edges</code><span class="sig-paren">(</span><em>edges: Iterable[Tuple[int, int]]</em><span class="sig-paren">)</span> &#x2192; Iterator[iglsynth.util.graph.Graph.Edge]<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds multiple edges to the graph. All the vertices must be present in the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edges</strong> (<em>Iterable</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – An iterable of 2-tuple of (uid, vid) representing the edge, where uid is source and vid is target.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – When at least one of the vertex is not in the graph.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_graph_property">
+<code class="descname">add_graph_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = 'object'</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_graph_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_graph_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new graph property for the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – Name of the property. The given name must be unique among all vertex/edge/graph properties.</li>
+<li><strong>of_type</strong> – One of the supported types of properties. See
+<a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>NameError</strong> – If given name is already a property.</li>
+<li><strong>TypeError</strong> – If the given type is invalid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_vertex">
+<code class="descname">add_vertex</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new vertex in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_vertex_property">
+<code class="descname">add_vertex_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = 'object'</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_vertex_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_vertex_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new vertex property for the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – Name of the property. The given name must be unique among all vertex/edge/graph properties.</li>
+<li><strong>of_type</strong> – One of the supported types of properties. See
+<a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>NameError</strong> – If given name is already a property.</li>
+<li><strong>TypeError</strong> – If the given type is invalid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.add_vertices">
+<code class="descname">add_vertices</code><span class="sig-paren">(</span><em>num: int</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.add_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.add_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a given number of vertices in graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num</strong> (<em>int</em><em> (</em><em>&gt; 0</em><em>)</em>) – Number of vertices to be added.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>AssertionError</strong> – When num &lt;= 0.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.edge_properties">
+<code class="descname">edge_properties</code><a class="headerlink" href="#iglsynth.util.Graph.edge_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of edge property names in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.edges">
+<code class="descname">edges</code><a class="headerlink" href="#iglsynth.util.Graph.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over edges in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.get_edge_property">
+<code class="descname">get_edge_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>edge: Optional[iglsynth.util.graph.Graph.Edge] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.get_edge_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.get_edge_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of edge property for a given edge.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – Name of edge property.</li>
+<li><strong>edge</strong> (<a class="reference internal" href="#iglsynth.util.Graph.Edge" title="iglsynth.util.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>) – Edge for which the property value is to be extracted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Value of the property.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.get_graph_property">
+<code class="descname">get_graph_property</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.get_graph_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.get_graph_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of graph property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of graph property.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Value of the property.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.get_vertex_property">
+<code class="descname">get_vertex_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>vid: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.get_vertex_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.get_vertex_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of vertex property for a given vertex.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – Name of vertex property.</li>
+<li><strong>vid</strong> (<em>int</em>) – Vertex ID of the vertex for which the property value is to be extracted.
+If vertex ID is not given then complete dictionary of property {vid: prop_value} is returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Value of the property.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.graph_properties">
+<code class="descname">graph_properties</code><a class="headerlink" href="#iglsynth.util.Graph.graph_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of graph property names in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.has_edge_property">
+<code class="descname">has_edge_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.has_edge_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.has_edge_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if graph has a edge property with give name. If type is provided, it checks whether the edge property
+with given name and type exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – Name of edge property.</li>
+<li><strong>of_type</strong> (str (a value from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>)) – Expected type of the property.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.has_graph_property">
+<code class="descname">has_graph_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.has_graph_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.has_graph_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if graph has a graph property with give name. If type is provided, it checks whether the graph property
+with given name and type exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – Name of graph property.</li>
+<li><strong>of_type</strong> (str (a value from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>)) – Expected type of the property.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.has_vertex_property">
+<code class="descname">has_vertex_property</code><span class="sig-paren">(</span><em>name: str</em>, <em>of_type: str = None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.has_vertex_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.has_vertex_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if graph has a vertex property with give name. If type is provided, it checks whether the vertex property
+with given name and type exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – Name of vertex property.</li>
+<li><strong>of_type</strong> (str (a value from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>)) – Expected type of the property.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.num_edges">
+<code class="descname">num_edges</code><a class="headerlink" href="#iglsynth.util.Graph.num_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of edges in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.num_vertices">
+<code class="descname">num_vertices</code><a class="headerlink" href="#iglsynth.util.Graph.num_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of vertices in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.properties">
+<code class="descname">properties</code><a class="headerlink" href="#iglsynth.util.Graph.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all properties of graph, including vertex, edge and graph properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.remove_edge">
+<code class="descname">remove_edge</code><span class="sig-paren">(</span><em>edge: iglsynth.util.graph.Graph.Edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.remove_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.remove_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a single edge from graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edge</strong> – <a class="reference internal" href="#iglsynth.util.Graph.Edge" title="iglsynth.util.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.remove_edges">
+<code class="descname">remove_edges</code><span class="sig-paren">(</span><em>edges: Iterable[Graph.Edge]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.remove_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.remove_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes multiple edges from graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edges</strong> – A list of <a class="reference internal" href="#iglsynth.util.Graph.Edge" title="iglsynth.util.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.remove_vertex">
+<code class="descname">remove_vertex</code><span class="sig-paren">(</span><em>vid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.remove_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.remove_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a single vertex from the graph, if exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vid</strong> (<em>int</em>) – Vertex id.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.remove_vertices">
+<code class="descname">remove_vertices</code><span class="sig-paren">(</span><em>vid: Iterable[int]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.remove_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.remove_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a multiple vertices from the graph, if existing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vid</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em>) – A list of vertex id’s.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.typeof_edge_property">
+<code class="descname">typeof_edge_property</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.typeof_edge_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.typeof_edge_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type of edge property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of property.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Type of property from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.typeof_graph_property">
+<code class="descname">typeof_graph_property</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.typeof_graph_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.typeof_graph_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type of graph property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of property.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Type of property from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.Graph.typeof_vertex_property">
+<code class="descname">typeof_vertex_property</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#Graph.typeof_vertex_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.Graph.typeof_vertex_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type of vertex property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of property.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Type of property from <a class="reference internal" href="#iglsynth.util.VALID_PROPERTY_TYPES" title="iglsynth.util.VALID_PROPERTY_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">VALID_PROPERTY_TYPES</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.vertex_properties">
+<code class="descname">vertex_properties</code><a class="headerlink" href="#iglsynth.util.Graph.vertex_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the a list of vertex property names in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.Graph.vertices">
+<code class="descname">vertices</code><a class="headerlink" href="#iglsynth.util.Graph.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over vertices in graph.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="sub-graph">
+<h2>Sub-Graph<a class="headerlink" href="#sub-graph" title="Permalink to this headline">¶</a></h2>
+<p>Given a graph (or sub-graph) <span class="math notranslate nohighlight">\(G\)</span>, a sub-graph is a graph defined using boolean properties
+<code class="docutils literal notranslate"><span class="pre">vfilt</span></code> and/or <code class="docutils literal notranslate"><span class="pre">efilt</span></code> over <span class="math notranslate nohighlight">\(G\)</span>. The vertices <span class="math notranslate nohighlight">\(v \in V\)</span> for which <code class="docutils literal notranslate"><span class="pre">vfilt[v]</span> <span class="pre">=</span> <span class="pre">True</span></code>
+are included in the sub-graph. Similarly, the edges <span class="math notranslate nohighlight">\(e \in E\)</span> for which <code class="docutils literal notranslate"><span class="pre">efilt[e]</span> <span class="pre">=</span> <span class="pre">True</span></code>
+are included in the sub-graph.</p>
+<dl class="class">
+<dt id="iglsynth.util.SubGraph">
+<em class="property">class </em><code class="descclassname">iglsynth.util.</code><code class="descname">SubGraph</code><span class="sig-paren">(</span><em>graph: iglsynth.util.graph.Graph</em>, <em>vfilt_name: str = None</em>, <em>efilt_name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/iglsynth/util/graph.html#SubGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.SubGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a sub-graph of <a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> defined using properties <code class="docutils literal notranslate"><span class="pre">vfilt</span></code> and/or <code class="docutils literal notranslate"><span class="pre">efilt</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>graph</strong> (<a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a>) – A graph object.</li>
+<li><strong>vfilt_name</strong> (<em>str</em>) – Name of the boolean vertex property used to define whether a vertex is in sub-graph or not.</li>
+<li><strong>efilt_name</strong> (<em>str</em>) – Name of the boolean edge property used to define whether an edge is in sub-graph or not.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#iglsynth.util.SubGraph" title="iglsynth.util.SubGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubGraph</span></code></a> is a derived class from <a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a>. All member functions and properties of
+<a class="reference internal" href="#iglsynth.util.Graph" title="iglsynth.util.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> class apply to <a class="reference internal" href="#iglsynth.util.SubGraph" title="iglsynth.util.SubGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubGraph</span></code></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="solver.html" class="btn btn-neutral float-left" title="Solver Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

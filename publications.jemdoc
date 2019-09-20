@@ -1,0 +1,36 @@
+# jemdoc: menu{MENU}{index.html}
+= Publications
+
+
+== Working Papers and Preprints
+
+- *Opportunistic Synthesis in Reactive Games under Information Asymmetry* 
+\nAbhishek N. Kulkarni and Jie Fu
+\n/Conference on Decision and Control (CDC), 2019./ (accepted)
+\n\[[https://arxiv.org/abs/1906.05847 arXiv]\]
+
+- *Sure  and  Almost-Sure  Winning  Strategies  in  Reactive  Games  under Action  Deception*
+\nAbhishek N. Kulkarni and Jie Fu
+
+- *Deceptive  Planning  in  Hypergames  with  Asymmetrical  Information  and Temporal  Logic  Objectives*
+\nHaoxiang Ma, Lening Li, Abhishek N. Kulkarni and Jie Fu
+
+
+== Conference Papers
+
+
+
+- *A Compositional Approach to Reactive Games under Temporal Logic Specifications*
+\nAbhishek N. Kulkarni and Jie Fu
+\nAnnual American Control Conference (ACC), 2018./
+\n/\[[https://ieeexplore-ieee-org.ezproxy.wpi.edu/document/8431867/ IEEEXplore]\] \[[papers/ANKulkarni2018.bib BibTeX]\] \[[papers/ANKulkarni2018.pdf PDF]\]
+
+- *Dot matrix text recognition for industrial carton classification*
+\nSiddharth Nitin Patki, Madhura Joshi and Abhishek N. Kulkarni
+\n/International Conference on Industrial Instrumentation and Control (ICIC), 2015./
+\n\[[https://ieeexplore-ieee-org.ezproxy.wpi.edu/document/7150847 IEEEXplore]\] \[[papers/SPatki2015.bib BibTeX]\] \[[papers/SPatki2015.pdf PDF]\]
+
+- *Big Data Management of a Cyber-Physical Multi-location Chemical Factory*
+\nAbhishek N. Kulkarni, Anita S. Joshi and Satish R. Inamdar
+\n/International Journal of Industrial Electronics and Electrical Engineering (IJIEEE), vol. 2, issue 8, pp. 9-14, Aug. 2014./
+\n\[[papers/ANKulkarni2014.pdf PDF]\]
