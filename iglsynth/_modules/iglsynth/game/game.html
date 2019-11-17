@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>iglsynth.game.game &mdash; iglsynth 0.1.0 documentation</title>
+  <title>iglsynth.game.game &mdash; iglsynth 0.2.1 documentation</title>
   
 
   
@@ -25,7 +25,6 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -34,6 +33,7 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.1
               </div>
             
           
@@ -83,12 +83,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">API Documentation</span></p>
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../index.html">Home Page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../game.html">Game Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../solver.html">Solver Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../util.html">Utility Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documentation</a></li>
 </ul>
 
             
@@ -158,140 +157,208 @@
 <span class="sd">License goes here...</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">iglsynth.util.graph</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">iglsynth.game.bases</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">iglsynth.game.tsys</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">iglsynth.logic.core</span> <span class="k">import</span> <span class="o">*</span>
 
 
-<div class="viewcode-block" id="Game"><a class="viewcode-back" href="../../../game.html#iglsynth.game.game.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">IGame</span><span class="p">):</span>
+<div class="viewcode-block" id="Game"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Represents a deterministic two-player game. The game may be concurrent or turn-based.</span>
+<span class="sd">    Represents a two-player deterministic game.</span>
 
-<span class="sd">    :param kind: Whether the game is concurrent or turn-based.</span>
-<span class="sd">    :type kind: str, either :data:`CONCURRENT &lt;iglsynth.game.game.CONCURRENT&gt;` or</span>
-<span class="sd">        :data:`TURN_BASED &lt;iglsynth.game.game.TURN_BASED&gt;`</span>
+<span class="sd">        * The game could be concurrent or turn-based.</span>
+<span class="sd">        * Game instance can be constructed by adding vertices and edges (See :ref:`Example Game Graph Construction`).</span>
+
+<span class="sd">    :param kind: (:data:`CONCURRENT &lt;iglsynth.game.core.CONCURRENT&gt;`</span>
+<span class="sd">        or :data:`TURN_BASED &lt;iglsynth.game.core.TURN_BASED&gt;`) Whether the game is concurrent or turn-based.</span>
+<span class="sd">    :param vtype: (:class:`Game.Vertex` or sub-class) The vertex type used to define the game instance.</span>
+<span class="sd">    :param etype: (:class:`Game.Edge` or sub-class) The edge type used to define the game instance.</span>
+<span class="sd">    :param graph: (:class:`Game`) A game instance from which &quot;self&quot; instance should be created.</span>
+<span class="sd">    :param file: (str) An absolute path of file from which the game should be loaded.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_validate_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC CLASSES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Game.Vertex"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.Vertex">[docs]</a>    <span class="k">class</span> <span class="nc">Vertex</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Vertex</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        A deterministic two-player game graph must have an edge property: &quot;act : &lt;Int&gt;&quot;, where the integer represents</span>
-<span class="sd">        action-id. It must also have a vertex property: &quot;is_final : &lt;bool&gt;&quot; that marks</span>
-<span class="sd">        whether a vertex is a final state or not.</span>
+<span class="sd">        Represents a vertex in game.</span>
 
-<span class="sd">        If game is turn-based, then graph must have vertex property: &quot;turn : &lt;Int&gt;&quot;, where the integer</span>
-<span class="sd">        represents the ID of player who will play at that vertex.</span>
+<span class="sd">        A game vertex is a 3-tuple, ``(name, tsys.v, aut.v)``. When game is</span>
+<span class="sd">        defined using a graph, `tsys.v` and `aut.v` are both set to None.</span>
 
-<span class="sd">        :param graph: An :class:`Graph` object.</span>
+<span class="sd">        - Vertex must have a name.</span>
+<span class="sd">        - When game is constructed from transition system and an automaton the vertex stores tsys and aut vertices.</span>
+
+<span class="sd">        :param name: (str) The name of the vertex.</span>
+<span class="sd">        :param turn: (int) The id of player who will make the move at this state.</span>
+<span class="sd">        :param tsys_v: (:class:`iglsynth.game.tsys.TSys.Vertex`) Vertex of transition system.</span>
+<span class="sd">        :param aut_v: (:class:`iglsynth.logic.core.Automaton.Vertex`) Vertex of automaton.</span>
+
+<span class="sd">        .. note:: When game is defined using transition system and automaton, it is conventional to name vertices</span>
+<span class="sd">            as ``(tsys_v.name, aut_v.name)``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># Check if graph has necessary properties applicable to both turn-based and concurrent games</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">TURN_BASED</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="o">.</span><span class="n">has_vertex_property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;turn&quot;</span><span class="p">,</span> <span class="n">of_type</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="c1"># INTERNAL CLASSES</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">turn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tsys_v</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">aut_v</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tsys_v</span><span class="p">,</span> <span class="n">TSys</span><span class="o">.</span><span class="n">Vertex</span><span class="p">)</span> <span class="ow">or</span> <span class="n">tsys_v</span> <span class="ow">is</span> <span class="kc">None</span>          
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">aut_v</span><span class="p">,</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">)</span> <span class="ow">or</span> <span class="n">aut_v</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">turn</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">turn</span> <span class="ow">is</span> <span class="kc">None</span>
 
-        <span class="c1"># Check if graph has necessary properties applicable to both turn-based and concurrent games</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">has_vertex_property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;is_final&quot;</span><span class="p">,</span> <span class="n">of_type</span><span class="o">=</span><span class="s2">&quot;bool&quot;</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="n">graph</span><span class="o">.</span><span class="n">has_edge_property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;act&quot;</span><span class="p">,</span> <span class="n">of_type</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)):</span>
-            <span class="k">return</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tsys_v</span> <span class="o">=</span> <span class="n">tsys_v</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_aut_v</span> <span class="o">=</span> <span class="n">aut_v</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span> <span class="o">=</span> <span class="n">turn</span>
 
-        <span class="c1"># If all properties are as expected</span>
-        <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">string</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;Vertex(name=</span><span class="si">{self._name}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tsys_v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="n">f</span><span class="s2">&quot;, TSys.V=</span><span class="si">{self._tsys_v}</span><span class="s2">&quot;</span>        <span class="c1"># pragma: no cover</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aut_v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="n">f</span><span class="s2">&quot;, Aut.V=</span><span class="si">{self._aut_v}</span><span class="s2">&quot;</span>          <span class="c1"># pragma: no cover</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
+            <span class="k">return</span> <span class="n">string</span>
 
-    <span class="k">def</span> <span class="nf">_validate_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Kripke</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_validate_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Player</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_turn</span>
 
-    <span class="k">def</span> <span class="nf">_validate_acc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acc</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="c1"># PUBLIC PROPERTIES</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the name of game vertex. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
-    <span class="k">def</span> <span class="nf">_define_by_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Kripke</span><span class="p">,</span> <span class="n">acc1</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span><span class="p">,</span> <span class="n">acc2</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the id of player who will make move in current state. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span>
 
-    <span class="k">def</span> <span class="nf">_define_by_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">acc1</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span><span class="p">,</span>
-                          <span class="n">rp</span><span class="p">:</span> <span class="s1">&#39;Distribution&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">acc2</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">tsys_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tsys_v</span>         <span class="c1"># pragma: no cover</span>
 
-    <span class="k">def</span> <span class="nf">_define_by_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="s1">&#39;Graph&#39;</span><span class="p">):</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">aut_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aut_v</span>          <span class="c1"># pragma: no cover</span></div>
+
+<div class="viewcode-block" id="Game.Edge"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.Edge">[docs]</a>    <span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Edge</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Configures the game using a graph provided by user.</span>
+<span class="sd">        Represents an action-labeled edge of a game.</span>
 
-<span class="sd">        :param graph: An :class:`Graph` object satisfying necessary constraints.</span>
+<span class="sd">        - :class:`Edge &lt;iglsynth.game.game.Game.Edge&gt;` represents a directed edge labeled with an action.</span>
+<span class="sd">        - Two edges are equal if they share equal source and target vertices</span>
+<span class="sd">          and have identical action labels.</span>
 
-<span class="sd">        .. note:: The graph is assumed to satisfy the requirements of a deterministic two-player game.</span>
+<span class="sd">        :param u: (:class:`Vertex`) Source vertex of edge.</span>
+<span class="sd">        :param v: (:class:`Vertex`) Target vertex of edge.</span>
+<span class="sd">        :param act: (:class:`Action &lt;iglsynth.game.core.Action&gt;` or None) An action label of edge. (Default: None)</span>
+
+<span class="sd">        .. note:: We have following cases depending on whether game is turn-based or concurrent.</span>
+
+<span class="sd">            * (Turn-based) Action must be an :class:`Action &lt;iglsynth.game.core.Action&gt;` object.</span>
+<span class="sd">            * (Concurrent) Action must be a 2-tuple of (:class:`Action &lt;iglsynth.game.core.Action&gt;`,</span>
+<span class="sd">              :class:`Action &lt;iglsynth.game.core.Action&gt;`)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_p1</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_p2</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_acc</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">graph</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="s1">&#39;Game.Vertex&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Game.Vertex&#39;</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="c1"># Validate type of action</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">Action</span><span class="p">):</span>
+                <span class="k">pass</span>
 
-<div class="viewcode-block" id="Game.define"><a class="viewcode-back" href="../../../game.html#iglsynth.game.game.Game.define">[docs]</a>    <span class="k">def</span> <span class="nf">define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Kripke</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">p1</span><span class="p">:</span> <span class="n">Player</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="n">Player</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">rp</span><span class="p">:</span> <span class="s1">&#39;Distribution&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">acc1</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">acc2</span><span class="p">:</span> <span class="s1">&#39;Acceptance&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Define a two-player zero-sum game with given parameters.</span>
-<span class="sd">        The instantiation checks for the following patterns, in order:</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">act</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Action</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Action</span><span class="p">)</span>
+                <span class="n">act</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
 
-<span class="sd">        1. ``game.define(graph=&lt;Graph&gt;)``</span>
-<span class="sd">        2. ``game.define(model=&lt;TSys&gt;, acc1=&lt;Acceptance&gt;)``</span>
-<span class="sd">        3. ``game.define(p1=&lt;Player&gt;, p2=&lt;Player&gt;, acc1=&lt;Acceptance&gt;)``</span>
+            <span class="k">elif</span> <span class="n">act</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
 
-<span class="sd">        :param graph: Graph object representing game.</span>
-<span class="sd">        :type graph: :class:`Graph &lt;iglsynth.util.Graph&gt;`</span>
-
-<span class="sd">        :param model: A Kripke structure.</span>
-<span class="sd">        :type model: :class:`TSys`</span>
-
-<span class="sd">        :param p1: Player 1 profile.</span>
-<span class="sd">        :type p1: :class:`Player`</span>
-
-<span class="sd">        :param p2: Player 1 profile.</span>
-<span class="sd">        :type p2: :class:`Player`</span>
-
-<span class="sd">        :param acc1: Winning condition of player 1.</span>
-<span class="sd">        :type acc1: :class:`Acceptance`</span>
-
-<span class="sd">        .. caution:: Currently, only instantiation using ``graph`` is implemented.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># Case 1: Definition by graph</span>
-        <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_define_by_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Game could not be defined using provided &#39;graph&#39;. Validation failed.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Input parameter act must be an Action or a 2-tuple (Action, Action) or None.&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Case 2: Definition by model and winning condition</span>
-        <span class="k">elif</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">acc1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
-            <span class="c1"># if self._validate_model(model) and self._validate_acc(acc1):</span>
-            <span class="c1">#     self._define_by_model(model, acc1)</span>
-            <span class="c1"># else:</span>
-            <span class="c1">#     raise AttributeError(&quot;Game could not be defined using provided &#39;model&#39;, &#39;acc1&#39;. Validation failed.&quot;)</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="o">.</span><span class="n">Edge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_act</span> <span class="o">=</span> <span class="n">act</span>
 
-        <span class="c1"># Case 2: Definition by player profiles and winning condition</span>
-        <span class="k">elif</span> <span class="n">p1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">p2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">acc1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">source</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">target</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">act</span>
 
-            <span class="c1"># if self._validate_player(p1) and self._validate_player(p2) and self._validate_acc(acc1):</span>
-            <span class="c1">#     self._define_by_player(p1, p2, acc1)</span>
-            <span class="c1"># else:</span>
-            <span class="c1">#     raise AttributeError(&quot;Game could not be defined using provided &#39;p1&#39;, &#39;p2&#39;, &#39;acc1&#39;. Validation failed.&quot;)</span>
+        <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">)</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
 
-        <span class="c1"># Case else:</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;Game cannot be defined using given parameters. See docs for acceptable definitions.&#39;</span><span class="p">)</span></div>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_act</span></div>
 
-    <span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_product</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">game_product</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">etype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">assert</span> <span class="n">kind</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TURN_BASED</span><span class="p">,</span> <span class="n">CONCURRENT</span><span class="p">],</span> \
+                <span class="n">f</span><span class="s2">&quot;Parameter &#39;kind&#39; must be either TURN_BASED or CONCURRENT. Got </span><span class="si">{kind}</span><span class="s2">.&quot;</span>
+
+        <span class="c1"># Initialize internal variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span> <span class="o">=</span> <span class="n">kind</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="n">etype</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">kind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Yet to be implemented...</span>
-
-<span class="sd">        :param model_product:</span>
-<span class="sd">        :param game_product:</span>
-<span class="sd">        :return:</span>
+<span class="sd">        Returns the kind of game, whether :data:`TURN_BASED &lt;iglsynth.game.core.TURN_BASED&gt;` or</span>
+<span class="sd">        :data:`CONCURRENT &lt;iglsynth.game.core.CONCURRENT&gt;`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Feature yet to be implemented.&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span>
 
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PRIVATE METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_define_by_tsys_aut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">):</span>
+        <span class="c1"># TODO: Implement this one!</span>
+        <span class="k">pass</span>        <span class="c1"># pragma: no cover</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Game.add_vertex"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.add_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Game.Vertex&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span> <span class="o">==</span> <span class="n">TURN_BASED</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">turn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>   <span class="c1"># kind is CONCURRENT</span>
+            <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">turn</span> <span class="ow">is</span> <span class="kc">None</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Game.add_edge"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;Game.Edge&#39;</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span> <span class="o">==</span> <span class="n">TURN_BASED</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">act</span><span class="p">,</span> <span class="n">Action</span><span class="p">)</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">act</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>   <span class="c1"># kind is CONCURRENT</span>
+            <span class="n">act</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">act</span>
+            <span class="k">if</span> <span class="n">act</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">act</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Action</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Action</span><span class="p">)</span>
+        
+        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">aut</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>      <span class="c1"># pragma: no cover</span>
+        <span class="k">if</span> <span class="n">tsys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">aut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_define_by_tsys_aut</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Either provide a graph or (tsys and aut) parameter, but not both.&quot;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -330,7 +397,18 @@
   
   
     
-   
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
 
 </body>
 </html>

@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iglsynth.logic.ltl &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iglsynth.logic.ltl</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iglsynth.logic.ltl</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">iglsynth.logic.core</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="LTL"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL">[docs]</a><span class="k">class</span> <span class="nc">LTL</span><span class="p">(</span><span class="n">PL</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an temporal logic formula.</span>
+
+<span class="sd">    :param formula: (str) A formula string constructed from</span>
+
+<span class="sd">        * Atomic propositions (AP names can be alphanumeric strings</span>
+<span class="sd">          that are not &quot;true&quot; or &quot;false&quot; (case insensitive) and do</span>
+<span class="sd">          not contain ``F, G, M, R, U, V, W, X, xor`` as a sub-string.</span>
+<span class="sd">        * Operators: Negation (!), And(&amp;), Or(|), Eventually(F),</span>
+<span class="sd">          Always(G), Next(X), Until(U).</span>
+
+<span class="sd">    :param alphabet: (:class:`Alphabet`) A set of atomic propositions.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="fm">__hash__</span> <span class="o">=</span> <span class="n">PL</span><span class="o">.</span><span class="fm">__hash__</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reference: https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+        <span class="n">unabbr_formula</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">unabbreviate</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">,</span> <span class="s2">&quot;FGRMWie^&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">unabbr_formula</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">unabbr_formula</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mp_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the class of LTL formula as per Manna-Pnueli hierarchy.</span>
+
+<span class="sd">        :return: (str) A character from {&#39;B&#39;, &#39;S&#39;, &#39;G&#39;, &#39;O&#39;, &#39;R&#39;, &#39;P&#39;, &#39;T&#39;}.</span>
+
+<span class="sd">        .. seealso:: A discussion on `Manna-Pnueli Hierarchy &lt;https://spot.lrde.epita.fr/hierarchy.html&gt;`_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">))</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PRIVATE METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_logical_and</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># FIXME: Use parenthesis around sub-formulas.</span>
+        <span class="k">return</span> <span class="n">LTL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span> <span class="o">+</span> <span class="s2">&quot; &amp; &quot;</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># FIXME: Use parenthesis around sub-formulas.</span>
+        <span class="k">return</span> <span class="n">LTL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span> <span class="o">+</span> <span class="s2">&quot; | &quot;</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_neg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># FIXME: Use parenthesis around sub-formulas.</span>
+        <span class="k">return</span> <span class="n">LTL</span><span class="p">(</span><span class="s2">&quot;!&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="LTL.parse"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Invoke spot parser</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;The string </span><span class="si">{formula}</span><span class="s2"> is NOT an acceptable LTL formula.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If input is acceptable LTL formula, then generate syntax tree and update internal variables</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">SyntaxTree</span><span class="p">()</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">build_from_spot_formula</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+
+        <span class="c1"># A non-PL formula cannot be evaluated.</span>
+        <span class="n">mp_class</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mp_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">MP_CLASS</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Set tree and formula string for LTL formula</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="n">formula</span>
+
+        <span class="c1"># Update alphabet</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="p">{</span><span class="n">AP</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ap</span><span class="p">))</span> <span class="k">for</span> <span class="n">ap</span> <span class="ow">in</span> <span class="n">spot</span><span class="o">.</span><span class="n">atomic_prop_collect</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="n">Alphabet</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">sigma</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;Input formula contains APs not in alphabet, </span><span class="si">{self._alphabet}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Special APs: true and false</span>
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="LTL.substitute"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.substitute">[docs]</a>    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.substitute is not yet implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LTL.simplify"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.simplify is not yet implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LTL.translate"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># Translate LTL formula to spot automaton using spot</span>
+        <span class="n">spot_aut</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="s2">&quot;BA&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">)</span>
+
+        <span class="n">num_vertices</span> <span class="o">=</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">num_states</span><span class="p">()</span>
+        <span class="n">init_st</span> <span class="o">=</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">get_init_state_number</span><span class="p">()</span>
+
+        <span class="n">bdict</span> <span class="o">=</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span>
+        <span class="n">ap_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">ap</span><span class="p">():</span>
+            <span class="n">ap_dict</span><span class="p">[</span><span class="n">bdict</span><span class="o">.</span><span class="n">varnum</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="n">p</span>
+
+        <span class="c1"># Construct IGLSynth.Automaton object from spot automaton</span>
+        <span class="c1"># Ref: https://spot.lrde.epita.fr/tut21.html</span>
+        <span class="c1"># Decide the acceptance condition by looking at Manna-Pnueli Hierarchy</span>
+        <span class="n">mp_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mp_class</span>
+        <span class="k">if</span> <span class="n">mp_class</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span> <span class="ow">or</span> <span class="n">mp_class</span> <span class="o">==</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span>
+            <span class="n">acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COSAFE</span>
+        <span class="k">elif</span> <span class="n">mp_class</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+            <span class="n">acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span>
+        <span class="k">elif</span> <span class="n">mp_class</span> <span class="o">==</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span>
+            <span class="n">acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_BUCHI</span>
+        <span class="k">elif</span> <span class="n">mp_class</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span>
+            <span class="n">acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COBUCHI</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">acc_cond</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">igl_aut</span> <span class="o">=</span> <span class="n">Automaton</span><span class="p">(</span><span class="n">acc_cond</span><span class="o">=</span><span class="n">acc_cond</span><span class="p">)</span>
+        <span class="n">igl_aut</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+
+        <span class="c1"># Add vertices, edges to iglsynth automaton</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_vertices</span><span class="p">):</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+
+            <span class="n">is_source_accepting</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">spot_aut</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">dst</span><span class="p">))</span>
+                <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+                <span class="n">edge</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">spot</span><span class="o">.</span><span class="n">bdd_format_formula</span><span class="p">(</span><span class="n">bdict</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">cond</span><span class="p">))</span>
+                <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+
+                <span class="c1"># PATCH: e.acc returns a spot-specific mark_t object. I&#39;m not sure how to iterate over these.</span>
+                <span class="c1">#  Now, the translate function generates a Buchi Automaton, where it is guaranteed that</span>
+                <span class="c1">#  acceptance set will always be a singleton. Hence, presently we only check if the length</span>
+                <span class="c1">#  of str(e.acc) is greater than 2; which means there&#39;s some acceptance set in e.acc.</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">acc</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">is_source_accepting</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="n">is_source_accepting</span><span class="p">:</span>
+                <span class="n">igl_aut</span><span class="o">.</span><span class="n">mark_final_st</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
+
+        <span class="c1"># Set initial state</span>
+        <span class="n">igl_aut</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">init_st</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">igl_aut</span></div>
+
+    <span class="c1"># def is_equivalent(self, other):</span>
+    <span class="c1">#     assert isinstance(other, ILogic)</span>
+    <span class="c1">#     return spot.formula(self.formula) == spot.formula(other.formula)</span>
+    <span class="c1">#</span>
+    <span class="c1"># def is_contained_in(self, other):</span>
+    <span class="c1">#     assert isinstance(other, ILogic)</span>
+    <span class="c1">#     checker = spot.language_containment_checker()</span>
+    <span class="c1">#     return checker.contained(spot.formula(self.formula), spot.formula(other.formula))</span>
+
+<div class="viewcode-block" id="LTL.evaluate"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates the LTL formula over the given state.</span>
+
+<span class="sd">        .. warning:: This function is not yet implemented.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.evaluate method is not yet implemented.&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

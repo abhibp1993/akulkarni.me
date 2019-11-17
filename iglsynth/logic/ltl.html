@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Linear Temporal Logic &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities API" href="../util/index.html" />
+    <link rel="prev" title="Logic Module" href="core.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../game/index.html">Game Module API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Logic Module API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html">logic.core</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">logic.ltl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">Utilities API</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">IGLSynth API</a> &raquo;</li>
+        
+          <li><a href="index.html">Logic Module API</a> &raquo;</li>
+        
+      <li>Linear Temporal Logic</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/logic/ltl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linear-temporal-logic">
+<h1>Linear Temporal Logic<a class="headerlink" href="#linear-temporal-logic" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iglsynth.logic.ltl.LTL">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.ltl.</code><code class="descname">LTL</code><span class="sig-paren">(</span><em>formula: str</em>, <em>alphabet: Optional[iglsynth.logic.core.Alphabet] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="core.html#iglsynth.logic.core.PL" title="iglsynth.logic.core.PL"><code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.logic.core.PL</span></code></a></p>
+<p>Represents an temporal logic formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>formula</strong> – <p>(str) A formula string constructed from</p>
+<ul>
+<li>Atomic propositions (AP names can be alphanumeric strings
+that are not “true” or “false” (case insensitive) and do
+not contain <code class="docutils literal notranslate"><span class="pre">F,</span> <span class="pre">G,</span> <span class="pre">M,</span> <span class="pre">R,</span> <span class="pre">U,</span> <span class="pre">V,</span> <span class="pre">W,</span> <span class="pre">X,</span> <span class="pre">xor</span></code> as a sub-string.</li>
+<li>Operators: Negation (!), And(&amp;), Or(|), Eventually(F),
+Always(G), Next(X), Until(U).</li>
+</ul>
+</li>
+<li><strong>alphabet</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code>) A set of atomic propositions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="iglsynth.logic.ltl.LTL.alphabet">
+<code class="descname">alphabet</code><a class="headerlink" href="#iglsynth.logic.ltl.LTL.alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of atomic propositions (as <a class="reference internal" href="core.html#iglsynth.logic.core.Alphabet" title="iglsynth.logic.core.Alphabet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code></a> object)
+over which the logic formula is defined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>st</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the LTL formula over the given state.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is not yet implemented.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.ltl.LTL.formula">
+<code class="descname">formula</code><a class="headerlink" href="#iglsynth.logic.ltl.LTL.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the logic formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.is_contained_in">
+<code class="descname">is_contained_in</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.ltl.LTL.is_contained_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether language of “self” formula is contained within the language of given formula (other).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="core.html#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether language of “self” is contained in “other” (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.is_equivalent">
+<code class="descname">is_equivalent</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.ltl.LTL.is_equivalent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether given logic formula accepts the same language as the current (self) formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="core.html#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether self and other accept same language (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">p.is_equivalent(q)</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>.
+The first  checks whether the languagesof formulas <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code>
+are equal or not, whereas the latter (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>) whether
+<code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are syntactically equivalent or not.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.ltl.LTL.mp_class">
+<code class="descname">mp_class</code><a class="headerlink" href="#iglsynth.logic.ltl.LTL.mp_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class of LTL formula as per Manna-Pnueli hierarchy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(str) A character from {‘B’, ‘S’, ‘G’, ‘O’, ‘R’, ‘P’, ‘T’}.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">A discussion on <a class="reference external" href="https://spot.lrde.epita.fr/hierarchy.html">Manna-Pnueli Hierarchy</a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>formula: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the given formula string to return a simplified parsed string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.simplify">
+<code class="descname">simplify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL.simplify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new logic formula with a simplified formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.ltl.LTL.size">
+<code class="descname">size</code><a class="headerlink" href="#iglsynth.logic.ltl.LTL.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference: <a class="reference external" href="https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula">https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.substitute">
+<code class="descname">substitute</code><span class="sig-paren">(</span><em>subs_map: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL.substitute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL.substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitutes the current AP with another AP according to given substitution map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subs_map</strong> – (dict[&lt;Logic&gt;: &lt;Logic&gt;]) A substitution map.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(AP) Substituted AP object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>KeyError</strong> – When subs_map does not contain the AP “self”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.ltl.LTL.translate">
+<code class="descname">translate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/ltl.html#LTL.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.ltl.LTL.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Automaton &lt;iglsynth.logic.core.Automaton&gt; object
+representing an equivalent automaton for the logic formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.ltl.LTL.tree">
+<code class="descname">tree</code><a class="headerlink" href="#iglsynth.logic.ltl.LTL.tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the abstract syntax tree (as <code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code> object) of the logic formula.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../util/index.html" class="btn btn-neutral float-right" title="Utilities API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core.html" class="btn btn-neutral float-left" title="Logic Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
