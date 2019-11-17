@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logic Module &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear Temporal Logic" href="ltl.html" />
+    <link rel="prev" title="Logic Module" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../game/index.html">Game Module API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Logic Module API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">logic.core</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#global-variables">Global Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ilogic-interface-class">ILogic (Interface Class)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#syntaxtree">SyntaxTree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atomic-propositions">Atomic Propositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alphabet">Alphabet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#propositional-logic-formulas">Propositional Logic Formulas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ltl.html">logic.ltl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">Utilities API</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">IGLSynth API</a> &raquo;</li>
+        
+          <li><a href="index.html">Logic Module API</a> &raquo;</li>
+        
+      <li>Logic Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/logic/core.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="logic-module">
+<h1>Logic Module<a class="headerlink" href="#logic-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="global-variables">
+<h2>Global Variables<a class="headerlink" href="#global-variables" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="iglsynth.logic.core.TRUE">
+<code class="descclassname">iglsynth.logic.core.</code><code class="descname">TRUE</code><em class="property"> = AP(name=true)</em><a class="headerlink" href="#iglsynth.logic.core.TRUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="iglsynth.logic.core.FALSE">
+<code class="descclassname">iglsynth.logic.core.</code><code class="descname">FALSE</code><em class="property"> = AP(name=false)</em><a class="headerlink" href="#iglsynth.logic.core.FALSE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="ilogic-interface-class">
+<h2>ILogic (Interface Class)<a class="headerlink" href="#ilogic-interface-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.logic.core.ILogic">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.core.</code><code class="descname">ILogic</code><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p><a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a> is an interface class to represent logic classes in IGLSynth.
+All logic classes must implement the methods of this class.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">DO NOT INSTANTIATE THIS CLASS!</p>
+</div>
+<dl class="attribute">
+<dt id="iglsynth.logic.core.ILogic.alphabet">
+<code class="descname">alphabet</code><a class="headerlink" href="#iglsynth.logic.core.ILogic.alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of atomic propositions (as <a class="reference internal" href="#iglsynth.logic.core.Alphabet" title="iglsynth.logic.core.Alphabet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code></a> object)
+over which the logic formula is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.ILogic.formula">
+<code class="descname">formula</code><a class="headerlink" href="#iglsynth.logic.core.ILogic.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the logic formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.is_contained_in">
+<code class="descname">is_contained_in</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.is_contained_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.is_contained_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether language of “self” formula is contained within the language of given formula (other).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether language of “self” is contained in “other” (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.is_equivalent">
+<code class="descname">is_equivalent</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.is_equivalent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.is_equivalent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether given logic formula accepts the same language as the current (self) formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether self and other accept same language (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">p.is_equivalent(q)</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>.
+The first  checks whether the languagesof formulas <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code>
+are equal or not, whereas the latter (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>) whether
+<code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are syntactically equivalent or not.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>formula: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the given formula string to return a simplified parsed string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.simplify">
+<code class="descname">simplify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.simplify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new logic formula with a simplified formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.ILogic.size">
+<code class="descname">size</code><a class="headerlink" href="#iglsynth.logic.core.ILogic.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size of formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.substitute">
+<code class="descname">substitute</code><span class="sig-paren">(</span><em>subs_map: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.substitute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new logic formula with substituted formulas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.ILogic.translate">
+<code class="descname">translate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#ILogic.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.ILogic.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Automaton &lt;iglsynth.logic.core.Automaton&gt; object
+representing an equivalent automaton for the logic formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.ILogic.tree">
+<code class="descname">tree</code><a class="headerlink" href="#iglsynth.logic.core.ILogic.tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the abstract syntax tree (as <code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code> object) of the logic formula.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="syntaxtree">
+<h2>SyntaxTree<a class="headerlink" href="#syntaxtree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.logic.core.SyntaxTree">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.core.</code><code class="descname">SyntaxTree</code><a class="reference internal" href="../_modules/iglsynth/logic/core.html#SyntaxTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../util/graph.html#iglsynth.util.graph.Graph" title="iglsynth.util.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.util.graph.Graph</span></code></a></p>
+<p>Represents an Abstract Syntax Tree of a <a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a> formula.</p>
+<dl class="class">
+<dt id="iglsynth.logic.core.SyntaxTree.Vertex">
+<em class="property">class </em><code class="descname">Vertex</code><span class="sig-paren">(</span><em>spot_formula</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#SyntaxTree.Vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree.Vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.util.graph.Vertex</span></code></p>
+<p>Represents a vertex of a <a class="reference internal" href="#iglsynth.logic.core.SyntaxTree" title="iglsynth.logic.core.SyntaxTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code></a>.</p>
+<dl class="docutils">
+<dt>A vertex of syntax tree stores two key pieces of information.</dt>
+<dd><ul class="first last simple">
+<li>A sub-formula string, which is represented by the sub-tree by considering the vertex as the root.</li>
+<li>The kind (operator) represented by the vertex.</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spot_formula</strong> – (spot.formula) The formula represented by the sub-tree with the vertex as the root.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="iglsynth.logic.core.SyntaxTree.Vertex.formula">
+<code class="descname">formula</code><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree.Vertex.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the formula string represented by the sub-tree with vertex as root.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.SyntaxTree.Vertex.operator">
+<code class="descname">operator</code><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree.Vertex.operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the operator represented by the sub-tree with vertex as root.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.SyntaxTree.build_from_spot_formula">
+<code class="descname">build_from_spot_formula</code><span class="sig-paren">(</span><em>spot_formula</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#SyntaxTree.build_from_spot_formula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree.build_from_spot_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a syntax tree from a given spot formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spot_formula</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">spot.formula</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.SyntaxTree.root">
+<code class="descname">root</code><a class="headerlink" href="#iglsynth.logic.core.SyntaxTree.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the root of <a class="reference internal" href="#iglsynth.logic.core.SyntaxTree" title="iglsynth.logic.core.SyntaxTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code></a> as a <a class="reference internal" href="#iglsynth.logic.core.SyntaxTree.Vertex" title="iglsynth.logic.core.SyntaxTree.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree.Vertex</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="atomic-propositions">
+<h2>Atomic Propositions<a class="headerlink" href="#atomic-propositions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.logic.core.AP">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.core.</code><code class="descname">AP</code><span class="sig-paren">(</span><em>formula: str</em>, <em>eval_func: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.logic.core.ILogic</span></code></a></p>
+<p>Represents an atomic proposition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>formula</strong> – (str) The name of atomic proposition. Acceptable strings are alphanumeric
+strings that are not “true” or “false” (case insensitive) and do not contain ‘F’, ‘G’,
+‘M’, ‘R’, ‘U’, ‘V’, ‘W’, ‘X’, ‘xor’.</li>
+<li><strong>eval_func</strong> – <p>(function) A function that evaluates whether the AP is true or false in a
+given state. The acceptable function templates are</p>
+<blockquote>
+<div><ul>
+<li><code class="docutils literal notranslate"><span class="pre">res</span> <span class="pre">&lt;-</span> <span class="pre">eval_func(st)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">res</span> <span class="pre">&lt;-</span> <span class="pre">eval_func(st,</span> <span class="pre">*args)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">res</span> <span class="pre">&lt;-</span> <span class="pre">eval_func(st,</span> <span class="pre">*kwargs)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">res</span> <span class="pre">&lt;-</span> <span class="pre">eval_func(st,</span> <span class="pre">*args,</span> <span class="pre">**kwargs)</span></code></li>
+</ul>
+</div></blockquote>
+<p>where <code class="docutils literal notranslate"><span class="pre">res</span></code> must be a boolean.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="iglsynth.logic.core.AP.alphabet">
+<code class="descname">alphabet</code><a class="headerlink" href="#iglsynth.logic.core.AP.alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of atomic propositions (as <a class="reference internal" href="#iglsynth.logic.core.Alphabet" title="iglsynth.logic.core.Alphabet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code></a> object)
+over which the logic formula is defined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>st</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the AP over the given state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>st</strong> – (pyobject) An object representing state. It is user’s duty to ensure the implementation
+of given <code class="docutils literal notranslate"><span class="pre">eval_func</span></code> consumes the given state object correctly.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) If AP is evaluated to be True/False over given state.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – When result of evaluation is not a boolean.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.AP.formula">
+<code class="descname">formula</code><a class="headerlink" href="#iglsynth.logic.core.AP.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the logic formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.is_contained_in">
+<code class="descname">is_contained_in</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.is_contained_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.is_contained_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether language of “self” formula is contained within the language of given formula (other).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether language of “self” is contained in “other” (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.is_equivalent">
+<code class="descname">is_equivalent</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.is_equivalent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.is_equivalent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether given logic formula accepts the same language as the current (self) formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether self and other accept same language (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">p.is_equivalent(q)</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>.
+The first  checks whether the languagesof formulas <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code>
+are equal or not, whereas the latter (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>) whether
+<code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are syntactically equivalent or not.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>formula: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the given formula string to return a simplified parsed string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.simplify">
+<code class="descname">simplify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.simplify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new logic formula with a simplified formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.AP.size">
+<code class="descname">size</code><a class="headerlink" href="#iglsynth.logic.core.AP.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size of formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.substitute">
+<code class="descname">substitute</code><span class="sig-paren">(</span><em>subs_map: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.substitute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitutes the current AP with another AP according to given substitution map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subs_map</strong> – (dict[&lt;Logic&gt;: &lt;Logic&gt;]) A substitution map.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(AP) Substituted AP object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>KeyError</strong> – When subs_map does not contain the AP “self”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.AP.translate">
+<code class="descname">translate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#AP.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.AP.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an :class:<a href="#id3"><span class="problematic" id="id4">`</span></a>Automaton &lt;iglsynth.logic.core.Automaton&gt; object
+representing an equivalent automaton for the logic formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.AP.tree">
+<code class="descname">tree</code><a class="headerlink" href="#iglsynth.logic.core.AP.tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the abstract syntax tree (as <code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code> object) of the logic formula.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="alphabet">
+<h2>Alphabet<a class="headerlink" href="#alphabet" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.logic.core.Alphabet">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.core.</code><code class="descname">Alphabet</code><span class="sig-paren">(</span><em>props=()</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#Alphabet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.Alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></p>
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>p: iglsynth.logic.core.AP</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#Alphabet.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.Alphabet.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an element to a set.</p>
+<p>This has no effect if the element is already present.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all elements from this set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a shallow copy of a set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.difference">
+<code class="descname">difference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the difference of two or more sets as a new set.</p>
+<p>(i.e. all elements that are in this set but not the others.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.difference_update">
+<code class="descname">difference_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.difference_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all elements of another set from this set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.discard">
+<code class="descname">discard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.discard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an element from a set if it is a member.</p>
+<p>If the element is not a member, do nothing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>st</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#Alphabet.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.Alphabet.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the alphabet over the given state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>st</strong> – (pyobject) An object representing state. It is user’s duty to ensure the implementation
+of given <code class="docutils literal notranslate"><span class="pre">eval_func</span></code> consumes the given state object correctly.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(dict(key=AP, value=bool)) A mapping of atomic proposition with it’s evaluation at the given state.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – When result of evaluation is not a boolean.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.intersection">
+<code class="descname">intersection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the intersection of two sets as a new set.</p>
+<p>(i.e. all elements that are in both sets.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.intersection_update">
+<code class="descname">intersection_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.intersection_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a set with the intersection of itself and another.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.isdisjoint">
+<code class="descname">isdisjoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.isdisjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if two sets have a null intersection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.issubset">
+<code class="descname">issubset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.issubset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report whether another set contains this set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.issuperset">
+<code class="descname">issuperset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.issuperset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report whether this set contains another set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove and return an arbitrary set element.
+Raises KeyError if the set is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an element from a set; it must be a member.</p>
+<p>If the element is not a member, raise a KeyError.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.symmetric_difference">
+<code class="descname">symmetric_difference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.symmetric_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the symmetric difference of two sets as a new set.</p>
+<p>(i.e. all elements that are in exactly one of the sets.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.symmetric_difference_update">
+<code class="descname">symmetric_difference_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.symmetric_difference_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a set with the symmetric difference of itself and another.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.union">
+<code class="descname">union</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the union of sets as a new set.</p>
+<p>(i.e. all elements that are in either set.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.Alphabet.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.Alphabet.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a set with the union of itself and others.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="propositional-logic-formulas">
+<h2>Propositional Logic Formulas<a class="headerlink" href="#propositional-logic-formulas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.logic.core.PL">
+<em class="property">class </em><code class="descclassname">iglsynth.logic.core.</code><code class="descname">PL</code><span class="sig-paren">(</span><em>formula: str</em>, <em>alphabet: Optional[iglsynth.logic.core.Alphabet] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#PL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.PL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#iglsynth.logic.core.AP" title="iglsynth.logic.core.AP"><code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.logic.core.AP</span></code></a></p>
+<p>Represents an propositional logic formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>formula</strong> – <p>(str) A formula string constructed from</p>
+<ul>
+<li>Atomic propositions (AP names can be alphanumeric strings
+that are not “true” or “false” (case insensitive) and do
+not contain <code class="docutils literal notranslate"><span class="pre">F,</span> <span class="pre">G,</span> <span class="pre">M,</span> <span class="pre">R,</span> <span class="pre">U,</span> <span class="pre">V,</span> <span class="pre">W,</span> <span class="pre">X,</span> <span class="pre">xor</span></code> as a sub-string.</li>
+<li>Operators: Negation (!), And(&amp;), Or(|)</li>
+</ul>
+</li>
+<li><strong>alphabet</strong> – (<a class="reference internal" href="#iglsynth.logic.core.Alphabet" title="iglsynth.logic.core.Alphabet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code></a>) A set of atomic propositions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="iglsynth.logic.core.PL.alphabet">
+<code class="descname">alphabet</code><a class="headerlink" href="#iglsynth.logic.core.PL.alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of atomic propositions (as <a class="reference internal" href="#iglsynth.logic.core.Alphabet" title="iglsynth.logic.core.Alphabet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alphabet</span></code></a> object)
+over which the logic formula is defined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>st</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#PL.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.PL.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the PL formula over the given state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>st</strong> – (pyobject) An object representing state. It is user’s duty to ensure the implementation
+of given <code class="docutils literal notranslate"><span class="pre">eval_func</span></code> consumes the given state object correctly.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) If PL formula is evaluated to be <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> over given state.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – When result of evaluation is not a boolean.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.PL.formula">
+<code class="descname">formula</code><a class="headerlink" href="#iglsynth.logic.core.PL.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the logic formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.is_contained_in">
+<code class="descname">is_contained_in</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.PL.is_contained_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether language of “self” formula is contained within the language of given formula (other).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether language of “self” is contained in “other” (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.is_equivalent">
+<code class="descname">is_equivalent</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.PL.is_equivalent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether given logic formula accepts the same language as the current (self) formula.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – (<a class="reference internal" href="#iglsynth.logic.core.ILogic" title="iglsynth.logic.core.ILogic"><code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code></a>) A logic formula.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether self and other accept same language (True) or not (False).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">p.is_equivalent(q)</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>.
+The first  checks whether the languagesof formulas <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code>
+are equal or not, whereas the latter (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code>) whether
+<code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are syntactically equivalent or not.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>formula: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#PL.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.PL.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the given formula string to return a simplified parsed string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.simplify">
+<code class="descname">simplify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#PL.simplify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.PL.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new logic formula with a simplified formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.PL.size">
+<code class="descname">size</code><a class="headerlink" href="#iglsynth.logic.core.PL.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference: <a class="reference external" href="https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula">https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.substitute">
+<code class="descname">substitute</code><span class="sig-paren">(</span><em>subs_map: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/logic/core.html#PL.substitute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.logic.core.PL.substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitutes the current AP with another AP according to given substitution map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subs_map</strong> – (dict[&lt;Logic&gt;: &lt;Logic&gt;]) A substitution map.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(AP) Substituted AP object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>KeyError</strong> – When subs_map does not contain the AP “self”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.logic.core.PL.translate">
+<code class="descname">translate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.logic.core.PL.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an :class:<a href="#id5"><span class="problematic" id="id6">`</span></a>Automaton &lt;iglsynth.logic.core.Automaton&gt; object
+representing an equivalent automaton for the logic formula.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.logic.core.PL.tree">
+<code class="descname">tree</code><a class="headerlink" href="#iglsynth.logic.core.PL.tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the abstract syntax tree (as <code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxTree</span></code> object) of the logic formula.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ltl.html" class="btn btn-neutral float-right" title="Linear Temporal Logic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="Logic Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

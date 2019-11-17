@@ -1,0 +1,1488 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>spot &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>spot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for spot</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (C) 2014-2019  Laboratoire de</span>
+<span class="c1"># Recherche et Développement de l&#39;Epita (LRDE).</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of Spot, a model checking library.</span>
+<span class="c1">#</span>
+<span class="c1"># Spot is free software; you can redistribute it and/or modify it</span>
+<span class="c1"># under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># Spot is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY</span>
+<span class="c1"># or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public</span>
+<span class="c1"># License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">hexversion</span> <span class="o">&lt;</span> <span class="mh">0x03030000</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;This module requires Python 3.3 or newer&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">suppress</span> <span class="k">as</span> <span class="n">_supress</span>
+
+<span class="k">if</span> <span class="s1">&#39;SPOT_UNINSTALLED&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+    <span class="c1"># When Spot is installed, _impl.so will be in the same directory as</span>
+    <span class="c1"># spot/impl.py, however when we run Spot&#39;s test suite, Spot is not yet</span>
+    <span class="c1"># installed and we want &quot;from . import _impl&quot; (generated by Swig4) to look</span>
+    <span class="c1"># into .libs/</span>
+    <span class="n">__path__</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">spot.aux</span> <span class="k">import</span> \
+     <span class="n">extend</span> <span class="k">as</span> <span class="n">_extend</span><span class="p">,</span> \
+     <span class="n">str_to_svg</span> <span class="k">as</span> <span class="n">_str_to_svg</span><span class="p">,</span> \
+     <span class="n">ostream_to_svg</span> <span class="k">as</span> <span class="n">_ostream_to_svg</span>
+
+
+<span class="c1"># The parrameters used by default when show() is called on an automaton.</span>
+<span class="n">_show_default</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Spot for fancy display.</span>
+
+<span class="sd">    This is manly useful in Jupyter/IPython.</span>
+
+<span class="sd">    Note that this function needs to be called before any automaton is</span>
+<span class="sd">    displayed.  Afterwards it will have no effect (you should restart</span>
+<span class="sd">    Python, or the Jupyter/IPython Kernel).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bullets : bool</span>
+<span class="sd">        whether to display acceptance conditions as UTF8 bullets</span>
+<span class="sd">        (default: True)</span>
+<span class="sd">    fillcolor : str</span>
+<span class="sd">        the color to use for states (default: &#39;#ffffaa&#39;)</span>
+<span class="sd">    size : str</span>
+<span class="sd">        the width and height of the GraphViz output in inches</span>
+<span class="sd">        (default: &#39;10.2,5&#39;)</span>
+<span class="sd">    font : str</span>
+<span class="sd">        the font to use in the GraphViz output (default: &#39;Lato&#39;)</span>
+<span class="sd">    show_default : str</span>
+<span class="sd">        default options for show()</span>
+<span class="sd">    max_states : int</span>
+<span class="sd">        maximum number of states in GraphViz output (default: 50)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;size=&quot;</span><span class="si">{}</span><span class="s1">&quot; edge[arrowhead=vee, arrowsize=.7]&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SPOT_DOTEXTRA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="s1">&#39;10.2,5&#39;</span><span class="p">))</span>
+
+    <span class="n">bullets</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bullets&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">max_states</span> <span class="o">=</span> <span class="s1">&#39;&lt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_states&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;rf(</span><span class="si">{}</span><span class="s1">)C(</span><span class="si">{}</span><span class="s1">)</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="s1">&#39;Lato&#39;</span><span class="p">),</span>
+                               <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fillcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffffaa&#39;</span><span class="p">),</span>
+                               <span class="n">bullets</span> <span class="o">+</span> <span class="n">max_states</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">_show_default</span>
+    <span class="n">_show_default</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_default&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SPOT_DOTDEFAULT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+
+
+<span class="c1"># In version 3.0.2, Swig puts strongly typed enum in the main</span>
+<span class="c1"># namespace without prefixing them.  Latter versions fix this.  So we</span>
+<span class="c1"># can remove for following hack once 3.0.2 is no longer used in our</span>
+<span class="c1"># build farm.</span>
+<span class="k">if</span> <span class="s1">&#39;op_ff&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="s1">&#39;tt&#39;</span><span class="p">,</span> <span class="s1">&#39;eword&#39;</span><span class="p">,</span> <span class="s1">&#39;ap&#39;</span><span class="p">,</span> <span class="s1">&#39;Not&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Closure&#39;</span><span class="p">,</span> <span class="s1">&#39;NegClosure&#39;</span><span class="p">,</span> <span class="s1">&#39;NegClosureMarked&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Xor&#39;</span><span class="p">,</span> <span class="s1">&#39;Implies&#39;</span><span class="p">,</span> <span class="s1">&#39;Equiv&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;EConcat&#39;</span><span class="p">,</span> <span class="s1">&#39;EConcatMarked&#39;</span><span class="p">,</span> <span class="s1">&#39;UConcat&#39;</span><span class="p">,</span> <span class="s1">&#39;Or&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;OrRat&#39;</span><span class="p">,</span> <span class="s1">&#39;And&#39;</span><span class="p">,</span> <span class="s1">&#39;AndRat&#39;</span><span class="p">,</span> <span class="s1">&#39;AndNLM&#39;</span><span class="p">,</span> <span class="s1">&#39;Concat&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Fusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Star&#39;</span><span class="p">,</span> <span class="s1">&#39;FStar&#39;</span><span class="p">):</span>
+        <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;op_&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">del</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+
+
+<span class="c1"># Global BDD dict so that we do not have to create one in user code.</span>
+<span class="n">_bdd_dict</span> <span class="o">=</span> <span class="n">make_bdd_dict</span><span class="p">()</span>
+
+
+<span class="n">__om_init_tmp</span> <span class="o">=</span> <span class="n">option_map</span><span class="o">.</span><span class="fm">__init__</span>
+
+
+<span class="k">def</span> <span class="nf">__om_init_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">__om_init_tmp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_options</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;failed to parse option at: &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+
+<span class="n">option_map</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">__om_init_new</span>
+
+
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">twa</span><span class="p">,</span> <span class="n">ta</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">twa</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_repr_svg_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Output the automaton as SVG&quot;&quot;&quot;</span>
+        <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">global</span> <span class="n">_show_default</span>
+            <span class="n">opt</span> <span class="o">=</span> <span class="n">_show_default</span>
+        <span class="n">print_dot</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_ostream_to_svg</span><span class="p">(</span><span class="n">ostr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display the automaton as SVG, in the IPython/Jupyter notebook&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">global</span> <span class="n">_show_default</span>
+            <span class="n">opt</span> <span class="o">=</span> <span class="n">_show_default</span>
+        <span class="c1"># Load the SVG function only if we need it. This way the</span>
+        <span class="c1"># bindings can still be used outside of IPython if IPython is</span>
+        <span class="c1"># not installed.</span>
+        <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+        <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr_svg_</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">highlight_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Highlight a list of states.  This can be a list of</span>
+<span class="sd">        state numbers, or a list of Booleans.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">bool</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">highlight_state</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">highlight_state</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">highlight_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Highlight a list of edges.  This can be a list of</span>
+<span class="sd">        edge numbers, or a list of Booleans.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">bool</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">highlight_edge</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">highlight_edge</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">twa</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">twa</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">to_str</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;hoa&#39;</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;hoa&#39;</span><span class="p">:</span>
+            <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">print_hoa</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ostr</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;dot&#39;</span><span class="p">:</span>
+            <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">print_dot</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ostr</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;spin&#39;</span><span class="p">:</span>
+            <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">print_never_claim</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ostr</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;lbtt&#39;</span><span class="p">:</span>
+            <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">print_lbtt</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ostr</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown string format: &quot;</span> <span class="o">+</span> <span class="nb">format</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;hoa&#39;</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span> <span class="k">if</span> <span class="n">append</span> <span class="k">else</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span>
+
+
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">twa_graph</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">twa_graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">show_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dump_storage_as_dot</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+        <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="n">_ostream_to_svg</span><span class="p">(</span><span class="n">ostr</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">make_twa_graph</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="n">make_twa_graph</span> <span class="k">as</span> <span class="n">mtg</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mtg</span><span class="p">(</span><span class="n">_bdd_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mtg</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="formula"><a class="viewcode-back" href="../util/spot.html#iglsynth.util.spot.formula">[docs]</a><span class="nd">@_extend</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">formula</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the given string to create a formula.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">==</span> <span class="n">formula</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">this</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">this</span> <span class="o">=</span> <span class="n">parse_formula</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">show_ast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display the syntax tree of the formula.&quot;&quot;&quot;</span>
+        <span class="c1"># Load the SVG function only if we need it. This way the bindings</span>
+        <span class="c1"># can still be used outside of IPython if IPython is not</span>
+        <span class="c1"># installed.</span>
+        <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+        <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="n">_str_to_svg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+
+    <span class="k">def</span> <span class="nf">to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;spot&#39;</span><span class="p">,</span> <span class="n">parenth</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;spot&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_psl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;spin&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_spin_ltl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;utf8&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_utf8_psl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;lbt&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_lbt_ltl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;wring&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_wring_ltl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;latex&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_latex_psl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;sclatex&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str_sclatex_psl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;mathjax&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;j&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">str_sclatex_psl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parenth</span><span class="p">)</span><span class="o">.</span>
+                    <span class="n">replace</span><span class="p">(</span><span class="s2">&quot;``&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">unicode</span><span class="si">{x201C}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span>
+                    <span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">textrm{&#39;&#39;}&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">unicode</span><span class="si">{x201D}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;dot&#39;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
+            <span class="n">ostr</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">print_dot_psl</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ostr</span><span class="o">.</span><span class="n">str</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown string format: &quot;</span> <span class="o">+</span> <span class="nb">format</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Format the formula according to `spec`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        spec : str, optional</span>
+<span class="sd">            a list of letters that specify how the formula</span>
+<span class="sd">            should be formatted.</span>
+
+<span class="sd">        Supported specifiers</span>
+<span class="sd">        --------------------</span>
+
+<span class="sd">        - &#39;f&#39;: use Spot&#39;s syntax (default)</span>
+<span class="sd">        - &#39;8&#39;: use Spot&#39;s syntax in UTF-8 mode</span>
+<span class="sd">        - &#39;s&#39;: use Spin&#39;s syntax</span>
+<span class="sd">        - &#39;l&#39;: use LBT&#39;s syntax</span>
+<span class="sd">        - &#39;w&#39;: use Wring&#39;s syntax</span>
+<span class="sd">        - &#39;x&#39;: use LaTeX output</span>
+<span class="sd">        - &#39;X&#39;: use self-contained LaTeX output</span>
+<span class="sd">        - &#39;j&#39;: use self-contained LaTeX output, adjusted for MathJax</span>
+
+<span class="sd">        Add some of those letters for additional options:</span>
+
+<span class="sd">        - &#39;p&#39;: use full parentheses</span>
+<span class="sd">        - &#39;c&#39;: escape the formula for CSV output (this will</span>
+<span class="sd">               enclose the formula in double quotes, and escape</span>
+<span class="sd">               any included double quotes)</span>
+<span class="sd">        - &#39;h&#39;: escape the formula for HTML output</span>
+<span class="sd">        - &#39;d&#39;: escape double quotes and backslash,</span>
+<span class="sd">               for use in C-strings (the outermost double</span>
+<span class="sd">               quotes are *not* added)</span>
+<span class="sd">        - &#39;q&#39;: quote and escape for shell output, using single</span>
+<span class="sd">               quotes or double quotes depending on the contents.</span>
+<span class="sd">        - &#39;[...]&#39;: rewrite away all the operators specified in brackets,</span>
+<span class="sd">               using spot.unabbreviate().</span>
+
+<span class="sd">        - &#39;:spec&#39;: pass the remaining specification to the</span>
+<span class="sd">                   formating function for strings.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">syntax</span> <span class="o">=</span> <span class="s1">&#39;f&#39;</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">escape</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="k">while</span> <span class="n">spec</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">,</span> <span class="n">spec</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">spec</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">):</span>
+                <span class="n">syntax</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">):</span>
+                <span class="n">escape</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;:&#39;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unclosed bracket: [&quot;</span> <span class="o">+</span> <span class="n">spec</span><span class="p">)</span>
+                <span class="n">form</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">unabbreviate</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pos</span><span class="p">])</span>
+                <span class="n">spec</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown format specification: &quot;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">spec</span><span class="p">)</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="n">syntax</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">escape</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">escape_rfc4180</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">o</span><span class="o">.</span><span class="n">str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span>
+        <span class="k">elif</span> <span class="n">escape</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">escape_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">escape</span> <span class="o">==</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">escape_html</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">escape</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+            <span class="n">quote_shell_string</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="fm">__format__</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">op_ff</span><span class="p">,</span> <span class="n">op_tt</span><span class="p">,</span> <span class="n">op_eword</span><span class="p">,</span> <span class="n">op_ap</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">op_Not</span><span class="p">,</span> <span class="n">op_X</span><span class="p">,</span> <span class="n">op_F</span><span class="p">,</span> <span class="n">op_G</span><span class="p">,</span> <span class="n">op_Closure</span><span class="p">,</span>
+                 <span class="n">op_NegClosure</span><span class="p">,</span> <span class="n">op_NegClosureMarked</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="n">unop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">op_Xor</span><span class="p">,</span> <span class="n">op_Implies</span><span class="p">,</span> <span class="n">op_Equiv</span><span class="p">,</span> <span class="n">op_U</span><span class="p">,</span> <span class="n">op_R</span><span class="p">,</span> <span class="n">op_W</span><span class="p">,</span>
+                 <span class="n">op_M</span><span class="p">,</span> <span class="n">op_EConcat</span><span class="p">,</span> <span class="n">op_EConcatMarked</span><span class="p">,</span> <span class="n">op_UConcat</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="n">binop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">op_Or</span><span class="p">,</span> <span class="n">op_OrRat</span><span class="p">,</span> <span class="n">op_And</span><span class="p">,</span> <span class="n">op_AndRat</span><span class="p">,</span> <span class="n">op_AndNLM</span><span class="p">,</span>
+                 <span class="n">op_Concat</span><span class="p">,</span> <span class="n">op_Fusion</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="n">multop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">op_Star</span><span class="p">,</span> <span class="n">op_FStar</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="n">bunop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown type of formula&quot;</span><span class="p">)</span></div>
+
+
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">atomic_prop_set</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">atomic_prop_set</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_repr_latex_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;$\{&#39;</span>
+        <span class="n">comma</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">ap</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">apname</span> <span class="o">=</span> <span class="n">ap</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">unicode{&#39;</span> <span class="ow">in</span> <span class="n">apname</span><span class="p">:</span>
+                <span class="n">apname</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">unicode</span><span class="si">{x201C}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">apname</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">unicode</span><span class="si">{x201D}</span><span class="s2">&quot;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">comma</span>
+            <span class="n">comma</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">apname</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;\}$&#39;</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="k">def</span> <span class="nf">automata</span><span class="p">(</span><span class="o">*</span><span class="n">sources</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_abort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">trust_hoa</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_sid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">want_kripke</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read automata from a list of sources.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    *sources : list of str</span>
+<span class="sd">        These sources can be either commands (end with `|`),</span>
+<span class="sd">        textual representations of automata (contain `\n`),</span>
+<span class="sd">        or filenames (else).</span>
+<span class="sd">    timeout : int, optional</span>
+<span class="sd">        Number of seconds to wait for the result of a command.</span>
+<span class="sd">        If None (the default), not limit is used.</span>
+<span class="sd">    ignore_abort : bool, optional</span>
+<span class="sd">        If True (the default), skip HOA atomata that ends with</span>
+<span class="sd">        `--ABORT--`, and return the next automaton in the stream.</span>
+<span class="sd">        If False, aborted automata are reported as syntax errors.</span>
+<span class="sd">    trust_hoa : bool, optional</span>
+<span class="sd">        If True (the default), supported HOA properies that</span>
+<span class="sd">        cannot be easily verified are trusted.</span>
+<span class="sd">    want_kripke : bool, optional</span>
+<span class="sd">        If True, the input is expected to discribe Kripke</span>
+<span class="sd">        structures, in the HOA format, and the returned type</span>
+<span class="sd">        will be of type kripke_graph_ptr.</span>
+<span class="sd">    no_sid : bool, optional</span>
+<span class="sd">        When an automaton is obtained from a subprocess, this</span>
+<span class="sd">        subprocess is started from a shell with its own session</span>
+<span class="sd">        group (the default) unless no_sid is set to True.</span>
+<span class="sd">    debug : bool, optional</span>
+<span class="sd">        Whether to run the parser in debug mode.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    The automata can be written in the `HOA format`_, as `never</span>
+<span class="sd">    claims`_, in `LBTT&#39;s format`_, or in `ltl2dstar&#39;s format`_.</span>
+
+<span class="sd">    .. _HOA format: http://adl.github.io/hoaf/</span>
+<span class="sd">    .. _never claims: http://spinroot.com/spin/Man/never.html</span>
+<span class="sd">    .. _LBTT&#39;s format:</span>
+<span class="sd">       http://www.tcs.hut.fi/Software/lbtt/doc/html/Format-for-automata.html</span>
+<span class="sd">    .. _ltl2dstar&#39;s format:</span>
+<span class="sd">       http://www.ltl2dstar.de/docs/ltl2dstar.html#output-format-dstar</span>
+
+<span class="sd">    If an argument ends with a `|`, then this argument is interpreted as</span>
+<span class="sd">    a shell command, and the output of that command (without the `|`)</span>
+<span class="sd">    is parsed.</span>
+
+<span class="sd">    If an argument contains a newline, then it is interpreted as</span>
+<span class="sd">    actual contents to be parsed.</span>
+
+<span class="sd">    Otherwise, the argument is assumed to be a filename.</span>
+
+<span class="sd">    The result of this function is a generator on all the automata</span>
+<span class="sd">    objects read from these sources.  The typical usage is::</span>
+
+<span class="sd">        for aut in spot.automata(filename, command, ...):</span>
+<span class="sd">            # do something with aut</span>
+
+<span class="sd">    When the source is a command, and no `timeout` is specified,</span>
+<span class="sd">    parsing is done straight out of the pipe connecting the</span>
+<span class="sd">    command.  So</span>
+
+<span class="sd">        for aut in spot.automata(&#39;randaut -H -n 10 2 |&#39;):</span>
+<span class="sd">            process(aut)</span>
+
+<span class="sd">    will call `process(aut)` on each automaton as soon as it is output by</span>
+<span class="sd">    `randaut`, and without waiting for `randaut` to terminate.</span>
+
+<span class="sd">    However if `timeout` is passed, then `automata()` will wait for</span>
+<span class="sd">    the entire command to terminate before parsing its entire output.</span>
+<span class="sd">    If one command takes more than `timeout` seconds,</span>
+<span class="sd">    `subprocess.TimeoutExpired` is raised.</span>
+
+<span class="sd">    If any command terminates with a non-zero error,</span>
+<span class="sd">    `subprocess.CalledProcessError` is raised.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">o</span> <span class="o">=</span> <span class="n">automaton_parser_options</span><span class="p">()</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">ignore_abort</span> <span class="o">=</span> <span class="n">ignore_abort</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">trust_hoa</span> <span class="o">=</span> <span class="n">trust_hoa</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">raise_errors</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">want_kripke</span> <span class="o">=</span> <span class="n">want_kripke</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;|&#39;</span><span class="p">:</span>
+                <span class="n">setsid_maybe</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">no_sid</span><span class="p">:</span>
+                    <span class="n">setsid_maybe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">setsid</span>
+                <span class="c1"># universal_newlines for str output instead of bytes</span>
+                <span class="c1"># when the pipe is read from Python (which happens</span>
+                <span class="c1"># when timeout is set).</span>
+                <span class="n">prefn</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">no_sid</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">setsid</span>
+                <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="n">preexec_fn</span><span class="o">=</span><span class="n">prefn</span><span class="p">,</span>
+                                        <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">automaton_stream_parser</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span>
+                                                <span class="n">filename</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">:</span>
+                        <span class="c1"># Using subprocess.check_output() with timeout</span>
+                        <span class="c1"># would just kill the shell, not its children.</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">killpg</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+                        <span class="k">raise</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">ret</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">ret</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span>
+                                                                <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">finally</span><span class="p">:</span>
+                        <span class="n">proc</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">automaton_stream_parser</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">automaton_stream_parser</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">automaton_stream_parser</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># Using proc as a context manager ensures that proc.stdout will be</span>
+            <span class="c1"># closed on exit, and the process will be properly waited for.</span>
+            <span class="c1"># This is important when running tools that produce an infinite</span>
+            <span class="c1"># stream of automata and that must be killed once the generator</span>
+            <span class="c1"># returned by spot.automata() is destroyed.  Otherwise, _supress()</span>
+            <span class="c1"># is just a dummy context manager that does nothing (Python 3.7</span>
+            <span class="c1"># introduces nullcontext() for this purpose, but at the time of</span>
+            <span class="c1"># writing we support Python 3.4).</span>
+            <span class="n">mgr</span> <span class="o">=</span> <span class="n">proc</span> <span class="k">if</span> <span class="n">proc</span> <span class="k">else</span> <span class="n">_supress</span><span class="p">()</span>
+            <span class="k">with</span> <span class="n">mgr</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">a</span><span class="p">:</span>
+                    <span class="c1"># the automaton is None when we reach the end of the file.</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">_bdd_dict</span><span class="p">)</span>
+                    <span class="n">a</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">ks</span> <span class="k">if</span> <span class="n">want_kripke</span> <span class="k">else</span> <span class="n">res</span><span class="o">.</span><span class="n">aut</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">:</span>
+                        <span class="k">yield</span> <span class="n">a</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Make sure we destroy the parser (p) and the subprocess</span>
+            <span class="c1"># (prop) in the correct order.</span>
+            <span class="k">del</span> <span class="n">p</span>
+            <span class="k">if</span> <span class="n">proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span>
+                <span class="k">del</span> <span class="n">proc</span>
+                <span class="c1"># Do not complain about the exit code if we are already raising</span>
+                <span class="c1"># an exception.</span>
+                <span class="k">if</span> <span class="n">ret</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># deleting o explicitly now prevents Python 3.5 from</span>
+    <span class="c1"># reporting the following error: &quot;&lt;built-in function</span>
+    <span class="c1"># delete_automaton_parser_options&gt; returned a result with</span>
+    <span class="c1"># an error set&quot;.  It&#39;s not clear to me if the bug is in Python</span>
+    <span class="c1"># or Swig.  At least it&#39;s related to the use of generators.</span>
+    <span class="k">del</span> <span class="n">o</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">automaton</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read a single automaton from a file.</span>
+
+<span class="sd">    See `spot.automata` for a list of supported formats.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">automata</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to read automaton from </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_postproc_translate_options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">default_type</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">type_name_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">type_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">pref_name_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">pref_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">optm_name_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">optm_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">comp_</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">unam_</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">sbac_</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">colo_</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">type_set</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">type_</span><span class="p">,</span> <span class="n">type_name_</span>
+        <span class="k">if</span> <span class="n">type_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">type_name_</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;type cannot be both </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2">&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name_</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;generic&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Generic</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;tgba&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">TGBA</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;ba&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">BA</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;cobuchi&#39;</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;nca&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">CoBuchi</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;dca&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">CoBuchi</span>
+            <span class="n">pref_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Deterministic</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity min odd&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMinOdd</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity min even&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMinEven</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity max odd&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMaxOdd</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity max even&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMaxEven</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity min&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMin</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity max&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityMax</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity odd&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityOdd</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity even&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">ParityEven</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;parity&#39;</span><span class="p">:</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Parity</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;monitor&#39;</span><span class="p">)</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Monitor</span>
+        <span class="n">type_name_</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">pref_set</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">pref_</span><span class="p">,</span> <span class="n">pref_name_</span>
+        <span class="k">if</span> <span class="n">pref_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pref_name_</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;preference cannot be both </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2">&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pref_name</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;small&#39;</span><span class="p">:</span>
+            <span class="n">pref_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Small</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;deterministic&#39;</span><span class="p">:</span>
+            <span class="n">pref_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Deterministic</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">)</span>
+            <span class="n">pref_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Any</span>
+        <span class="n">pref_name_</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">optm_set</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">optm_</span><span class="p">,</span> <span class="n">optm_name_</span>
+        <span class="k">if</span> <span class="n">optm_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">optm_name_</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;optimization level cannot be both </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2">&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">optm_name_</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span>
+            <span class="n">optm_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">High</span>
+        <span class="k">elif</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;med&#39;</span><span class="p">):</span>
+            <span class="n">optm_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Medium</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">)</span>
+            <span class="n">optm_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Low</span>
+        <span class="n">optm_name_</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">misc_set</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">comp_</span><span class="p">,</span> <span class="n">unam_</span><span class="p">,</span> <span class="n">sbac_</span><span class="p">,</span> <span class="n">colo_</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;colored&#39;</span><span class="p">:</span>
+            <span class="n">colo_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Colored</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;complete&#39;</span><span class="p">:</span>
+            <span class="n">comp_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Complete</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;sbacc&#39;</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;state-based-acceptance&#39;</span><span class="p">:</span>
+            <span class="n">sbac_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">SBAcc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;unambiguous&#39;</span><span class="p">)</span>
+            <span class="n">unam_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Unambiguous</span>
+
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;any&#39;</span><span class="p">:</span> <span class="n">pref_set</span><span class="p">,</span>
+        <span class="s1">&#39;ba&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;cobuchi&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;colored&#39;</span><span class="p">:</span> <span class="n">misc_set</span><span class="p">,</span>
+        <span class="s1">&#39;complete&#39;</span><span class="p">:</span> <span class="n">misc_set</span><span class="p">,</span>
+        <span class="s1">&#39;dca&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;deterministic&#39;</span><span class="p">:</span> <span class="n">pref_set</span><span class="p">,</span>
+        <span class="s1">&#39;generic&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="n">optm_set</span><span class="p">,</span>
+        <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="n">optm_set</span><span class="p">,</span>
+        <span class="s1">&#39;medium&#39;</span><span class="p">:</span> <span class="n">optm_set</span><span class="p">,</span>
+        <span class="s1">&#39;monitor&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;nca&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity even&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity max even&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity max odd&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity max&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity min even&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity min odd&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity min&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity odd&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;parity&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;sbacc&#39;</span><span class="p">:</span> <span class="n">misc_set</span><span class="p">,</span>
+        <span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="n">pref_set</span><span class="p">,</span>
+        <span class="s1">&#39;statebasedacceptance&#39;</span><span class="p">:</span> <span class="n">misc_set</span><span class="p">,</span>
+        <span class="s1">&#39;tgba&#39;</span><span class="p">:</span> <span class="n">type_set</span><span class="p">,</span>
+        <span class="s1">&#39;unambiguous&#39;</span><span class="p">:</span> <span class="n">misc_set</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+            <span class="n">fn</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># arg is not an know option, but maybe it is a prefix of</span>
+            <span class="c1"># one of them</span>
+            <span class="n">compat</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+                    <span class="n">compat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="n">fn</span>
+            <span class="n">lc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">(</span><span class="n">compat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">lc</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown option &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ambiguous option &#39;</span><span class="si">{}</span><span class="s2">&#39; is prefix of </span><span class="si">{}</span><span class="s2">&quot;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">compat</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">type_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">type_</span> <span class="o">=</span> <span class="n">default_type</span>
+    <span class="k">if</span> <span class="n">pref_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pref_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Small</span>
+    <span class="k">if</span> <span class="n">optm_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">optm_</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">High</span>
+
+    <span class="n">obj</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">set_pref</span><span class="p">(</span><span class="n">pref_</span> <span class="o">|</span> <span class="n">comp_</span> <span class="o">|</span> <span class="n">unam_</span> <span class="o">|</span> <span class="n">sbac_</span> <span class="o">|</span> <span class="n">colo_</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">set_level</span><span class="p">(</span><span class="n">optm_</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="nb">dict</span><span class="o">=</span><span class="n">_bdd_dict</span><span class="p">,</span> <span class="n">xargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Translate a formula into an automaton.</span>
+
+<span class="sd">    Keep in mind that &#39;Deterministic&#39; expresses just a preference that</span>
+<span class="sd">    may not be satisfied.</span>
+
+<span class="sd">    The optional arguments should be strings among the following:</span>
+<span class="sd">    - at most one in &#39;TGBA&#39;, &#39;BA&#39;, or &#39;Monitor&#39;, &#39;generic&#39;,</span>
+<span class="sd">      &#39;parity&#39;, &#39;parity min odd&#39;, &#39;parity min even&#39;,</span>
+<span class="sd">      &#39;parity max odd&#39;, &#39;parity max even&#39; (type of automaton to</span>
+<span class="sd">      build), &#39;coBuchi&#39;</span>
+<span class="sd">    - at most one in &#39;Small&#39;, &#39;Deterministic&#39;, &#39;Any&#39;</span>
+<span class="sd">      (preferred characteristics of the produced automaton)</span>
+<span class="sd">    - at most one in &#39;Low&#39;, &#39;Medium&#39;, &#39;High&#39;</span>
+<span class="sd">      (optimization level)</span>
+<span class="sd">    - any combination of &#39;Complete&#39;, &#39;Unambiguous&#39;,</span>
+<span class="sd">      &#39;StateBasedAcceptance&#39; (or &#39;SBAcc&#39; for short), and</span>
+<span class="sd">      &#39;Colored&#39; (only for parity acceptance)</span>
+
+<span class="sd">    The default corresponds to &#39;tgba&#39;, &#39;small&#39; and &#39;high&#39;.</span>
+
+<span class="sd">    Additional options can be supplied using a `spot.option_map`, or a</span>
+<span class="sd">    string (that will be converted to `spot.option_map`), as the `xargs`</span>
+<span class="sd">    argument.  This is similar to the `-x` option of command-line tools;</span>
+<span class="sd">    so check out the spot-x(7) man page for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">xargs</span> <span class="o">=</span> <span class="n">option_map</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">translator</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">xargs</span><span class="p">)</span>
+    <span class="n">_postproc_translate_options</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">TGBA</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="n">parse_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xargs</span><span class="p">:</span>
+        <span class="n">xargs</span><span class="o">.</span><span class="n">report_unused_options</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">formula</span><span class="o">.</span><span class="n">translate</span> <span class="o">=</span> <span class="n">translate</span>
+
+
+<span class="c1"># Wrap C++-functions into lambdas so that they get converted into</span>
+<span class="c1"># instance methods (i.e., self passed as first argument</span>
+<span class="c1"># automatically), because only user-defined functions are converted as</span>
+<span class="c1"># instance methods.</span>
+<span class="k">def</span> <span class="nf">_add_formula</span><span class="p">(</span><span class="n">meth</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">meth</span><span class="p">,</span> <span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span>
+                                    <span class="nb">globals</span><span class="p">()[</span><span class="n">meth</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+
+
+<span class="n">_add_formula</span><span class="p">(</span><span class="s1">&#39;contains&#39;</span><span class="p">)</span>
+<span class="n">_add_formula</span><span class="p">(</span><span class="s1">&#39;are_equivalent&#39;</span><span class="p">,</span> <span class="s1">&#39;equivalent_to&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="n">automaton</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Post process an automaton.</span>
+
+<span class="sd">    This applies a number of simlification algorithms, depending on</span>
+<span class="sd">    the options supplied. Keep in mind that &#39;Deterministic&#39; expresses</span>
+<span class="sd">    just a preference that may not be satisfied if the input is</span>
+<span class="sd">    not already &#39;Deterministic&#39;.</span>
+
+<span class="sd">    The optional arguments should be strings among the following:</span>
+<span class="sd">    - at most one in &#39;Generic&#39;, &#39;TGBA&#39;, &#39;BA&#39;, or &#39;Monitor&#39;,</span>
+<span class="sd">      &#39;parity&#39;, &#39;parity min odd&#39;, &#39;parity min even&#39;,</span>
+<span class="sd">      &#39;parity max odd&#39;, &#39;parity max even&#39; (type of automaton to</span>
+<span class="sd">      build), &#39;coBuchi&#39;</span>
+<span class="sd">    - at most one in &#39;Small&#39;, &#39;Deterministic&#39;, &#39;Any&#39;</span>
+<span class="sd">      (preferred characteristics of the produced automaton)</span>
+<span class="sd">    - at most one in &#39;Low&#39;, &#39;Medium&#39;, &#39;High&#39;</span>
+<span class="sd">      (optimization level)</span>
+<span class="sd">    - any combination of &#39;Complete&#39;, &#39;StateBasedAcceptance&#39;</span>
+<span class="sd">      (or &#39;SBAcc&#39; for short), and &#39;Colored (only for parity</span>
+<span class="sd">      acceptance)</span>
+
+<span class="sd">    The default corresponds to &#39;generic&#39;, &#39;small&#39; and &#39;high&#39;.</span>
+
+<span class="sd">    If a formula denoted by this automaton is known, pass it to as the</span>
+<span class="sd">    optional `formula` argument; it can help some algorithms by</span>
+<span class="sd">    providing an easy way to complement the automaton.</span>
+
+<span class="sd">    Additional options can be supplied using a `spot.option_map`, or a</span>
+<span class="sd">    string (that will be converted to `spot.option_map`), as the `xargs`</span>
+<span class="sd">    argument.  This is similar to the `-x` option of command-line tools;</span>
+<span class="sd">    so check out the spot-x(7) man page for details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">xargs</span> <span class="o">=</span> <span class="n">option_map</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">automaton</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">automaton</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;automaton&#39;</span><span class="p">](</span><span class="n">automaton</span><span class="p">)</span>
+    <span class="n">_postproc_translate_options</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">postprocessor</span><span class="o">.</span><span class="n">Generic</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">automaton</span><span class="p">,</span> <span class="n">formula</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xargs</span><span class="p">:</span>
+        <span class="n">xargs</span><span class="o">.</span><span class="n">report_unused_options</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">twa</span><span class="o">.</span><span class="n">postprocess</span> <span class="o">=</span> <span class="n">postprocess</span>
+
+
+<span class="c1"># Wrap C++-functions into lambdas so that they get converted into</span>
+<span class="c1"># instance methods (i.e., self passed as first argument</span>
+<span class="c1"># automatically), because only user-defined functions are converted as</span>
+<span class="c1"># instance methods.</span>
+<span class="k">def</span> <span class="nf">_add_twa_graph</span><span class="p">(</span><span class="n">meth</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">twa_graph</span><span class="p">,</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">meth</span><span class="p">,</span> <span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span>
+                                      <span class="nb">globals</span><span class="p">()[</span><span class="n">meth</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+
+
+<span class="k">for</span> <span class="n">meth</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;scc_filter&#39;</span><span class="p">,</span> <span class="s1">&#39;scc_filter_states&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;is_deterministic&#39;</span><span class="p">,</span> <span class="s1">&#39;is_unambiguous&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;contains&#39;</span><span class="p">):</span>
+    <span class="n">_add_twa_graph</span><span class="p">(</span><span class="n">meth</span><span class="p">)</span>
+<span class="n">_add_twa_graph</span><span class="p">(</span><span class="s1">&#39;are_equivalent&#39;</span><span class="p">,</span> <span class="s1">&#39;equivalent_to&#39;</span><span class="p">)</span>
+
+<span class="c1"># Wrapper around a formula iterator to which we add some methods of formula</span>
+<span class="c1"># (using _addfilter and _addmap), so that we can write things like</span>
+<span class="c1"># formulas.simplify().is_X_free().</span>
+
+
+<span class="k">class</span> <span class="nc">formulaiterator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formulas</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formulas</span> <span class="o">=</span> <span class="n">formulas</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formulas</span><span class="p">)</span>
+
+
+<span class="c1"># fun shoud be a predicate and should be a method of formula.</span>
+<span class="c1"># _addfilter adds this predicate as a filter whith the same name in</span>
+<span class="c1"># formulaiterator.</span>
+<span class="k">def</span> <span class="nf">_addfilter</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">filtf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fun</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">formulaiterator</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">nfiltf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fun</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">formulaiterator</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fun</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;is_&#39;</span><span class="p">:</span>
+        <span class="n">notfun</span> <span class="o">=</span> <span class="s1">&#39;is_not_&#39;</span> <span class="o">+</span> <span class="n">fun</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+    <span class="k">elif</span> <span class="n">fun</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;has_&#39;</span><span class="p">:</span>
+        <span class="n">notfun</span> <span class="o">=</span> <span class="s1">&#39;has_no_&#39;</span> <span class="o">+</span> <span class="n">fun</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">notfun</span> <span class="o">=</span> <span class="s1">&#39;not_&#39;</span> <span class="o">+</span> <span class="n">fun</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">formulaiterator</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">filtf</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">formulaiterator</span><span class="p">,</span> <span class="n">notfun</span><span class="p">,</span> <span class="n">nfiltf</span><span class="p">)</span>
+
+
+<span class="c1"># fun should be a function taking a formula as its first parameter and</span>
+<span class="c1"># returning a formula.  _addmap adds this function as a method of</span>
+<span class="c1"># formula and formulaiterator.</span>
+<span class="k">def</span> <span class="nf">_addmap</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">mapf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">formulaiterator</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fun</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="p">))</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span>
+            <span class="nb">globals</span><span class="p">()[</span><span class="n">fun</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">formulaiterator</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">mapf</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">randltl</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">n</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate random formulas.</span>
+
+<span class="sd">    Returns a random formula iterator.</span>
+
+<span class="sd">    ap: the number of atomic propositions used to generate random formulas.</span>
+
+<span class="sd">    n: number of formulas to generate, or unbounded if n &lt; 0.</span>
+
+<span class="sd">    **kwargs:</span>
+<span class="sd">    seed: seed for the random number generator (0).</span>
+<span class="sd">    output: can be &#39;ltl&#39;, &#39;psl&#39;, &#39;bool&#39; or &#39;sere&#39; (&#39;ltl&#39;).</span>
+<span class="sd">    allow_dups: allow duplicate formulas (False).</span>
+<span class="sd">    tree_size: tree size of the formulas generated, before mandatory</span>
+<span class="sd">    simplifications (15)</span>
+<span class="sd">    boolean_priorities: set priorities for Boolean formulas.</span>
+<span class="sd">    ltl_priorities: set priorities for LTL formulas.</span>
+<span class="sd">    sere_priorities: set priorities for SERE formulas.</span>
+<span class="sd">    dump_priorities: show current priorities, do not generate any formula.</span>
+<span class="sd">    simplify:</span>
+<span class="sd">      0           No rewriting</span>
+<span class="sd">      1           basic rewritings and eventual/universal rules</span>
+<span class="sd">      2           additional syntactic implication rules</span>
+<span class="sd">      3 (default) better implications using containment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="n">option_map</span><span class="p">()</span>
+    <span class="n">output_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;ltl&quot;</span><span class="p">:</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">LTL</span><span class="p">,</span>
+        <span class="s2">&quot;psl&quot;</span><span class="p">:</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">PSL</span><span class="p">,</span>
+        <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">Bool</span><span class="p">,</span>
+        <span class="s2">&quot;sere&quot;</span><span class="p">:</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">SERE</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">aprops</span> <span class="o">=</span> <span class="n">atomic_prop_set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">ap</span><span class="p">:</span>
+            <span class="n">aprops</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">formula</span><span class="o">.</span><span class="n">ap</span><span class="p">(</span><span class="n">elt</span><span class="p">))</span>
+        <span class="n">ap</span> <span class="o">=</span> <span class="n">aprops</span>
+    <span class="n">ltl_priorities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ltl_priorities&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">sere_priorities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sere_priorities&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">boolean_priorities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;boolean_priorities&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">output_map</span><span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;ltl&quot;</span><span class="p">)]</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;seed&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;seed&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">tree_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tree_size&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree_size</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">tree_size_min</span><span class="p">,</span> <span class="n">tree_size_max</span> <span class="o">=</span> <span class="n">tree_size</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tree_size_min</span> <span class="o">=</span> <span class="n">tree_size_max</span> <span class="o">=</span> <span class="n">tree_size</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;tree_size_min&quot;</span><span class="p">,</span> <span class="n">tree_size_min</span><span class="p">)</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;tree_size_max&quot;</span><span class="p">,</span> <span class="n">tree_size_max</span><span class="p">)</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;unique&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;allow_dups&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;wf&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weak_fairness&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">simpl_level</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;simplify&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">simpl_level</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">simpl_level</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;invalid simplification level: &#39;</span> <span class="o">+</span> <span class="n">simpl_level</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">opts</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;simplification_level&quot;</span><span class="p">,</span> <span class="n">simpl_level</span><span class="p">)</span>
+
+    <span class="n">rg</span> <span class="o">=</span> <span class="n">randltlgenerator</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">ltl_priorities</span><span class="p">,</span> <span class="n">sere_priorities</span><span class="p">,</span>
+                          <span class="n">boolean_priorities</span><span class="p">)</span>
+
+    <span class="n">dump_priorities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dump_priorities&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dump_priorities</span><span class="p">:</span>
+        <span class="n">dumpstream</span> <span class="o">=</span> <span class="n">ostringstream</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">LTL</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Use argument ltl_priorities=STRING to set the following &#39;</span>
+                  <span class="s1">&#39;LTL priorities:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rg</span><span class="o">.</span><span class="n">dump_ltl_priorities</span><span class="p">(</span><span class="n">dumpstream</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dumpstream</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">Bool</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Use argument boolean_priorities=STRING to set the &#39;</span>
+                  <span class="s1">&#39;following Boolean formula priorities:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rg</span><span class="o">.</span><span class="n">dump_bool_priorities</span><span class="p">(</span><span class="n">dumpstream</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dumpstream</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">PSL</span> <span class="ow">or</span> <span class="n">output</span> <span class="o">==</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">SERE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">output</span> <span class="o">!=</span> <span class="n">randltlgenerator</span><span class="o">.</span><span class="n">SERE</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Use argument ltl_priorities=STRING to set the &#39;</span>
+                      <span class="s1">&#39;following LTL priorities:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">rg</span><span class="o">.</span><span class="n">dump_psl_priorities</span><span class="p">(</span><span class="n">dumpstream</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">dumpstream</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Use argument sere_priorities=STRING to set the &#39;</span>
+                  <span class="s1">&#39;following SERE priorities:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rg</span><span class="o">.</span><span class="n">dump_sere_priorities</span><span class="p">(</span><span class="n">dumpstream</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dumpstream</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Use argument boolean_priorities=STRING to set the &#39;</span>
+                  <span class="s1">&#39;following Boolean formula priorities:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rg</span><span class="o">.</span><span class="n">dump_sere_bool_priorities</span><span class="p">(</span><span class="n">dumpstream</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dumpstream</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;internal error: unknown type of output&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">class</span> <span class="nc">_randltliterator</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rg</span> <span class="o">=</span> <span class="n">rg</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+
+        <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rg</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Warning: could not generate a new &quot;</span>
+                                 <span class="s2">&quot;unique formula after </span><span class="si">{}</span><span class="s2"> trials.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randltlgenerator</span><span class="o">.</span><span class="n">MAX_TRIALS</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">f</span>
+
+    <span class="k">return</span> <span class="n">formulaiterator</span><span class="p">(</span><span class="n">_randltliterator</span><span class="p">(</span><span class="n">rg</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tl_simplifier</span><span class="p">(</span><span class="n">tl_simplifier_options</span><span class="p">(</span><span class="n">level</span><span class="p">))</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="n">basics</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;basics&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">synt_impl</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;synt_impl&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">event_univ</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;event_univ&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">cont_checks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;containment_checks&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">cont_checks_stronger</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;containment_checks_stronger&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">nenoform_stop_on_boolean</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nenoform_stop_on_boolean&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">reduce_size_strictly</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reduce_size_strictly&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">boolean_to_isop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boolean_to_isop&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">favor_event_univ</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;favor_event_univ&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">simp_opts</span> <span class="o">=</span> <span class="n">tl_simplifier_options</span><span class="p">(</span><span class="n">basics</span><span class="p">,</span>
+                                      <span class="n">synt_impl</span><span class="p">,</span>
+                                      <span class="n">event_univ</span><span class="p">,</span>
+                                      <span class="n">cont_checks</span><span class="p">,</span>
+                                      <span class="n">cont_checks_stronger</span><span class="p">,</span>
+                                      <span class="n">nenoform_stop_on_boolean</span><span class="p">,</span>
+                                      <span class="n">reduce_size_strictly</span><span class="p">,</span>
+                                      <span class="n">boolean_to_isop</span><span class="p">,</span>
+                                      <span class="n">favor_event_univ</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tl_simplifier</span><span class="p">(</span><span class="n">simp_opts</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">fun</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">formula</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">fun</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fun</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;is_&#39;</span> <span class="ow">or</span>
+                                             <span class="n">fun</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;has_&#39;</span><span class="p">)):</span>
+        <span class="n">_addfilter</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">fun</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;remove_x&#39;</span><span class="p">,</span> <span class="s1">&#39;relabel&#39;</span><span class="p">,</span> <span class="s1">&#39;relabel_bse&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;simplify&#39;</span><span class="p">,</span> <span class="s1">&#39;unabbreviate&#39;</span><span class="p">,</span> <span class="s1">&#39;negative_normal_form&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mp_class&#39;</span><span class="p">,</span> <span class="s1">&#39;nesting_depth&#39;</span><span class="p">]:</span>
+    <span class="n">_addmap</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+
+
+<span class="c1"># Better interface to the corresponding C++ function.</span>
+<span class="k">def</span> <span class="nf">sat_minimize</span><span class="p">(</span><span class="n">aut</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">state_based</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">max_states</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sat_naive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sat_langmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">sat_incr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sat_incr_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">display_log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_log</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">acc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument &#39;acc&#39; should be a string&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,acc=&quot;&#39;</span> <span class="o">+</span> <span class="n">acc</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span>
+    <span class="k">if</span> <span class="n">colored</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,colored&#39;</span>
+    <span class="k">if</span> <span class="n">states</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">states</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument &#39;states&#39; should be a positive integer&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,states=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_states</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">max_states</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">max_states</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument &#39;states&#39; should be a positive integer&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,max-states=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_states</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sat_naive</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,sat-naive&#39;</span>
+    <span class="k">if</span> <span class="n">sat_langmap</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,sat-langmap&#39;</span>
+    <span class="k">if</span> <span class="n">sat_incr</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,sat-incr=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sat_incr</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,sat-incr-steps=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sat_incr_steps</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="n">sat_minimize</span> <span class="k">as</span> <span class="n">sm</span>
+
+    <span class="k">if</span> <span class="n">display_log</span> <span class="ow">or</span> <span class="n">return_log</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.satlog&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="s1">&#39;,log=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">aut</span> <span class="o">=</span> <span class="n">sm</span><span class="p">(</span><span class="n">aut</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">state_based</span><span class="p">)</span>
+            <span class="n">dfrm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">display_log</span><span class="p">:</span>
+                <span class="c1"># old versions of ipython do not import display by default</span>
+                <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
+                <span class="k">del</span> <span class="n">dfrm</span><span class="p">[</span><span class="s1">&#39;automaton&#39;</span><span class="p">]</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">dfrm</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">return_log</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">aut</span><span class="p">,</span> <span class="n">dfrm</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">aut</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sm</span><span class="p">(</span><span class="n">aut</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">state_based</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">parse_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">dic</span><span class="o">=</span><span class="n">_bdd_dict</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="n">parse_word</span> <span class="k">as</span> <span class="n">pw</span>
+    <span class="k">return</span> <span class="n">pw</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">dic</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">bdd_to_formula</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dic</span><span class="o">=</span><span class="n">_bdd_dict</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="n">bdd_to_formula</span> <span class="k">as</span> <span class="n">bf</span>
+    <span class="k">return</span> <span class="n">bf</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dic</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">language_containment_checker</span><span class="p">(</span><span class="n">dic</span><span class="o">=</span><span class="n">_bdd_dict</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">spot.impl</span> <span class="k">import</span> <span class="n">language_containment_checker</span> <span class="k">as</span> <span class="n">c</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">contains</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">this</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">contained</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">are_equivalent</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">this</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">mp_hierarchy_svg</span><span class="p">(</span><span class="n">cl</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return an some string containing an SVG picture of the Manna &amp;</span>
+<span class="sd">    Pnueli hierarchy, highlighting class `cl` if given.</span>
+
+<span class="sd">    If not None, `cl` should be one of &#39;TPROGSB&#39;.  For convenience,</span>
+<span class="sd">    if `cl` is an instance of `spot.formula`, it is replaced by</span>
+<span class="sd">    `mp_class(cl)`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span> <span class="o">==</span> <span class="n">formula</span><span class="p">:</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">mp_class</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="s1">&#39;110,35&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;R&#39;</span><span class="p">:</span> <span class="s1">&#39;40,80&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="s1">&#39;175,80&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="s1">&#39;110,140&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="s1">&#39;40,160&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;175,160&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;110,198&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">highlight</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;&lt;g transform=&quot;translate(</span><span class="si">{}</span><span class="s1">)&quot;&gt;</span>
+<span class="s1">    &lt;line x1=&quot;-10&quot; y1=&quot;-10&quot; x2=&quot;10&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;5&quot; /&gt;</span>
+<span class="s1">    &lt;line x1=&quot;-10&quot; y1=&quot;10&quot; x2=&quot;10&quot; y2=&quot;-10&quot; stroke=&quot;red&quot; stroke-width=&quot;5&quot; /&gt;</span>
+<span class="s1">    &lt;/g&gt;&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="n">cl</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">highlight</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;svg height=&quot;210&quot; width=&quot;220&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;</span>
+<span class="s1">&lt;polygon points=&quot;20,0 200,120 200,210 20,210&quot; fill=&quot;cyan&quot; opacity=&quot;.2&quot; /&gt;</span>
+<span class="s1">&lt;polygon points=&quot;20,120 155,210 20,210&quot; fill=&quot;cyan&quot; opacity=&quot;.2&quot; /&gt;</span>
+<span class="s1">&lt;polygon points=&quot;200,0 20,120 20,210 200,210&quot; fill=&quot;magenta&quot; opacity=&quot;.15&quot; /&gt;</span>
+<span class="s1">&lt;polygon points=&quot;200,120 65,210 200,210&quot; fill=&quot;magenta&quot; opacity=&quot;.15&quot; /&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span> <span class="o">+</span> <span class="n">highlight</span> <span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;g text-anchor=&quot;middle&quot; font-size=&quot;14&quot;&gt;</span>
+<span class="s1">&lt;text x=&quot;110&quot; y=&quot;20&quot;&gt;Reactivity&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;60&quot; y=&quot;65&quot;&gt;Recurrence&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;160&quot; y=&quot;65&quot;&gt;Persistence&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;110&quot; y=&quot;125&quot;&gt;Obligation&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;60&quot; y=&quot;185&quot;&gt;Safety&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;160&quot; y=&quot;185&quot;&gt;Guarantee&lt;/text&gt;</span>
+<span class="s1">&lt;/g&gt;</span>
+<span class="s1">&lt;g font-size=&quot;14&quot;&gt;</span>
+<span class="s1">&lt;text text-anchor=&quot;begin&quot; transform=&quot;rotate(-90,18,210)&quot; x=&quot;18&quot; y=&quot;210&quot; fill=&quot;gray&quot;&gt;Monitor&lt;/text&gt;</span>
+<span class="s1">&lt;text text-anchor=&quot;end&quot; transform=&quot;rotate(-90,18,0)&quot; x=&quot;18&quot; y=&quot;0&quot; fill=&quot;gray&quot;&gt;Deterministic Büchi&lt;/text&gt;</span>
+<span class="s1">&lt;text text-anchor=&quot;begin&quot; transform=&quot;rotate(-90,214,210)&quot; x=&quot;214&quot; y=&quot;210&quot; fill=&quot;gray&quot;&gt;Terminal Büchi&lt;/text&gt;</span>
+<span class="s1">&lt;text text-anchor=&quot;end&quot; transform=&quot;rotate(-90,214,0)&quot; x=&quot;214&quot; y=&quot;0&quot; fill=&quot;gray&quot;&gt;Weak Büchi&lt;/text&gt;</span>
+<span class="s1">&lt;/g&gt;</span>
+<span class="s1">&lt;/svg&gt;&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">show_mp_hierarchy</span><span class="p">(</span><span class="n">cl</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a picture of the Manna &amp; Pnueli hierarchy as an SVG object</span>
+<span class="sd">    in the IPython/Jupyter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+    <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="n">mp_hierarchy_svg</span><span class="p">(</span><span class="n">cl</span><span class="p">))</span>
+
+
+<span class="n">formula</span><span class="o">.</span><span class="n">show_mp_hierarchy</span> <span class="o">=</span> <span class="n">show_mp_hierarchy</span>
+
+
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">twa_word</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">twa_word</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_repr_latex_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;; &#39;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">bdd_to_formula</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">bd</span><span class="p">)</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;; &#39;</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">mathsf</span><span class="si">{cycle}</span><span class="se">\\</span><span class="s1">{&#39;</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;; &#39;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">bdd_to_formula</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">bd</span><span class="p">)</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">}$&#39;</span>
+
+    <span class="k">def</span> <span class="nf">as_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build an SVG picture representing the word as a collection of</span>
+<span class="sd">        signals for each atomic proposition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get the list of atomic proposition used</span>
+        <span class="n">sup</span> <span class="o">=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bddtrue</span>
+        <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="p">):</span>
+            <span class="n">sup</span> <span class="o">=</span> <span class="n">sup</span> <span class="o">&amp;</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_support</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span>
+        <span class="n">ap</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">sup</span> <span class="o">!=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bddtrue</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_var</span><span class="p">(</span><span class="n">sup</span><span class="p">)</span>
+            <span class="n">ap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">sup</span> <span class="o">=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_high</span><span class="p">(</span><span class="n">sup</span><span class="p">)</span>
+
+        <span class="c1"># Prepare canvas</span>
+        <span class="n">psize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="n">csize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;endprefix&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">psize</span><span class="p">,</span>
+            <span class="s1">&#39;endcycle&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="p">(</span><span class="n">psize</span> <span class="o">+</span> <span class="n">csize</span><span class="p">),</span>
+            <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="p">(</span><span class="n">psize</span> <span class="o">+</span> <span class="n">csize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">),</span>
+            <span class="s1">&#39;height2&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">&#39;h3&#39;</span><span class="p">:</span> <span class="mi">50</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s1">&#39;bgcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;#f4f4f4&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bgl&#39;</span><span class="p">:</span> <span class="s1">&#39;stroke=&quot;white&quot; stroke-width=&quot;4&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bgt&#39;</span><span class="p">:</span> <span class="s1">&#39;stroke=&quot;white&quot; stroke-width=&quot;1&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;txt&#39;</span><span class="p">:</span> <span class="s1">&#39;text-anchor=&quot;start&quot; font-size=&quot;20&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="s1">&#39;stroke=&quot;#ff0000&quot; stroke-width=&quot;2&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sml&#39;</span><span class="p">:</span> <span class="s1">&#39;text-anchor=&quot;start&quot; font-size=&quot;10&quot;&#39;</span>
+        <span class="p">}</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;svg height=&quot;</span><span class="si">{h3}</span><span class="s1">&quot; width=&quot;</span><span class="si">{w}</span><span class="s1">&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;</span>
+<span class="s1">&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;</span><span class="si">{w}</span><span class="s1">&quot; height=&quot;</span><span class="si">{height}</span><span class="s1">&quot; fill=&quot;</span><span class="si">{bgcolor}</span><span class="s1">&quot;/&gt;</span>
+<span class="s1">&lt;line x1=&quot;</span><span class="si">{endprefix}</span><span class="s1">&quot; y1=&quot;0&quot; x2=&quot;</span><span class="si">{endprefix}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{height}</span><span class="s1">&quot;</span>
+<span class="s1">      stroke=&quot;white&quot; stroke-width=&quot;4&quot;/&gt;</span>
+<span class="s1">&lt;line x1=&quot;</span><span class="si">{endcycle}</span><span class="s1">&quot; y1=&quot;0&quot; x2=&quot;</span><span class="si">{endcycle}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{height}</span><span class="s1">&quot;</span>
+<span class="s1">      stroke=&quot;white&quot; stroke-width=&quot;4&quot;/&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="c1"># Iterate over all used atomic propositions, and fill each line</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="p">)</span>
+        <span class="n">bd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ypos</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ap</span><span class="p">):</span>
+            <span class="n">pa</span> <span class="o">=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_ithvar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">na</span> <span class="o">=</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_nithvar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">bdd_format_formula</span><span class="p">(</span><span class="n">bd</span><span class="p">,</span> <span class="n">pa</span><span class="p">)</span>
+            <span class="c1"># Whether the last state was down (-1), up (1), or unknown (0)</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">txt</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;&lt;line x1=&quot;0&quot; y1=&quot;</span><span class="si">{y}</span><span class="s1">&quot; x2=&quot;</span><span class="si">{w}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{y}</span><span class="s1">&quot; </span><span class="si">{bgl}</span><span class="s1">/&gt;&#39;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">))</span>
+            <span class="n">txt</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;&lt;text x=&quot;</span><span class="si">{x}</span><span class="s1">&quot; y=&quot;</span><span class="si">{y}</span><span class="s1">&quot; </span><span class="si">{txt}</span><span class="s1">&gt;</span><span class="si">{name}</span><span class="s1">&lt;/text&gt;&#39;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">xpos</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_implies</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">pa</span><span class="p">):</span>
+                    <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">buddy</span><span class="o">.</span><span class="n">bdd_implies</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">na</span><span class="p">):</span>
+                    <span class="n">cur</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">txt</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;&lt;line x1=&quot;</span><span class="si">{x}</span><span class="s1">&quot; y1=&quot;</span><span class="si">{y1}</span><span class="s1">&quot; x2=&quot;</span><span class="si">{x}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{y2}</span><span class="s1">&quot; </span><span class="si">{bgt}</span><span class="s1">/&gt;&#39;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">xpos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="n">y2</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="mi">50</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">cur</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">last</span> <span class="o">==</span> <span class="o">-</span><span class="n">cur</span><span class="p">:</span>
+                        <span class="n">txt</span> <span class="o">+=</span> \
+                            <span class="p">(</span><span class="s1">&#39;&lt;line x1=&quot;</span><span class="si">{x}</span><span class="s1">&quot; y1=&quot;</span><span class="si">{y1}</span><span class="s1">&quot; x2=&quot;</span><span class="si">{x}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{y2}</span><span class="s1">&quot; </span><span class="si">{red}</span><span class="s1">/&gt;&#39;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xpos</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span>
+                                     <span class="n">y2</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="mi">45</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">))</span>
+                    <span class="n">txt</span> <span class="o">+=</span> \
+                        <span class="p">(</span><span class="s1">&#39;&lt;line x1=&quot;</span><span class="si">{x1}</span><span class="s1">&quot; y1=&quot;</span><span class="si">{y}</span><span class="s1">&quot; x2=&quot;</span><span class="si">{x2}</span><span class="s1">&quot; y2=&quot;</span><span class="si">{y}</span><span class="s1">&quot; </span><span class="si">{red}</span><span class="s1">/&gt;&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="o">=</span><span class="n">xpos</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="n">x2</span><span class="o">=</span><span class="p">(</span><span class="n">xpos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span>
+                                 <span class="n">y</span><span class="o">=</span><span class="n">ypos</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="mi">25</span><span class="o">-</span><span class="mi">20</span><span class="o">*</span><span class="n">cur</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">))</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">cur</span>
+        <span class="k">if</span> <span class="n">psize</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">txt</span> <span class="o">+=</span> <span class="s1">&#39;&lt;text x=&quot;0&quot; y=&quot;</span><span class="si">{height2}</span><span class="s1">&quot; </span><span class="si">{sml}</span><span class="s1">&gt;prefix&lt;/text&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">txt</span> <span class="o">+=</span> <span class="s1">&#39;&#39;&#39;&lt;text x=&quot;</span><span class="si">{endprefix}</span><span class="s1">&quot; y=&quot;</span><span class="si">{height2}</span><span class="s1">&quot; </span><span class="si">{sml}</span><span class="s1">&gt;cycle&lt;/text&gt;</span>
+<span class="s1">&lt;text x=&quot;</span><span class="si">{endcycle}</span><span class="s1">&quot; y=&quot;</span><span class="si">{height2}</span><span class="s1">&quot; </span><span class="si">{sml}</span><span class="s1">&gt;cycle&lt;/text&gt;&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">txt</span> <span class="o">+</span> <span class="s1">&#39;&lt;/svg&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Display the word as an SVG picture of signals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+        <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_svg</span><span class="p">())</span>
+
+
+<span class="c1"># Make scc_and_mark filter usable as context manager</span>
+<span class="nd">@_extend</span><span class="p">(</span><span class="n">scc_and_mark_filter</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">scc_and_mark_filter</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restore_acceptance</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

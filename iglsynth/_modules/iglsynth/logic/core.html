@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iglsynth.logic.core &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iglsynth.logic.core</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iglsynth.logic.core</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">iglsynth.util.graph</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">iglsynth.util.spot</span> <span class="k">as</span> <span class="nn">spot</span>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># INTERFACE CLASSES</span>
+<span class="c1">########################################################################################################################</span>
+
+<div class="viewcode-block" id="ILogic"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic">[docs]</a><span class="k">class</span> <span class="nc">ILogic</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`ILogic` is an interface class to represent logic classes in IGLSynth.</span>
+<span class="sd">    All logic classes must implement the methods of this class.</span>
+
+<span class="sd">    .. caution:: DO NOT INSTANTIATE THIS CLASS!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.__hash__ is abstract method. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logical_and</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logical_or</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logical_neg</span><span class="p">()</span>
+
+    <span class="fm">__iand__</span> <span class="o">=</span> <span class="fm">__rand__</span> <span class="o">=</span> <span class="fm">__and__</span>
+    <span class="fm">__ior__</span> <span class="o">=</span> <span class="fm">__ror__</span> <span class="o">=</span> <span class="fm">__or__</span>
+    <span class="fm">__invert__</span> <span class="o">=</span> <span class="fm">__neg__</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the set of atomic propositions (as :class:`Alphabet &lt;iglsynth.logic.core.Alphabet&gt;` object)</span>
+<span class="sd">        over which the logic formula is defined.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.alphabet is abstract property. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a string representing the logic formula. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.formula is abstract property. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the size of formula. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.size is abstract property. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the abstract syntax tree (as :class:`SyntaxTree &lt;&gt;` object) of the logic formula. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.tree is abstract property. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PRIVATE METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_logical_and</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a new logic formula representing the AND-ing of &quot;self&quot; and &quot;other&quot; formulas. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic._logical_and is abstract method. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a new logic formula representing the OR-ing of &quot;self&quot; and &quot;other&quot; formulas. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic._logical_or is abstract method. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_neg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a new logic formula representing the NEG-ation of &quot;self&quot; formula. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic._logical_neg is abstract method. The derived class must override it.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="ILogic.parse"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Parses the given formula string to return a simplified parsed string. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.parse is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ILogic.substitute"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.substitute">[docs]</a>    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a new logic formula with substituted formulas. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.substitute is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ILogic.simplify"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a new logic formula with a simplified formula. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.simplify is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ILogic.translate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an :class:`Automaton &lt;iglsynth.logic.core.Automaton&gt; object</span>
+<span class="sd">        representing an equivalent automaton for the logic formula.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.translate is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ILogic.is_equivalent"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.is_equivalent">[docs]</a>    <span class="k">def</span> <span class="nf">is_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether given logic formula accepts the same language as the current (self) formula.</span>
+
+<span class="sd">        :param other: (:class:`ILogic &lt;iglsynth.logic.core.ILogic&gt;`) A logic formula.</span>
+<span class="sd">        :return: (bool) Whether self and other accept same language (True) or not (False).</span>
+
+<span class="sd">        .. note:: ``p.is_equivalent(q)`` is not the same as ``p == q``.</span>
+<span class="sd">          The first  checks whether the languagesof formulas ``p`` and ``q``</span>
+<span class="sd">          are equal or not, whereas the latter (``p == q``) whether</span>
+<span class="sd">          ``p`` and ``q`` are syntactically equivalent or not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.is_equivalent is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ILogic.is_contained_in"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.ILogic.is_contained_in">[docs]</a>    <span class="k">def</span> <span class="nf">is_contained_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether language of &quot;self&quot; formula is contained within the language of given formula (other).</span>
+
+<span class="sd">        :param other: (:class:`ILogic &lt;iglsynth.logic.core.ILogic&gt;`) A logic formula.</span>
+<span class="sd">        :return: (bool) Whether language of &quot;self&quot; is contained in &quot;other&quot; (True) or not (False).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ILogic.is_contained_in is abstract method. The derived class must override it.&quot;</span><span class="p">)</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># PRIVATE CLASSES</span>
+<span class="c1">########################################################################################################################</span>
+
+<div class="viewcode-block" id="SyntaxTree"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.SyntaxTree">[docs]</a><span class="k">class</span> <span class="nc">SyntaxTree</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an Abstract Syntax Tree of a :class:`ILogic &lt;iglsynth.logic.core.ILogic&gt;` formula.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC CLASSES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="SyntaxTree.Vertex"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.SyntaxTree.Vertex">[docs]</a>    <span class="k">class</span> <span class="nc">Vertex</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Vertex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Represents a vertex of a :class:`SyntaxTree`.</span>
+
+<span class="sd">        A vertex of syntax tree stores two key pieces of information.</span>
+<span class="sd">            - A sub-formula string, which is represented by the sub-tree by considering the vertex as the root.</span>
+<span class="sd">            - The kind (operator) represented by the vertex.</span>
+
+<span class="sd">        :param spot_formula: (spot.formula) The formula represented by the sub-tree with the vertex as the root.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="c1"># INTERNAL METHODS</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spot_formula</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">SyntaxTree</span><span class="o">.</span><span class="n">Vertex</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+            <span class="c1"># Internal variables</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_node_type</span> <span class="o">=</span> <span class="n">_SPOT_OP_MAP</span><span class="p">[</span><span class="n">spot_formula</span><span class="o">.</span><span class="n">kind</span><span class="p">()]</span>
+
+        <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formula</span><span class="p">)</span> <span class="o">==</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formula</span><span class="p">)</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;SyntaxTree.Vertex(formula=&#39;</span><span class="si">{self._formula}</span><span class="s2">&#39;, kind=</span><span class="si">{self.operator}</span><span class="s2">)&quot;</span>
+
+        <span class="c1"># --------------------------------------------------------------------------------------------------------------</span>
+        <span class="c1"># PUBLIC PROPERTIES</span>
+        <span class="c1"># --------------------------------------------------------------------------------------------------------------</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the formula string represented by the sub-tree with vertex as root. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">operator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the operator represented by the sub-tree with vertex as root. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_type</span></div>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SyntaxTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">SyntaxTree</span><span class="o">.</span><span class="n">Vertex</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the root of :class:`SyntaxTree` as a :class:`SyntaxTree.Vertex`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="SyntaxTree.build_from_spot_formula"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.SyntaxTree.build_from_spot_formula">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_spot_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spot_formula</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a syntax tree from a given spot formula.</span>
+
+<span class="sd">        :param spot_formula: (:class:`spot.formula`)</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Start with root of tree</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">SyntaxTree</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">spot_formula</span><span class="o">=</span><span class="n">spot_formula</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root</span> <span class="o">=</span> <span class="n">root</span>
+
+        <span class="c1"># Iteratively visit root in spot formula and build a tree in IGLSynth representation.</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="c1"># Create a vertex for current spot node.</span>
+            <span class="n">igl_vertex</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">igl_vertex</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+            <span class="c1"># Get children of spot node and add them to stack.</span>
+            <span class="k">for</span> <span class="n">spot_child</span> <span class="ow">in</span> <span class="n">spot_formula</span><span class="p">:</span>
+                <span class="n">igl_vertex_child</span> <span class="o">=</span> <span class="n">SyntaxTree</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">spot_formula</span><span class="o">=</span><span class="n">spot_child</span><span class="p">)</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">igl_vertex_child</span><span class="p">)</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># PUBLIC CLASSES</span>
+<span class="c1">########################################################################################################################</span>
+
+<div class="viewcode-block" id="AP"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP">[docs]</a><span class="k">class</span> <span class="nc">AP</span><span class="p">(</span><span class="n">ILogic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an atomic proposition.</span>
+
+<span class="sd">    :param formula: (str) The name of atomic proposition. Acceptable strings are alphanumeric</span>
+<span class="sd">        strings that are not &quot;true&quot; or &quot;false&quot; (case insensitive) and do not contain &#39;F&#39;, &#39;G&#39;,</span>
+<span class="sd">        &#39;M&#39;, &#39;R&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;xor&#39;.</span>
+
+<span class="sd">    :param eval_func: (function) A function that evaluates whether the AP is true or false in a</span>
+<span class="sd">        given state. The acceptable function templates are</span>
+
+<span class="sd">            * ``res &lt;- eval_func(st)``</span>
+<span class="sd">            * ``res &lt;- eval_func(st, *args)``</span>
+<span class="sd">            * ``res &lt;- eval_func(st, *kwargs)``</span>
+<span class="sd">            * ``res &lt;- eval_func(st, *args, **kwargs)``</span>
+
+<span class="sd">        where ``res`` must be a boolean.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">eval_func</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+        <span class="c1"># self._alphabet = None         # TODO: Why is this commented?</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="n">eval_func</span>
+
+        <span class="c1"># Note: It is important to call parse after setting _eval_func.</span>
+        <span class="c1"># because &quot;parse&quot; function overrides eval_func if AP name is true/false.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># A __call__ function wraps AP.evaluate function by providing additional</span>
+        <span class="c1"># protection to &quot;evaluate&quot; functionality by checking if user has defined</span>
+        <span class="c1"># the ``eval_func`` or not.</span>
+
+        <span class="c1"># Handle the case when user has not provided evaluation function.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.eval_func is None. Did you provide the evaluation function for this AP?&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Try evaluating the AP over given state.</span>
+        <span class="c1"># If evaluation fails because of function template not matching given inputs,</span>
+        <span class="c1"># raise appropriate error explaining the reason.</span>
+        <span class="c1"># If evaluation fails due to some other reason, do not handle it here.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Given evaluation function does not conform to required signature.&quot;</span>
+                             <span class="n">f</span><span class="s2">&quot;An evaluation must be:: func(st, *args, **kwargs)&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ILogic</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;An AP can only be compared with another ILogic formula. &quot;</span> \
+            <span class="n">f</span><span class="s2">&quot;Received other={type(other)}&quot;</span>
+
+        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span> <span class="o">==</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;AP(name=</span><span class="si">{self.formula}</span><span class="s2">)&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Alphabet</span><span class="p">((</span><span class="bp">self</span><span class="p">,))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PRIVATE METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_logical_and</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="n">PL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">PL</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{self.formula}</span><span class="s2"> &amp; </span><span class="si">{other.formula}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;AND-ing of AP and {type(other)} is not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">AP</span><span class="p">,</span> <span class="n">PL</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PL</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{self.formula}</span><span class="s2"> | </span><span class="si">{other.formula}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;OR-ing of AP and {type(other)} is not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_logical_neg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">AP</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(!</span><span class="si">{self.formula}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="AP.parse"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+        <span class="c1"># Invoke spot parser</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;The string </span><span class="si">{formula}</span><span class="s2"> is NOT an acceptable AP name.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if spot recognizes this as an AP</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_literal</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;The string </span><span class="si">{formula}</span><span class="s2"> is NOT an acceptable AP name.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If input string is acceptable AP, then generate syntax tree and update internal variables</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">SyntaxTree</span><span class="p">()</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">build_from_spot_formula</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="n">formula</span>
+
+        <span class="c1"># Special APs: true and false</span>
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AP.substitute"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.substitute">[docs]</a>    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Substitutes the current AP with another AP according to given substitution map.</span>
+
+<span class="sd">        :param subs_map: (dict[&lt;Logic&gt;: &lt;Logic&gt;]) A substitution map.</span>
+<span class="sd">        :return: (AP) Substituted AP object.</span>
+
+<span class="sd">        :raises KeyError: When subs_map does not contain the AP &quot;self&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subs_map</span><span class="p">[</span><span class="bp">self</span><span class="p">],</span> <span class="n">AP</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;AP can only be substituted by another ILogic formula. &quot;</span> \
+            <span class="n">f</span><span class="s2">&quot;Received subs_map[</span><span class="si">{self}</span><span class="s2">] as obj=</span><span class="si">{subs_map[self]}</span><span class="s2"> of type={type(subs_map[self])}&quot;</span>
+
+        <span class="k">return</span> <span class="n">subs_map</span><span class="p">[</span><span class="bp">self</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="AP.simplify"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># No simplification possible for an AP.</span>
+        <span class="k">return</span> <span class="n">AP</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AP.translate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># Construct IGLSynth Automaton object from spot_aut</span>
+        <span class="c1"># Automaton for an AP has same structure for any AP. This is hard-coded here.</span>
+        <span class="c1">#</span>
+        <span class="c1"># State 0:</span>
+        <span class="c1">#   edge(0 -&gt; 0)</span>
+        <span class="c1">#     label = 1</span>
+        <span class="c1">#     acc sets = {0}</span>
+        <span class="c1"># State 1:</span>
+        <span class="c1">#   edge(1 -&gt; 0)</span>
+        <span class="c1">#     label = a</span>
+        <span class="c1">#     acc sets = {}</span>
+        <span class="c1">#   edge(1 -&gt; 2)</span>
+        <span class="c1">#     label = !a</span>
+        <span class="c1">#     acc sets = {}</span>
+        <span class="c1"># State 2:</span>
+        <span class="c1">#   edge(2 -&gt; 2)</span>
+        <span class="c1">#     label = 1</span>
+        <span class="c1">#     acc sets = {}</span>
+
+        <span class="c1"># Create automaton</span>
+        <span class="n">igl_aut</span> <span class="o">=</span> <span class="n">Automaton</span><span class="p">(</span><span class="n">acc_cond</span><span class="o">=</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COSAFE</span><span class="p">)</span>
+
+        <span class="c1"># If AP is either true or false, then automaton has exactly one state.</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">AP</span><span class="o">.</span><span class="n">TRUE</span> <span class="ow">or</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">AP</span><span class="o">.</span><span class="n">FALSE</span><span class="p">:</span>
+            <span class="c1"># Add vertices and mark final vertices</span>
+            <span class="n">v0</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">acc_set</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">v0</span><span class="p">)</span>
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">mark_final_st</span><span class="p">(</span><span class="n">v0</span><span class="p">)</span>
+
+            <span class="c1"># Add edges</span>
+            <span class="n">e00</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e00</span><span class="p">)</span>
+
+        <span class="c1"># Else, construct the above 3-state automaton</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Add vertices and mark final vertices</span>
+            <span class="n">v0</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">acc_set</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">([</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">])</span>
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">mark_final_st</span><span class="p">(</span><span class="n">v0</span><span class="p">)</span>
+
+            <span class="c1"># Add edges</span>
+            <span class="n">e00</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">AP</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
+            <span class="n">e22</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">AP</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
+            <span class="n">e10</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">e12</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span>
+                                 <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span>
+                                     <span class="n">formula</span><span class="o">=</span><span class="s2">&quot;!&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span>
+                                     <span class="n">eval_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
+                                 <span class="p">)</span>
+
+            <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([</span><span class="n">e00</span><span class="p">,</span> <span class="n">e10</span><span class="p">,</span> <span class="n">e12</span><span class="p">,</span> <span class="n">e22</span><span class="p">])</span>
+
+        <span class="c1"># Return automaton</span>
+        <span class="k">return</span> <span class="n">igl_aut</span></div>
+
+<div class="viewcode-block" id="AP.is_equivalent"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.is_equivalent">[docs]</a>    <span class="k">def</span> <span class="nf">is_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ILogic</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span> <span class="o">==</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AP.is_contained_in"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.is_contained_in">[docs]</a>    <span class="k">def</span> <span class="nf">is_contained_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ILogic</span><span class="p">)</span>
+        <span class="n">checker</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">language_containment_checker</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">checker</span><span class="o">.</span><span class="n">contained</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">),</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="AP.evaluate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.AP.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates the AP over the given state.</span>
+
+<span class="sd">        :param st: (pyobject) An object representing state. It is user&#39;s duty to ensure the implementation</span>
+<span class="sd">            of given ``eval_func`` consumes the given state object correctly.</span>
+
+<span class="sd">        :return: (bool) If AP is evaluated to be True/False over given state.</span>
+<span class="sd">        :raises ValueError: When result of evaluation is not a boolean.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Call user-provided evaluation function</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Check if result is boolean</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.formula}</span><span class="s2">.evaluate(st=</span><span class="si">{st}</span><span class="s2">, args=</span><span class="si">{args}</span><span class="s2">, kwargs=</span><span class="si">{kwargs}</span><span class="s2">)&quot;</span>
+                             <span class="n">f</span><span class="s2">&quot;returned </span><span class="si">{result}</span><span class="s2">, which is not a boolean.&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PL"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL">[docs]</a><span class="k">class</span> <span class="nc">PL</span><span class="p">(</span><span class="n">AP</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an propositional logic formula.</span>
+
+<span class="sd">    :param formula: (str) A formula string constructed from</span>
+
+<span class="sd">        * Atomic propositions (AP names can be alphanumeric strings</span>
+<span class="sd">          that are not &quot;true&quot; or &quot;false&quot; (case insensitive) and do</span>
+<span class="sd">          not contain ``F, G, M, R, U, V, W, X, xor`` as a sub-string.</span>
+<span class="sd">        * Operators: Negation (!), And(&amp;), Or(|)</span>
+
+<span class="sd">    :param alphabet: (:class:`Alphabet`) A set of atomic propositions.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="fm">__hash__</span> <span class="o">=</span> <span class="n">AP</span><span class="o">.</span><span class="fm">__hash__</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">:</span> <span class="s1">&#39;Alphabet&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;Input parameter formula must be a string.Received formula=</span><span class="si">{formula}</span><span class="s2">.&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="n">alphabet</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reference: https://stackoverflow.com/questions/17920304/what-is-the-size-of-an-ltl-formula</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+        <span class="n">unabbr_formula</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">unabbreviate</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">,</span> <span class="s2">&quot;FGRMWie^&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">unabbr_formula</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">unabbr_formula</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PRIVATE METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_logical_neg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">PL</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(!</span><span class="si">{self.formula}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="PL.parse"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Invoke spot parser</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;The string </span><span class="si">{formula}</span><span class="s2"> is NOT an acceptable PL formula name.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if the formula is propositional logic formula</span>
+        <span class="n">mp_class</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mp_class</span> <span class="o">!=</span> <span class="s2">&quot;B&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;The string </span><span class="si">{formula}</span><span class="s2"> is NOT an acceptable PL formula.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If input string is acceptable PL formula, then generate syntax tree and update internal variables</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">SyntaxTree</span><span class="p">()</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">build_from_spot_formula</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)</span>
+
+        <span class="c1"># Set tree and formula string for PL formula</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="n">formula</span>
+
+        <span class="c1"># Update alphabet</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="p">{</span><span class="n">AP</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ap</span><span class="p">))</span> <span class="k">for</span> <span class="n">ap</span> <span class="ow">in</span> <span class="n">spot</span><span class="o">.</span><span class="n">atomic_prop_collect</span><span class="p">(</span><span class="n">spot_formula</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="n">Alphabet</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">sigma</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;Input formula contains APs not in alphabet, </span><span class="si">{self._alphabet}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Special APs: true and false</span>
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="PL.substitute"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.substitute">[docs]</a>    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Substitutes the current AP with another AP according to given substitution map.</span>
+
+<span class="sd">        :param subs_map: (dict[&lt;Logic&gt;: &lt;Logic&gt;]) A substitution map.</span>
+<span class="sd">        :return: (AP) Substituted AP object.</span>
+
+<span class="sd">        :raises KeyError: When subs_map does not contain the AP &quot;self&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Copy the formula into a local variable</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+        <span class="c1"># For all keys in substitution map, we try replacing self.formula with provided substitutions</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">subs_map</span><span class="p">:</span>
+
+            <span class="c1"># Validate type of q. If q is True/False, replace with their logical equivalent.</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">subs_map</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">q</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">AP</span><span class="o">.</span><span class="n">TRUE</span>
+
+            <span class="k">if</span> <span class="n">q</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">AP</span><span class="o">.</span><span class="n">FALSE</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">AP</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">AP</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;PL.substitute(...) does not support substitution for non-AP objects. &quot;</span>
+                              <span class="s2">&quot;The results of substitution may not be correct!&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create instances of spot formula</span>
+            <span class="n">spot_p</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+            <span class="n">spot_q</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+            <span class="c1"># Invoke spot.formula.substitute (defined in iglsynth.util.spot)</span>
+            <span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">spot_p</span><span class="p">,</span> <span class="n">new_formula</span><span class="o">=</span><span class="n">spot_q</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">PL</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">formula</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PL.simplify"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;PL.simplify is not yet implemented.&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># def is_equivalent(self, other):</span>
+    <span class="c1">#     assert isinstance(other, ILogic)</span>
+    <span class="c1">#     return spot.formula(self.formula) == spot.formula(other.formula)</span>
+
+    <span class="c1"># def is_contained_in(self, other):</span>
+    <span class="c1">#     assert isinstance(other, ILogic)</span>
+    <span class="c1">#     checker = spot.language_containment_checker()</span>
+    <span class="c1">#     return checker.contained(spot.formula(self.formula), spot.formula(other.formula))</span>
+
+<div class="viewcode-block" id="PL.evaluate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates the PL formula over the given state.</span>
+
+<span class="sd">        :param st: (pyobject) An object representing state. It is user&#39;s duty to ensure the implementation</span>
+<span class="sd">            of given ``eval_func`` consumes the given state object correctly.</span>
+
+<span class="sd">        :return: (bool) If PL formula is evaluated to be ``True`` or ``False`` over given state.</span>
+<span class="sd">        :raises ValueError: When result of evaluation is not a boolean.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Evaluate alphabet to get a substitution map</span>
+        <span class="n">subs_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Substitute valuation of APs in PL formula</span>
+        <span class="n">plf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">subs_map</span><span class="p">)</span>
+
+        <span class="c1"># Simplify the formula</span>
+        <span class="n">spot_formula</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">plf</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_tt</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">elif</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.formula}</span><span class="s2">.evaluate(st=</span><span class="si">{st}</span><span class="s2">, args=</span><span class="si">{args}</span><span class="s2">, kwargs=</span><span class="si">{kwargs}</span><span class="s2">)&quot;</span>
+                         <span class="n">f</span><span class="s2">&quot;returned </span><span class="si">{plf}</span><span class="s2">, which is not a boolean. Was the substitution map complete?&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Alphabet"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.Alphabet">[docs]</a><span class="k">class</span> <span class="nc">Alphabet</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="nb">tuple</span><span class="p">()):</span>
+        <span class="sd">&quot;&quot;&quot; Represents a set of AP objects. &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">AP</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">props</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Alphabet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Alphabet.add"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.Alphabet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">AP</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">AP</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Alphabet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Alphabet.evaluate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.Alphabet.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates the alphabet over the given state.</span>
+
+<span class="sd">        :param st: (pyobject) An object representing state. It is user&#39;s duty to ensure the implementation</span>
+<span class="sd">            of given ``eval_func`` consumes the given state object correctly.</span>
+
+<span class="sd">        :return: (dict(key=AP, value=bool)) A mapping of atomic proposition with it&#39;s evaluation at the given state.</span>
+<span class="sd">        :raises ValueError: When result of evaluation is not a boolean.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize a dictionary</span>
+        <span class="n">ap_label</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="c1"># For every atomic proposition in alphabet, evaluate it</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">ap_label</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Return the dictionary</span>
+        <span class="k">return</span> <span class="n">ap_label</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for representing automata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC VARIABLES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># ACC_REACHABILITY = &quot;Reachability&quot;</span>
+    <span class="n">ACC_SAFETY</span> <span class="o">=</span> <span class="s2">&quot;Safety&quot;</span>
+    <span class="n">ACC_COSAFE</span> <span class="o">=</span> <span class="s2">&quot;Co-Safety&quot;</span>
+    <span class="n">ACC_BUCHI</span> <span class="o">=</span> <span class="s2">&quot;Persistence&quot;</span>
+    <span class="n">ACC_COBUCHI</span> <span class="o">=</span> <span class="s2">&quot;Co-Buchi&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC CLASSES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">class</span> <span class="nc">Vertex</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Vertex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Base class for representing a vertex of automaton.</span>
+
+<span class="sd">        - Two vertices are equal, if they have same names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">acc_set</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_set</span> <span class="o">=</span> <span class="n">acc_set</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_acc</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">acc_set</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span>
+
+        <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;Automaton.Vertex&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_name</span>
+
+        <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;Automaton.Vertex(name=</span><span class="si">{self._name}</span><span class="s2">, &quot;</span> \
+                <span class="n">f</span><span class="s2">&quot;is_acc={&#39;Yes, acc_set: &#39; + str(self._acc_set) if self._is_acc else &#39;No&#39;})&quot;</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">is_acc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_acc</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">acc_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acc_set</span>
+
+    <span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Edge</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Base class for representing a edge of automaton.</span>
+
+<span class="sd">        - :class:`Edge` represents a directed edge.</span>
+<span class="sd">        - Two edges are equal, if the two :class:`Edge` objects are same.</span>
+
+<span class="sd">        :param u: (:class:`Vertex`) Source vertex of edge.</span>
+<span class="sd">        :param v: (:class:`Vertex`) Target vertex of edge.</span>
+<span class="sd">        :param f: (:class:`ILogic`) A PL formula over 2^AP denoting the label of edge.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="fm">__hash__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__hash__</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="s1">&#39;ILogic&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_source</span> <span class="o">=</span> <span class="n">u</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_target</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="n">f</span>
+
+        <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;Edge(source=</span><span class="si">{self.source}</span><span class="s2">, target=</span><span class="si">{self.target}</span><span class="s2">), f=</span><span class="si">{self.formula}</span><span class="s2">&quot;</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the source vertex of edge. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the target vertex of edge. &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># INTERNAL METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acc_cond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">etype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">acc_cond</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ACC_BUCHI</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACC_COBUCHI</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACC_COSAFE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACC_SAFETY</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">Alphabet</span><span class="p">)</span> <span class="ow">or</span> <span class="n">alphabet</span> <span class="ow">is</span> <span class="kc">None</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Automaton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">vtype</span><span class="p">,</span> <span class="n">etype</span><span class="o">=</span><span class="n">etype</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acc_condition</span> <span class="o">=</span> <span class="n">acc_cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="n">alphabet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>            <span class="c1"># Map of type {&lt;acc_set_num&gt;: &lt;set: acc_set&gt;}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_st</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;Automaton(|V|=</span><span class="si">{self.num_vertices}</span><span class="s2">, |E|=</span><span class="si">{self.num_edges}</span><span class="s2">, v0=</span><span class="si">{self._init_st}</span><span class="s2">, final=</span><span class="si">{self._final}</span><span class="s2">)&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PROPERTIES</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acc_condition</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_st</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_st</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># PUBLIC METHODS</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_st</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">init_st</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_st</span> <span class="o">=</span> <span class="n">init_st</span>
+
+    <span class="k">def</span> <span class="nf">mark_final_st</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">acc_set</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span>
+
+        <span class="k">if</span> <span class="n">acc_set</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">[</span><span class="n">acc_set</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">[</span><span class="n">acc_set</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_from_hoa_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">load_from_hoa_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># GLOBAL VARIABLES</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<span class="k">class</span> <span class="nc">ParsingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Error raised when IGLSynth logic parsing fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">ap</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator for creating atomic propositions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">AP</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+
+<span class="n">RESERVED</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>        <span class="c1">#: Set of reserved keywords or symbols</span>
+<span class="n">_SPOT_OP_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;tt&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;ap&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;!&#39;</span><span class="p">,</span>  <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span>
+                <span class="mi">12</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span> <span class="s1">&#39; &lt;-&gt;&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">:</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">}</span>
+<span class="n">MP_CLASS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="s2">&quot;PL&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;Reachability&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="s2">&quot;Safety&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="s2">&quot;Obligation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="s2">&quot;Persistence&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="s2">&quot;Recurrence&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;Reactivity&quot;</span>
+            <span class="p">}</span>
+
+<span class="n">TRUE</span> <span class="o">=</span> <span class="n">AP</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">FALSE</span> <span class="o">=</span> <span class="n">AP</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="n">eval_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">AP</span><span class="o">.</span><span class="n">TRUE</span> <span class="o">=</span> <span class="n">TRUE</span>          <span class="c1">#: Hello</span>
+<span class="n">AP</span><span class="o">.</span><span class="n">FALSE</span> <span class="o">=</span> <span class="n">FALSE</span>        <span class="c1">#: Bye</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities &mdash; iglsynth 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities" href="spot.html" />
+    <link rel="prev" title="Utilities" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../game/index.html">Game Module API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logic/index.html">Logic Module API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Utilities API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">game.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#graph-class">Graph Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spot.html">game.spot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">IGLSynth API</a> &raquo;</li>
+        
+          <li><a href="index.html">Utilities API</a> &raquo;</li>
+        
+      <li>Utilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/util/graph.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="graph-class">
+<h2>Graph Class<a class="headerlink" href="#graph-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="iglsynth.util.graph.Graph">
+<em class="property">class </em><code class="descclassname">iglsynth.util.graph.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>vtype=None</em>, <em>etype=None</em>, <em>graph=None</em>, <em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class to represent graph-based objects in IGLSynth.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph" title="iglsynth.util.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> may represent a Digraph or a Multi-Digraph.</li>
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> may represent a self-loop, i.e. <cite>source = target</cite>.</li>
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph" title="iglsynth.util.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> stores objects of <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> and <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> classes or
+their sub-classes, which users may define.</li>
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> and <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> may have attributes, which represent the vertex
+and edge properties of the graph.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vtype</strong> – (class) Class representing vertex objects.</li>
+<li><strong>etype</strong> – (class) Class representing edge objects.</li>
+<li><strong>graph</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph" title="iglsynth.util.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a>) Copy constructor. Copies the input graph into new Graph object.</li>
+<li><strong>file</strong> – (str) Name of file (with absolute path) from which to load the graph.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">The copy-constructor and load-from-file functionality.</p>
+</div>
+<dl class="class">
+<dt id="iglsynth.util.graph.Graph.Edge">
+<em class="property">class </em><code class="descname">Edge</code><span class="sig-paren">(</span><em>u: iglsynth.util.graph.Graph.Vertex</em>, <em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.Edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for representing a edge of graph.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> represents a directed edge.</li>
+<li>Two edges are equal, if the two <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> objects are same.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>u</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> or its sub-class) Source vertex of edge.</li>
+<li><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> or its sub-class) Target vertex of edge.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.Edge.source">
+<code class="descname">source</code><a class="headerlink" href="#iglsynth.util.graph.Graph.Edge.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the source vertex of edge.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.Edge.target">
+<code class="descname">target</code><a class="headerlink" href="#iglsynth.util.graph.Graph.Edge.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the target vertex of edge.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="iglsynth.util.graph.Graph.Vertex">
+<em class="property">class </em><code class="descname">Vertex</code><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.Vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.Vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for representing a vertex of graph.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> constructor takes no arguments.</li>
+<li>Two vertices are equal, if the two <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> objects are same.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.add_edge">
+<code class="descname">add_edge</code><span class="sig-paren">(</span><em>e: iglsynth.util.graph.Graph.Edge</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.add_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an edge to the graph.
+Both the vertices must be present in the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>AttributeError</strong> – When at least one of the vertex is not in the graph.</li>
+<li><strong>AssertionError</strong> – When argument <cite>e</cite> is not an <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.add_edges">
+<code class="descname">add_edges</code><span class="sig-paren">(</span><em>ebunch: Iterable[Graph.Edge]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.add_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a bunch of edges to the graph.
+Both the vertices of all edges must be present in the graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>AttributeError</strong> – When at least one of the vertex is not in the graph.</li>
+<li><strong>AssertionError</strong> – When argument <cite>e</cite> is not an <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.add_vertex">
+<code class="descname">add_vertex</code><span class="sig-paren">(</span><em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.add_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new vertex to graph.
+An attempt to add existing vertex will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex to be added to graph.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.add_vertices">
+<code class="descname">add_vertices</code><span class="sig-paren">(</span><em>vbunch: Iterable[Graph.Vertex]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.add_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.add_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a bunch of vertices to graph.
+An attempt to add existing vertex will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vbunch</strong> – (Iterable over <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertices to be added to graph.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.edges">
+<code class="descname">edges</code><a class="headerlink" href="#iglsynth.util.graph.Graph.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over edges in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.in_edges">
+<code class="descname">in_edges</code><span class="sig-paren">(</span><em>v: Union[Graph.Vertex, Iterable[Graph.Vertex]]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.in_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.in_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over incoming edges to given vertex or vertices.
+In case of vertices, the iterator is defined over the union of set of
+incoming edges of individual vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>AssertionError</strong> – When <cite>v</cite> is neither a <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> object
+nor an iterable of <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> objects.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.in_neighbors">
+<code class="descname">in_neighbors</code><span class="sig-paren">(</span><em>v: Union[Graph.Vertex, Iterable[Graph.Vertex]]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.in_neighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.in_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over sources of incoming edges to given vertex or vertices.
+In case of vertices, the iterator is defined over the union of set of
+incoming edges of individual vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>AssertionError</strong> – When <cite>v</cite> is neither a <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> object
+nor an iterable of <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> objects.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.num_edges">
+<code class="descname">num_edges</code><a class="headerlink" href="#iglsynth.util.graph.Graph.num_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of edges in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.num_vertices">
+<code class="descname">num_vertices</code><a class="headerlink" href="#iglsynth.util.graph.Graph.num_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of vertices in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.out_edges">
+<code class="descname">out_edges</code><span class="sig-paren">(</span><em>v: Union[Graph.Vertex, Iterable[Graph.Vertex]]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.out_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.out_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over outgoing edges to given vertex or vertices.
+In case of vertices, the iterator is defined over the union of set of
+incoming edges of individual vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>AssertionError</strong> – When <cite>v</cite> is neither a <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> object
+nor an iterable of <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> objects.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.out_neighbors">
+<code class="descname">out_neighbors</code><span class="sig-paren">(</span><em>v: Union[Graph.Vertex, Iterable[Graph.Vertex]]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.out_neighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.out_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over targets of incoming edges to given vertex or vertices.
+In case of vertices, the iterator is defined over the union of set of
+incoming edges of individual vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>AssertionError</strong> – When <cite>v</cite> is neither a <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> object
+nor an iterable of <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a> objects.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.rm_edge">
+<code class="descname">rm_edge</code><span class="sig-paren">(</span><em>e: iglsynth.util.graph.Graph.Edge</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.rm_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.rm_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an edge from the graph.
+An attempt to remove a non-existing edge will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>) Edge to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.rm_edges">
+<code class="descname">rm_edges</code><span class="sig-paren">(</span><em>ebunch: Iterable[Graph.Edge]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.rm_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.rm_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a bunch of edges from the graph.
+An attempt to remove a non-existing edge will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ebunch</strong> – (Iterable over <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>) Edges to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.rm_vertex">
+<code class="descname">rm_vertex</code><span class="sig-paren">(</span><em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.rm_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.rm_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a vertex from the graph.
+An attempt to remove a non-existing vertex will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.rm_vertices">
+<code class="descname">rm_vertices</code><span class="sig-paren">(</span><em>vbunch: Iterable[Graph.Vertex]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.rm_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.rm_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a bunch of vertices from the graph.
+An attempt to remove a non-existing vertex will be ignored, with a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vbunch</strong> – (Iterable over <a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertices to be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.util.graph.Graph.vertices">
+<code class="descname">vertices</code><a class="headerlink" href="#iglsynth.util.graph.Graph.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over vertices in graph.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spot.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
