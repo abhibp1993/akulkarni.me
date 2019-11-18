@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Defining Logic Formulas &mdash; iglsynth 0.2.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Notes" href="../changelog.html" />
+    <link rel="prev" title="Constructing a Game Graph" href="construct_game_graph.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="construct_game_graph.html">Game Graph Construction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Defining Logic Formulas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#atomic-propositions">Atomic Propositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#propositional-logic-formulas">Propositional Logic Formulas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temporal-logic-formulas">Temporal Logic Formulas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html">IGLSynth Examples</a> &raquo;</li>
+        
+      <li>Defining Logic Formulas</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/define_logic_formula.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="defining-logic-formulas">
+<span id="example-define-logic-formulas"></span><h1>Defining Logic Formulas<a class="headerlink" href="#defining-logic-formulas" title="Permalink to this headline">¶</a></h1>
+<p>This example demonstrates how to define logic formulas using <code class="docutils literal notranslate"><span class="pre">iglsynth.logic</span></code> module.
+Presently, IGLSynth defines three classes of logic formulas; namely atomic propositions <code class="xref py py-class docutils literal notranslate"><span class="pre">AP</span></code>,
+propositional logic <code class="xref py py-class docutils literal notranslate"><span class="pre">PL</span></code> and linear temporal logic <code class="xref py py-class docutils literal notranslate"><span class="pre">LTL</span></code>.</p>
+<div class="section" id="atomic-propositions">
+<h2>Atomic Propositions<a class="headerlink" href="#atomic-propositions" title="Permalink to this headline">¶</a></h2>
+<p>The most common use of logic formulas in IGLSynth is to define certain properties of a game on graph.
+Hence, we define atomic propositions to be <code class="docutils literal notranslate"><span class="pre">Callable</span></code> objects over states (or vertices) of a graph.</p>
+<p>An AP can be defined by providing a name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AP</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, it is desirable to evaluate an AP at a given state.
+This can be achieved by instantiating an AP in the following way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define atomic proposition with evaluation function</span>
+<span class="nd">@ap</span>
+<span class="k">def</span> <span class="nf">is_goal</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">10</span>
+
+<span class="c1"># Define atomic proposition with evaluation function accepting extra arguments</span>
+<span class="nd">@ap</span>
+<span class="k">def</span> <span class="nf">is_colliding</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">obs</span>
+
+<span class="c1"># Define atomic proposition with evaluation function accepting extra keyword arguments</span>
+<span class="nd">@ap</span>
+<span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;threshold&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">st</span> <span class="o">-</span> <span class="n">threshold</span> <span class="o">&lt;</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Let us understand the three AP definitions given above.
+The first AP, <code class="docutils literal notranslate"><span class="pre">is_goal</span></code>, accepts a state <code class="docutils literal notranslate"><span class="pre">st</span></code> as an input parameter and returns whether <code class="docutils literal notranslate"><span class="pre">st</span> <span class="pre">==</span> <span class="pre">10</span></code> or not.
+It is imperative that an <code class="xref py py-class docutils literal notranslate"><span class="pre">AP</span></code> must return a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<p>In many cases, it is convenient to define a parameterized atomic proposition.
+In such cases, the extra parameters can be passed to the AP’s evaluation function
+as optional arguments <code class="docutils literal notranslate"><span class="pre">args</span></code> or optional keyword arguments <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is strongly recommended that AP’s function template to have <code class="docutils literal notranslate"><span class="pre">*args,</span> <span class="pre">**kwargs</span></code> as parameters.</p>
+</div>
+<p>Given an <code class="xref py py-class docutils literal notranslate"><span class="pre">AP</span></code>, it is possible to evaluate it at a given state:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">is_goal</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">is_goal</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">is_colliding</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">is_colliding</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">is_close</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">is_close</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="propositional-logic-formulas">
+<h2>Propositional Logic Formulas<a class="headerlink" href="#propositional-logic-formulas" title="Permalink to this headline">¶</a></h2>
+<p>Propositional Logic Formulas can be defined by instantiating <code class="xref py py-class docutils literal notranslate"><span class="pre">PL</span></code> class.
+Similar to <code class="xref py py-class docutils literal notranslate"><span class="pre">AP</span></code>, a propositional logic formula can be defined by passing a formula string
+containing only And(<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>), Or(<code class="docutils literal notranslate"><span class="pre">|</span></code>) and/or Negation(<code class="docutils literal notranslate"><span class="pre">!</span></code>) operators:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plf0</span> <span class="o">=</span> <span class="n">PL</span><span class="p">(</span><span class="s2">&quot;a &amp; b&quot;</span><span class="p">)</span>
+<span class="n">plf1</span> <span class="o">=</span> <span class="n">PL</span><span class="p">(</span><span class="s2">&quot;a | b&quot;</span><span class="p">)</span>
+<span class="n">plf2</span> <span class="o">=</span> <span class="n">PL</span><span class="p">(</span><span class="s2">&quot;!a | b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A PL formula is, generally, defined over an alphabet.
+An alphabet is a set of atomic propositions.
+To define a PL formula over alphabet, first define an alphabet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@ap</span>
+<span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">10</span>
+
+<span class="nd">@ap</span>
+<span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">Alphabet</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>An important feature of alphabet is that it can be evaluated at a given state.
+For example,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>returns a dictionary with keys as AP’s in alphabet and values as the result
+of evaluating the AP at given state. In above case, <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">{a:</span> <span class="pre">True,</span> <span class="pre">b:</span> <span class="pre">True}</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Observe that evaluating an alphabet at a state is equivalent to computing the label
+of that state.</p>
+</div>
+<p>Now, we can define a PL formula over an alphabet.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plf</span> <span class="o">=</span> <span class="n">PL</span><span class="p">(</span><span class="s2">&quot;a &amp; b&quot;</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>PL formulas can also be evaluated at a given state.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># PL is callable class</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">plf</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c1"># Explicitly call evaluate function</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">plf</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>When a PL formula is evaluated at a given state, the alphabet is evaluated at that state. Then,
+the APs in PL formula are substituted with the evaluated values to get back <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Calling <code class="docutils literal notranslate"><span class="pre">PL</span></code> object like <code class="docutils literal notranslate"><span class="pre">res</span> <span class="pre">=</span> <span class="pre">plf(10,</span> <span class="pre">[10,</span> <span class="pre">20])</span></code> is currently failing.
+See <a class="reference external" href="https://github.com/abhibp1993/iglsynth/issues/17">Bug Report Issue #17</a>.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="temporal-logic-formulas">
+<h2>Temporal Logic Formulas<a class="headerlink" href="#temporal-logic-formulas" title="Permalink to this headline">¶</a></h2>
+<p>(Linear) Temporal Logic formulas can be defined by instantiating <code class="xref py py-class docutils literal notranslate"><span class="pre">LTL</span></code> class.
+Similar to <code class="xref py py-class docutils literal notranslate"><span class="pre">PL</span></code>, LTL formulas can be defined with/without providing an alphabet.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alphabet not provided.</span>
+<span class="n">ltlf0</span> <span class="o">=</span> <span class="n">LTL</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;Gp1 &amp; !(p1 &amp; X(p0 xor p1))&quot;</span><span class="p">)</span>
+
+<span class="c1"># Alphabet provided</span>
+<span class="n">ltlf</span> <span class="o">=</span> <span class="n">LTL</span><span class="p">(</span><span class="s2">&quot;F(a &amp; Fb)&quot;</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../changelog.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="construct_game_graph.html" class="btn btn-neutral float-left" title="Constructing a Game Graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
