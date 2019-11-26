@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>iglsynth.logic.ltl &mdash; iglsynth 0.2.2 documentation</title>
+  <title>iglsynth.logic.ltl &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -260,12 +261,6 @@
         <span class="k">if</span> <span class="n">spot_formula</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="LTL.substitute"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.substitute">[docs]</a>    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.substitute is not yet implemented.&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="LTL.simplify"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.simplify is not yet implemented.&quot;</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="LTL.translate"><a class="viewcode-back" href="../../../logic/ltl.html#iglsynth.logic.ltl.LTL.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="c1"># Translate LTL formula to spot automaton using spot</span>
@@ -307,7 +302,8 @@
                 <span class="n">target</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">dst</span><span class="p">))</span>
                 <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 
-                <span class="n">edge</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">spot</span><span class="o">.</span><span class="n">bdd_format_formula</span><span class="p">(</span><span class="n">bdict</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">cond</span><span class="p">))</span>
+                <span class="n">edge_formula</span> <span class="o">=</span> <span class="n">PL</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">bdd_format_formula</span><span class="p">(</span><span class="n">bdict</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">cond</span><span class="p">)),</span> <span class="n">alphabet</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
+                <span class="n">edge</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">edge_formula</span><span class="p">)</span>
                 <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
 
                 <span class="c1"># PATCH: e.acc returns a spot-specific mark_t object. I&#39;m not sure how to iterate over these.</span>
@@ -340,7 +336,12 @@
 
 <span class="sd">        .. warning:: This function is not yet implemented.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;LTL.evaluate method is not yet implemented.&quot;</span><span class="p">)</span></div></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mp_class</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>        <span class="c1"># LTL can only be evaluated when LTL formula is PL formula.</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">LTL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;LTL formula can be evaluated only if it is a AP/PL formula. </span><span class="si">{self}</span><span class="s2"> is not a AP/PL formula.&quot;</span><span class="p">)</span></div></div>
+
+
 </pre></div>
 
            </div>

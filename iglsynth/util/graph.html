@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utilities &mdash; iglsynth 0.2.2 documentation</title>
+  <title>Utilities &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -101,6 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spot.html">game.spot</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../solver/index.html">Solver Module API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -262,7 +264,10 @@ Both the vertices must be present in the graph.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>e</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>) An edge to be added to the graph.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
 <li><strong>AttributeError</strong> – When at least one of the vertex is not in the graph.</li>
 <li><strong>AssertionError</strong> – When argument <cite>e</cite> is not an <a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a> object.</li>
 </ul>
@@ -325,6 +330,59 @@ An attempt to add existing vertex will be ignored, with a warning.</p>
 <dt id="iglsynth.util.graph.Graph.edges">
 <code class="descname">edges</code><a class="headerlink" href="#iglsynth.util.graph.Graph.edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an iterator over edges in graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.get_edges">
+<code class="descname">get_edges</code><span class="sig-paren">(</span><em>u: iglsynth.util.graph.Graph.Vertex</em>, <em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.get_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all edges with source <code class="docutils literal notranslate"><span class="pre">u</span></code> and target <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of the graph.</li>
+<li><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex of the graph.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(iterator(<a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>)) Edges between u, v.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.has_edge">
+<code class="descname">has_edge</code><span class="sig-paren">(</span><em>e: iglsynth.util.graph.Graph.Edge</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.has_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.has_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the graph has the given edge or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Edge" title="iglsynth.util.graph.Graph.Edge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code></a>) An edge to be checked for containment in the graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) True if the graph has the given edge, False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.util.graph.Graph.has_vertex">
+<code class="descname">has_vertex</code><span class="sig-paren">(</span><em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/util/graph.html#Graph.has_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.util.graph.Graph.has_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the graph has the given vertex or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.util.graph.Graph.Vertex" title="iglsynth.util.graph.Graph.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code></a>) Vertex to be checked for containment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) True if given vertex is in the graph, else False.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

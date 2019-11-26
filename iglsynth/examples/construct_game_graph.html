@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Constructing a Game Graph &mdash; iglsynth 0.2.2 documentation</title>
+  <title>Constructing a Game Graph &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,7 +37,7 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Defining Logic Formulas" href="define_logic_formula.html" />
+    <link rel="next" title="Gridworld Problem: Game on Graph" href="gw_tsys_spec_zielonka.html" />
     <link rel="prev" title="IGLSynth Examples" href="../examples.html" /> 
 </head>
 
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -91,10 +92,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Game Graph Construction</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Game on Graph from Scratch</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#define-game-by-explicit-construction">Define Game by Explicit Construction</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="gw_tsys_spec_zielonka.html">Game on Graph using TSys and LTL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="define_logic_formula.html">Defining Logic Formulas</a></li>
 </ul>
 </li>
@@ -187,9 +189,9 @@ Hence, first import the <code class="docutils literal notranslate"><span class="
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.game.game</span> <span class="k">import</span> <span class="n">Game</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">Game</span></code> class defines a deterministic two-player game on graph.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">Game</span></code> class defines a deterministic two-player zero-sum game on graph.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">Game</span></code> can be either <code class="docutils literal notranslate"><span class="pre">TURN_BASED</span></code> or <code class="docutils literal notranslate"><span class="pre">CONCURRENT</span></code>.
-For this example, let us consider the game on graph shown in following image.</p>
+For this example, let us consider a <code class="docutils literal notranslate"><span class="pre">TURN_BASED</span></code> game on graph shown in following image.</p>
 <a class="reference internal image-reference" href="../_images/EPFL_Problem1.png"><img alt="Game graph from `EPFL Slides &lt;http://richmodels.epfl.ch/_media/w2_wed_3.pdf&gt;`_." class="align-center" src="../_images/EPFL_Problem1.png" style="width: 237.0px; height: 235.0px;" /></a>
 <p>First, instantiate a game object:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">TURN_BASED</span><span class="p">)</span>
@@ -200,16 +202,22 @@ When a vertex has <code class="docutils literal notranslate"><span class="pre">t
 When a vertex has <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">=</span> <span class="pre">2</span></code>, player 2 (box) will make a move.</p>
 <p>The vertex in a <code class="docutils literal notranslate"><span class="pre">game</span></code> (an instance of <code class="docutils literal notranslate"><span class="pre">Game</span></code> class) must be of type <code class="docutils literal notranslate"><span class="pre">Game.Vertex</span></code> or its derivative.
 Hence, it is recommended to instantiate a new game vertex as <code class="docutils literal notranslate"><span class="pre">game.Vertex</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add vertices to game</span>
-<span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
-    <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">turn</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>
-    <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">turn</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vertices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+        <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">turn</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">turn</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="n">game</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and mark the vertices 3, 4 as final:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the states as final</span>
+<span class="n">v3</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">v4</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">game</span><span class="o">.</span><span class="n">mark_final</span><span class="p">(</span><span class="n">v3</span><span class="p">)</span>
+<span class="n">game</span><span class="o">.</span><span class="n">mark_final</span><span class="p">(</span><span class="n">v4</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Finally, add the edges to the game. Similar to vertices, we instantiate new edges as <code class="docutils literal notranslate"><span class="pre">game.Edge</span></code> objects:</p>
@@ -223,6 +231,20 @@ Hence, it is recommended to instantiate a new game vertex as <code class="docuti
     <span class="n">game</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>Now, given a game we invoke the <code class="docutils literal notranslate"><span class="pre">ZielonkaSolver</span></code> from <code class="docutils literal notranslate"><span class="pre">iglsynth.solver.zielonka</span></code> module
+to compute the winning regions for players 1 and 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.solver.zielonka</span> <span class="k">import</span> <span class="n">ZielonkaSolver</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">ZielonkaSolver</span><span class="p">(</span><span class="n">game</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">solver.solve()</span></code> runs the solver on the <code class="docutils literal notranslate"><span class="pre">Game</span></code> object <code class="docutils literal notranslate"><span class="pre">game</span></code> that encodes the game on graph.
+The solution of solver can be accessed using the properties:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">p1_win</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">p2_win</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which returns the winning sets for P1 and P2.</p>
 </div>
 </div>
 
@@ -234,7 +256,7 @@ Hence, it is recommended to instantiate a new game vertex as <code class="docuti
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="define_logic_formula.html" class="btn btn-neutral float-right" title="Defining Logic Formulas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gw_tsys_spec_zielonka.html" class="btn btn-neutral float-right" title="Gridworld Problem: Game on Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../examples.html" class="btn btn-neutral float-left" title="IGLSynth Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

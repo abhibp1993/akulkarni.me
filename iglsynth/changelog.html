@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; iglsynth 0.2.2 documentation</title>
+  <title>Release Notes &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -91,8 +92,10 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#proposed">0.2.4 (Proposed)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.2.3 ()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#november-2019">0.2.2 (17 November 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">0.2.1 (16 November 2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.2.1 (16 November 2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#august-2019">0.1.0 (07 August 2019)</a></li>
 </ul>
 </li>
@@ -162,6 +165,60 @@
             
   <div class="section" id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="proposed">
+<h2>0.2.4 (Proposed)<a class="headerlink" href="#proposed" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Solver module</p>
+<blockquote>
+<div><ul class="simple">
+<li>[Issue #24] Define <code class="docutils literal notranslate"><span class="pre">Strategy</span></code> class to represent deterministic and stochastic strategies.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>0.2.3 ()<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Bugs</p>
+<blockquote>
+<div><ul class="simple">
+<li>[Issue #20] Automaton.Edge now returns an <cite>AP</cite> or <cite>PL</cite> class object for AP, PL, LTL.translate().</li>
+<li>[Issue #17] Unexpected AssertionError when calling <cite>PL(st=..)</cite> and <cite>LTL(st=..)</cite> is handled resolved.</li>
+<li>[Issue #16] Bug in the printing PL, LTL objects was resolved.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Game module</p>
+<blockquote>
+<div><ul class="simple">
+<li>[Issue #6] Gridworld class accept <code class="docutils literal notranslate"><span class="pre">p1_action</span></code> and <code class="docutils literal notranslate"><span class="pre">p2_action</span></code> separately.</li>
+<li>[Issue #6] Gridworld class defined with basic 4, 5, 8, 9 connectivity.</li>
+<li>[Issue #23] Implement <code class="docutils literal notranslate"><span class="pre">game.define(tsys,</span> <span class="pre">spec)</span></code> function.</li>
+<li>[Issue #4] Defined <code class="docutils literal notranslate"><span class="pre">Kripke</span></code> class to support <code class="docutils literal notranslate"><span class="pre">TSys</span></code> class. No special properties or functions are
+associated with <code class="docutils literal notranslate"><span class="pre">Kripke</span></code> are defined or implemented.</li>
+<li>[Issue #5] Updated <code class="docutils literal notranslate"><span class="pre">TSys</span></code> constructor signature to accept <code class="docutils literal notranslate"><span class="pre">p1_action,</span> <span class="pre">p2_action</span></code> instead of <code class="docutils literal notranslate"><span class="pre">actions</span></code>.
+<code class="docutils literal notranslate"><span class="pre">TSys.Vertex</span></code> now requires <code class="docutils literal notranslate"><span class="pre">name,</span> <span class="pre">turn</span></code> parameters. <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">=</span> <span class="pre">None</span></code> represents a concurrent game.
+<code class="docutils literal notranslate"><span class="pre">TSys.Edge</span></code> is updated to represent both concurrent and turn-based edges.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Solver module</p>
+<blockquote>
+<div><ul class="simple">
+<li>[Issue #24] <code class="docutils literal notranslate"><span class="pre">ZielonkaSolver</span></code> class defined and implemented. The solver computes winning regions only.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Utilities</p>
+<blockquote>
+<div><ul class="simple">
+<li>[Issue #11] Added <cite>has_vertex</cite>, <cite>has_edge</cite>, <cite>get_edges</cite> functionality to <cite>Graph</cite> class.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
 <div class="section" id="november-2019">
 <h2>0.2.2 (17 November 2019)<a class="headerlink" href="#november-2019" title="Permalink to this headline">¶</a></h2>
 <ul>
@@ -193,8 +250,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>0.2.1 (16 November 2019)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>0.2.1 (16 November 2019)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl class="first docutils">
 <dt>Game module</dt>

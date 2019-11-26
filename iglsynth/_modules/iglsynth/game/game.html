@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>iglsynth.game.game &mdash; iglsynth 0.2.2 documentation</title>
+  <title>iglsynth.game.game &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -166,7 +167,7 @@
 
 <div class="viewcode-block" id="Game"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Represents a two-player deterministic game.</span>
+<span class="sd">    Represents a two-player deterministic **zero-sum** game.</span>
 
 <span class="sd">        * The game could be concurrent or turn-based.</span>
 <span class="sd">        * Game instance can be constructed by adding vertices and edges (See :ref:`Example Game Graph Construction`).</span>
@@ -229,7 +230,9 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_turn</span>
+            <span class="c1"># print(&quot;MYPRINT&quot;, self, other)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;Expected other of type={type(self)}. Received other.type={type(other)}.&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">turn</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">turn</span>
 
         <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
         <span class="c1"># PUBLIC PROPERTIES</span>
@@ -246,10 +249,12 @@
 
         <span class="nd">@property</span>
         <span class="k">def</span> <span class="nf">tsys_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the transition system vertex associated with game vertex. &quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tsys_v</span>         <span class="c1"># pragma: no cover</span>
 
         <span class="nd">@property</span>
         <span class="k">def</span> <span class="nf">aut_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns the automaton vertex associated with game vertex. &quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aut_v</span>          <span class="c1"># pragma: no cover</span></div>
 
 <div class="viewcode-block" id="Game.Edge"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.Edge">[docs]</a>    <span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Graph</span><span class="o">.</span><span class="n">Edge</span><span class="p">):</span>
@@ -298,6 +303,7 @@
 
         <span class="nd">@property</span>
         <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Returns action associated with game edge. &quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_act</span></div>
 
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
@@ -310,6 +316,9 @@
 
         <span class="c1"># Initialize internal variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span> <span class="o">=</span> <span class="n">kind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p1_spec</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
         <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="n">etype</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
 
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
@@ -323,10 +332,57 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">p1_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the specification of P1 in the game. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p1_spec</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the set of final states of the game. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final</span>
+
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># PRIVATE METHODS</span>
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
-    <span class="k">def</span> <span class="nf">_define_by_tsys_aut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_product_turn_based_tsys_aut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the product of a turn-based transition system with a specification automaton.</span>
+
+<span class="sd">        :param tsys:</span>
+<span class="sd">        :param aut:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Generate vertices of game</span>
+        <span class="n">tsys_states</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tsys</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+        <span class="n">aut_states</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+
+        <span class="n">game_states</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{s}</span><span class="s2">, </span><span class="si">{q}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">tsys_v</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">aut_v</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">turn</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">turn</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">tsys_states</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">aut_states</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">(</span><span class="n">game_states</span><span class="p">)</span>
+
+        <span class="c1"># Set final states</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">aut_vertex</span> <span class="ow">in</span> <span class="n">aut</span><span class="o">.</span><span class="n">final</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mark_final</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="c1"># Add edges of game</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">tsys_vertex</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">aut_vertex</span>
+
+            <span class="n">s_out_edges</span> <span class="o">=</span> <span class="n">tsys</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">q_out_edges</span> <span class="o">=</span> <span class="n">aut</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">se</span> <span class="ow">in</span> <span class="n">s_out_edges</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">qe</span> <span class="ow">in</span> <span class="n">q_out_edges</span><span class="p">:</span>
+                    <span class="c1"># qe_formula = PL(formula=str(qe.formula), alphabet=self.p1_spec.alphabet)</span>
+                    <span class="k">if</span> <span class="n">qe</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">se</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vertex</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{se.target}</span><span class="s2">, </span><span class="si">{qe.target}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">tsys_v</span><span class="o">=</span><span class="n">se</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                                        <span class="n">aut_v</span><span class="o">=</span><span class="n">qe</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">turn</span><span class="o">=</span><span class="n">se</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">turn</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="n">se</span><span class="o">.</span><span class="n">action</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_product_concurrent_tsys_aut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">):</span>
         <span class="c1"># TODO: Implement this one!</span>
         <span class="k">pass</span>        <span class="c1"># pragma: no cover</span>
 
@@ -355,12 +411,55 @@
         
         <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">aut</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>      <span class="c1"># pragma: no cover</span>
-        <span class="k">if</span> <span class="n">tsys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">aut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_define_by_tsys_aut</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.define"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.define">[docs]</a>    <span class="k">def</span> <span class="nf">define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p1_spec</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>      <span class="c1"># pragma: no cover</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines and constructs the deterministic zero-sum game graph.</span>
+
+<span class="sd">        :param tsys: (:class:`TSys`) Transition system over which game is defined.</span>
+<span class="sd">        :param p1_spec: (:class:`ILogic`) Logical specification that P1 must satisfy over transition system.</span>
+
+<span class="sd">        .. note:: A game graph can be defined in three possible ways.</span>
+
+<span class="sd">            * Explicit construction of graph by adding vertices and edges.</span>
+<span class="sd">            * By providing transition system and a logical specification for P1.</span>
+<span class="sd">            * By providing an game field and two players. (Not presently supported).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If transition system and specification are provided, then construct game using appropriate product operation</span>
+        <span class="k">if</span> <span class="n">tsys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">p1_spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># Validate input arguments</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p1_spec</span><span class="p">,</span> <span class="n">ILogic</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;Input argument p1_spec must be an ILogic formula. Received p1_spec=</span><span class="si">{p1_spec}</span><span class="s2">.&quot;</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">TSys</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;Input argument tsys must be an TSys object. Received p1_spec=</span><span class="si">{tsys}</span><span class="s2">.&quot;</span>
+            <span class="k">assert</span> <span class="n">tsys</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> \
+                <span class="n">f</span><span class="s2">&quot;Type of argument tsys=</span><span class="si">{tsys}</span><span class="s2"> is </span><span class="si">{tsys.kind}</span><span class="s2"> does NOT match self.kind=</span><span class="si">{self.kind}</span><span class="s2">.&quot;</span>
+
+            <span class="c1"># Update internal variables</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_p1_spec</span> <span class="o">=</span> <span class="n">p1_spec</span>
+
+            <span class="c1"># Translate the specification to an automaton</span>
+            <span class="n">aut</span> <span class="o">=</span> <span class="n">p1_spec</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
+
+            <span class="c1"># Invoke appropriate product operation</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">TURN_BASED</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_product_turn_based_tsys_aut</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_product_concurrent_tsys_aut</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">aut</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Either provide a graph or (tsys and aut) parameter, but not both.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Game.mark_final"><a class="viewcode-back" href="../../../game/game.html#iglsynth.game.game.Game.mark_final">[docs]</a>    <span class="k">def</span> <span class="nf">mark_final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the given state to the set of final states in the game.</span>
+
+<span class="sd">        :param v: (:class:`Game.Vertex`) Vertex to be marked as final.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Game Module &mdash; iglsynth 0.2.2 documentation</title>
+  <title>Game Module &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -101,6 +102,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../logic/index.html">Logic Module API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util/index.html">Utilities API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solver/index.html">Solver Module API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -181,7 +183,7 @@
 <dt id="iglsynth.game.game.Game">
 <em class="property">class </em><code class="descclassname">iglsynth.game.game.</code><code class="descname">Game</code><span class="sig-paren">(</span><em>kind</em>, <em>vtype=None</em>, <em>etype=None</em>, <em>graph=None</em>, <em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/game/game.html#Game"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.game.game.Game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../util/graph.html#iglsynth.util.graph.Graph" title="iglsynth.util.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">iglsynth.util.graph.Graph</span></code></a></p>
-<p>Represents a two-player deterministic game.</p>
+<p>Represents a two-player deterministic <strong>zero-sum</strong> game.</p>
 <blockquote>
 <div><ul class="simple">
 <li>The game could be concurrent or turn-based.</li>
@@ -237,6 +239,12 @@ and have identical action labels.</li>
 </ul>
 </div>
 <dl class="attribute">
+<dt id="iglsynth.game.game.Game.Edge.act">
+<code class="descname">act</code><a class="headerlink" href="#iglsynth.game.game.Game.Edge.act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns action associated with game edge.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="iglsynth.game.game.Game.Edge.source">
 <code class="descname">source</code><a class="headerlink" href="#iglsynth.game.game.Game.Edge.source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the source vertex of edge.</p>
@@ -281,9 +289,21 @@ defined using a graph, <cite>tsys.v</cite> and <cite>aut.v</cite> are both set t
 as <code class="docutils literal notranslate"><span class="pre">(tsys_v.name,</span> <span class="pre">aut_v.name)</span></code>.</p>
 </div>
 <dl class="attribute">
+<dt id="iglsynth.game.game.Game.Vertex.aut_vertex">
+<code class="descname">aut_vertex</code><a class="headerlink" href="#iglsynth.game.game.Game.Vertex.aut_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the automaton vertex associated with game vertex.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="iglsynth.game.game.Game.Vertex.name">
 <code class="descname">name</code><a class="headerlink" href="#iglsynth.game.game.Game.Vertex.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the name of game vertex.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.game.game.Game.Vertex.tsys_vertex">
+<code class="descname">tsys_vertex</code><a class="headerlink" href="#iglsynth.game.game.Game.Vertex.tsys_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the transition system vertex associated with game vertex.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -303,7 +323,10 @@ Both the vertices must be present in the graph.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>e</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code>) An edge to be added to the graph.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
 <li><strong>AttributeError</strong> – When at least one of the vertex is not in the graph.</li>
 <li><strong>AssertionError</strong> – When argument <cite>e</cite> is not an <code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code> object.</li>
 </ul>
@@ -362,10 +385,96 @@ An attempt to add existing vertex will be ignored, with a warning.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="iglsynth.game.game.Game.define">
+<code class="descname">define</code><span class="sig-paren">(</span><em>tsys=None</em>, <em>p1_spec=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/game/game.html#Game.define"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.game.game.Game.define" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines and constructs the deterministic zero-sum game graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tsys</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">TSys</span></code>) Transition system over which game is defined.</li>
+<li><strong>p1_spec</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">ILogic</span></code>) Logical specification that P1 must satisfy over transition system.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>A game graph can be defined in three possible ways.</p>
+<ul class="last simple">
+<li>Explicit construction of graph by adding vertices and edges.</li>
+<li>By providing transition system and a logical specification for P1.</li>
+<li>By providing an game field and two players. (Not presently supported).</li>
+</ul>
+</div>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="iglsynth.game.game.Game.edges">
 <code class="descname">edges</code><a class="headerlink" href="#iglsynth.game.game.Game.edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an iterator over edges in graph.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.game.game.Game.final">
+<code class="descname">final</code><a class="headerlink" href="#iglsynth.game.game.Game.final" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of final states of the game.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.game.game.Game.get_edges">
+<code class="descname">get_edges</code><span class="sig-paren">(</span><em>u: iglsynth.util.graph.Graph.Vertex</em>, <em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.game.game.Game.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all edges with source <code class="docutils literal notranslate"><span class="pre">u</span></code> and target <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code>) Vertex of the graph.</li>
+<li><strong>v</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code>) Vertex of the graph.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(iterator(<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code>)) Edges between u, v.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.game.game.Game.has_edge">
+<code class="descname">has_edge</code><span class="sig-paren">(</span><em>e: iglsynth.util.graph.Graph.Edge</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.game.game.Game.has_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the graph has the given edge or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Edge</span></code>) An edge to be checked for containment in the graph.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) True if the graph has the given edge, False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.game.game.Game.has_vertex">
+<code class="descname">has_vertex</code><span class="sig-paren">(</span><em>v: iglsynth.util.graph.Graph.Vertex</em><span class="sig-paren">)</span><a class="headerlink" href="#iglsynth.game.game.Game.has_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the graph has the given vertex or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph.Vertex</span></code>) Vertex to be checked for containment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) True if given vertex is in the graph, else False.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -411,6 +520,20 @@ nor an iterable of <code class="xref py py-class docutils literal notranslate"><
 <code class="descname">kind</code><a class="headerlink" href="#iglsynth.game.game.Game.kind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the kind of game, whether <a class="reference internal" href="core.html#iglsynth.game.core.TURN_BASED" title="iglsynth.game.core.TURN_BASED"><code class="xref py py-data docutils literal notranslate"><span class="pre">TURN_BASED</span></code></a> or
 <a class="reference internal" href="core.html#iglsynth.game.core.CONCURRENT" title="iglsynth.game.core.CONCURRENT"><code class="xref py py-data docutils literal notranslate"><span class="pre">CONCURRENT</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="iglsynth.game.game.Game.mark_final">
+<code class="descname">mark_final</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iglsynth/game/game.html#Game.mark_final"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iglsynth.game.game.Game.mark_final" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the given state to the set of final states in the game.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> – (<a class="reference internal" href="#iglsynth.game.game.Game.Vertex" title="iglsynth.game.game.Game.Vertex"><code class="xref py py-class docutils literal notranslate"><span class="pre">Game.Vertex</span></code></a>) Vertex to be marked as final.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -461,6 +584,12 @@ nor an iterable of <code class="xref py py-class docutils literal notranslate"><
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iglsynth.game.game.Game.p1_spec">
+<code class="descname">p1_spec</code><a class="headerlink" href="#iglsynth.game.game.Game.p1_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the specification of P1 in the game.</p>
 </dd></dl>
 
 <dl class="method">

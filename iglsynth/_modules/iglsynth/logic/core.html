@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>iglsynth.logic.core &mdash; iglsynth 0.2.2 documentation</title>
+  <title>iglsynth.logic.core &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -153,7 +154,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for iglsynth.logic.core</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
+<span></span><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span>
 <span class="kn">from</span> <span class="nn">iglsynth.util.graph</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">iglsynth.util.spot</span> <span class="k">as</span> <span class="nn">spot</span>
@@ -170,6 +172,7 @@
 
 <span class="sd">    .. caution:: DO NOT INSTANTIATE THIS CLASS!</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># INTERNAL METHODS</span>
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
@@ -188,6 +191,9 @@
     <span class="fm">__iand__</span> <span class="o">=</span> <span class="fm">__rand__</span> <span class="o">=</span> <span class="fm">__and__</span>
     <span class="fm">__ior__</span> <span class="o">=</span> <span class="fm">__ror__</span> <span class="o">=</span> <span class="fm">__or__</span>
     <span class="fm">__invert__</span> <span class="o">=</span> <span class="fm">__neg__</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.__class__.__name__}</span><span class="s2">(formula=</span><span class="si">{self.formula}</span><span class="s2">)&quot;</span>
 
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># PROPERTIES</span>
@@ -398,6 +404,7 @@
 <span class="sd">        where ``res`` must be a boolean.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># INTERNAL METHODS</span>
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
@@ -419,7 +426,7 @@
         <span class="c1"># the ``eval_func`` or not.</span>
 
         <span class="c1"># Handle the case when user has not provided evaluation function.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">AP</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.eval_func is None. Did you provide the evaluation function for this AP?&quot;</span><span class="p">)</span>
 
         <span class="c1"># Try evaluating the AP over given state.</span>
@@ -430,8 +437,9 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Given evaluation function does not conform to required signature.&quot;</span>
-                             <span class="n">f</span><span class="s2">&quot;An evaluation must be:: func(st, *args, **kwargs)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Given evaluation function does not conform to required signature. &quot;</span>
+                             <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.eval_func has signature {inspect.signature(self._eval_func)}. &quot;</span>
+                             <span class="n">f</span><span class="s2">&quot;Received inputs st=</span><span class="si">{st}</span><span class="s2">, args=</span><span class="si">{args}</span><span class="s2">, kwargs=</span><span class="si">{kwargs}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ILogic</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;An AP can only be compared with another ILogic formula. &quot;</span> \
@@ -442,8 +450,8 @@
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;AP(name=</span><span class="si">{self.formula}</span><span class="s2">)&quot;</span>
+    <span class="c1"># def __repr__(self):</span>
+    <span class="c1">#     return f&quot;AP(name={self.formula})&quot;</span>
 
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># PROPERTIES</span>
@@ -575,14 +583,11 @@
             <span class="n">igl_aut</span><span class="o">.</span><span class="n">mark_final_st</span><span class="p">(</span><span class="n">v0</span><span class="p">)</span>
 
             <span class="c1"># Add edges</span>
-            <span class="n">e00</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">AP</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
-            <span class="n">e22</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">AP</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
+            <span class="n">e00</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
+            <span class="n">e22</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
             <span class="n">e10</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-            <span class="n">e12</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span>
-                                 <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span>
-                                     <span class="n">formula</span><span class="o">=</span><span class="s2">&quot;!&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span>
-                                     <span class="n">eval_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_func</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
-                                 <span class="p">)</span>
+            <span class="n">e12</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="fm">__neg__</span><span class="p">())</span>
 
             <span class="n">igl_aut</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([</span><span class="n">e00</span><span class="p">,</span> <span class="n">e10</span><span class="p">,</span> <span class="n">e12</span><span class="p">,</span> <span class="n">e22</span><span class="p">])</span>
 
@@ -747,15 +752,6 @@
 
 <div class="viewcode-block" id="PL.simplify"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;PL.simplify is not yet implemented.&quot;</span><span class="p">)</span></div>
-
-    <span class="c1"># def is_equivalent(self, other):</span>
-    <span class="c1">#     assert isinstance(other, ILogic)</span>
-    <span class="c1">#     return spot.formula(self.formula) == spot.formula(other.formula)</span>
-
-    <span class="c1"># def is_contained_in(self, other):</span>
-    <span class="c1">#     assert isinstance(other, ILogic)</span>
-    <span class="c1">#     checker = spot.language_containment_checker()</span>
-    <span class="c1">#     return checker.contained(spot.formula(self.formula), spot.formula(other.formula))</span>
 
 <div class="viewcode-block" id="PL.evaluate"><a class="viewcode-back" href="../../../logic/core.html#iglsynth.logic.core.PL.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

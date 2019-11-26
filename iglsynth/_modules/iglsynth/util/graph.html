@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>iglsynth.util.graph &mdash; iglsynth 0.2.2 documentation</title>
+  <title>iglsynth.util.graph &mdash; iglsynth 0.2.3 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -266,23 +267,28 @@
         <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.__class__.__name__}</span><span class="s2">(|V|=</span><span class="si">{self.num_vertices}</span><span class="s2"> of type=</span><span class="si">{self.vtype}</span><span class="s2">, &quot;</span> \
             <span class="n">f</span><span class="s2">&quot;|E|=</span><span class="si">{self.num_edges}</span><span class="s2"> of type=</span><span class="si">{self.etype}</span><span class="s2">)&quot;</span>
 
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_vertex</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">etype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.__contains__: Input must be of {type(self.vtype)} or {type(self.etype)}. &quot;</span>
+                            <span class="n">f</span><span class="s2">&quot;Received {type(item)}.&quot;</span><span class="p">)</span>
+
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># PROPERTIES</span>
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Returns an iterator over vertices in graph. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Returns an iterator over edges in graph. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">num_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Returns the number of vertices in graph. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_multigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.__class__.__name__}</span><span class="s2">.is_multigraph property is not yet implemented.&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -290,8 +296,14 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_multigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.__class__.__name__}</span><span class="s2">.is_multigraph property is not yet implemented.&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">num_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the number of vertices in graph. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns an iterator over vertices in graph. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
     <span class="c1"># ------------------------------------------------------------------------------------------------------------------</span>
     <span class="c1"># PUBLIC METHODS</span>
@@ -322,38 +334,12 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vbunch</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.rm_vertex"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.rm_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">rm_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Removes a vertex from the graph.</span>
-<span class="sd">        An attempt to remove a non-existing vertex will be ignored, with a warning.</span>
-
-<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex to be removed.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> \
-            <span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be object of </span><span class="si">{self.vtype}</span><span class="s2">. Given, v is </span><span class="si">{v.__class__.__name__}</span><span class="s2">&quot;</span>
-
-        <span class="c1"># Remove incoming and outgoing edges from v, and then remove v</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">:</span>
-            <span class="n">in_edges</span><span class="p">,</span> <span class="n">out_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rm_edges</span><span class="p">(</span><span class="n">in_edges</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rm_edges</span><span class="p">(</span><span class="n">out_edges</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.rm_vertices"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.rm_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">rm_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vbunch</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Removes a bunch of vertices from the graph.</span>
-<span class="sd">        An attempt to remove a non-existing vertex will be ignored, with a warning.</span>
-
-<span class="sd">        :param vbunch: (Iterable over :class:`Graph.Vertex`) Vertices to be removed.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vbunch</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rm_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="Graph.add_edge"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;Graph.Edge&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds an edge to the graph.</span>
 <span class="sd">        Both the vertices must be present in the graph.</span>
 
+<span class="sd">        :param e: (:class:`Graph.Edge`) An edge to be added to the graph.</span>
 <span class="sd">        :raises AttributeError: When at least one of the vertex is not in the graph.</span>
 <span class="sd">        :raises AssertionError: When argument `e` is not an :class:`Graph.Edge` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -393,6 +379,160 @@
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ebunch</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Graph.get_edges"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.get_edges">[docs]</a>    <span class="k">def</span> <span class="nf">get_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all edges with source ``u`` and target ``v``.</span>
+
+<span class="sd">        :param u: (:class:`Graph.Vertex`) Vertex of the graph.</span>
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of the graph.</span>
+<span class="sd">        :return: (iterator(:class:`Graph.Edge`)) Edges between u, v.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.get_edges:: Vertex u=</span><span class="si">{u}</span><span class="s2"> is not in graph.&quot;</span>
+        <span class="k">assert</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self}</span><span class="s2">.get_edges:: Vertex v=</span><span class="si">{v}</span><span class="s2"> is not in graph.&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Graph.has_edge"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.has_edge">[docs]</a>    <span class="k">def</span> <span class="nf">has_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;Graph.Edge&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the graph has the given edge or not.</span>
+
+<span class="sd">        :param e: (:class:`Graph.Edge`) An edge to be checked for containment in the graph.</span>
+<span class="sd">        :return: (bool) True if the graph has the given edge, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span></div>
+
+<div class="viewcode-block" id="Graph.has_vertex"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.has_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">has_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the graph has the given vertex or not.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex to be checked for containment.</span>
+<span class="sd">        :return: (bool) True if given vertex is in the graph, else False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Graph.in_edges"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.in_edges">[docs]</a>    <span class="k">def</span> <span class="nf">in_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator over incoming edges to given vertex or vertices.</span>
+<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
+<span class="sd">        incoming edges of individual vertices.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
+
+<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
+<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+
+            <span class="n">in_edges</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="n">in_edges</span><span class="p">))</span>
+
+        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Graph.in_neighbors"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.in_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">in_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator over sources of incoming edges to given vertex or vertices.</span>
+<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
+<span class="sd">        incoming edges of individual vertices.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
+
+<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
+<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">source</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">source</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">prune</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<div class="viewcode-block" id="Graph.out_edges"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.out_edges">[docs]</a>    <span class="k">def</span> <span class="nf">out_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator over outgoing edges to given vertex or vertices.</span>
+<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
+<span class="sd">        incoming edges of individual vertices.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
+
+<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
+<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+
+            <span class="n">out_edges</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="n">out_edges</span><span class="p">))</span>
+
+        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Graph.out_neighbors"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.out_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">out_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator over targets of incoming edges to given vertex or vertices.</span>
+<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
+<span class="sd">        incoming edges of individual vertices.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
+
+<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
+<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">target</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
+                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
+
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">target</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Graph.rm_vertex"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.rm_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">rm_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a vertex from the graph.</span>
+<span class="sd">        An attempt to remove a non-existing vertex will be ignored, with a warning.</span>
+
+<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex to be removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> \
+            <span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be object of </span><span class="si">{self.vtype}</span><span class="s2">. Given, v is </span><span class="si">{v.__class__.__name__}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Remove incoming and outgoing edges from v, and then remove v</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">:</span>
+            <span class="n">in_edges</span><span class="p">,</span> <span class="n">out_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rm_edges</span><span class="p">(</span><span class="n">in_edges</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rm_edges</span><span class="p">(</span><span class="n">out_edges</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Graph.rm_vertices"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.rm_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">rm_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vbunch</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a bunch of vertices from the graph.</span>
+<span class="sd">        An attempt to remove a non-existing vertex will be ignored, with a warning.</span>
+
+<span class="sd">        :param vbunch: (Iterable over :class:`Graph.Vertex`) Vertices to be removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vbunch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rm_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Graph.rm_edge"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.rm_edge">[docs]</a>    <span class="k">def</span> <span class="nf">rm_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;Graph.Edge&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes an edge from the graph.</span>
@@ -427,103 +567,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ebunch</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rm_edge</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.in_edges"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.in_edges">[docs]</a>    <span class="k">def</span> <span class="nf">in_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns an iterator over incoming edges to given vertex or vertices.</span>
-<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
-<span class="sd">        incoming edges of individual vertices.</span>
-
-<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
-
-<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
-<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
-                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-
-            <span class="n">in_edges</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="n">in_edges</span><span class="p">))</span>
-
-        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.out_edges"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.out_edges">[docs]</a>    <span class="k">def</span> <span class="nf">out_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns an iterator over outgoing edges to given vertex or vertices.</span>
-<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
-<span class="sd">        incoming edges of individual vertices.</span>
-
-<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
-
-<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
-<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
-                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-
-            <span class="n">out_edges</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="n">out_edges</span><span class="p">))</span>
-
-        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.in_neighbors"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.in_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">in_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns an iterator over sources of incoming edges to given vertex or vertices.</span>
-<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
-<span class="sd">        incoming edges of individual vertices.</span>
-
-<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
-
-<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
-<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">source</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
-                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">source</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-
-        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.out_neighbors"><a class="viewcode-back" href="../../../util/graph.html#iglsynth.game.game.Graph.out_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">out_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">]]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns an iterator over targets of incoming edges to given vertex or vertices.</span>
-<span class="sd">        In case of vertices, the iterator is defined over the union of set of</span>
-<span class="sd">        incoming edges of individual vertices.</span>
-
-<span class="sd">        :param v: (:class:`Graph.Vertex`) Vertex of graph.</span>
-
-<span class="sd">        :raises AssertionError: When `v` is neither a :class:`Graph.Vertex` object</span>
-<span class="sd">            nor an iterable of :class:`Graph.Vertex` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">),</span> <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">target</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span><span class="p">),</span> \
-                <span class="n">f</span><span class="s2">&quot;All vertices in input: </span><span class="si">{v}</span><span class="s2"> must be of type=</span><span class="si">{self.vtype}</span><span class="s2">.&quot;</span>
-
-            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">target</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertex_edge_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Vertex </span><span class="si">{v}</span><span class="s2"> must be a single or an iterable of </span><span class="si">{self.vtype}</span><span class="s2"> objects.&quot;</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">prune</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;Graph.Vertex&#39;</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>

@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gridworld Problem: Game on Graph &mdash; iglsynth 0.2.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Defining Logic Formulas" href="define_logic_formula.html" />
+    <link rel="prev" title="Constructing a Game Graph" href="construct_game_graph.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> iglsynth
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">IGLSynth Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="construct_game_graph.html">Game on Graph from Scratch</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Game on Graph using TSys and LTL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#define-transition-system">Define Transition System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-ltl-specification">Define LTL Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-game-object">Define Game Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solve-the-game">Solve the Game</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="define_logic_formula.html">Defining Logic Formulas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">iglsynth</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html">IGLSynth Examples</a> &raquo;</li>
+        
+      <li>Gridworld Problem: Game on Graph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/gw_tsys_spec_zielonka.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gridworld-problem-game-on-graph">
+<span id="example-game-definition-by-tsys-and-ltl"></span><h1>Gridworld Problem: Game on Graph<a class="headerlink" href="#gridworld-problem-game-on-graph" title="Permalink to this headline">¶</a></h1>
+<p>This example demonstrates how to construct a game on graph using a <code class="xref py py-class docutils literal notranslate"><span class="pre">Gridworld</span></code>
+transition system and an <code class="xref py py-class docutils literal notranslate"><span class="pre">LTL</span></code> specification for P1.</p>
+<p>In general, there are three ways to define a game on graph, namely</p>
+<blockquote>
+<div><ul class="simple">
+<li>By explicitly adding vertices and edges to the graph and marking the accepting states,</li>
+<li>By providing a transition system and a formal specification,</li>
+<li>By providing a game field and player objects.</li>
+</ul>
+</div></blockquote>
+<p>Presently, in IGLSynth v0.2.3, only first two are supported. See <a class="reference internal" href="#example-game-definition-by-tsys-and-ltl"><span class="std std-ref">Gridworld Problem: Game on Graph</span></a>
+for an example of constructing game on graph by explicitly adding vertices and edges.</p>
+<div class="section" id="define-transition-system">
+<h2>Define Transition System<a class="headerlink" href="#define-transition-system" title="Permalink to this headline">¶</a></h2>
+<p>To define a game using transition system and P1’s specification, first define the transition system.
+In general, a transition system may be defined using <code class="xref py py-class docutils literal notranslate"><span class="pre">TSys</span></code> class.
+In this example, we use a predefined <code class="xref py py-class docutils literal notranslate"><span class="pre">Gridworld</span></code> transition system from
+<code class="docutils literal notranslate"><span class="pre">iglsynth.game.gridworld</span></code> module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.game.gridworld</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># Define transition system</span>
+<span class="n">tsys</span> <span class="o">=</span> <span class="n">Gridworld</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">TURN_BASED</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">p1_actions</span><span class="o">=</span><span class="n">CONN_4</span><span class="p">,</span> <span class="n">p2_actions</span><span class="o">=</span><span class="n">CONN_4</span><span class="p">)</span>
+<span class="n">tsys</span><span class="o">.</span><span class="n">generate_graph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-ltl-specification">
+<h2>Define LTL Specification<a class="headerlink" href="#define-ltl-specification" title="Permalink to this headline">¶</a></h2>
+<p>To define P1’s objective using an LTL specification, import the logic module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.logic.ltl</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>An <code class="xref py py-class docutils literal notranslate"><span class="pre">LTL</span></code> formula is defined over an alphabet. Hence, we start by defining <code class="xref py py-class docutils literal notranslate"><span class="pre">AP</span></code> objects
+using which we will construct an alphabet.</p>
+<p>In this demo example, we will represent P1’s objective to reach to a goal. Such a reachability specification
+can be written as <span class="math notranslate nohighlight">\(\varphi = \Diamond a\)</span> where <span class="math notranslate nohighlight">\(a\)</span> is an AP representing goal.
+So, define the AP as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GOAL</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AP</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">st</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">GOAL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the specification as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">LTL</span><span class="p">(</span><span class="s2">&quot;Fa&quot;</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">Alphabet</span><span class="p">([</span><span class="n">a</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-game-object">
+<h2>Define Game Object<a class="headerlink" href="#define-game-object" title="Permalink to this headline">¶</a></h2>
+<p>Given a transition system and specification, we will now define a game.
+To define game, we require the game module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.game.game</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Now, instantiate and define a game as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">TURN_BASED</span><span class="p">)</span>
+<span class="n">game</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="n">tsys</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="solve-the-game">
+<h2>Solve the Game<a class="headerlink" href="#solve-the-game" title="Permalink to this headline">¶</a></h2>
+<p>The final step is to invoke a solver to solve the game.
+We will use Zielonka’s algorithm to solve the above game.
+Note that Zielonka’s algorithm computes winning region for P1 in a
+deterministic two-player zero-sum game.</p>
+<p>In IGLSynth, Zielonka’s algorithm is implemented in <code class="docutils literal notranslate"><span class="pre">zielonka</span></code> module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iglsynth.solver.zielonka</span> <span class="k">import</span> <span class="n">ZielonkaSolver</span>
+</pre></div>
+</div>
+<p>To run the solver, first instantiate it and call the <code class="docutils literal notranslate"><span class="pre">solve</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span> <span class="o">=</span> <span class="n">ZielonkaSolver</span><span class="p">(</span><span class="n">game</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">solver.solve()</span></code> runs the solver on the <code class="docutils literal notranslate"><span class="pre">Game</span></code> object <code class="docutils literal notranslate"><span class="pre">game</span></code> that encodes the game on graph.
+The solution of solver can be accessed using the properties:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">p1_win</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">p2_win</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which returns the winning sets for P1 and P2.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="define_logic_formula.html" class="btn btn-neutral float-right" title="Defining Logic Formulas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="construct_game_graph.html" class="btn btn-neutral float-left" title="Constructing a Game Graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Abhishek N. Kulkarni
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
