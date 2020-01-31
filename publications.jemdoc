@@ -2,22 +2,15 @@
 = Publications
 
 
-== Working Papers and Preprints
+== Preprints
 
 - *Opportunistic Synthesis in Reactive Games under Information Asymmetry* 
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Conference on Decision and Control (CDC), 2019./ (accepted)
 \n\[[https://arxiv.org/abs/1906.05847 arXiv]\]
 
-- *Sure  and  Almost-Sure  Winning  Strategies  in  Reactive  Games  under Action  Deception*
-\nAbhishek N. Kulkarni and Jie Fu
-
-- *Deceptive  Planning  in  Hypergames  with  Asymmetrical  Information  and Temporal  Logic  Objectives*
-\nHaoxiang Ma, Lening Li, Abhishek N. Kulkarni and Jie Fu
-
 
 == Conference Papers
-
 
 
 - *A Compositional Approach to Reactive Games under Temporal Logic Specifications*
@@ -34,3 +27,8 @@
 \nAbhishek N. Kulkarni, Anita S. Joshi and Satish R. Inamdar
 \n/International Journal of Industrial Electronics and Electrical Engineering (IJIEEE), vol. 2, issue 8, pp. 9-14, Aug. 2014./
 \n\[[papers/ANKulkarni2014.pdf PDF]\]
+
+
+== Talks 
+
+- *[rhobetaepsilon2018.pdf An Informal Introduction to Formal Methods in Robotics]* at [https://rhobetaepsilon.com/ Rho Beta Epsilon] at WPI. 

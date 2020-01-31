@@ -3,31 +3,27 @@
 
 ~~~
 {}{img_left}{images/abhishek.jpg}{Abhishek}{180px}
-Ph.D. Candidate,
+*Ph.D. Candidate*,
 \n[https://www.wpi.edu/academics/departments/robotics-engineering Robotics Engineering],
 \n[www.wpi.edu Worcester Polytechnic Institute (WPI)]
-\n\n Email: [ankulkarni@wpi.edu ankulkarni@wpi.edu] 
-\n Lab: [http://labs.wpi.edu/cirl/ Control and Intelligent Robotics Laboratory (CIRL)]
-\n Office: AK 316
-\n\n Profiles: \[[https://github.com/abhibp1993 Github]\] \[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] \[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] 
+\n\n *Email*: [ankulkarni@wpi.edu ankulkarni@wpi.edu] 
+\n *Lab*: [http://labs.wpi.edu/cirl/ Control and Intelligent Robotics Laboratory (CIRL)]
+\n *Office*: AK 316
+\n\n *Profiles*: \[[https://github.com/abhibp1993 Github]\] \[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] \[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] 
 ~~~
 
 
-== About me
-
-I am a third year Ph.D. student in [https://www.wpi.edu/academics/departments/robotics-engineering Robotics Engineering Program] at [https://www.wpi.edu Worcester Polytechnic Institute (WPI)], advised by [https://users.wpi.edu/~jfu2/ Prof. Jie Fu]. 
+== Research Interests
 
 My research interest is to develop correct-by-construction AI algorithms with advanced reasoning capabilities. My focus areas are:
 
 - Reactive Synthesis
 - Game and Hypergame Theory 
 - Formal Logic: Temporal, Epistemic and Spatial Logic
-
-My research focuses on developing algorithms that synthesize provably-correct strategies for autonomous agents to accomplish their tasks in dynamic and uncontrollable environments; which may contain a number of cooperative, non-cooperative or even adversarial agents. I explore applications of the above theory to 
-
-- Mobile Robots: Mission and Motion Planning
-- Cybersecurity
-- Multi-robot and Human-robot Interactions
+- Applications: Cybersecurity, Robot Motion Planning 
 
 
-I received by Bachelors degree in Electronics and Telecommunications Engineering from [http://www.vit.edu/ Vishwakarma Institute of Technology (VIT)], Pune, India. During my undergraduate studies, I was fortunate to work with [https://dblp.uni-trier.de/pers/hd/j/Joglekar:Pushkar_S= Prof. Pushkar Joglekar] and [https://www.linkedin.com/in/satish-inamdar-7771019/ Prof. Satish Inamdar] on robot motion planning and cyber-physical systems that laid the foundation for my present research. I also started a student organization - Cognitive Robotics and Intelligent SysTems Lab (CRISTL) along with my colleague [https://monica-patel.com/ Monica Patel]. At CRISTL, we developed and fabricated an autonomous robot [curio.html Curio] to be used for teaching at VIT. 
+
+== About me
+
+I am a third year Ph.D. student in [https://www.wpi.edu/academics/departments/robotics-engineering Robotics Engineering Program] at [https://www.wpi.edu Worcester Polytechnic Institute (WPI)], advised by [https://users.wpi.edu/~jfu2/ Prof. Jie Fu]. I received by Bachelors degree in Electronics and Telecommunications Engineering from [http://www.vit.edu/ Vishwakarma Institute of Technology (VIT)], Pune, India. During my undergraduate studies, I was fortunate to work with [https://dblp.uni-trier.de/pers/hd/j/Joglekar:Pushkar_S= Prof. Pushkar Joglekar] and [https://www.linkedin.com/in/satish-inamdar-7771019/ Prof. Satish Inamdar] on robot motion planning and cyber-physical systems that laid the foundation for my present research. I also started a student organization - Cognitive Robotics and Intelligent SysTems Lab (CRISTL) along with my colleague [https://monica-patel.com/ Monica Patel]. At CRISTL, we developed and fabricated an autonomous robot [curio.html Curio] to be used for teaching at VIT. 
