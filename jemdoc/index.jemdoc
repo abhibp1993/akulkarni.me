@@ -1,0 +1,34 @@
+# jemdoc: menu{MENU}{index.html}
+= Abhishek N. Kulkarni
+
+~~~
+{}{img_left}{images/whatsapp-dp.jpg}{Abhishek}{180px}
+*Ph.D. Candidate*,
+\n[https://www.wpi.edu/academics/departments/robotics-engineering Robotics Engineering],
+\n[www.wpi.edu Worcester Polytechnic Institute (WPI)],
+\nWorcester, MA, USA.
+\n\n *Email*: [ankulkarni@wpi.edu ankulkarni@wpi.edu] 
+\n *Lab*: [http://labs.wpi.edu/cirl/ Control and Intelligent Robotics Laboratory (CIRL)]
+\n *Office*: AK 316
+\n\n *Profiles*: \[[https://github.com/abhibp1993 Github]\] \[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] \[[https://twitter.com/abhibp1993 Twitter]\] \[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] 
+~~~
+
+
+== Research Interests
+
+I am presently exploring the use of /formal methods/ and /automated reasoning/ to synthesize strategies for autonomous agents capable of /deception/. 
+
+
+My focus areas are:
+- Reactive Synthesis
+- Automated Reasoning
+- Game and Hypergame Theory 
+- Applications: Cybersecurity, Robot Motion Planning 
+
+
+Please visit [to-be-updated.html my research page] for detailed information about my ongoing research. 
+
+
+== News
+
+- *\[Dec. 2019\]* I presented my paper [https://arxiv.org/abs/1906.05847 /Opportunistic Synthesis in Reactive Games under Information Asymmetry/] at [https://cdc2019.ieeecss.org/ CDC 2019]. 
