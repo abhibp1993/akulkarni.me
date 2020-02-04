@@ -1,0 +1,22 @@
+# jemdoc: menu{MENU}{index.html}
+= Research Overview 
+
+My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
+
+
+== On-going Research 
+
+I am currently working on the following research.
+
+=== 1. Sequential Hypergames: Modeling, Specification and Learning-based Synthesis of Deceptive Policies
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.
+
+*Publications*: 
+    - Abhishek N. Kulkarni, Jie Fu, “Opportunistic Synthesis in Reactive Games under Information Asymmetry”, arXiv:1906.05847v1, IEEE Conference on Decision and Control, accepted, 2019. ([https://arxiv.org/abs/1906.05847 preprint])
+~~~
+
+
