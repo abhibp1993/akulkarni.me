@@ -1,20 +1,26 @@
 # jemdoc: menu{MENU}{index.html}
 = Publications
 
+Sections:
 
-== Preprints
+- Preprints
+- Conference Papers
+- arXiv Papers
+- Talks/Presentations
+
+
+== Preprints (Submitted/Accepted)
 
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
 \nAbhishek N. Kulkarni and Jie Fu,
-\n/IJCAI 2020 (submitted)./
+\n/IJCAI 2020./ (Accepted)
 \n\[[https://arxiv.org/abs/2002.07045 arXiv]\]
 
 
-- *Secure-by-Synthesis Network with Active Deception and Temporal Logic Specifications*
-\nJie Fu, Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua
-\n/Arxiv Preprint, 2020./
-\n\[[https://arxiv.org/abs/2002.07025 arXiv]\]
-
+- *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
+\nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
+\n/CDC 2020./ (Submitted)
+\n\[[https://arxiv.org/abs/2004.05213 arXiv]\]
 
 
 == Conference Papers
@@ -23,19 +29,20 @@
 - *Opportunistic Synthesis in Reactive Games under Information Asymmetry*
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Conference on Decision and Control (CDC), 2019./ 
-\n\[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[papers/ANKulkarni2019.bib BibTeX]\] \[[https://arxiv.org/abs/1906.05847 arXiv (v1)]\]
+\n\[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[papers/ANKulkarni2019.bib BibTeX]\] \[[papers/ANKulkarni2019.pdf PDF]\]
+
 
 *2018*
 - *A Compositional Approach to Reactive Games under Temporal Logic Specifications*
 \nAbhishek N. Kulkarni and Jie Fu
 \nAnnual American Control Conference (ACC), 2018./
-\n/\[[https://ieeexplore-ieee-org.ezproxy.wpi.edu/document/8431867/ IEEEXplore]\] \[[papers/ANKulkarni2018.bib BibTeX]\] \[[papers/ANKulkarni2018.pdf PDF]\]
+\n/\[[https://ieeexplore.ieee.org/document/8431867 IEEEXplore]\] \[[papers/ANKulkarni2018.bib BibTeX]\] \[[papers/ANKulkarni2018.pdf PDF]\]
 
 *2015*
 - *Dot matrix text recognition for industrial carton classification*
 \nSiddharth Nitin Patki, Madhuri Joshi and Abhishek N. Kulkarni
 \n/International Conference on Industrial Instrumentation and Control (ICIC), 2015./
-\n\[[https://ieeexplore-ieee-org.ezproxy.wpi.edu/document/7150847 IEEEXplore]\] \[[papers/SPatki2015.bib BibTeX]\] \[[papers/SPatki2015.pdf PDF]\]
+\n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] \[[papers/SPatki2015.bib BibTeX]\] 
 
 *2014*
 - *Big Data Management of a Cyber-Physical Multi-location Chemical Factory*
@@ -44,7 +51,20 @@
 \n\[[papers/ANKulkarni2014.pdf PDF]\]
 
 
-== Talks 
+== arXiv Papers
+
+- *Secure-by-Synthesis Network with Active Deception and Temporal Logic Specifications*
+\nJie Fu, Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua
+\n/Arxiv, 2020./ 
+\n\[[https://arxiv.org/abs/2002.07025 arXiv]\]
+
+
+== Talks/Presentations
+
+*2019*
+- *[papers/2019-12-04-PhDQualifier.pdf PhD Qualifier Presentation]* at WPI. 
 
 *2018*
 - *[rhobetaepsilon2018.pdf An Informal Introduction to Formal Methods in Robotics]* at [https://rhobetaepsilon.com/ Rho Beta Epsilon] at WPI. 
+
+
