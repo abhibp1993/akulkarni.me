@@ -5,7 +5,7 @@ Sections:
 
 - Preprints
 - Conference Papers
-- arXiv Papers
+- Technical Reports
 - Talks/Presentations
 
 
@@ -19,7 +19,7 @@ Sections:
 
 - *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
 \nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
-\n/CDC 2020./ (Submitted)
+\n/IEEE Control Systems Letters (L-CSS)./ (Accepted)
 \n\[[https://arxiv.org/abs/2004.05213 arXiv]\]
 
 
@@ -38,11 +38,13 @@ Sections:
 \nAnnual American Control Conference (ACC), 2018./
 \n/\[[https://ieeexplore.ieee.org/document/8431867 IEEEXplore]\] \[[papers/ANKulkarni2018.bib BibTeX]\] \[[papers/ANKulkarni2018.pdf PDF]\]
 
+
 *2015*
 - *Dot matrix text recognition for industrial carton classification*
 \nSiddharth Nitin Patki, Madhuri Joshi and Abhishek N. Kulkarni
 \n/International Conference on Industrial Instrumentation and Control (ICIC), 2015./
 \n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] \[[papers/SPatki2015.bib BibTeX]\] 
+
 
 *2014*
 - *Big Data Management of a Cyber-Physical Multi-location Chemical Factory*
@@ -51,15 +53,19 @@ Sections:
 \n\[[papers/ANKulkarni2014.pdf PDF]\]
 
 
-== arXiv Papers
+== Technical/Selected Course-Project Reports
 
-- *Secure-by-Synthesis Network with Active Deception and Temporal Logic Specifications*
-\nJie Fu, Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua
-\n/Arxiv, 2020./ 
-\n\[[https://arxiv.org/abs/2002.07025 arXiv]\]
+*2017*
+- *On Path Planning using Point-based Minkowski Sum for Rigid Robots*
+\nAbhishek N. Kulkarni
+\n/Motion Planning (RBE 550)/
+\n\[[papers/Kulkarni2017MinkowskiReport.pdf PDF]\]
 
 
 == Talks/Presentations
+
+*2020*
+- *[https://owenarden.github.io/fcs2020/ Foundations of Computer Security (FCS) Workshop]* at CSF 2020 conference. ([https://www.youtube.com/watch?v=PexLfs7nBKA video], [https://owenarden.github.io/fcs2020/paper/13-Synthesis_of_Deceptive_Cyberdefense_with_Temporal_Logic_Constraints.pdf paper]).
 
 *2019*
 - *[papers/2019-12-04-PhDQualifier.pdf PhD Qualifier Presentation]* at WPI. 

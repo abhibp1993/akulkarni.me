@@ -1,0 +1,13 @@
+# jemdoc: menu{MENU}{index.html}
+= Suggested Reading
+
+Sections:
+
+- Submodularity
+
+
+
+== Submodularity
+
+- [https://sudeepraja.github.io/Submodular/ A brief introduction to submodularity]
+- [https://theory.stanford.edu/~jvondrak/CS369P/lec16.pdf Polyhedral techniques in combinatorial optimization]: See examples of submodular functions
