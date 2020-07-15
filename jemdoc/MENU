@@ -1,15 +1,11 @@
 Abhishek N. Kulkarni
     Home                [index.html]
-    About Me            [about-me.html]
+    Bio                 [about-me.html]
+    Research            [publications.html]
     Teaching			[teaching.html]
     CV					[cv.pdf]
 
-Research
-    Research Overview   [research-overview.html]
-    Publications        [publications.html]
-
-Projects
-    Projects Overview   [projects-overview.html]
-    IGLSynth            [iglsynth/index.html]
-    Curio               [to-be-updated.html]    
+Software
+    IGLSynth            [iglsynth/index.html]    
     FormalTicTacToe     [https://github.com/abhibp1993/formal-tic-tac-toe]
+

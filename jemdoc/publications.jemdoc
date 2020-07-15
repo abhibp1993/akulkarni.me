@@ -1,5 +1,8 @@
 # jemdoc: menu{MENU}{index.html}
-= Publications
+= Research
+
+My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal, spatial and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
+
 
 Sections:
 
@@ -11,25 +14,34 @@ Sections:
 
 == Preprints (Submitted/Accepted)
 
+
+
+== Conference/Workshop Papers
+
+*2020*
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
 \nAbhishek N. Kulkarni and Jie Fu,
-\n/IJCAI 2020./ (Accepted)
-\n\[[https://arxiv.org/abs/2002.07045 arXiv]\]
+\n/International Joint Conference on Artificial Intelligence (IJCAI) 2020./ 
+\n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] \[[papers/Kulkarni2020ActionDeception.bib BibTeX]\]
 
 
 - *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
 \nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
-\n/IEEE Control Systems Letters (L-CSS)./ (Accepted)
-\n\[[https://ieeexplore.ieee.org/document/9136805 IEEEXplore]\] \[[https://arxiv.org/abs/2004.05213 arXiv]\]
+\n/IEEE Control Systems Letters (L-CSS)./
+\n\[[papers/Kulkarni2020DeceptiveLabeling.pdf PDF]\] \[[papers/Kulkarni2020DeceptiveLabeling.bib BibTeX]\]
 
 
-== Conference Papers
+- *Synthesis of Deceptive Cyberdefense with Temporal Logic Constraints*
+\nAbhishek N. Kulkarni and Jie Fu,
+\n/Workshop on Foundations of Computer Security (FCS) 2020./ 
+\n\[[https://owenarden.github.io/fcs2020/paper/13-Synthesis_of_Deceptive_Cyberdefense_with_Temporal_Logic_Constraints.pdf PDF]\] 
+
 
 *2019*
 - *Opportunistic Synthesis in Reactive Games under Information Asymmetry*
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Conference on Decision and Control (CDC), 2019./ 
-\n\[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[papers/ANKulkarni2019.bib BibTeX]\] \[[papers/ANKulkarni2019.pdf PDF]\]
+\n\[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[papers/ANKulkarni2019.pdf PDF]\] \[[papers/ANKulkarni2019.bib BibTeX]\]
 
 
 *2018*
@@ -53,7 +65,7 @@ Sections:
 \n\[[papers/ANKulkarni2014.pdf PDF]\]
 
 
-== Technical/Selected Course-Project Reports
+== Technical/Project Reports
 
 *2017*
 - *On Path Planning using Point-based Minkowski Sum for Rigid Robots*
