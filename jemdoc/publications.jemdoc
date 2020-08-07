@@ -7,12 +7,34 @@ My primary research interest is in /formal methods (reactive synthesis)/ with ap
 Sections:
 
 - Preprints
+- Journal Papers
 - Conference Papers
 - Technical Reports
 - Talks/Presentations
 
 
-== Preprints (Submitted/Accepted)
+== Preprints (Under Review / Accepted)
+
+- *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Under-review\]
+\nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
+\n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
+\n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
+
+
+- *A Theory of Hypergames on Graphs for Synthesizing Dynamic Cyber Defense with Deception.* \[Accepted\]
+\nAbhishek N. Kulkarni and Jie Fu
+\n/Book: Game Theory and Machine Learning for Cyber Security, Wiley-IEEE Press./ 
+\n\[[https://arxiv.org/ arXiv]\] \[[res/bibtex/kulkarni2020hypergames.bib BibTeX]\]
+
+
+
+== Journal Papers
+
+*2020*
+- *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
+\nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
+\n/IEEE Control Systems Letters (L-CSS)./
+\n\[[res/papers/kulkarni2020labeling.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/9136805 IEEEXplore]\] \[[res/bibtex/kulkarni2020labeling.bib BibTeX]\]
 
 
 
@@ -22,47 +44,41 @@ Sections:
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
 \nAbhishek N. Kulkarni and Jie Fu,
 \n/International Joint Conference on Artificial Intelligence (IJCAI) 2020./ 
-\n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] \[[papers/Kulkarni2020ActionDeception.bib BibTeX]\]
-
-
-- *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
-\nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
-\n/IEEE Control Systems Letters (L-CSS)./
-\n\[[papers/Kulkarni2020DeceptiveLabeling.pdf PDF]\] \[[papers/Kulkarni2020DeceptiveLabeling.bib BibTeX]\]
+\n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] \[[res/bibtex/kulkarni2020action.bib BibTeX]\]
 
 
 - *Synthesis of Deceptive Cyberdefense with Temporal Logic Constraints*
 \nAbhishek N. Kulkarni and Jie Fu,
 \n/Workshop on Foundations of Computer Security (FCS) 2020./ 
-\n\[[https://owenarden.github.io/fcs2020/paper/13-Synthesis_of_Deceptive_Cyberdefense_with_Temporal_Logic_Constraints.pdf PDF]\] 
+\n\[[res/papers/kulkarni2020cyberdefense.pdf PDF]\] \[[res/bibtex/kulkarni2020cyberdefense.bib BibTeX]\]
 
 
 *2019*
 - *Opportunistic Synthesis in Reactive Games under Information Asymmetry*
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Conference on Decision and Control (CDC), 2019./ 
-\n\[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[papers/ANKulkarni2019.pdf PDF]\] \[[papers/ANKulkarni2019.bib BibTeX]\]
+\n\[[res/papers/kulkarni2019opportunistic.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[res/bibtex/kulkarni2019opportunistic.bib BibTeX]\]
 
 
 *2018*
 - *A Compositional Approach to Reactive Games under Temporal Logic Specifications*
 \nAbhishek N. Kulkarni and Jie Fu
 \nAnnual American Control Conference (ACC), 2018./
-\n/\[[https://ieeexplore.ieee.org/document/8431867 IEEEXplore]\] \[[papers/ANKulkarni2018.bib BibTeX]\] \[[papers/ANKulkarni2018.pdf PDF]\]
+\n/\[[res/papers/kulkarni2018compositional.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/8431867 IEEEXplore]\] \[[res/bibtex/kulkarni2018compositional.bib BibTeX]\] 
 
 
 *2015*
 - *Dot matrix text recognition for industrial carton classification*
 \nSiddharth Nitin Patki, Madhuri Joshi and Abhishek N. Kulkarni
 \n/International Conference on Industrial Instrumentation and Control (ICIC), 2015./
-\n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] \[[papers/SPatki2015.bib BibTeX]\] 
+\n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] \[[res/bibtex/patki2015classification.bib BibTeX]\] 
 
 
 *2014*
 - *Big Data Management of a Cyber-Physical Multi-location Chemical Factory*
 \nAbhishek N. Kulkarni, Anita S. Joshi and Satish R. Inamdar
 \n/International Journal of Industrial Electronics and Electrical Engineering (IJIEEE), vol. 2, issue 8, pp. 9-14, Aug. 2014./
-\n\[[papers/ANKulkarni2014.pdf PDF]\]
+\n\[[res/papers/kulkarni2014bigdata.pdf PDF]\] 
 
 
 == Technical/Project Reports
@@ -71,18 +87,18 @@ Sections:
 - *On Path Planning using Point-based Minkowski Sum for Rigid Robots*
 \nAbhishek N. Kulkarni
 \n/Motion Planning (RBE 550)/
-\n\[[papers/Kulkarni2017MinkowskiReport.pdf PDF]\]
+\n\[[res/reports/kulkarni2017concavemsum.pdf PDF]\]
 
 
 == Talks/Presentations
 
 *2020*
-- *[https://owenarden.github.io/fcs2020/ Foundations of Computer Security (FCS) Workshop]* at CSF 2020 conference. ([https://www.youtube.com/watch?v=PexLfs7nBKA video], [https://owenarden.github.io/fcs2020/paper/13-Synthesis_of_Deceptive_Cyberdefense_with_Temporal_Logic_Constraints.pdf paper]).
+- *[https://owenarden.github.io/fcs2020/ Foundations of Computer Security (FCS) Workshop]* at CSF 2020 conference. ([https://www.youtube.com/watch?v=PexLfs7nBKA video], [res/papers/kulkarni2020cyberdefense.pdf paper]).
 
 *2019*
-- *[papers/2019-12-04-PhDQualifier.pdf PhD Qualifier Presentation]* at WPI. 
+- *[res/slides/2019-12-04-PhDQualifier.pdf PhD Qualifier Presentation]* at WPI. 
 
 *2018*
-- *[rhobetaepsilon2018.pdf An Informal Introduction to Formal Methods in Robotics]* at [https://rhobetaepsilon.com/ Rho Beta Epsilon] at WPI. 
+- *[res/slides/rhobetaepsilon2018.pdf An Informal Introduction to Formal Methods in Robotics]* at [https://rhobetaepsilon.com/ Rho Beta Epsilon] at WPI. 
 
 
