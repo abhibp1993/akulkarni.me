@@ -1,0 +1,10 @@
+# jemdoc: menu{MENU}{index.html}
+= Software
+
+
+*Decoy Allocation Games on Graph*: Implements "GreedyMax" algorithm from 
+our [https://www.gamesec-conf.org/GameSec_Proceeding_2020/Paper%203.4.pdf GameSec2020] paper. 
+
+	- [https://akulkarni.me/res/software/DecoyAllocationPy.zip Algorithm Implementation in Python].
+	- [https://akulkarni.me/res/software/DecoyAllocationUI.zip Visualization Tool].
+
