@@ -15,11 +15,20 @@ Sections:
 
 == Preprints (Under Review / Accepted)
 
+- *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception* \[Under-review\] 
+\nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
+\n/Journal of AI Research (JAIR)./ 
+\n\[[https://arxiv.org/abs/2104.11676 arXiv (Tech. Report)]\] 
+
+- *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* \[Under-review\]
+\nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
+\n/IEEE Conference on Decision and Control (CDC)./ 
+\n\[[https://arxiv.org/abs/2104.00176 arXiv]\] 
+
 - *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Under-review\]
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
 \n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
 \n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
-
 
 - *A Theory of Hypergames on Graphs for Synthesizing Dynamic Cyber Defense with Deception.* \[Accepted\]
 \nAbhishek N. Kulkarni and Jie Fu
