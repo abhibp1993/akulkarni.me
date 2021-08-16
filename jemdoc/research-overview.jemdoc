@@ -4,11 +4,33 @@
 My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
 
 
+Sections:
+
+    - Ongoing Research at WPI
+    - Exploratory Projects 
+
+
 == On-going Research 
 
 I am currently working on the following research.
 
-=== 1. Sequential Hypergames: Modeling, Specification and Learning-based Synthesis of Deceptive Policies
+=== 1. Opportunistic Synthesis
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.
+
+*Publications*: 
+	- Abhishek N. Kulkarni, Jie Fu, "Synthesis of Deceptive Strategies in Reachability Games with Action Misperception", IJCAI 2020 (accepted). ([https://arxiv.org/abs/2002.07045 preprint])
+    - Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu, "Deceptive Labeling: Hypergames on Graphs for Stealthy Deception", IEEE Conference on Conference on Decision and Control, 2019 (Submitted). ([https://arxiv.org/abs/2004.05213 preprint])
+    - Abhishek N. Kulkarni, Jie Fu, “Opportunistic Synthesis in Reactive Games under Information Asymmetry”, IEEE Conference on Decision and Control, 2019. ([https://ieeexplore.ieee.org/document/9029851 IEEEXplore])
+
+~~~
+
+
+
+=== 2. Deceptive Synthesis
 
 ~~~
 {}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
@@ -22,4 +44,36 @@ The goal of this project is to develop models and methods for intelligent decisi
 
 ~~~
 
+
+=== 3. Compositional Synthesis
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.
+
+*Publications*: 
+	- Abhishek N. Kulkarni, Jie Fu, "Synthesis of Deceptive Strategies in Reachability Games with Action Misperception", IJCAI 2020 (accepted). ([https://arxiv.org/abs/2002.07045 preprint])
+    - Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,, "Deceptive Labeling: Hypergames on Graphs for Stealthy Deception", IEEE Conference on Conference on Decision and Control, 2019 (Submitted). ([https://arxiv.org/abs/2004.05213 preprint])
+    - Abhishek N. Kulkarni, Jie Fu, “Opportunistic Synthesis in Reactive Games under Information Asymmetry”, IEEE Conference on Decision and Control, 2019. ([https://ieeexplore.ieee.org/document/9029851 IEEEXplore])
+
+~~~
+
+
+== Exploratory Research
+
+
+=== 1. Integrated Mission and Motion Planning under Temporal Logic Specifications
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.
+
+*Publications*: 
+	- Abhishek N. Kulkarni, Jie Fu, "Synthesis of Deceptive Strategies in Reachability Games with Action Misperception", IJCAI 2020 (accepted). ([https://arxiv.org/abs/2002.07045 preprint])
+    - Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,, "Deceptive Labeling: Hypergames on Graphs for Stealthy Deception", IEEE Conference on Conference on Decision and Control, 2019 (Submitted). ([https://arxiv.org/abs/2004.05213 preprint])
+    - Abhishek N. Kulkarni, Jie Fu, “Opportunistic Synthesis in Reactive Games under Information Asymmetry”, IEEE Conference on Decision and Control, 2019. ([https://ieeexplore.ieee.org/document/9029851 IEEEXplore])
+
+~~~
 
