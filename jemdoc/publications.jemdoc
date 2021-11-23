@@ -6,35 +6,24 @@ My primary research interest is in /formal methods (reactive synthesis)/ with ap
 
 Sections:
 
-- Preprints
+- Working Papers
 - Journal Papers
 - Conference Papers
-- Technical Reports
+- Technical/Project Reports
 - Talks/Presentations
 
 
-== Preprints (Under Review / Accepted)
+== Working Papers 
 
-- *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception* \[Under-review\] 
-\nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
-\n/Journal of AI Research (JAIR)./ 
-\n\[[https://arxiv.org/abs/2104.11676 arXiv (Tech. Report)]\] 
+- *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*  
+\nAbhishek N. Kulkarni and Jie Fu
+\n\[[https://arxiv.org/abs/2104.11676 arXiv]\] 
 
-- *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* \[Under-review\]
-\nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
-\n/IEEE Conference on Decision and Control (CDC)./ 
-\n\[[https://arxiv.org/abs/2104.00176 arXiv]\] 
 
 - *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Under-review\]
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
 \n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
 \n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
-
-- *A Theory of Hypergames on Graphs for Synthesizing Dynamic Cyber Defense with Deception.* \[Accepted\]
-\nAbhishek N. Kulkarni and Jie Fu
-\n/Book: Game Theory and Machine Learning for Cyber Security, Wiley-IEEE Press./ 
-\n\[[https://arxiv.org/abs/2008.03210 arXiv]\] \[[res/bibtex/kulkarni2020hypergames.bib BibTeX]\]
-
 
 
 == Journal Papers
@@ -53,10 +42,16 @@ Sections:
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Book: Game Theory and Machine Learning for Cyber Security, Wiley-IEEE Press./ 
 \n\[[https://onlinelibrary.wiley.com/doi/book/10.1002/9781119723950 Book]\] 
-\[[https://arxiv.org/abs/2008.03210 arXiv (draft)]\] \[[res/bibtex/kulkarni2021hypergames.bib BibTeX]\]
+\[[https://arxiv.org/abs/2008.03210 arXiv]\] \[[res/bibtex/kulkarni2021hypergames.bib BibTeX]\]
 
 
-== Conference/Workshop Papers
+== Conference Papers
+
+*2021*
+- *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* \[Under-review\]
+\nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
+\n/IEEE Conference on Decision and Control (CDC)./ 
+\n\[[https://arxiv.org/abs/2104.00176 arXiv]\] 
 
 *2020*
 - *Decoy Placement Games on Graphs with Temporal Logic Objectives* 
@@ -64,17 +59,10 @@ Sections:
 \n/Conference on Decision and Game Theory for Security (GameSec) 2020/
 \n\[[https://arxiv.org/abs/2010.01208 arXiv]\] \[[res/bibtex/kulkarni2020decoy.bib BibTeX]\]
 
-
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
 \nAbhishek N. Kulkarni and Jie Fu,
 \n/International Joint Conference on Artificial Intelligence (IJCAI) 2020./ 
 \n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] \[[res/bibtex/kulkarni2020action.bib BibTeX]\]
-
-
-- *Synthesis of Deceptive Cyberdefense with Temporal Logic Constraints*
-\nAbhishek N. Kulkarni and Jie Fu,
-\n/Workshop on Foundations of Computer Security (FCS) 2020./ 
-\n\[[res/papers/kulkarni2020cyberdefense.pdf PDF]\] \[[res/bibtex/kulkarni2020cyberdefense.bib BibTeX]\]
 
 
 *2019*
@@ -103,6 +91,16 @@ Sections:
 \nAbhishek N. Kulkarni, Anita S. Joshi and Satish R. Inamdar
 \n/International Journal of Industrial Electronics and Electrical Engineering (IJIEEE), vol. 2, issue 8, pp. 9-14, Aug. 2014./
 \n\[[res/papers/kulkarni2014bigdata.pdf PDF]\] 
+
+
+== Workshop Papers
+
+*2020* 
+- *Synthesis of Deceptive Cyberdefense with Temporal Logic Constraints*
+\nAbhishek N. Kulkarni and Jie Fu,
+\n/Workshop on Foundations of Computer Security (FCS) 2020./ 
+\n\[[res/papers/kulkarni2020cyberdefense.pdf PDF]\] \[[res/bibtex/kulkarni2020cyberdefense.bib BibTeX]\]
+
 
 
 == Technical/Project Reports
