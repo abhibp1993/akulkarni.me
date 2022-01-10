@@ -1,7 +1,7 @@
 # jemdoc: menu{MENU}{index.html}
 = Research
 
-My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal, spatial and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
+My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision-making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal, spatial and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
 
 
 Sections:
@@ -9,6 +9,7 @@ Sections:
 - Working Papers
 - Journal Papers
 - Conference Papers
+- Workshop Papers
 - Technical/Project Reports
 - Talks/Presentations
 
@@ -20,18 +21,21 @@ Sections:
 \n\[[https://arxiv.org/abs/2104.11676 arXiv]\] 
 
 
-- *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Under-review\]
+
+== Journal Papers
+
+*2022*
+- *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Accepted\]
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
 \n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
 \n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
 
 
-== Journal Papers
 
 *2020*
 - *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
 \nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
-\n/IEEE Control Systems Letters (L-CSS)./
+\n/IEEE Control Systems Letters (L-CSS) 2020./
 \n\[[res/papers/kulkarni2020labeling.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/9136805 IEEEXplore]\] \[[res/bibtex/kulkarni2020labeling.bib BibTeX]\]
 
 
@@ -50,13 +54,13 @@ Sections:
 *2021*
 - *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* \[Under-review\]
 \nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
-\n/IEEE Conference on Decision and Control (CDC)./ 
+\n/IEEE Conference on Decision and Control (CDC) 2021./ 
 \n\[[https://arxiv.org/abs/2104.00176 arXiv]\] 
 
 *2020*
 - *Decoy Placement Games on Graphs with Temporal Logic Objectives* 
 \nAbhishek N. Kulkarni, Jie Fu, Huan Luo, Charles A. Kamhoua, Nandi O. Leslie,
-\n/Conference on Decision and Game Theory for Security (GameSec) 2020/
+\n/Conference on Decision and Game Theory for Security (GameSec) 2020./
 \n\[[https://arxiv.org/abs/2010.01208 arXiv]\] \[[res/bibtex/kulkarni2020decoy.bib BibTeX]\]
 
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
