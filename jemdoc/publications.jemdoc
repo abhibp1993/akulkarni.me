@@ -25,11 +25,22 @@ Sections:
 == Journal Papers
 
 *2022*
-- *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* \[Accepted\]
+- *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* 
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
 \n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
 \n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
 
+
+- *Opportunistic Qualitative Planning in Stochastic Systems with Preferences over Temporal Logic Objectives.*  [Under Review]
+\nAbhishek N. Kulkarni and Jie Fu
+\n/IEEE Control System Letters (L-CSS)./ 
+\n
+
+
+- *Synthesizing Attack-Aware Control and Active Sensing Strategies under Reactive Sensor Attacks.* [Under Review]
+\nSumukha Udupa, Abhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua, and Jie Fu
+\n/IEEE Control System Letters (L-CSS)./ 
+\n
 
 
 *2020*
