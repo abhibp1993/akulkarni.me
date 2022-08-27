@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ggsolver.models &mdash; ggsolver 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ggsolver
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ggsolver Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ggsolver</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>ggsolver.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ggsolver.models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># TODO. Try implementing zlk package.</span>
+<span class="c1"># TODO. Add logging statements.</span>
+<span class="c1"># TODO. Make note that user will not be warned of any private attributes that are unserialized.</span>
+<span class="c1"># TODO. Make note that user must update RESERVED_PROPERTIES and _graphify_unpointed appropriately.</span>
+<span class="c1"># TODO. Instead of registering property function, register just name and then use getattr to</span>
+<span class="c1">#  find the appropriate function during serialization. This will allow rebinding functions.</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">ggsolver</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">ggsolver.graph</span> <span class="kn">import</span> <span class="n">NodePropertyMap</span><span class="p">,</span> <span class="n">EdgePropertyMap</span><span class="p">,</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># DECORATOR FUNCTIONS.</span>
+<span class="c1"># ==========================================================================</span>
+<span class="k">def</span> <span class="nf">register_property</span><span class="p">(</span><span class="n">property_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="n">property_set</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;[WARN] Duplicate property: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">ENDC</span><span class="p">)</span>
+        <span class="n">property_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span>
+    <span class="k">return</span> <span class="n">register_function</span>
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># BASE CLASS.</span>
+<span class="c1"># ==========================================================================</span>
+<span class="k">class</span> <span class="nc">GraphicalModel</span><span class="p">:</span>
+    <span class="n">NODE_PROPERTY</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">EDGE_PROPERTY</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">GRAPH_PROPERTY</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_probabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Types of Graphical Models. Acceptable values:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_deterministic</span> <span class="o">=</span> <span class="n">is_deterministic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_probabilistic</span> <span class="o">=</span> <span class="n">is_probabilistic</span>
+
+        <span class="c1"># Input domain (Expected value: A function that returns an Iterable object.)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inp_domain</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;input_domain&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;input_domain&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="c1"># Pointed model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;init_state&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;init_state&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="c1"># Caching variables during serializing and deserializing the model.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__states</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state2node</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> object at </span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># PRIVATE FUNCTIONS.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="k">def</span> <span class="nf">_add_nodes_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds nodes to the input graph and sets the &quot;state&quot; property.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">(),</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.states() must return a list/tuple.&quot;</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">()</span>
+        <span class="n">node_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">add_nodes</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)))</span>
+        <span class="n">p_map</span> <span class="o">=</span> <span class="n">NodePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_ids</span><span class="p">)):</span>
+            <span class="n">p_map</span><span class="p">[</span><span class="n">node_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_map</span>
+
+        <span class="c1"># Cache states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__states</span> <span class="o">=</span> <span class="n">states</span>
+
+        <span class="c1"># Logging and printing</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed graph property: states. Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">node_ids</span><span class="p">)</span><span class="si">}</span><span class="s2"> states.&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_add_edges_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds edges to the input graph and sets the &quot;input&quot; property.</span>
+<span class="sd">        Each edge is unique identified by a triple (state, input, next_state).</span>
+
+<span class="sd">        Assumes: self._add_nodes_to_graph() is called before and self.__states is cached.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inp_domain</span><span class="p">()</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.inp_domain must be a list/tuple.&quot;</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[ERROR] Input domain of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> is not set. No edges were added.&quot;</span><span class="p">))</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Input domain of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> is empty. No edges were added.&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Create an edge property called input</span>
+        <span class="n">property_inp</span> <span class="o">=</span> <span class="n">EdgePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">property_prob</span> <span class="o">=</span> <span class="n">EdgePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Generate edges by applying each input to every state.</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+                <span class="n">next_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span>
+
+                <span class="c1"># There are three types of graphical models. Handle each separately.</span>
+                <span class="c1"># If model is deterministic, next states is a single state.</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">:</span>
+                    <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                    <span class="n">vid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">next_states</span><span class="p">)</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span>
+                    <span class="n">property_inp</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">inp</span>
+
+                <span class="c1"># If model is non-deterministic, next states is an Iterable of states.</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_probabilistic</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">next_state</span> <span class="ow">in</span> <span class="n">next_states</span><span class="p">:</span>
+                        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                        <span class="n">vid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+                        <span class="n">key</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span>
+                        <span class="n">property_inp</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">inp</span>
+
+                <span class="c1"># If model is stochastic, next states is a Distribution of states.</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_probabilistic</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">next_state</span> <span class="ow">in</span> <span class="n">next_states</span><span class="o">.</span><span class="n">support</span><span class="p">():</span>
+                        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                        <span class="n">vid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+                        <span class="n">key</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span>
+                        <span class="n">property_inp</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">inp</span>
+                        <span class="n">property_prob</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">next_states</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Graphical Model is neither deterministic, nor non-deterministic, nor stochastic! &quot;</span>
+                                    <span class="sa">f</span><span class="s2">&quot;Check the values: is_deterministic: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span><span class="si">}</span><span class="s2">, &quot;</span>
+                                    <span class="sa">f</span><span class="s2">&quot;self.is_quantitative:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">is_probabilistic</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Update the properties with graph</span>
+        <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;inp_domain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">property_inp</span>
+        <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;prob&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">property_prob</span>
+
+        <span class="c1"># Logging and printing</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed graph property: inp_domain. OK.&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed edge property: input. OK.&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed edge property: prob. OK.&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_add_node_prop_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the node property called `p_name` to the graph.</span>
+
+<span class="sd">        Requires: `p_name` should be a function in self that inputs a single parameter: state.</span>
+
+<span class="sd">        Assumes: self._add_nodes_to_graph() is called before.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">has_property</span><span class="p">(</span><span class="n">p_name</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Duplicate property is ignored: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">p_map</span> <span class="o">=</span> <span class="n">NodePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>
+            <span class="n">p_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>   <span class="c1"># self.NODE_PROPERTY[p_name]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">isfunction</span><span class="p">(</span><span class="n">p_func</span><span class="p">)</span> <span class="ow">or</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">p_func</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node property </span><span class="si">{</span><span class="n">p_func</span><span class="si">}</span><span class="s2"> is not a function.&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="p">)):</span>
+                <span class="n">p_map</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="p">[</span><span class="n">uid</span><span class="p">])</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">p_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_map</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed node property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. OK&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Node property function not implemented: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Node property function is not defined: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_add_edge_prop_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an edge property called `p_name` to the graph.</span>
+
+<span class="sd">        Requires: `p_name` should be a function in self that inputs three parameters: state, inp, next_state .</span>
+
+<span class="sd">        Assumes: self._add_nodes_to_graph() is called.</span>
+<span class="sd">        Assumes: self._add_edges_to_graph() is called.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">has_property</span><span class="p">(</span><span class="n">p_name</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Duplicate property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">p_map</span> <span class="o">=</span> <span class="n">EdgePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>
+            <span class="n">p_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">isfunction</span><span class="p">(</span><span class="n">p_func</span><span class="p">)</span> <span class="ow">or</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">p_func</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Edge property </span><span class="si">{</span><span class="n">p_func</span><span class="si">}</span><span class="s2"> is not a function.&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+                <span class="n">p_map</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">p_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="p">[</span><span class="n">uid</span><span class="p">],</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">][(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__states</span><span class="p">[</span><span class="n">vid</span><span class="p">])</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">p_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_map</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed edge property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. OK&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Edge property not implemented: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Node property function is not defined: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_add_graph_prop_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a graph property called `p_name` to the graph.</span>
+
+<span class="sd">        Requires: `p_name` should be a function in self that inputs no parameters.</span>
+
+<span class="sd">        Assumes: self._add_states_to_graph() is called before and self.__states is cached.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">has_property</span><span class="p">(</span><span class="n">p_name</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Duplicate property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">p_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">p_func</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">isfunction</span><span class="p">(</span><span class="n">p_func</span><span class="p">)</span> <span class="ow">and</span> <span class="n">p_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;&lt;lambda&gt;&quot;</span><span class="p">):</span>
+                <span class="n">graph</span><span class="p">[</span><span class="n">p_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_func</span><span class="p">()</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed graph property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. OK&quot;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isfunction</span><span class="p">(</span><span class="n">p_func</span><span class="p">):</span>
+                <span class="n">graph</span><span class="p">[</span><span class="n">p_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_func</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Processed graph property: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. OK&quot;</span><span class="p">))</span>
+            <span class="c1"># elif inspect.ismethod(p_func):</span>
+            <span class="c1">#     graph[p_name] = p_func()</span>
+            <span class="c1">#     logging.warning(util.ColoredMsg.ok(f&quot;[INFO] Processed graph property: {p_name}. OK&quot;))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph property </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2"> is neither a function nor a method.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Graph property is not implemented: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Node property function is not defined: </span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s2">. IGNORED&quot;</span><span class="p">))</span>
+    
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="k">def</span> <span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the states component of the graphical model.</span>
+
+<span class="sd">        :return: (list/tuple of JSONifiable object). List or tuple of states.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.states() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">util</span><span class="o">.</span><span class="n">Distribution</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">,</span> <span class="nb">object</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># PUBLIC FUNCTIONS.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the initial state of the graphical model.</span>
+
+<span class="sd">        .. note:: The function does NOT check if the given state is valid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">graphify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pointed</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the underlying graph of the graphical model.</span>
+
+<span class="sd">        :param pointed: (bool) If pointed is `True`, the :py:meth:`TSys.graphify_pointed()` is called, which constructs</span>
+<span class="sd">            a pointed graphical model containing only the states reachable from the initial state.  Otherwise,</span>
+<span class="sd">            :py:meth:`TSys.graphify_unpointed()` is called, which constructs the complete transition system.</span>
+<span class="sd">        :return: (:class:`ggsolver.graph.Graph` object) An equivalent graph representation of the graphical model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pointed</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is not initialized. &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Did you forget to call </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.initialize() function?&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pointed</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graphify_pointed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graphify_unpointed</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">OKGREEN</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;[SUCCESS] </span><span class="si">{</span><span class="n">graph</span><span class="si">}</span><span class="s2"> generated.&quot;</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">ENDC</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">graph</span>
+
+    <span class="k">def</span> <span class="nf">graphify_pointed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the underlying graph of the graphical model. The constructed graph contains only the states that are</span>
+<span class="sd">        reachable from the initial state.</span>
+
+<span class="sd">        :return: (:class:`ggsolver.graph.Graph` object) An equivalent graph representation of the graphical model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">._graphify_pointed() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">graphify_unpointed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the underlying graph of the graphical model. The constructed graph contains all possible states in</span>
+<span class="sd">        the model.</span>
+
+<span class="sd">        :return: (:class:`ggsolver.graph.Graph` object) An equivalent graph representation of the graphical model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+
+        <span class="c1"># Glob node, edge and graph properties</span>
+        <span class="n">state_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NODE_PROPERTY</span>
+        <span class="n">trans_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">EDGE_PROPERTY</span>
+        <span class="n">graph_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span>
+
+        <span class="c1"># Warn about duplication</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Globbed state properties: </span><span class="si">{</span><span class="n">state_props</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Globbed trans properties: </span><span class="si">{</span><span class="n">trans_props</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Globbed graph properties: </span><span class="si">{</span><span class="n">graph_props</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Duplicate state, trans properties: &quot;</span>
+                                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">state_props</span><span class="p">,</span> <span class="n">trans_props</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Duplicate trans, graph properties: &quot;</span>
+                                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">trans_props</span><span class="p">,</span> <span class="n">graph_props</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Duplicate graph, state properties: &quot;</span>
+                                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">graph_props</span><span class="p">,</span> <span class="n">state_props</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Add nodes and edges to the graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_nodes_to_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_edges_to_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="c1"># Add node properties</span>
+        <span class="k">for</span> <span class="n">p_name</span> <span class="ow">in</span> <span class="n">state_props</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_node_prop_to_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>
+
+        <span class="c1"># Add edge properties</span>
+        <span class="k">for</span> <span class="n">p_name</span> <span class="ow">in</span> <span class="n">trans_props</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_edge_prop_to_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>
+
+        <span class="c1"># Add graph properties</span>
+        <span class="k">for</span> <span class="n">p_name</span> <span class="ow">in</span> <span class="n">graph_props</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_graph_prop_to_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">p_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">graph</span>
+
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Serializes the underlying graph of the graphical model into a dictionary with the following format.</span>
+<span class="sd">        The state properties are saved as node properties, transition properties are stored are edge properties</span>
+<span class="sd">        and model properties are stored as graph properties in the underlying graph::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;graph&quot;: {</span>
+<span class="sd">                    &quot;nodes&quot;: &lt;number of nodes&gt;,</span>
+<span class="sd">                    &quot;edges&quot;: {</span>
+<span class="sd">                        uid: {vid: key},</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    }</span>
+<span class="sd">                    &quot;node_properties&quot;: {</span>
+<span class="sd">                        &quot;property_name&quot;: {</span>
+<span class="sd">                            &quot;default&quot;: &lt;value&gt;,</span>
+<span class="sd">                            &quot;dict&quot;: {</span>
+<span class="sd">                                &quot;uid&quot;: &lt;property value&gt;,</span>
+<span class="sd">                                ...</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;edge_properties&quot;: {</span>
+<span class="sd">                        &quot;property_name&quot;: {</span>
+<span class="sd">                            &quot;default&quot;: &lt;value&gt;,</span>
+<span class="sd">                            &quot;dict&quot;: [{&quot;edge&quot;: [uid, vid, key], &quot;pvalue&quot;: &lt;property value&gt;} ...]</span>
+<span class="sd">                        },</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;graph_properties&quot;: {</span>
+<span class="sd">                        &quot;property_name&quot;: &lt;value&gt;,</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        :return: (dict) Serialized graphical model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 1. Graphify</span>
+        <span class="c1"># 2. Serialize the graph</span>
+        <span class="c1"># 3. Return a dict</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">pointed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the graphical model to file.</span>
+
+<span class="sd">        :param fpath: (str) Path to which the file should be saved. Must include an extension.</span>
+<span class="sd">        :param pointed: (bool) If pointed is `True`, the :py:meth:`TSys.graphify_pointed()` is called, which constructs</span>
+<span class="sd">            a pointed graphical model containing only the states reachable from the initial state.  Otherwise,</span>
+<span class="sd">            :py:meth:`TSys.graphify_unpointed()` is called, which constructs the complete transition system.</span>
+<span class="sd">        :param overwrite: (bool) Specifies whether to overwrite the file, if it exists. [Default: False]</span>
+<span class="sd">        :param protocol: (str) The protocol to use to save the file. Options: {&quot;json&quot; [Default], &quot;pickle&quot;}.</span>
+
+<span class="sd">        .. note:: Pickle protocol is not tested.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 1. Graphify</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graphify</span><span class="p">(</span><span class="n">pointed</span><span class="o">=</span><span class="n">pointed</span><span class="p">)</span>
+
+        <span class="c1"># 2. Save the graph</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a graphical model from a serialized graph object. The node properties are deserialized as state</span>
+<span class="sd">        properties, the edge properties are deserialized as transition properties, and the graph properties are</span>
+<span class="sd">        deserialized as model properties. All the deserialized properties are represented as a function in the</span>
+<span class="sd">        GraphicalModel class. See example #todo.</span>
+
+<span class="sd">        The format is described in :py:meth:`GraphicalModel.serialize`.</span>
+
+<span class="sd">        :return: (Sub-class of GraphicalModel) An instance of the `cls` class. `cls` must be a sub-class of</span>
+<span class="sd">            `GraphicalModel`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 1. Construct a graph from obj_dict.</span>
+        <span class="c1"># 2. Define functions from graph</span>
+        <span class="c1"># 3. Create cls() instance.</span>
+        <span class="c1"># 4. Update __dir__ with new methods</span>
+        <span class="c1"># 5. Return instance</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads the graphical model from file.</span>
+
+<span class="sd">        :param fpath: (str) Path to which the file should be saved. Must include an extension.</span>
+<span class="sd">        :param protocol: (str) The protocol to use to save the file. Options: {&quot;json&quot; [Default], &quot;pickle&quot;}.</span>
+
+<span class="sd">        .. note:: Pickle protocol is not tested.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Load game graph</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">)</span>
+
+        <span class="c1"># Create object</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="c1"># Add graph properties</span>
+        <span class="k">for</span> <span class="n">gprop</span><span class="p">,</span> <span class="n">gprop_value</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">func_code</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;def </span><span class="si">{</span><span class="n">gprop</span><span class="si">}</span><span class="s2">():</span><span class="se">\n\t</span><span class="s2">return </span><span class="si">{</span><span class="n">gprop_value</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+            <span class="n">exec</span><span class="p">(</span><span class="n">func_code</span><span class="p">)</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()[</span><span class="n">gprop</span><span class="p">]</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">gprop</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+
+        <span class="c1"># Construct inverse state mapping</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">][</span><span class="n">node</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">__state2node</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="c1"># Add node properties</span>
+        <span class="k">def</span> <span class="nf">get_node_property</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_properties</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">obj</span><span class="o">.</span><span class="n">__state2node</span><span class="p">[</span><span class="n">state</span><span class="p">]]</span>
+
+        <span class="k">for</span> <span class="n">nprop</span><span class="p">,</span> <span class="n">nprop_value</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">nprop</span><span class="p">,</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_node_property</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">nprop</span><span class="p">))</span>
+
+        <span class="c1"># TODO. Add edge properties (How to handle them is unclear).</span>
+
+        <span class="c1"># Reconstruct delta function</span>
+        <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
+            <span class="c1"># Get node from state</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">__state2node</span><span class="p">[</span><span class="n">state</span><span class="p">]</span>
+
+            <span class="c1"># Get out_edges from node in graph</span>
+            <span class="n">out_edges</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+            <span class="c1"># Iterate over each out edge to match action.</span>
+            <span class="n">successors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">out_edges</span><span class="p">:</span>
+                <span class="n">action_label</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;act&quot;</span><span class="p">][(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">action_label</span> <span class="o">==</span> <span class="n">act</span><span class="p">:</span>
+                    <span class="n">successors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">vid</span><span class="p">)</span>
+
+            <span class="c1"># If model is deterministic, then return single state.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;is_stochastic&quot;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">][</span><span class="n">successors</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span>
+
+            <span class="c1"># If model is stochastic and NOT quantitative, then return list of states.</span>
+            <span class="k">elif</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;is_stochastic&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;is_quantitative&quot;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">graph</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">][</span><span class="n">vid</span><span class="p">]</span> <span class="k">for</span> <span class="n">vid</span> <span class="ow">in</span> <span class="n">successors</span><span class="p">]</span>
+
+            <span class="c1"># If model is stochastic and quantitative, then return distribution.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">successors</span> <span class="o">=</span> <span class="p">[</span><span class="n">graph</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">][</span><span class="n">vid</span><span class="p">]</span> <span class="k">for</span> <span class="n">vid</span> <span class="ow">in</span> <span class="n">successors</span><span class="p">]</span>
+                <span class="n">prob</span> <span class="o">=</span> <span class="p">[</span><span class="n">graph</span><span class="p">[</span><span class="s2">&quot;prob&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span> <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">successors</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">successors</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
+
+        <span class="n">obj</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span>
+
+        <span class="c1"># Return reconstructed object</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the initial state of the graphical model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_deterministic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True` if the graphical model is deterministic. Else, returns `False`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_deterministic</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_nondeterministic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns `True` if the graphical model is non-deterministic. Else, returns `False`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_deterministic</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_probabilistic</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_probabilistic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns `True` if the graphical model is probabilistic. Else, returns `False`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_probabilistic</span>
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># USER MODELS.</span>
+<span class="c1"># ==========================================================================</span>
+<div class="viewcode-block" id="TSys"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys">[docs]</a><span class="k">class</span> <span class="nc">TSys</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a Transition System [Principles of Model Checking, Def. 2.1].</span>
+
+<span class="sd">    The transition system can be either deterministic or non-deterministic or probabilistic depending on the inputs</span>
+<span class="sd">    given to the constructor.</span>
+<span class="sd">    - Deterministic: (is_deterministic = True)</span>
+<span class="sd">    - Non-deterministic: (is_deterministic = False, is_probabilistic = False)</span>
+<span class="sd">    - Probabilistic: (is_deterministic = False, is_probabilistic = True)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NODE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">EDGE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">EDGE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">GRAPH_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TSys.__init__"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_probabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a transition system.</span>
+
+<span class="sd">        :param is_deterministic: (bool). If `True` then the transition system is deterministic. Otherwise,</span>
+<span class="sd">            it is either non-deterministic or probabilistic.</span>
+<span class="sd">        :param is_probabilistic: (bool). If `is_deterministic` is `False`, then if `is_probabilistic` is `True`</span>
+<span class="sd">            then the transition system is probabilistic. Otherwise, it is non-deterministic.</span>
+<span class="sd">        :param input_domain: (optional, function). A member function of TSys class that defines the inputs to the</span>
+<span class="sd">            transition system. [Default: TSys.actions]</span>
+<span class="sd">        :param input_name: (optional, str). The name of input property during graphify().</span>
+<span class="sd">        :param init_state: (optional, JSON-serializable object). The initial state of the transition system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TSys</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
+                                   <span class="n">is_deterministic</span><span class="o">=</span><span class="n">is_deterministic</span><span class="p">,</span>
+                                   <span class="n">is_probabilistic</span><span class="o">=</span><span class="n">is_probabilistic</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
+    <span class="c1"># ==========================================================================</span>
+<div class="viewcode-block" id="TSys.actions"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys.actions">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the actions component of the transition system.</span>
+
+<span class="sd">        :return: (list/tuple of str). List or tuple of action labels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.actions() is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TSys.delta"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys.delta">[docs]</a>    <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the transition function of the transition system.</span>
+
+<span class="sd">        :param state: (object) A valid state.</span>
+<span class="sd">        :param act: (str) An action.</span>
+<span class="sd">        :return: (object/list(object)/util.Distribution object). Depending on the type of transition system, the return</span>
+<span class="sd">            type is different.</span>
+<span class="sd">            - Deterministic: returns a single state.</span>
+<span class="sd">            - Non-deterministic: returns a list/tuple of states.</span>
+<span class="sd">            - Probabilistic: returns a distribution over all state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.delta() is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TSys.atoms"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys.atoms">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the atomic propositions component of the transition system.</span>
+
+<span class="sd">        :return: (list/tuple of str). List or tuple of atomic proposition labels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.atoms() is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TSys.label"><a class="viewcode-back" href="../../models.html#ggsolver.models.TSys.label">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the labeling function of the transition system.</span>
+
+<span class="sd">        :param state: (object) A valid state.</span>
+<span class="sd">        :return: (list/tuple of str). A list/tuple of atomic propositions that are true in the given state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.label() is not implemented.&quot;</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">TSys</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_turn_based</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_probabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">is_turn_based</span><span class="o">=</span><span class="n">is_turn_based</span><span class="p">,</span>
+                                   <span class="n">is_deterministic</span><span class="o">=</span><span class="n">is_deterministic</span><span class="p">,</span>
+                                   <span class="n">is_probabilistic</span><span class="o">=</span><span class="n">is_probabilistic</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">TSys</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Alphabet is powerset(atoms).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NODE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">EDGE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">EDGE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">GRAPH_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">REACHABILITY</span> <span class="o">=</span> <span class="s2">&quot;Reach&quot;</span>
+    <span class="n">BUCHI</span> <span class="o">=</span> <span class="s2">&quot;Buchi&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acc_cond</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Automaton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># If user provides direct definition of automaton</span>
+        <span class="k">if</span> <span class="s2">&quot;states&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s2">&quot;atoms&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s2">&quot;init_state&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_state</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;init_state&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s2">&quot;final&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">st</span><span class="p">:</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Default properties (will be treated as graph properties during serialization)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">acc_cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_sbacc</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_sbacc&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_sbacc&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_complete</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_complete&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_complete&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_stutter_invariant</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_stutter_invariant&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_stutter_invariant&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_unambiguous</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_unambiguous&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_unambiguous&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_terminal</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_terminal&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_terminal&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># PRIVATE FUNCTIONS.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="k">def</span> <span class="nf">_add_edges_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TODO. post process edges to merge parallel edges.</span>
+<span class="sd">        No merging of parallel edges performed right now.</span>
+<span class="sd">        # TODO. Merge parallel edges to compress DFA.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">edge_label</span> <span class="o">=</span> <span class="n">EdgePropertyMap</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">util</span><span class="o">.</span><span class="n">powerset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">()):</span>
+                <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">next_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">WARNING</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;[WARN] Automaton transition undefined on state:</span><span class="si">{</span><span class="n">st</span><span class="si">}</span><span class="s2">, inp:</span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">uid</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+                <span class="n">vid</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span>
+                <span class="n">edge_label</span><span class="p">[(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">inp</span>
+
+        <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;edge_label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_label</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">OKCYAN</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;[INFO] Processing edge property: edge_label.&quot;</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">BColors</span><span class="o">.</span><span class="n">ENDC</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">graph</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.atoms() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">num_acc_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.num_acc_sets() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># PUBLIC FUNCTIONS.</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_sbacc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_sbacc</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_complete</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_stutter_invariant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_stutter_invariant</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_unambiguous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_unambiguous</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_terminal</span>
+
+
+<span class="k">class</span> <span class="nc">Solver</span><span class="p">:</span>
+    <span class="n">DETERMINISTIC</span> <span class="o">=</span> <span class="s2">&quot;deterministic&quot;</span>
+    <span class="n">RANDOMIZED</span> <span class="o">=</span> <span class="s2">&quot;deterministic&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">strategy_type</span><span class="o">=</span><span class="n">DETERMINISTIC</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">graph</span>
+
+        <span class="c1"># Winning regions of the players</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win3</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Winning regions of the players</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Winning strategies of the players</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pi1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pi2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pi3</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.solve() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement only for concurrent games.</span>
+
+<span class="sd">        :param state:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">pi1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement only for turn-based games for states of P1.</span>
+
+<span class="sd">        :param state:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">pi2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement only for turn-based games for states of P2.</span>
+
+<span class="sd">        :param state:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">pi3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement only for turn-based games for states of P3 (Nature).</span>
+
+<span class="sd">        :param state:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+        <span class="c1"># Add win1, win2, win3 as graph properties</span>
+        <span class="c1"># Add pi1, pi2, pi3 as node properties</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Abhishek N. Kulkarni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
