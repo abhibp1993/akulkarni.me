@@ -18,6 +18,8 @@
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -109,12 +111,39 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.TSys">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">TSys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys" title="Permalink to this definition"></a></dt>
-<dd><p>Represents a Transition System [Principles of Model Checking, Def. 2.1].</p>
-<p>The transition system can be either deterministic or non-deterministic or probabilistic depending on the inputs
-given to the constructor.
-- Deterministic: (is_deterministic = True)
-- Non-deterministic: (is_deterministic = False, is_probabilistic = False)
-- Probabilistic: (is_deterministic = False, is_probabilistic = True)</p>
+<dd><p>Represents a transition system [Principles of Model Checking, Def. 2.1].</p>
+<div class="math notranslate nohighlight">
+\[TSys = (S, A, T, AP, L)\]</div>
+<p>In the <cite>TSys</cite> class, each component is represented as a function.</p>
+<ul class="simple">
+<li><p>The set of states <span class="math notranslate nohighlight">\(S\)</span> is represented by <cite>TSys.states</cite> function,</p></li>
+<li><p>The set of actions <span class="math notranslate nohighlight">\(A\)</span> is represented by <cite>TSys.actions</cite> function,</p></li>
+<li><p>The transition function <span class="math notranslate nohighlight">\(T\)</span> is represented by <cite>TSys.delta</cite> function,</p></li>
+<li><p>The set of atomic propositions is represented by <cite>TSys.atoms</cite> function,</p></li>
+<li><p>The labeling function <span class="math notranslate nohighlight">\(L\)</span> is represented by <cite>TSys.label</cite> function.</p></li>
+</ul>
+<p>All of the above functions are marked abstract. The recommended way to use <cite>TSys</cite> class is by subclassing it and implementing its component functions.</p>
+<p>A transition system can be either deterministic or non-deterministic or probabilistic. To define a <strong>deterministic</strong> transition system, provide a keyword argument <cite>is_deterministic=True</cite> to the constructor. To define a <strong>nondeterministic</strong> transition system, provide a keyword argument <cite>is_deterministic=False</cite> to the constructor. To define a <strong>probabilistic</strong> transition system, provide a keyword arguments <cite>is_deterministic=False, is_probabilistic=True</cite> to the constructor.</p>
+<p>The design of <cite>TSys</cite> class closely follows its mathematical definition. Hence, the signatures of <cite>delta</cite> function for deterministic, nondeterministic, probabilistic  transition systems are different.</p>
+<ul class="simple">
+<li><p><strong>deterministic:</strong>  <cite>delta(state, act) -&gt; single state</cite></p></li>
+<li><p><strong>non-deterministic:</strong>  <cite>delta(state, act) -&gt; a list of states</cite></p></li>
+<li><p><strong>probabilistic:</strong>  <cite>delta(state, act) -&gt; a distribution over states</cite></p></li>
+</ul>
+<p>An important feature of <cite>TSys</cite> class is the <cite>graphify()</cite> function. It constructs a <cite>Graph</cite> object that is equivalent to the transition system. The nodes of the <cite>Graph</cite> represent the states of <cite>TSys</cite>, the edges of the <cite>Graph</cite> are defined by the set of <cite>actions</cite> and the <cite>delta</cite> function. The atomic propositions, labeling function are stored as <cite>node, edge</cite> and <cite>graph</cite> properties. By default, every <cite>Graph</cite> returned a <cite>TSys.graphify()</cite> function have the following (node/edge/graph) properties:</p>
+<ul class="simple">
+<li><p><cite>state</cite>: (node property) A Map from every node to the state of transition system it represents.</p></li>
+<li><p><cite>actions</cite>: (graph property) List of valid actions.</p></li>
+<li><p><cite>input</cite>: (edge property) A map from every edge <cite>(uid, vid, key)</cite> to its associated action label.</p></li>
+<li><p><cite>prob</cite>: (edge property) The probability associated with the edge <cite>(uid, vid, key)</cite>.</p></li>
+<li><p><cite>atoms</cite>: (graph property) List of valid atomic propositions.</p></li>
+<li><p><cite>label</cite>: (node property) A map every node to the list of atomic propositions true in the state represented by that node.</p></li>
+<li><p><cite>init_state</cite>: (graph property) Initial state of transition system.</p></li>
+<li><p><cite>is_deterministic</cite>: (graph property) Is the transition system deterministic?</p></li>
+<li><p><cite>is_probabilistic</cite>: (graph property) Is the transition system probabilistic?</p></li>
+</ul>
+<p><strong>Note:</strong> Some features of probabilistic transition system are not tested. If you are trying to implement a probabilistic transition system, reach out to Abhishek Kulkarni (<a class="reference external" href="mailto:a&#46;kulkarni2&#37;&#52;&#48;ufl&#46;edu">a<span>&#46;</span>kulkarni2<span>&#64;</span>ufl<span>&#46;</span>edu</a>).</p>
+<p>Next, we demonstrate how to use <cite>TSys</cite> class to define a deterministic, non-deterministic and probabilistic transition system.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.__init__" title="Permalink to this definition"></a></dt>
