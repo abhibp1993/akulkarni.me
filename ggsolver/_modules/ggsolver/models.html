@@ -615,11 +615,18 @@
 <span class="sd">    - The set of atomic propositions is represented by `TSys.atoms` function,</span>
 <span class="sd">    - The labeling function :math:`L` is represented by `TSys.label` function.</span>
 
-<span class="sd">    All of the above functions are marked abstract. The recommended way to use `TSys` class is by subclassing it and implementing its component functions.</span>
+<span class="sd">    All of the above functions are marked abstract.</span>
+<span class="sd">    The recommended way to use `TSys` class is by subclassing it and implementing its component functions.</span>
 
-<span class="sd">    A transition system can be either deterministic or non-deterministic or probabilistic. To define a **deterministic** transition system, provide a keyword argument `is_deterministic=True` to the constructor. To define a **nondeterministic** transition system, provide a keyword argument `is_deterministic=False` to the constructor. To define a **probabilistic** transition system, provide a keyword arguments `is_deterministic=False, is_probabilistic=True` to the constructor.</span>
+<span class="sd">    A transition system can be either deterministic or non-deterministic or probabilistic.</span>
+<span class="sd">    To define a **deterministic** transition system, provide a keyword argument `is_deterministic=True`</span>
+<span class="sd">    to the constructor. To define a **nondeterministic** transition system, provide a keyword argument</span>
+<span class="sd">    `is_deterministic=False` to the constructor. To define a **probabilistic** transition system, provide</span>
+<span class="sd">    a keyword arguments `is_deterministic=False, is_probabilistic=True` to the constructor.</span>
 
-<span class="sd">    The design of `TSys` class closely follows its mathematical definition. Hence, the signatures of `delta` function for deterministic, nondeterministic, probabilistic  transition systems are different.</span>
+<span class="sd">    The design of `TSys` class closely follows its mathematical definition.</span>
+<span class="sd">    Hence, the signatures of `delta` function for deterministic, nondeterministic, probabilistic</span>
+<span class="sd">    transition systems are different.</span>
 
 <span class="sd">    - **deterministic:**  `delta(state, act) -&gt; single state`</span>
 <span class="sd">    - **non-deterministic:**  `delta(state, act) -&gt; a list of states`</span>
@@ -711,19 +718,152 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.label() is not implemented.&quot;</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">TSys</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_turn_based</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_probabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">is_turn_based</span><span class="o">=</span><span class="n">is_turn_based</span><span class="p">,</span>
-                                   <span class="n">is_deterministic</span><span class="o">=</span><span class="n">is_deterministic</span><span class="p">,</span>
+<div class="viewcode-block" id="Game"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">(</span><span class="n">TSys</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a game transition system, hereafter referred simply as a game.</span>
+<span class="sd">    A `Game` can represent two mathematical structures commonly used in literature, namely</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        G = (S, A, T, AP, L, formula)</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        G = (S, A, T, F, WinCond)</span>
+
+<span class="sd">    In the `Game` class, each component is represented as a function. By defining the relevant functions, a `Game`</span>
+<span class="sd">    class may represent either of the two mathematical structures.</span>
+
+<span class="sd">    - The set of states :math:`S` is represented by `Game.states` function,</span>
+<span class="sd">    - The set of actions :math:`A` is represented by `Game.actions` function,</span>
+<span class="sd">    - The transition function :math:`T` is represented by `Game.delta` function,</span>
+<span class="sd">    - The set of atomic propositions :math:`AP` is represented by `Game.atoms` function,</span>
+<span class="sd">    - The labeling function :math:`L` is represented by `Game.label` function.</span>
+<span class="sd">    - When the winning condition is represented by a logic formula :math:`formula`, we define `Game.formula` function.</span>
+<span class="sd">    - When the winning condition is represented by a final states :math:`F`, we define `Game.final` function.</span>
+<span class="sd">      In this case, we must also specify the acceptance condition.</span>
+<span class="sd">    - The winning condition :math:`WinCond` is represented by `Game.win_cond` function.</span>
+
+<span class="sd">    All of the above functions are marked abstract.</span>
+<span class="sd">    The recommended way to use `Game` class is by subclassing it and implementing the relevant component functions.</span>
+
+<span class="sd">    **Categorization of a Game:** A game is categorized by three types:</span>
+
+<span class="sd">    -   A game can be either deterministic or non-deterministic or probabilistic.</span>
+<span class="sd">        To define a **deterministic** transition system, provide a keyword argument `is_deterministic=True` to the</span>
+<span class="sd">        constructor. To define a **nondeterministic** transition system, provide a keyword argument `is_deterministic=False`</span>
+<span class="sd">        to the constructor. To define a **probabilistic** transition system, provide a keyword arguments</span>
+<span class="sd">        `is_deterministic=False, is_probabilistic=True` to the constructor.</span>
+
+<span class="sd">        The design of `Game` class closely follows its mathematical definition.</span>
+<span class="sd">        Hence, the signatures of `delta` function for deterministic, nondeterministic, probabilistic games are different.</span>
+
+<span class="sd">        - **deterministic:**  `delta(state, act) -&gt; single state`</span>
+<span class="sd">        - **non-deterministic:**  `delta(state, act) -&gt; a list of states`</span>
+<span class="sd">        - **probabilistic:**  `delta(state, act) -&gt; a distribution over states`</span>
+
+<span class="sd">    -   A game can be turn-based or concurrent. To define a **concurrent** game, provide a keyword argument</span>
+<span class="sd">        `is_turn_based=False`. The game is `turn_based` by default.</span>
+
+<span class="sd">    -   A game can be a 1/1.5/2/2.5-player game. A one-player game models a deterministic motion planning-type problem in</span>
+<span class="sd">        a static environment. A 1.5-player game is an MDP. A two-player game models a deterministic interaction between</span>
+<span class="sd">        two strategic players. And, a 2.5-player game models a stochastic interaction between two strategic players.</span>
+
+<span class="sd">        If a game is one or two player, then the :py:meth:`Game.delta` is `deterministic`.</span>
+<span class="sd">        If a game is 1.5 or 2.5 player, then the :py:meth:`Game.delta` is either `non-deterministic` (when</span>
+<span class="sd">        transition probabilities are unknown), and `probabilistic` (when transition probabilities are known).</span>
+
+<span class="sd">    Every state in a turn-based game is controlled by a player. To define which player controls which state, define</span>
+<span class="sd">    a game component :py:meth:`Game.turn` which takes in a state and returns a value between 0 and 3 to indicate</span>
+<span class="sd">    which player controls the state.</span>
+
+<span class="sd">    An important feature of `Game` class is the `graphify()` function. It constructs a `Graph` object that is</span>
+<span class="sd">    equivalent to the game. The nodes of the `Graph` represent the states of `Game`,</span>
+<span class="sd">    the edges of the `Graph` are defined by the set of `actions` and the `delta` function.</span>
+<span class="sd">    The atomic propositions, labeling function are stored as `node, edge` and `graph` properties.</span>
+<span class="sd">    By default, every `Graph` returned a `Game.graphify()` function have the following (node/edge/graph) properties:</span>
+
+<span class="sd">    - `state`: (node property) A Map from every node to the state of transition system it represents.</span>
+<span class="sd">    - `actions`: (graph property) List of valid actions.</span>
+<span class="sd">    - `input`: (edge property) A map from every edge `(uid, vid, key)` to its associated action label.</span>
+<span class="sd">    - `prob`: (edge property) The probability associated with the edge `(uid, vid, key)`.</span>
+<span class="sd">    - `atoms`: (graph property) List of valid atomic propositions.</span>
+<span class="sd">    - `label`: (node property) A map every node to the list of atomic propositions true in the state represented by that node.</span>
+<span class="sd">    - `init_state`: (graph property) Initial state of transition system.</span>
+<span class="sd">    - `is_deterministic`: (graph property) Is the transition system deterministic?</span>
+<span class="sd">    - `is_probabilistic`: (graph property) Is the transition system probabilistic?</span>
+<span class="sd">    - `is_turn_based`: (graph property) Is the transition system turn-based?</span>
+<span class="sd">    - `final`: (node property) Returns an integer denoting the acceptance set the state belongs to.</span>
+<span class="sd">    - `win_cond`: (graph property) The winning condition of the game.</span>
+<span class="sd">    - `formula`: (graph property) A logic formula representing the winning condition of the game.</span>
+<span class="sd">    - `turn`: (node property) A map from every node to an integer (0/1/2) that denotes which player controls the node.</span>
+<span class="sd">    - `p1_acts`: (graph property) A subset of actions accessible to P1.</span>
+<span class="sd">    - `p2_acts`: (graph property) A subset of actions accessible to P2.</span>
+
+<span class="sd">    **Note:** Some features of probabilistic transition system are not tested.</span>
+<span class="sd">    If you are trying to implement a probabilistic transition system, reach out to Abhishek Kulkarni</span>
+<span class="sd">    (a.kulkarni2@ufl.edu).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NODE_PROPERTY</span> <span class="o">=</span> <span class="n">TSys</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">EDGE_PROPERTY</span> <span class="o">=</span> <span class="n">TSys</span><span class="o">.</span><span class="n">EDGE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">GRAPH_PROPERTY</span> <span class="o">=</span> <span class="n">TSys</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Game.__init__"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_turn_based</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_probabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">is_deterministic</span><span class="o">=</span><span class="n">is_deterministic</span><span class="p">,</span>
                                    <span class="n">is_probabilistic</span><span class="o">=</span><span class="n">is_probabilistic</span><span class="p">,</span>
                                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_turn_based</span> <span class="o">=</span> <span class="n">is_turn_based</span></div>
 
     <span class="c1"># ==========================================================================</span>
     <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
     <span class="c1"># ==========================================================================</span>
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">TSys</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines whether the given state is a final state.</span>
+<span class="sd">        The structure of final state is based on the winning condition</span>
+<span class="sd">        [See Automata, Logics and Infinite Games (Ch. 2)].</span>
+
+<span class="sd">        :param state: (object) A valid state.</span>
+<span class="sd">        :return: (int or a list of ints). The integer denotes the acceptance set the state belongs to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_turn_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Is the game turn based? &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_turn_based</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the player who controls the given state.</span>
+
+<span class="sd">        :param state: (object) A valid state.</span>
+<span class="sd">        :return: (int). In turn-based game, turn can be 1 for player 1 or 2 for player 2.</span>
+<span class="sd">            In concurrent games, the turn must be 0.</span>
+
+<span class="sd">        .. note:: For concurrent games, the turn function can be left unimplemented.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">p1_acts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; A subset of actions accessible to P1. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">p2_acts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; A subset of actions accessible to P2. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">win_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Winning condition of the game. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; A logic formula representing the winning condition of the game. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
 <span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
