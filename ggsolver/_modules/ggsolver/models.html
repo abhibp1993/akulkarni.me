@@ -815,7 +815,7 @@
     <span class="c1"># ==========================================================================</span>
     <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
     <span class="c1"># ==========================================================================</span>
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.final"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.final">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines whether the given state is a final state.</span>
@@ -825,14 +825,14 @@
 <span class="sd">        :param state: (object) A valid state.</span>
 <span class="sd">        :return: (int or a list of ints). The integer denotes the acceptance set the state belongs to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.is_turn_based"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.is_turn_based">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">is_turn_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Is the game turn based? &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_turn_based</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_turn_based</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.turn"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.turn">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the player who controls the given state.</span>
@@ -843,27 +843,27 @@
 
 <span class="sd">        .. note:: For concurrent games, the turn function can be left unimplemented.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.p1_acts"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.p1_acts">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">p1_acts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; A subset of actions accessible to P1. &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.p2_acts"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.p2_acts">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">p2_acts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; A subset of actions accessible to P2. &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.win_cond"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.win_cond">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">win_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Winning condition of the game. &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Game.formula"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Game.formula">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; A logic formula representing the winning condition of the game. &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
@@ -972,65 +972,77 @@
 
 
 <span class="k">class</span> <span class="nc">Solver</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a game solver that computes the winning regions and strategies for the players</span>
+<span class="sd">    under a fixed solution concept.</span>
+
+<span class="sd">    It is recommended to implement a solver using the underlying graph of the game.</span>
+<span class="sd">    This helps speeding up the algorithms. Hence, a typical workflow would look like</span>
+
+<span class="sd">    .. code::</span>
+<span class="sd">        def __init__(self, game, ...):</span>
+<span class="sd">            super(Solver, self).__init__(game, ...)</span>
+<span class="sd">            self._graph = self.game.graphify()</span>
+
+<span class="sd">        def solver(self):</span>
+<span class="sd">            ... uses only self._graph.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">DETERMINISTIC</span> <span class="o">=</span> <span class="s2">&quot;deterministic&quot;</span>
     <span class="n">RANDOMIZED</span> <span class="o">=</span> <span class="s2">&quot;deterministic&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">strategy_type</span><span class="o">=</span><span class="n">DETERMINISTIC</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">graph</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">strategy_type</span><span class="o">=</span><span class="n">DETERMINISTIC</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_game</span> <span class="o">=</span> <span class="n">game</span>
+
+        <span class="c1"># Type of strategy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_strategy_type</span> <span class="o">=</span> <span class="n">strategy_type</span>
 
         <span class="c1"># Winning regions of the players</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win1</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win2</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win3</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Winning regions of the players</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win1</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win2</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win3</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="c1"># Winning strategies of the players</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pi1</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pi2</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pi3</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.solve() is not implemented.&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement only for concurrent games.</span>
-
-<span class="sd">        :param state:</span>
-<span class="sd">        :return:</span>
+<span class="sd">        Validates the input game.</span>
+<span class="sd">        Typically, this would involve checking if all necessary properties are well-defined.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Resets the internal variables to default values. &quot;&quot;&quot;</span>
+        <span class="c1"># Winning regions of the players</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win2</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solves the game to compute winning regions as per the solution concept.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.solve() is not implemented.&quot;</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">pi1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement only for turn-based games for states of P1.</span>
+<span class="sd">        Player 1&#39;s strategy at the given state.</span>
 
-<span class="sd">        :param state:</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :param state: A valid state in the game.</span>
+<span class="sd">        :return: A valid action.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span> <span class="nf">pi2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement only for turn-based games for states of P2.</span>
+<span class="sd">        Player 2&#39;s strategy at the given state.</span>
 
-<span class="sd">        :param state:</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :param state: A valid state in the game.</span>
+<span class="sd">        :return: A valid action.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="nf">pi3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement only for turn-based games for states of P3 (Nature).</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
 
-<span class="sd">        :param state:</span>
-<span class="sd">        :return:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">graph_dict</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>

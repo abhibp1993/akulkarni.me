@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 </ul>
 
         </div>
@@ -217,14 +218,14 @@
         <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="NodePropertyMap"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.NodePropertyMap">[docs]</a><span class="k">class</span> <span class="nc">NodePropertyMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="NodePropertyMap"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.NodePropertyMap">[docs]</a><span class="k">class</span> <span class="nc">NodePropertyMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements a default dictionary that maps a node ID to its property value. To store data efficiently,</span>
 <span class="sd">    only the non-default values are stored in the dictionary.</span>
 
 <span class="sd">    Raises an error if the node ID is invalid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="NodePropertyMap.__init__"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.NodePropertyMap.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="NodePropertyMap.__init__"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.NodePropertyMap.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">NodePropertyMap</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span></div>
@@ -262,14 +263,14 @@
             <span class="bp">self</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span></div>
 
 
-<div class="viewcode-block" id="EdgePropertyMap"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.EdgePropertyMap">[docs]</a><span class="k">class</span> <span class="nc">EdgePropertyMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="EdgePropertyMap"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.EdgePropertyMap">[docs]</a><span class="k">class</span> <span class="nc">EdgePropertyMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements a default dictionary that maps an edge (uid, vid, key) to its property value. To store data efficiently,</span>
 <span class="sd">    only the non-default values are stored in the dictionary.</span>
 
 <span class="sd">    Raises an error if the edge (uid, vid, key) is invalid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="EdgePropertyMap.__init__"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.EdgePropertyMap.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="EdgePropertyMap.__init__"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.EdgePropertyMap.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EdgePropertyMap</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span></div>
@@ -306,19 +307,19 @@
             <span class="bp">self</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;edge&quot;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;pvalue&quot;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Graph"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph">[docs]</a><span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="n">IGraph</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph">[docs]</a><span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="n">IGraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A MultiDiGraph class represented as a 5-tuple (nodes, edges, node_properties, edge_properties, graph_properties).</span>
 <span class="sd">    In addition, the graph implements a serialization protocol, save-load and drawing functionality.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Graph.__init__"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.__init__"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Graph</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Graph with |V|=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">, |E|=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
 
-<div class="viewcode-block" id="Graph.add_node"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.add_node">[docs]</a>    <span class="k">def</span> <span class="nf">add_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.add_node"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.add_node">[docs]</a>    <span class="k">def</span> <span class="nf">add_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a new node to the graph.</span>
 
@@ -330,7 +331,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">uid</span></div>
 
-<div class="viewcode-block" id="Graph.add_nodes"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.add_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">add_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.add_nodes"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.add_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">add_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds multiple nodes to the graph.</span>
 
@@ -340,7 +341,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">add_node</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)]</span></div>
 
-<div class="viewcode-block" id="Graph.add_edge"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.add_edge"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a new edge between the give nodes.</span>
 
@@ -352,7 +353,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.add_edges"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.add_edges">[docs]</a>    <span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.add_edges"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.add_edges">[docs]</a>    <span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds multiple edge between the give nodes.</span>
 
@@ -364,19 +365,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">)</span> <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Graph.rem_node"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.rem_node">[docs]</a>    <span class="k">def</span> <span class="nf">rem_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.rem_node"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.rem_node">[docs]</a>    <span class="k">def</span> <span class="nf">rem_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removal of nodes is NOT supported. Use filtering instead.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Removal of nodes is not supported. Use SubGraph instead.&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.rem_edge"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.rem_edge">[docs]</a>    <span class="k">def</span> <span class="nf">rem_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.rem_edge"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.rem_edge">[docs]</a>    <span class="k">def</span> <span class="nf">rem_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removal of edges is NOT supported. Use filtering instead.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Removal of nodes is not supported. Use SubGraph instead.&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.has_node"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.has_node">[docs]</a>    <span class="k">def</span> <span class="nf">has_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.has_node"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.has_node">[docs]</a>    <span class="k">def</span> <span class="nf">has_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks whether the graph has the given node or not.</span>
 
@@ -385,7 +386,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.has_edge"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.has_edge">[docs]</a>    <span class="k">def</span> <span class="nf">has_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.has_edge"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.has_edge">[docs]</a>    <span class="k">def</span> <span class="nf">has_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks whether the graph has the given edge or not.</span>
 
@@ -398,73 +399,73 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.nodes"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.nodes">[docs]</a>    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.nodes"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.nodes">[docs]</a>    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all nodes in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Graph.edges"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.edges">[docs]</a>    <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.edges"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.edges">[docs]</a>    <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all edges in the graph. Each edge is represented as a 3-tuple (uid, vid, key).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.successors"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.successors">[docs]</a>    <span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.successors"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.successors">[docs]</a>    <span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all successors of the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">uid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.predecessors"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.predecessors"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all predecessors of the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">uid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.neighbors"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.neighbors"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all (in and out) neighbors of the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">uid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.ancestors"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.ancestors">[docs]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.ancestors"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.ancestors">[docs]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all nodes from which the node represented by uid is reachable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="p">,</span> <span class="n">uid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.descendants"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.descendants">[docs]</a>    <span class="k">def</span> <span class="nf">descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.descendants"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.descendants">[docs]</a>    <span class="k">def</span> <span class="nf">descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all nodes that can be reached from  the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">descendants</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="p">,</span> <span class="n">uid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Graph.in_edges"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.in_edges">[docs]</a>    <span class="k">def</span> <span class="nf">in_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.in_edges"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.in_edges">[docs]</a>    <span class="k">def</span> <span class="nf">in_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all in edges to the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">in_edges</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.out_edges"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.out_edges">[docs]</a>    <span class="k">def</span> <span class="nf">out_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.out_edges"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.out_edges">[docs]</a>    <span class="k">def</span> <span class="nf">out_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all out edges from the node represented by uid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.number_of_nodes"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.number_of_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.number_of_nodes"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.number_of_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The number of nodes in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Graph.number_of_edges"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.number_of_edges">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.number_of_edges"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.number_of_edges">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The number of edges in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Graph.clear"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.clear"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Clears all nodes, edges and the node, edge and graph properties.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -473,7 +474,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_edge_properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_graph_properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Graph.serialize"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.serialize"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Serializes the graph into a dictionary with the following format::</span>
 
@@ -554,7 +555,7 @@
         <span class="c1"># Return serialized object</span>
         <span class="k">return</span> <span class="n">obj_dict</span></div>
 
-<div class="viewcode-block" id="Graph.deserialize"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.deserialize">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Graph.deserialize"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.deserialize">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructs a graph from a serialized graph object. The format is described in :py:meth:`Graph.serialize`.</span>
@@ -595,7 +596,7 @@
         <span class="c1"># Return constructed object</span>
         <span class="k">return</span> <span class="n">obj</span></div>
 
-<div class="viewcode-block" id="Graph.save"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.save"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the graph to file.</span>
 
@@ -618,7 +619,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph.save() does not support &#39;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&#39; protocol. One of [&#39;json&#39;, &#39;pickle&#39;] expected&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.load"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.load">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Graph.load"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.load">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads the graph from file.</span>
@@ -644,7 +645,7 @@
 
         <span class="k">return</span> <span class="n">graph</span></div>
 
-<div class="viewcode-block" id="Graph.to_png"><a class="viewcode-back" href="../../graph.html#ggsolver.graph.Graph.to_png">[docs]</a>    <span class="k">def</span> <span class="nf">to_png</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">nlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">elabel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.to_png"><a class="viewcode-back" href="../../modules/graph.html#ggsolver.graph.Graph.to_png">[docs]</a>    <span class="k">def</span> <span class="nf">to_png</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">nlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">elabel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a PNG image of the graph.</span>
 
