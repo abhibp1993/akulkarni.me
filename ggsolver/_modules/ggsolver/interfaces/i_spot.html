@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ggsolver.interfaces.i_spot &mdash; ggsolver 0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ggsolver
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ggsolver Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ggsolver</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>ggsolver.interfaces.i_spot</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ggsolver.interfaces.i_spot</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Defines an interface from spot automaton to ggsolver automaton.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">spot</span>
+<span class="kn">from</span> <span class="nn">ggsolver.models</span> <span class="kn">import</span> <span class="n">Automaton</span><span class="p">,</span> <span class="n">register_property</span>
+<span class="kn">from</span> <span class="nn">ggsolver.util</span> <span class="kn">import</span> <span class="n">powerset</span>
+<span class="kn">from</span> <span class="nn">dd.autoref</span> <span class="kn">import</span> <span class="n">BDD</span>
+
+
+<div class="viewcode-block" id="SpotAutomaton"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton">[docs]</a><span class="k">class</span> <span class="nc">SpotAutomaton</span><span class="p">(</span><span class="n">Automaton</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `SpotAutomaton` constructs an :class:`Automaton` from an LTL specification string using</span>
+<span class="sd">    `spot` (https://spot.lrde.epita.fr/) with customizations for `ggsolver`.</span>
+
+<span class="sd">    **Customizations:** Since `ggsolver` contains several algorithms for reactive/controller synthesis,</span>
+<span class="sd">    we prefer to construct deterministic automata. Given an LTL formula, `SpotAutomaton` automatically</span>
+<span class="sd">    determines the best acceptance condition that would result in a deterministic automaton.</span>
+
+<span class="sd">    Programmer&#39;s note: The graphified version of automaton does not use PL formulas as edge labels.</span>
+<span class="sd">    This is intentionally done to be able to run our codes on robots that may not have logic libraries installed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SpotAutomaton.__init__"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given an LTL formula, SpotAutomaton determines the best options for spot.translate() function</span>
+<span class="sd">        to generate a deterministic automaton in ggsolver.Automaton format.</span>
+
+<span class="sd">        :param formula: (str) LTL formula.</span>
+<span class="sd">        :param options: (List/Tuple of str) Valid options for spot.translate() function. By default, the</span>
+<span class="sd">            value is `None`, in which case, the options are determined automatically. See description below.</span>
+
+<span class="sd">        **Default translation options:** While constructing an automaton using `spot`, we use the following</span>
+<span class="sd">        options: `deterministic, high, complete, unambiguous, SBAcc`. If selected acceptance condition</span>
+<span class="sd">        is parity, then we use `colored` option as well.</span>
+
+<span class="sd">        The default options can be overriden. For quick reference, the following description is copied from</span>
+<span class="sd">        `spot` documentation (spot.lrde.epita.fr/doxygen).</span>
+
+<span class="sd">        The optional arguments should be strings among the following:</span>
+<span class="sd">        - at most one in &#39;GeneralizedBuchi&#39;, &#39;Buchi&#39;, or &#39;Monitor&#39;,</span>
+<span class="sd">          &#39;generic&#39;, &#39;parity&#39;, &#39;parity min odd&#39;, &#39;parity min even&#39;,</span>
+<span class="sd">          &#39;parity max odd&#39;, &#39;parity max even&#39;, &#39;coBuchi&#39;</span>
+<span class="sd">          (type of acceptance condition to build)</span>
+<span class="sd">        - at most one in &#39;Small&#39;, &#39;Deterministic&#39;, &#39;Any&#39;</span>
+<span class="sd">          (preferred characteristics of the produced automaton)</span>
+<span class="sd">        - at most one in &#39;Low&#39;, &#39;Medium&#39;, &#39;High&#39;</span>
+<span class="sd">          (optimization level)</span>
+<span class="sd">        - any combination of &#39;Complete&#39;, &#39;Unambiguous&#39;,</span>
+<span class="sd">          &#39;StateBasedAcceptance&#39; (or &#39;SBAcc&#39; for short), and</span>
+<span class="sd">          &#39;Colored&#39; (only for parity acceptance)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Construct the automaton</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SpotAutomaton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+
+        <span class="c1"># Instance variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span> <span class="o">=</span> <span class="n">formula</span>
+
+        <span class="c1"># If options are not given, determine the set of options to generate deterministic automaton with</span>
+        <span class="c1"># state-based acceptance condition.</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_options</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Translating </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_formula</span><span class="si">}</span><span class="s2"> with options=</span><span class="si">{</span><span class="n">options</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="o">*</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="c1"># Set the acceptance condition (in ggsolver terms)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">acc</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_REACH</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_REACH</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;co-Büchi&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COBUCHI</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># name contains &quot;parity&quot;:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_PARITY</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton._determine_options"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton._determine_options">[docs]</a>    <span class="k">def</span> <span class="nf">_determine_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines the options based on where the given LTL formula lies in Manna-Pnueli hierarchy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mp_cls</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span> <span class="ow">or</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Monitor&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span>
+        <span class="k">elif</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;G&quot;</span> <span class="ow">or</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span> <span class="ow">or</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Buchi&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span>
+        <span class="k">elif</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;coBuchi&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># cls.upper() == &quot;T&quot;:</span>
+            <span class="k">return</span> <span class="s1">&#39;parity&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span><span class="p">,</span> <span class="s2">&quot;colored&quot;</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.sigma"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.sigma">[docs]</a>    <span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set of symbols for automaton. Follows mathematical definition of automaton.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;To many atoms. Currently support up to 16 atoms.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">powerset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.states"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.states">[docs]</a>    <span class="k">def</span> <span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; States of automaton. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">num_states</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.atoms"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.atoms">[docs]</a>    <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Atomic propositions appearing in LTL formula. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="k">for</span> <span class="n">ap</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">ap</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.delta"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.delta">[docs]</a>    <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transition function of automaton. For a deterministic automaton, returns a single state. Otherwise,</span>
+<span class="sd">        returns a list/tuple of states.</span>
+
+<span class="sd">        :param state: (object) A valid state.</span>
+<span class="sd">        :param inp: (list) List of atoms that are true (an element of sigma).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Preprocess inputs</span>
+        <span class="n">inp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="kc">True</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">}</span>
+
+        <span class="c1"># Initialize a BDD over set of atoms. </span>
+        <span class="n">bdd</span> <span class="o">=</span> <span class="n">BDD</span><span class="p">()</span>
+        <span class="n">bdd</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">())</span>
+
+        <span class="c1"># Get spot BDD dict to extract formula </span>
+        <span class="n">bdd_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span>
+        
+        <span class="c1"># Get next states</span>
+        <span class="n">next_states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">bdd_format_formula</span><span class="p">(</span><span class="n">bdd_dict</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">cond</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">is_ff</span><span class="p">():</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">label</span><span class="o">.</span><span class="n">is_tt</span><span class="p">():</span>
+                <span class="n">next_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">dst</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">to_str</span><span class="p">(</span><span class="s1">&#39;spin&#39;</span><span class="p">)</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">bdd</span><span class="o">.</span><span class="n">add_expr</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">bdd</span><span class="o">.</span><span class="n">let</span><span class="p">(</span><span class="n">inp_dict</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">bdd</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                    <span class="n">next_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">dst</span><span class="p">))</span>
+
+        <span class="c1"># Return based on whether automaton is deterministic or non-deterministic.</span>
+        <span class="c1">#   If automaton is deterministic but len(next_states) = 0, then automaton is incomplete, return None.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_states</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">next_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">next_states</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.init_state"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.init_state">[docs]</a>    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initial state of automaton. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">get_init_state_number</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.final"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.final">[docs]</a>    <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Maps every state to its acceptance set. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_state_based_acc</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">state_acc_sets</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">sets</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.acc_cond"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.acc_cond">[docs]</a>    <span class="k">def</span> <span class="nf">acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns acceptance condition according to ggsolver definitions:</span>
+<span class="sd">        See `ACC_REACH, ...` variables in Automaton class.</span>
+<span class="sd">        See :meth:`SpotAutomaton.spot_acc_cond` for acceptance condition in spot&#39;s nomenclature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.num_acc_sets"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.num_acc_sets">[docs]</a>    <span class="k">def</span> <span class="nf">num_acc_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Number of acceptance sets. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">num_sets</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_deterministic"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_deterministic">[docs]</a>    <span class="k">def</span> <span class="nf">is_deterministic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Is the automaton deterministic? &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_universal</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">is_existential</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_unambiguous"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_unambiguous">[docs]</a>    <span class="k">def</span> <span class="nf">is_unambiguous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        There is at most one run accepting a word (but it might be recognized several time).</span>
+<span class="sd">        See https://spot.lrde.epita.fr/concepts.html.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_unambiguous</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_terminal"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_terminal">[docs]</a>    <span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Automaton is weak, accepting SCCs are complete, accepting edges may not go to rejecting SCCs.</span>
+<span class="sd">        An automaton is weak if the transitions of an SCC all belong to the same acceptance sets.</span>
+
+<span class="sd">        See https://spot.lrde.epita.fr/concepts.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_terminal</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_stutter_invariant"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_stutter_invariant">[docs]</a>    <span class="k">def</span> <span class="nf">is_stutter_invariant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The property recognized by the automaton is stutter-invariant</span>
+<span class="sd">        (see https://www.lrde.epita.fr/~adl/dl/adl/michaud.15.spin.pdf)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_stutter_invariant</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_complete"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_complete">[docs]</a>    <span class="k">def</span> <span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Is the automaton complete? &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_semi_deterministic"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_semi_deterministic">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_semi_deterministic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Is the automaton semi-deterministic?</span>
+<span class="sd">        See https://spot.lrde.epita.fr/doxygen/namespacespot.html#a56b3f00b7b93deafb097cad595998783</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">is_semi_deterministic</span><span class="p">()(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.acc_name"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.acc_name">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">acc_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Name of acceptance condition as per spot&#39;s nomenclature. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">acc</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.spot_acc_cond"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.spot_acc_cond">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">spot_acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Acceptance condition in spot&#39;s nomenclature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">get_acceptance</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.formula"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.formula">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; The LTL Formula. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formula</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_state_based_acc"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_state_based_acc">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_state_based_acc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Is the acceptance condition state-based? &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_state_acc</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_weak"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_weak">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_weak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Are transitions of an SCC all belong to the same acceptance sets?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_weak</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SpotAutomaton.is_inherently_weak"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.is_inherently_weak">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">is_inherently_weak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Is it the case that accepting and rejecting cycles cannot be mixed in the same SCC? &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">prop_inherently_weak</span><span class="p">())</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Abhishek N. Kulkarni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
