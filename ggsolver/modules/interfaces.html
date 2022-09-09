@@ -114,7 +114,7 @@
 <cite>spot</cite> (<a class="reference external" href="https://spot.lrde.epita.fr/">https://spot.lrde.epita.fr/</a>) with customizations for <cite>ggsolver</cite>.</p>
 <p><strong>Customizations:</strong> Since <cite>ggsolver</cite> contains several algorithms for reactive/controller synthesis,
 we prefer to construct deterministic automata. Given an LTL formula, <cite>SpotAutomaton</cite> automatically
-determines the best acceptance condition that would result in a deterministic automaton.</p>
+determines the best acceptance condition that would result in a deterministic automaton..</p>
 <p>Programmer’s note: The graphified version of automaton does not use PL formulas as edge labels.
 This is intentionally done to be able to run our codes on robots that may not have logic libraries installed.</p>
 <dl class="py method">
@@ -137,12 +137,10 @@ is parity, then we use <cite>colored</cite> option as well.</p>
 <p>The default options can be overriden. For quick reference, the following description is copied from
 <cite>spot</cite> documentation (spot.lrde.epita.fr/doxygen).</p>
 <p>The optional arguments should be strings among the following:
-- at most one in ‘GeneralizedBuchi’, ‘Buchi’, or ‘Monitor’,</p>
-<blockquote>
-<div><p>‘generic’, ‘parity’, ‘parity min odd’, ‘parity min even’,
+- at most one in ‘GeneralizedBuchi’, ‘Buchi’, or ‘Monitor’,
+‘generic’, ‘parity’, ‘parity min odd’, ‘parity min even’,
 ‘parity max odd’, ‘parity max even’, ‘coBuchi’
 (type of acceptance condition to build)</p>
-</div></blockquote>
 <ul class="simple">
 <li><p>at most one in ‘Small’, ‘Deterministic’, ‘Any’
 (preferred characteristics of the produced automaton)</p></li>
