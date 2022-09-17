@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ggsolver.models &mdash; ggsolver 0.1.1 documentation</title>
+  <title>ggsolver.models &mdash; ggsolver 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -30,7 +30,7 @@
             <a href="../../index.html" class="icon icon-home"> ggsolver
           </a>
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -84,6 +84,7 @@
 <span class="kn">import</span> <span class="nn">typing</span>
 <span class="kn">from</span> <span class="nn">ggsolver</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">ggsolver.graph</span> <span class="kn">import</span> <span class="n">NodePropertyMap</span><span class="p">,</span> <span class="n">EdgePropertyMap</span><span class="p">,</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">ggsolver.logic</span> <span class="kn">import</span> <span class="n">pl</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 
@@ -943,73 +944,181 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
+<div class="viewcode-block" id="Automaton"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton">[docs]</a><span class="k">class</span> <span class="nc">Automaton</span><span class="p">(</span><span class="n">GraphicalModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Alphabet is powerset(atoms).</span>
+<span class="sd">    Represents an Automaton.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\mathcal{A} = (Q, \\Sigma := 2^{AP}, \\delta, q_0, F)</span>
+
+<span class="sd">    In the `Automaton` class, each component is represented as a function.</span>
+
+<span class="sd">    - The set of states :math:`Q` is represented by `Automaton.states` function,</span>
+<span class="sd">    - The set of atomic propositions :math:`AP` is represented by `Automaton.atoms` function,</span>
+<span class="sd">    - The set of symbols :math:`\\Sigma` is represented by `Automaton.sigma` function,</span>
+<span class="sd">    - The transition function :math:`\\delta` is represented by `Automaton.delta` function,</span>
+<span class="sd">    - The initial state :math:`q_0` is represented by `Automaton.init_state` function.</span>
+
+<span class="sd">    An automaton may have one of the following acceptance conditions:</span>
+
+<span class="sd">    - (:class:`Automaton.ACC_REACH`, 0)</span>
+<span class="sd">    - (:class:`Automaton.ACC_SAFETY`, 0)</span>
+<span class="sd">    - (:class:`Automaton.ACC_BUCHI`, 0)</span>
+<span class="sd">    - (:class:`Automaton.ACC_COBUCHI`, 0)</span>
+<span class="sd">    - (:class:`Automaton.ACC_PARITY`, 0)</span>
+<span class="sd">    - (:class:`Automaton.ACC_PREF_LAST`, None)</span>
+<span class="sd">    - (:class:`Automaton.ACC_ACC_PREF_MP`, None)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">NODE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">NODE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">EDGE_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">EDGE_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">GRAPH_PROPERTY</span> <span class="o">=</span> <span class="n">GraphicalModel</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="n">ACC_REACH</span> <span class="o">=</span> <span class="s2">&quot;Reach&quot;</span>
-    <span class="n">ACC_SAFETY</span> <span class="o">=</span> <span class="s2">&quot;Safety&quot;</span>
-    <span class="n">ACC_BUCHI</span> <span class="o">=</span> <span class="s2">&quot;Buchi&quot;</span>
-    <span class="n">ACC_COBUCHI</span> <span class="o">=</span> <span class="s2">&quot;co-Buchi&quot;</span>
-    <span class="n">ACC_PARITY</span> <span class="o">=</span> <span class="s2">&quot;parity&quot;</span>
+    <span class="n">ACC_REACH</span> <span class="o">=</span> <span class="s2">&quot;Reach&quot;</span>                                 <span class="c1">#:</span>
+    <span class="n">ACC_SAFETY</span> <span class="o">=</span> <span class="s2">&quot;Safety&quot;</span>                               <span class="c1">#:</span>
+    <span class="n">ACC_BUCHI</span> <span class="o">=</span> <span class="s2">&quot;Buchi&quot;</span>                                 <span class="c1">#:</span>
+    <span class="n">ACC_COBUCHI</span> <span class="o">=</span> <span class="s2">&quot;co-Buchi&quot;</span>                            <span class="c1">#:</span>
+    <span class="n">ACC_PARITY</span> <span class="o">=</span> <span class="s2">&quot;Parity Min Even&quot;</span>                      <span class="c1">#:</span>
+    <span class="n">ACC_PREF_LAST</span> <span class="o">=</span> <span class="s2">&quot;Preference Last&quot;</span>                   <span class="c1">#:</span>
+    <span class="n">ACC_PREF_MP</span> <span class="o">=</span> <span class="s2">&quot;Preference MostPreferred&quot;</span>            <span class="c1">#:</span>
     <span class="n">ACC_UNDEFINED</span> <span class="o">=</span> <span class="s2">&quot;undefined&quot;</span>
+    <span class="n">ACC_TYPES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ACC_UNDEFINED</span><span class="p">,</span>
+        <span class="n">ACC_REACH</span><span class="p">,</span>
+        <span class="n">ACC_SAFETY</span><span class="p">,</span>
+        <span class="n">ACC_BUCHI</span><span class="p">,</span>
+        <span class="n">ACC_COBUCHI</span><span class="p">,</span>
+        <span class="n">ACC_PARITY</span><span class="p">,</span>
+        <span class="n">ACC_PREF_LAST</span><span class="p">,</span>
+        <span class="n">ACC_PREF_MP</span>
+    <span class="p">]</span>                                   <span class="c1">#: Acceptance conditions supported by Automaton.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acc_cond</span><span class="o">=</span><span class="n">ACC_UNDEFINED</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Automaton.__init__"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Supported keyword arguments:</span>
+
+<span class="sd">        :param states: (Iterable) An iterable over states in the automaton.</span>
+<span class="sd">        :param atoms: (Iterable[str]) An iterable over atomic propositions in the automaton.</span>
+<span class="sd">        :param trans_dict: (dict) A dictionary defining the (deterministic) transition function of automaton.</span>
+<span class="sd">                      Format of dictionary: {state: {logic.PLFormula: state}}</span>
+<span class="sd">        :param init_state: (object) The initial state, a member of states iterable.</span>
+<span class="sd">        :param final: (Iterable[states]) The set of final states, a subset of states iterable.</span>
+<span class="sd">        :param acc_cond: (tuple) A tuple of automaton acceptance type and an acceptance set.</span>
+<span class="sd">            For example, DFA has an acceptance condition of `(Automaton.ACC_REACH, 0)`.</span>
+<span class="sd">        :param is_deterministic: (bool) Whether the Automaton is deterministic.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Automaton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="c1"># Default properties (will be treated as graph properties during serialization)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">acc_cond</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_sbacc</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_sbacc&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_sbacc&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_complete</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_complete&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_complete&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_stutter_invariant</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_stutter_invariant&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_stutter_invariant&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_unambiguous</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_unambiguous&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_unambiguous&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_terminal</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_terminal&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;is_terminal&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="c1"># Process keyword arguments</span>
+        <span class="k">if</span> <span class="s2">&quot;states&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">states_</span><span class="p">():</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="n">states_</span>
+
+        <span class="k">if</span> <span class="s2">&quot;atoms&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">atoms_</span><span class="p">():</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_</span>
+
+        <span class="k">if</span> <span class="s2">&quot;trans_dict&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">delta_</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+                <span class="n">next_states</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">formula</span><span class="p">,</span> <span class="n">n_state</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;trans_dict&quot;</span><span class="p">][</span><span class="n">state</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">pl</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+                        <span class="n">next_states</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n_state</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_states</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Non-determinism detected in a deterministic automaton. &quot;</span> <span class="o">+</span>
+                                         <span class="sa">f</span><span class="s2">&quot;delta(</span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">) -&gt; </span><span class="si">{</span><span class="n">next_states</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">next_states</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_states</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+
+                <span class="k">return</span> <span class="n">next_states</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta_</span>
+
+        <span class="k">if</span> <span class="s2">&quot;init_state&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;init_state&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s2">&quot;final&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">final_</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">final_</span>
+
+        <span class="k">if</span> <span class="s2">&quot;acc_cond&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">acc_cond_</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;acc_cond&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">acc_cond</span> <span class="o">=</span> <span class="n">acc_cond_</span>
+
+        <span class="k">if</span> <span class="s2">&quot;is_deterministic&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">is_deterministic_</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;is_deterministic&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_deterministic</span> <span class="o">=</span> <span class="n">is_deterministic_</span></div>
 
     <span class="c1"># ==========================================================================</span>
     <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
     <span class="c1"># ==========================================================================</span>
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span>
-
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Automaton.atoms"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.atoms">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.atoms() is not implemented.&quot;</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list/tuple of atomic propositions.</span>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
+<span class="sd">        :return: (list of str) A list of atomic proposition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.atoms() is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Automaton.final"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.final">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">NODE_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the acceptance set associated with the given state.</span>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<span class="sd">        :param state: (an element of `self.states()`) A valid state.</span>
+<span class="sd">        :return: (int) Acceptance set associated with the given state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.final() is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Automaton.acc_type"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.acc_type">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">acc_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Acceptance type of the automaton.</span>
+
+<span class="sd">        :return: A value from :class:`Automaton.ACC_TYPES`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">acc_cond</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Automaton.acc_cond"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.acc_cond">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">acc_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Acceptance condition of the automaton.</span>
+
+<span class="sd">        :return: (2-tuple) A value of type (acc_type, acc_set) where acc_type is from :class:`Automaton.ACC_TYPES`</span>
+<span class="sd">                 and acc_set is either an integer or a list of integer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACC_UNDEFINED</span><span class="p">,</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Automaton.num_acc_sets"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.num_acc_sets">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">num_acc_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.num_acc_sets() is not implemented.&quot;</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Number of acceptance sets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.num_acc_sets() is not implemented.&quot;</span><span class="p">)</span></div>
 
-    <span class="c1"># ==========================================================================</span>
-    <span class="c1"># PUBLIC FUNCTIONS.</span>
-    <span class="c1"># ==========================================================================</span>
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">is_sbacc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_sbacc</span>
-
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
+<div class="viewcode-block" id="Automaton.is_complete"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.is_complete">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_complete</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Is the automaton complete? That is, is transition function well-defined at every state for any</span>
+<span class="sd">        input symbol?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">is_stutter_invariant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_stutter_invariant</span>
-
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">is_unambiguous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_unambiguous</span>
-
-    <span class="nd">@register_property</span><span class="p">(</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_terminal</span>
+    <span class="c1"># ==========================================================================</span>
+    <span class="c1"># FUNCTIONS TO BE IMPLEMENTED BY USER.</span>
+    <span class="c1"># ==========================================================================</span>
+<div class="viewcode-block" id="Automaton.sigma"><a class="viewcode-back" href="../../modules/models.html#ggsolver.models.Automaton.sigma">[docs]</a>    <span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the set of alphabet of automaton. It is the powerset of atoms().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">powerset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">()))</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">Solver</span><span class="p">:</span>

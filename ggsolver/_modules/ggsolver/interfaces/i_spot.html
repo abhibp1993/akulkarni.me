@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ggsolver.interfaces.i_spot &mdash; ggsolver 0.1 documentation</title>
+  <title>ggsolver.interfaces.i_spot &mdash; ggsolver 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -30,7 +30,7 @@
             <a href="../../../index.html" class="icon icon-home"> ggsolver
           </a>
               <div class="version">
-                0.1
+                0.1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -79,7 +79,6 @@
 
 <span class="kn">import</span> <span class="nn">spot</span>
 <span class="kn">from</span> <span class="nn">ggsolver.models</span> <span class="kn">import</span> <span class="n">Automaton</span><span class="p">,</span> <span class="n">register_property</span>
-<span class="kn">from</span> <span class="nn">ggsolver.util</span> <span class="kn">import</span> <span class="n">powerset</span>
 <span class="kn">from</span> <span class="nn">dd.autoref</span> <span class="kn">import</span> <span class="n">BDD</span>
 
 
@@ -166,15 +165,7 @@
         <span class="k">elif</span> <span class="n">mp_cls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;coBuchi&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># cls.upper() == &quot;T&quot;:</span>
-            <span class="k">return</span> <span class="s1">&#39;parity&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span><span class="p">,</span> <span class="s2">&quot;colored&quot;</span></div>
-
-<div class="viewcode-block" id="SpotAutomaton.sigma"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.sigma">[docs]</a>    <span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set of symbols for automaton. Follows mathematical definition of automaton.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;To many atoms. Currently support up to 16 atoms.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">powerset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">()))</span></div>
+            <span class="k">return</span> <span class="s1">&#39;parity min even&#39;</span><span class="p">,</span> <span class="s2">&quot;Deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Unambiguous&quot;</span><span class="p">,</span> <span class="s2">&quot;SBAcc&quot;</span><span class="p">,</span> <span class="s2">&quot;colored&quot;</span></div>
 
 <div class="viewcode-block" id="SpotAutomaton.states"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.states">[docs]</a>    <span class="k">def</span> <span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; States of automaton. &quot;&quot;&quot;</span>
