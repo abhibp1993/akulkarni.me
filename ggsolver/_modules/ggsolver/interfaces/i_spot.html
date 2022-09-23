@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ggsolver.interfaces.i_spot &mdash; ggsolver 0.1.2 documentation</title>
+  <title>ggsolver.interfaces.i_spot &mdash; ggsolver 0.1.4 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -30,7 +30,7 @@
             <a href="../../../index.html" class="icon icon-home"> ggsolver
           </a>
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -141,17 +141,17 @@
         <span class="c1"># Set the acceptance condition (in ggsolver terms)</span>
         <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="o">.</span><span class="n">acc</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_REACH</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_REACH</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Büchi&quot;</span> <span class="ow">and</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_REACH</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_BUCHI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;co-Büchi&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COBUCHI</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_COBUCHI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_SAFETY</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># name contains &quot;parity&quot;:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_PARITY</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_acc_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">ACC_PARITY</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpotAutomaton._determine_options"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton._determine_options">[docs]</a>    <span class="k">def</span> <span class="nf">_determine_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -275,7 +275,7 @@
 <span class="sd">        Is the automaton semi-deterministic?</span>
 <span class="sd">        See https://spot.lrde.epita.fr/doxygen/namespacespot.html#a56b3f00b7b93deafb097cad595998783</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">is_semi_deterministic</span><span class="p">()(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">spot</span><span class="o">.</span><span class="n">is_semi_deterministic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_aut</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="SpotAutomaton.acc_name"><a class="viewcode-back" href="../../../modules/interfaces.html#ggsolver.interfaces.i_spot.SpotAutomaton.acc_name">[docs]</a>    <span class="nd">@register_property</span><span class="p">(</span><span class="n">Automaton</span><span class="o">.</span><span class="n">GRAPH_PROPERTY</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">acc_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
