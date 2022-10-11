@@ -6,7 +6,7 @@ My primary research interest is in /formal methods (reactive synthesis)/ with ap
 
 Sections:
 
-- Working Papers
+- Working Papers/Preprints
 - Journal Papers
 - Conference Papers
 - Peer-reviewed Workshop
@@ -14,16 +14,19 @@ Sections:
 - Talks/Presentations
 
 
-== Working Papers 
+== Working Papers / Preprints
+
+- *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* [Submitted to ACC'23]
+\nAbhishek N. Kulkarni and Jie Fu
+\n\[[https://arxiv.org/abs/2210.01878 arXiv]\]
+
+- *Probabilistic Planning with Partially Ordered Preferences over Temporal Goals* [Submitted to ICRA'23]
+\nHazhar Rahmani, Abhishek N. Kulkarni and Jie Fu
+\n\[[https://arxiv.org/abs/2209.12267 arXiv]\]
 
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*  
 \nAbhishek N. Kulkarni and Jie Fu
 \n\[[https://arxiv.org/abs/2104.11676 arXiv]\] 
-
-- *Opportunistic Qualitative Planning in Stochastic Systems with Preferences over Temporal Logic Objectives.* 
-\nAbhishek N. Kulkarni and Jie Fu
-\n\[[https://arxiv.org/abs/2203.13803 arXiv]\]
-
 
 
 == Journal Papers
