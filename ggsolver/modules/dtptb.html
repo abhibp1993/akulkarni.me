@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>(dtptb) Deterministic Two-Player Turn-based Games &mdash; ggsolver 0.1.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="(mdp) One-Player Stochastic Games (MDP Games)" href="mdp.html" />
+    <link rel="prev" title="Automata" href="automata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> ggsolver
+          </a>
+              <div class="version">
+                0.1.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ggsolver Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="graph.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automata.html">Automata</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">(dtptb) Deterministic Two-Player Turn-based Games</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#swinreach">SWinReach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swinsafe">SWinSafe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aswinreach">ASWinReach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aswinsafe">ASWinSafe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mdp.html">(mdp) One-Player Stochastic Games (MDP Games)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ggsolver</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API</a> &raquo;</li>
+      <li>(dtptb) Deterministic Two-Player Turn-based Games</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/dtptb.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="dtptb-deterministic-two-player-turn-based-games">
+<h1>(dtptb) Deterministic Two-Player Turn-based Games<a class="headerlink" href="#dtptb-deterministic-two-player-turn-based-games" title="Permalink to this heading"></a></h1>
+<section id="swinreach">
+<h2>SWinReach<a class="headerlink" href="#swinreach" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.dtptb.reachability.</span></span><span class="sig-name descname"><span class="pre">SWinReach</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinReach"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach" title="Permalink to this definition"></a></dt>
+<dd><p>Computes sure winning region for player 1 or player 2 to reach a set of final states in a deterministic
+two-player turn-based game.</p>
+<p>Implements Zielonka’s recursive algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – (Graph or SubGraph instance) A graph or subgraph of a deterministic two-player turn-based game.</p></li>
+<li><p><strong>final</strong> – (Iterable) The set of final states. By default, the final states are determined using
+node property “final” of the graph.</p></li>
+<li><p><strong>player</strong> – (int) The player who has the reachability objective.
+Value should be 1 for player 1, and 2 for player 2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.get_final_states">
+<span class="sig-name descname"><span class="pre">get_final_states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinReach.get_final_states"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.get_final_states" title="Permalink to this definition"></a></dt>
+<dd><p>Determines the final states using “final” property of the input graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.graph" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the input game graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.is_solved">
+<span class="sig-name descname"><span class="pre">is_solved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.is_solved" title="Permalink to this definition"></a></dt>
+<dd><p>Returns if the game is solved or not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinReach.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Resets the solver to initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.solution">
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.solution" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the solved game graph.
+The graph contains two special properties:</p>
+<ul class="simple">
+<li><p><cite>node_winner</cite> (node property): Maps each node to the id of player (1/2) who wins from that node.</p></li>
+<li><p><cite>edge_winner</cite> (edge property): Maps each edge to the id of player (1/2) who wins using that edge.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinReach.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.solve" title="Permalink to this definition"></a></dt>
+<dd><p>Implements Zielonka’s recursive algorithm to determine winning nodes and edges for each player.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.state2node">
+<span class="sig-name descname"><span class="pre">state2node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.state2node" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to get the node id associated with given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.win_acts">
+<span class="sig-name descname"><span class="pre">win_acts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.win_acts" title="Permalink to this definition"></a></dt>
+<dd><p>Retuns the list of winning actions from the given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.win_region">
+<span class="sig-name descname"><span class="pre">win_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.win_region" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the winning region for the player.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinReach.winner">
+<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinReach.winner" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the player who wins from the given state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="swinsafe">
+<h2>SWinSafe<a class="headerlink" href="#swinsafe" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.dtptb.reachability.</span></span><span class="sig-name descname"><span class="pre">SWinSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinSafe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Computes sure winning region for player 1 or player 2 to remain within a set of final states in a deterministic
+two-player turn-based game.</p>
+<p>Solves the dual reachability game to determine the winning nodes and edges in the safety game.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – (Graph or SubGraph instance) A graph or subgraph of a deterministic two-player turn-based game.</p></li>
+<li><p><strong>final</strong> – (Iterable) The set of final states. By default, the final states are determined using
+node property “final” of the graph.</p></li>
+<li><p><strong>player</strong> – (int) The player who has the reachability objective.
+Value should be 1 for player 1, and 2 for player 2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.get_final_states">
+<span class="sig-name descname"><span class="pre">get_final_states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinSafe.get_final_states"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.get_final_states" title="Permalink to this definition"></a></dt>
+<dd><p>Determines the final states using “final” property of the input graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.graph" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the input game graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.is_solved">
+<span class="sig-name descname"><span class="pre">is_solved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.is_solved" title="Permalink to this definition"></a></dt>
+<dd><p>Returns if the game is solved or not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Resets the solver to initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.solution">
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.solution" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the solved game graph.
+The graph contains two special properties:</p>
+<ul class="simple">
+<li><p><cite>node_winner</cite> (node property): Maps each node to the id of player (1/2) who wins from that node.</p></li>
+<li><p><cite>edge_winner</cite> (edge property): Maps each edge to the id of player (1/2) who wins using that edge.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/dtptb/reachability.html#SWinSafe.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.solve" title="Permalink to this definition"></a></dt>
+<dd><p>Solves the dual reachability game to solve the safety game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.state2node">
+<span class="sig-name descname"><span class="pre">state2node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.state2node" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to get the node id associated with given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.win_acts">
+<span class="sig-name descname"><span class="pre">win_acts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.win_acts" title="Permalink to this definition"></a></dt>
+<dd><p>Retuns the list of winning actions from the given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.win_region">
+<span class="sig-name descname"><span class="pre">win_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.win_region" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the winning region for the player.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.SWinSafe.winner">
+<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.dtptb.reachability.SWinSafe.winner" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the player who wins from the given state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="aswinreach">
+<h2>ASWinReach<a class="headerlink" href="#aswinreach" title="Permalink to this heading"></a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.ASWinReach">
+<span class="sig-prename descclassname"><span class="pre">ggsolver.dtptb.reachability.</span></span><span class="sig-name descname"><span class="pre">ASWinReach</span></span><a class="headerlink" href="#ggsolver.dtptb.reachability.ASWinReach" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#ggsolver.dtptb.reachability.SWinReach" title="ggsolver.dtptb.reachability.SWinReach"><code class="xref py py-class docutils literal notranslate"><span class="pre">SWinReach</span></code></a></p>
+</dd></dl>
+
+</section>
+<section id="aswinsafe">
+<h2>ASWinSafe<a class="headerlink" href="#aswinsafe" title="Permalink to this heading"></a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.dtptb.reachability.ASWinSafe">
+<span class="sig-prename descclassname"><span class="pre">ggsolver.dtptb.reachability.</span></span><span class="sig-name descname"><span class="pre">ASWinSafe</span></span><a class="headerlink" href="#ggsolver.dtptb.reachability.ASWinSafe" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#ggsolver.dtptb.reachability.SWinSafe" title="ggsolver.dtptb.reachability.SWinSafe"><code class="xref py py-class docutils literal notranslate"><span class="pre">SWinSafe</span></code></a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="automata.html" class="btn btn-neutral float-left" title="Automata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mdp.html" class="btn btn-neutral float-right" title="(mdp) One-Player Stochastic Games (MDP Games)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Abhishek N. Kulkarni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

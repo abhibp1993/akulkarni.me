@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Models &mdash; ggsolver 0.1.4 documentation</title>
+  <title>Models &mdash; ggsolver 0.1.5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -35,7 +35,7 @@
             <a href="../index.html" class="icon icon-home"> ggsolver
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -55,10 +55,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#automaton">Automaton</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tsys">TSys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#game">Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solver">Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deterministicstrategy">DeterministicStrategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nondeterministicstrategy">NonDeterministicStrategy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automata.html">Automata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtptb.html">Deterministic Two-Player Turn-based Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mdp.html">One-Player Stochastic Games (MDP Games)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -270,46 +275,22 @@ GraphicalModel class. See example #todo.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Automaton.from_automaton">
 <span class="sig-name descname"><span class="pre">from_automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ggsolver.models.Automaton" title="ggsolver.models.Automaton"><span class="pre">Automaton</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.from_automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.from_automaton" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs a DFA from another Automaton instance.
-The input automaton’s acceptance condition must match that of a DFA.</p>
+<dd><p>Constructs an Automaton from another Automaton instance.
+The input automaton’s acceptance condition must match that of a current Automaton.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Automaton.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.graphify" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.graphify" title="Permalink to this definition"></a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.graphify_pointed">
-<span class="sig-name descname"><span class="pre">graphify_pointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.graphify_pointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains only the states that are
-reachable from the initial state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.graphify_unpointed">
-<span class="sig-name descname"><span class="pre">graphify_unpointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.graphify_unpointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains all possible states in
-the model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -387,9 +368,9 @@ input symbol?</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> – (str) Path to which the file should be saved. Must include an extension.</p></li>
-<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p></li>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p></li>
 <li><p><strong>overwrite</strong> – (bool) Specifies whether to overwrite the file, if it exists. [Default: False]</p></li>
 <li><p><strong>protocol</strong> – (str) The protocol to use to save the file. Options: {“json” [Default], “pickle”}.</p></li>
 </ul>
@@ -522,9 +503,8 @@ transition systems are different.</p>
 it is either non-deterministic or probabilistic.</p></li>
 <li><p><strong>is_probabilistic</strong> – (bool). If <cite>is_deterministic</cite> is <cite>False</cite>, then if <cite>is_probabilistic</cite> is <cite>True</cite>
 then the transition system is probabilistic. Otherwise, it is non-deterministic.</p></li>
-<li><p><strong>input_domain</strong> – (optional, function). A member function of TSys class that defines the inputs to the
-transition system. [Default: TSys.actions]</p></li>
-<li><p><strong>input_name</strong> – (optional, str). The name of input property during graphify().</p></li>
+<li><p><strong>input_domain</strong> – (optional, str). Name of the member function of TSys class that defines the inputs to the
+transition system. [Default: “actions”]</p></li>
 <li><p><strong>init_state</strong> – (optional, JSON-serializable object). The initial state of the transition system.</p></li>
 </ul>
 </dd>
@@ -592,40 +572,16 @@ GraphicalModel class. See example #todo.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify" title="Permalink to this definition"></a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.TSys.graphify_pointed">
-<span class="sig-name descname"><span class="pre">graphify_pointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify_pointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains only the states that are
-reachable from the initial state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.TSys.graphify_unpointed">
-<span class="sig-name descname"><span class="pre">graphify_unpointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify_unpointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains all possible states in
-the model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -704,9 +660,9 @@ the model.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> – (str) Path to which the file should be saved. Must include an extension.</p></li>
-<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p></li>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p></li>
 <li><p><strong>overwrite</strong> – (bool) Specifies whether to overwrite the file, if it exists. [Default: False]</p></li>
 <li><p><strong>protocol</strong> – (str) The protocol to use to save the file. Options: {“json” [Default], “pickle”}.</p></li>
 </ul>
@@ -838,6 +794,7 @@ The atomic propositions, labeling function are stored as <cite>node, edge</cite>
 By default, every <cite>Graph</cite> returned a <cite>Game.graphify()</cite> function have the following (node/edge/graph) properties:</p>
 <ul class="simple">
 <li><p><cite>state</cite>: (node property) A Map from every node to the state of transition system it represents.</p></li>
+<li><p><cite>input_domain</cite>: (graph property) Name of function that defines input domain of game (=”actions”).</p></li>
 <li><p><cite>actions</cite>: (graph property) List of valid actions.</p></li>
 <li><p><cite>input</cite>: (edge property) A map from every edge <cite>(uid, vid, key)</cite> to its associated action label.</p></li>
 <li><p><cite>prob</cite>: (edge property) The probability associated with the edge <cite>(uid, vid, key)</cite>.</p></li>
@@ -868,9 +825,8 @@ If you are trying to implement a probabilistic transition system, reach out to A
 it is either non-deterministic or probabilistic.</p></li>
 <li><p><strong>is_probabilistic</strong> – (bool). If <cite>is_deterministic</cite> is <cite>False</cite>, then if <cite>is_probabilistic</cite> is <cite>True</cite>
 then the transition system is probabilistic. Otherwise, it is non-deterministic.</p></li>
-<li><p><strong>input_domain</strong> – (optional, function). A member function of TSys class that defines the inputs to the
-transition system. [Default: TSys.actions]</p></li>
-<li><p><strong>input_name</strong> – (optional, str). The name of input property during graphify().</p></li>
+<li><p><strong>input_domain</strong> – (optional, str). Name of the member function of TSys class that defines the inputs to the
+transition system. [Default: “actions”]</p></li>
 <li><p><strong>init_state</strong> – (optional, JSON-serializable object). The initial state of the transition system.</p></li>
 </ul>
 </dd>
@@ -960,40 +916,16 @@ The structure of final state is based on the winning condition
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify" title="Permalink to this definition"></a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<dd class="field-odd"><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Game.graphify_pointed">
-<span class="sig-name descname"><span class="pre">graphify_pointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify_pointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains only the states that are
-reachable from the initial state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Game.graphify_unpointed">
-<span class="sig-name descname"><span class="pre">graphify_unpointed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify_unpointed" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs the underlying graph of the graphical model. The constructed graph contains all possible states in
-the model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(<a class="reference internal" href="graph.html#ggsolver.graph.Graph" title="ggsolver.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ggsolver.graph.Graph</span></code></a> object) An equivalent graph representation of the graphical model.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1090,9 +1022,9 @@ the model.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> – (str) Path to which the file should be saved. Must include an extension.</p></li>
-<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <a class="reference internal" href="#ggsolver.models.TSys.graphify_pointed" title="ggsolver.models.TSys.graphify_pointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code></a> is called, which constructs
+<li><p><strong>pointed</strong> – (bool) If pointed is <cite>True</cite>, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_pointed()</span></code> is called, which constructs
 a pointed graphical model containing only the states reachable from the initial state.  Otherwise,
-<a class="reference internal" href="#ggsolver.models.TSys.graphify_unpointed" title="ggsolver.models.TSys.graphify_unpointed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code></a> is called, which constructs the complete transition system.</p></li>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TSys.graphify_unpointed()</span></code> is called, which constructs the complete transition system.</p></li>
 <li><p><strong>overwrite</strong> – (bool) Specifies whether to overwrite the file, if it exists. [Default: False]</p></li>
 <li><p><strong>protocol</strong> – (str) The protocol to use to save the file. Options: {“json” [Default], “pickle”}.</p></li>
 </ul>
@@ -1183,6 +1115,114 @@ In concurrent games, the turn must be 0.</p>
 <dt class="sig sig-object py" id="ggsolver.models.Game.win_cond">
 <span class="sig-name descname"><span class="pre">win_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.win_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.win_cond" title="Permalink to this definition"></a></dt>
 <dd><p>Winning condition of the game.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="solver">
+<h2>Solver<a class="headerlink" href="#solver" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.models.Solver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a game solver that computes the winning regions and strategies for the players
+under a fixed solution concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – (Graph or SubGraph instance) Graph or subgraph representing the game on a graph.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.graph" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the input game graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.is_solved">
+<span class="sig-name descname"><span class="pre">is_solved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.is_solved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.is_solved" title="Permalink to this definition"></a></dt>
+<dd><p>Returns if the game is solved or not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Resets the solver.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.solution">
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solution" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the solved game graph.
+The graph contains two special properties:</p>
+<ul class="simple">
+<li><p><cite>node_winner</cite> (node property): Maps each node to the id of player (1/2) who wins from that node.</p></li>
+<li><p><cite>edge_winner</cite> (edge property): Maps each edge to the id of player (1/2) who wins using that edge.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solve" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.state2node">
+<span class="sig-name descname"><span class="pre">state2node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.state2node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.state2node" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to get the node id associated with given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.win_acts">
+<span class="sig-name descname"><span class="pre">win_acts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_acts" title="Permalink to this definition"></a></dt>
+<dd><p>Retuns the list of winning actions from the given state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.win_region">
+<span class="sig-name descname"><span class="pre">win_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_region" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the winning region for the player.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.Solver.winner">
+<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.winner" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the player who wins from the given state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="deterministicstrategy">
+<h2>DeterministicStrategy<a class="headerlink" href="#deterministicstrategy" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.models.DeterministicStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">DeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a deterministic strategy. That is, the strategy at a given state always selects the same winning action.</p>
+<p>Allows customization of losing behavior by specifying a function that maps a losing node to an action.
+By default, losing state is mapped to None.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.DeterministicStrategy.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the action selected by strategy at given state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nondeterministicstrategy">
+<h2>NonDeterministicStrategy<a class="headerlink" href="#nondeterministicstrategy" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.models.NonDeterministicStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">NonDeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a non-deterministic strategy. Uniformly samples an action from winning actions at that state.</p>
+<p>Allows customization of losing behavior by specifying a function that maps a losing node to an action.
+By default, losing state is mapped to None.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.models.NonDeterministicStrategy.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the action selected by strategy at given state.</p>
 </dd></dl>
 
 </dd></dl>
