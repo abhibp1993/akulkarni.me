@@ -1,130 +1,111 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Models &mdash; ggsolver 0.1.5 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../_static/js/theme.js"></script>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Models &#8212; ggsolver 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Interfaces" href="interfaces.html" />
+    <link rel="next" title="Automata" href="automata.html" />
     <link rel="prev" title="Graph" href="graph.html" /> 
-</head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="automata.html" title="Automata"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="graph.html" title="Graph"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> ggsolver
-          </a>
-              <div class="version">
-                0.1.5
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">ggsolver Documentation:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home Page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Instructions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="graph.html">Graph</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#automaton">Automaton</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tsys">TSys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#game">Game</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#solver">Solver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#deterministicstrategy">DeterministicStrategy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#nondeterministicstrategy">NonDeterministicStrategy</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automata.html">Automata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtptb.html">Deterministic Two-Player Turn-based Games</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mdp.html">One-Player Stochastic Games (MDP Games)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
-</ul>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Models</a></li> 
+      </ul>
+    </div>
+    </div>
+  
 
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">ggsolver</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API</a> &raquo;</li>
-      <li>Models</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/modules/models.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   
 <style>
-/* CSS overrides for sphinx_rtd_theme */
+/* CSS overrides for cloud theme */
 
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
+/* nicer titles and more space for info and warning logos */
+
+div.admonition p.admonition-title {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
 }
 
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
 }
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
 }
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
 }
 </style>
 <section id="models">
-<h1>Models<a class="headerlink" href="#models" title="Permalink to this heading"></a></h1>
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this heading">¶</a></h1>
 <section id="automaton">
-<h2>Automaton<a class="headerlink" href="#automaton" title="Permalink to this heading"></a></h2>
+<h2>Automaton<a class="headerlink" href="#automaton" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.base.</span></span><span class="sig-name descname"><span class="pre">Automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an Automaton.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{A} = (Q, \Sigma := 2^{AP}, \delta, q_0, F)\]</div>
@@ -138,58 +119,58 @@
 </ul>
 <p>An automaton may have one of the following acceptance conditions:</p>
 <ul class="simple">
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_REACH" title="ggsolver.models.Automaton.ACC_REACH"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_REACH</span></code></a>, 0)</p></li>
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_SAFETY" title="ggsolver.models.Automaton.ACC_SAFETY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_SAFETY</span></code></a>, 0)</p></li>
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_BUCHI" title="ggsolver.models.Automaton.ACC_BUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_BUCHI</span></code></a>, 0)</p></li>
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_COBUCHI" title="ggsolver.models.Automaton.ACC_COBUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_COBUCHI</span></code></a>, 0)</p></li>
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_PARITY" title="ggsolver.models.Automaton.ACC_PARITY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PARITY</span></code></a>, 0)</p></li>
-<li><p>(<a class="reference internal" href="#ggsolver.models.Automaton.ACC_PREF_LAST" title="ggsolver.models.Automaton.ACC_PREF_LAST"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PREF_LAST</span></code></a>, None)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_REACH" title="ggsolver.logic.base.Automaton.ACC_REACH"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_REACH</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_SAFETY" title="ggsolver.logic.base.Automaton.ACC_SAFETY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_SAFETY</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_BUCHI" title="ggsolver.logic.base.Automaton.ACC_BUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_BUCHI</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_COBUCHI" title="ggsolver.logic.base.Automaton.ACC_COBUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_COBUCHI</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_PARITY" title="ggsolver.logic.base.Automaton.ACC_PARITY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PARITY</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_PREF_LAST" title="ggsolver.logic.base.Automaton.ACC_PREF_LAST"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PREF_LAST</span></code></a>, None)</p></li>
 <li><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_ACC_PREF_MP</span></code>, None)</p></li>
 </ul>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_BUCHI">
-<span class="sig-name descname"><span class="pre">ACC_BUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Buchi'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_BUCHI" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_BUCHI">
+<span class="sig-name descname"><span class="pre">ACC_BUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Buchi'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_BUCHI" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_COBUCHI">
-<span class="sig-name descname"><span class="pre">ACC_COBUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'co-Buchi'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_COBUCHI" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_COBUCHI">
+<span class="sig-name descname"><span class="pre">ACC_COBUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'co-Buchi'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_COBUCHI" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_PARITY">
-<span class="sig-name descname"><span class="pre">ACC_PARITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_PARITY" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_PARITY">
+<span class="sig-name descname"><span class="pre">ACC_PARITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_PARITY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_PREF_LAST">
-<span class="sig-name descname"><span class="pre">ACC_PREF_LAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">Last'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_PREF_LAST" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_PREF_LAST">
+<span class="sig-name descname"><span class="pre">ACC_PREF_LAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">Last'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_PREF_LAST" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_PREF_MP">
-<span class="sig-name descname"><span class="pre">ACC_PREF_MP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">MostPreferred'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_PREF_MP" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_PREF_MP">
+<span class="sig-name descname"><span class="pre">ACC_PREF_MP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">MostPreferred'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_PREF_MP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_REACH">
-<span class="sig-name descname"><span class="pre">ACC_REACH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Reach'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_REACH" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_REACH">
+<span class="sig-name descname"><span class="pre">ACC_REACH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Reach'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_REACH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_SAFETY">
-<span class="sig-name descname"><span class="pre">ACC_SAFETY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Safety'</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_SAFETY" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_SAFETY">
+<span class="sig-name descname"><span class="pre">ACC_SAFETY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Safety'</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_SAFETY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.ACC_TYPES">
-<span class="sig-name descname"><span class="pre">ACC_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['undefined',</span> <span class="pre">'Reach',</span> <span class="pre">'Safety',</span> <span class="pre">'Buchi',</span> <span class="pre">'co-Buchi',</span> <span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even',</span> <span class="pre">'Preference</span> <span class="pre">Last',</span> <span class="pre">'Preference</span> <span class="pre">MostPreferred']</span></em><a class="headerlink" href="#ggsolver.models.Automaton.ACC_TYPES" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.ACC_TYPES">
+<span class="sig-name descname"><span class="pre">ACC_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['undefined',</span> <span class="pre">'Reach',</span> <span class="pre">'Safety',</span> <span class="pre">'Buchi',</span> <span class="pre">'co-Buchi',</span> <span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even',</span> <span class="pre">'Preference</span> <span class="pre">Last',</span> <span class="pre">'Preference</span> <span class="pre">MostPreferred']</span></em><a class="headerlink" href="#ggsolver.logic.base.Automaton.ACC_TYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acceptance conditions supported by Automaton.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.__init__" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Supported keyword arguments:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -209,31 +190,31 @@ For example, DFA has an acceptance condition of <cite>(Automaton.ACC_REACH, 0)</
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.acc_cond">
-<span class="sig-name descname"><span class="pre">acc_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.acc_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.acc_cond" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.acc_cond">
+<span class="sig-name descname"><span class="pre">acc_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.acc_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.acc_cond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acceptance condition of the automaton.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(2-tuple) A value of type (acc_type, acc_set) where acc_type is from <a class="reference internal" href="#ggsolver.models.Automaton.ACC_TYPES" title="ggsolver.models.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>
+<dd class="field-odd"><p>(2-tuple) A value of type (acc_type, acc_set) where acc_type is from <a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_TYPES" title="ggsolver.logic.base.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>
 and acc_set is either an integer or a list of integer.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.acc_type">
-<span class="sig-name descname"><span class="pre">acc_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.acc_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.acc_type" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.acc_type">
+<span class="sig-name descname"><span class="pre">acc_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.acc_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.acc_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acceptance type of the automaton.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A value from <a class="reference internal" href="#ggsolver.models.Automaton.ACC_TYPES" title="ggsolver.models.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>.</p>
+<dd class="field-odd"><p>A value from <a class="reference internal" href="#ggsolver.logic.base.Automaton.ACC_TYPES" title="ggsolver.logic.base.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.atoms">
-<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.atoms" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list/tuple of atomic propositions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -243,8 +224,8 @@ and acc_set is either an integer or a list of integer.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.deserialize">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.deserialize" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.deserialize">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a graphical model from a serialized graph object. The node properties are deserialized as state
 properties, the edge properties are deserialized as transition properties, and the graph properties are
 deserialized as model properties. All the deserialized properties are represented as a function in the
@@ -259,8 +240,8 @@ GraphicalModel class. See example #todo.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.final">
-<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.final" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.final">
+<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.final" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the acceptance set associated with the given state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -273,15 +254,15 @@ GraphicalModel class. See example #todo.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.from_automaton">
-<span class="sig-name descname"><span class="pre">from_automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ggsolver.models.Automaton" title="ggsolver.models.Automaton"><span class="pre">Automaton</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.from_automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.from_automaton" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.from_automaton">
+<span class="sig-name descname"><span class="pre">from_automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ggsolver.logic.base.Automaton" title="ggsolver.logic.base.Automaton"><span class="pre">Automaton</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.from_automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.from_automaton" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs an Automaton from another Automaton instance.
 The input automaton’s acceptance condition must match that of a current Automaton.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.graphify" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.graphify">
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.graphify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,14 +277,14 @@ a pointed graphical model containing only the states reachable from the initial 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.init_state">
-<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.init_state" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.init_state">
+<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.init_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the initial state of the graphical model.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.initialize" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the initial state of the graphical model.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -312,33 +293,33 @@ a pointed graphical model containing only the states reachable from the initial 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.is_complete">
-<span class="sig-name descname"><span class="pre">is_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.is_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.is_complete" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.is_complete">
+<span class="sig-name descname"><span class="pre">is_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.is_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.is_complete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is the automaton complete? That is, is transition function well-defined at every state for any
 input symbol?</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.is_deterministic">
-<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.is_deterministic" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.is_deterministic">
+<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.is_deterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.is_nondeterministic">
-<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.is_nondeterministic" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.is_nondeterministic">
+<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.is_nondeterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is non-deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.is_probabilistic">
-<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.is_probabilistic" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.is_probabilistic">
+<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.is_probabilistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is probabilistic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.load" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the graphical model from file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -355,14 +336,14 @@ input symbol?</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.num_acc_sets">
-<span class="sig-name descname"><span class="pre">num_acc_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.num_acc_sets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.num_acc_sets" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.num_acc_sets">
+<span class="sig-name descname"><span class="pre">num_acc_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.num_acc_sets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.num_acc_sets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of acceptance sets.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.save" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the graphical model to file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -383,8 +364,8 @@ a pointed graphical model containing only the states reachable from the initial 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.serialize">
-<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.serialize" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.serialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serializes the underlying graph of the graphical model into a dictionary with the following format.
 The state properties are saved as node properties, transition properties are stored are edge properties
 and model properties are stored as graph properties in the underlying graph:</p>
@@ -428,14 +409,14 @@ and model properties are stored as graph properties in the underlying graph:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.sigma">
-<span class="sig-name descname"><span class="pre">sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Automaton.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Automaton.sigma" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.base.Automaton.sigma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the set of alphabet of automaton. It is the powerset of atoms().</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ggsolver.models.Automaton.states">
-<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Automaton.states" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ggsolver.logic.base.Automaton.states">
+<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.logic.base.Automaton.states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the states component of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -448,10 +429,10 @@ and model properties are stored as graph properties in the underlying graph:</p>
 
 </section>
 <section id="tsys">
-<h2>TSys<a class="headerlink" href="#tsys" title="Permalink to this heading"></a></h2>
+<h2>TSys<a class="headerlink" href="#tsys" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.TSys">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">TSys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">TSys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a transition system [Principles of Model Checking, Def. 2.1].</p>
 <div class="math notranslate nohighlight">
 \[TSys = (S, A, T, AP, L)\]</div>
@@ -494,7 +475,7 @@ transition systems are different.</p>
 <p>Next, we demonstrate how to use <cite>TSys</cite> class to define a deterministic, non-deterministic and probabilistic transition system.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -513,7 +494,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.actions">
-<span class="sig-name descname"><span class="pre">actions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.actions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">actions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.actions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the actions component of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -524,7 +505,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.atoms">
-<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.atoms" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the atomic propositions component of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -535,7 +516,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.delta">
-<span class="sig-name descname"><span class="pre">delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.delta" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.delta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the transition function of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -556,7 +537,7 @@ type is different.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.deserialize">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.deserialize" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a graphical model from a serialized graph object. The node properties are deserialized as state
 properties, the edge properties are deserialized as transition properties, and the graph properties are
 deserialized as model properties. All the deserialized properties are represented as a function in the
@@ -572,7 +553,7 @@ GraphicalModel class. See example #todo.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.graphify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -588,13 +569,13 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.init_state">
-<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.init_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.init_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the initial state of the graphical model.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.initialize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the initial state of the graphical model.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -604,25 +585,25 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.is_deterministic">
-<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_deterministic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_deterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.is_nondeterministic">
-<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_nondeterministic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_nondeterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is non-deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.is_probabilistic">
-<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_probabilistic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.is_probabilistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is probabilistic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.label">
-<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.label" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#TSys.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.TSys.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the labeling function of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -636,7 +617,7 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.load" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the graphical model from file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -654,7 +635,7 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.save" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the graphical model to file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -676,7 +657,7 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.serialize">
-<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.serialize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.serialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serializes the underlying graph of the graphical model into a dictionary with the following format.
 The state properties are saved as node properties, transition properties are stored are edge properties
 and model properties are stored as graph properties in the underlying graph:</p>
@@ -721,7 +702,7 @@ and model properties are stored as graph properties in the underlying graph:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.TSys.states">
-<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.states" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.TSys.states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the states component of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -734,10 +715,10 @@ and model properties are stored as graph properties in the underlying graph:</p>
 
 </section>
 <section id="game">
-<h2>Game<a class="headerlink" href="#game" title="Permalink to this heading"></a></h2>
+<h2>Game<a class="headerlink" href="#game" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.Game">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_turn_based</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_turn_based</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a game transition system, hereafter referred simply as a game.
 A <cite>Game</cite> can represent two mathematical structures commonly used in literature, namely</p>
 <div class="math notranslate nohighlight">
@@ -816,7 +797,7 @@ If you are trying to implement a probabilistic transition system, reach out to A
 (<a class="reference external" href="mailto:a&#46;kulkarni2&#37;&#52;&#48;ufl&#46;edu">a<span>&#46;</span>kulkarni2<span>&#64;</span>ufl<span>&#46;</span>edu</a>).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_turn_based</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_turn_based</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_probabilistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -835,7 +816,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.actions">
-<span class="sig-name descname"><span class="pre">actions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.actions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">actions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.actions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the actions component of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -846,7 +827,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.atoms">
-<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.atoms" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the atomic propositions component of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -857,7 +838,7 @@ transition system. [Default: “actions”]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.delta">
-<span class="sig-name descname"><span class="pre">delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.delta" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.delta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the transition function of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -878,7 +859,7 @@ type is different.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.deserialize">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.deserialize" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a graphical model from a serialized graph object. The node properties are deserialized as state
 properties, the edge properties are deserialized as transition properties, and the graph properties are
 deserialized as model properties. All the deserialized properties are represented as a function in the
@@ -894,7 +875,7 @@ GraphicalModel class. See example #todo.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.final">
-<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.final" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.final" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines whether the given state is a final state.
 The structure of final state is based on the winning condition
 [See Automata, Logics and Infinite Games (Ch. 2)].</p>
@@ -910,13 +891,13 @@ The structure of final state is based on the winning condition
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.formula">
-<span class="sig-name descname"><span class="pre">formula</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.formula" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">formula</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.formula" title="Permalink to this definition">¶</a></dt>
 <dd><p>A logic formula representing the winning condition of the game.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.graphify">
-<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graphify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.graphify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the underlying graph of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -932,13 +913,13 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.init_state">
-<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.init_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.init_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the initial state of the graphical model.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.initialize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the initial state of the graphical model.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -948,31 +929,31 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.is_deterministic">
-<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_deterministic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_deterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.is_nondeterministic">
-<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_nondeterministic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_nondeterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_nondeterministic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is non-deterministic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.is_probabilistic">
-<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_probabilistic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_probabilistic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.is_probabilistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the graphical model is probabilistic. Else, returns <cite>False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.is_turn_based">
-<span class="sig-name descname"><span class="pre">is_turn_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.is_turn_based"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.is_turn_based" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_turn_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.is_turn_based"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.is_turn_based" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is the game turn based?</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.label">
-<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.label" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the labeling function of the transition system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -986,7 +967,7 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.load" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the graphical model from file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1004,19 +985,19 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.p1_acts">
-<span class="sig-name descname"><span class="pre">p1_acts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.p1_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.p1_acts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">p1_acts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.p1_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.p1_acts" title="Permalink to this definition">¶</a></dt>
 <dd><p>A subset of actions accessible to P1.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.p2_acts">
-<span class="sig-name descname"><span class="pre">p2_acts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.p2_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.p2_acts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">p2_acts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.p2_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.p2_acts" title="Permalink to this definition">¶</a></dt>
 <dd><p>A subset of actions accessible to P2.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.save" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the graphical model to file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1038,7 +1019,7 @@ a pointed graphical model containing only the states reachable from the initial 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.serialize">
-<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.serialize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.serialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serializes the underlying graph of the graphical model into a dictionary with the following format.
 The state properties are saved as node properties, transition properties are stored are edge properties
 and model properties are stored as graph properties in the underlying graph:</p>
@@ -1083,7 +1064,7 @@ and model properties are stored as graph properties in the underlying graph:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.states">
-<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.states" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ggsolver.models.Game.states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the states component of the graphical model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1094,7 +1075,7 @@ and model properties are stored as graph properties in the underlying graph:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.turn">
-<span class="sig-name descname"><span class="pre">turn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.turn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.turn" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">turn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.turn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.turn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the player who controls the given state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1113,7 +1094,7 @@ In concurrent games, the turn must be 0.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Game.win_cond">
-<span class="sig-name descname"><span class="pre">win_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.win_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.win_cond" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">win_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Game.win_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Game.win_cond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Winning condition of the game.</p>
 </dd></dl>
 
@@ -1121,10 +1102,10 @@ In concurrent games, the turn must be 0.</p>
 
 </section>
 <section id="solver">
-<h2>Solver<a class="headerlink" href="#solver" title="Permalink to this heading"></a></h2>
+<h2>Solver<a class="headerlink" href="#solver" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.Solver">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a game solver that computes the winning regions and strategies for the players
 under a fixed solution concept.</p>
 <dl class="field-list simple">
@@ -1134,25 +1115,25 @@ under a fixed solution concept.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.graph">
-<span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.graph" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the input game graph.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.is_solved">
-<span class="sig-name descname"><span class="pre">is_solved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.is_solved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.is_solved" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_solved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.is_solved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.is_solved" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns if the game is solved or not.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.reset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets the solver.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.solution">
-<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solution" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the solved game graph.
 The graph contains two special properties:</p>
 <ul class="simple">
@@ -1163,31 +1144,31 @@ The graph contains two special properties:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.solve">
-<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solve" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract method.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.state2node">
-<span class="sig-name descname"><span class="pre">state2node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.state2node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.state2node" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">state2node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.state2node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.state2node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to get the node id associated with given state.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.win_acts">
-<span class="sig-name descname"><span class="pre">win_acts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_acts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">win_acts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_acts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_acts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retuns the list of winning actions from the given state.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.win_region">
-<span class="sig-name descname"><span class="pre">win_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_region" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">win_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.win_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.win_region" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the winning region for the player.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.Solver.winner">
-<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.winner" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#Solver.winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.Solver.winner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the player who wins from the given state.</p>
 </dd></dl>
 
@@ -1195,16 +1176,16 @@ The graph contains two special properties:</p>
 
 </section>
 <section id="deterministicstrategy">
-<h2>DeterministicStrategy<a class="headerlink" href="#deterministicstrategy" title="Permalink to this heading"></a></h2>
+<h2>DeterministicStrategy<a class="headerlink" href="#deterministicstrategy" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.DeterministicStrategy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">DeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">DeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a deterministic strategy. That is, the strategy at a given state always selects the same winning action.</p>
 <p>Allows customization of losing behavior by specifying a function that maps a losing node to an action.
 By default, losing state is mapped to None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.DeterministicStrategy.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#DeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.DeterministicStrategy.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the action selected by strategy at given state.</p>
 </dd></dl>
 
@@ -1212,16 +1193,16 @@ By default, losing state is mapped to None.</p>
 
 </section>
 <section id="nondeterministicstrategy">
-<h2>NonDeterministicStrategy<a class="headerlink" href="#nondeterministicstrategy" title="Permalink to this heading"></a></h2>
+<h2>NonDeterministicStrategy<a class="headerlink" href="#nondeterministicstrategy" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ggsolver.models.NonDeterministicStrategy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">NonDeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.models.</span></span><span class="sig-name descname"><span class="pre">NonDeterministicStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a non-deterministic strategy. Uniformly samples an action from winning actions at that state.</p>
 <p>Allows customization of losing behavior by specifying a function that maps a losing node to an action.
 By default, losing state is mapped to None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ggsolver.models.NonDeterministicStrategy.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/models.html#NonDeterministicStrategy.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.models.NonDeterministicStrategy.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the action selected by strategy at given state.</p>
 </dd></dl>
 
@@ -1231,34 +1212,100 @@ By default, losing state is mapped to None.</p>
 </section>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="graph.html" class="btn btn-neutral float-left" title="Graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="interfaces.html" class="btn btn-neutral float-right" title="Interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2022, Abhishek N. Kulkarni.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#automaton">Automaton</a></li>
+<li><a class="reference internal" href="#tsys">TSys</a></li>
+<li><a class="reference internal" href="#game">Game</a></li>
+<li><a class="reference internal" href="#solver">Solver</a></li>
+<li><a class="reference internal" href="#deterministicstrategy">DeterministicStrategy</a></li>
+<li><a class="reference internal" href="#nondeterministicstrategy">NonDeterministicStrategy</a></li>
+</ul>
+</li>
+</ul>
 
-</body>
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="graph.html"
+                          title="Previous page">&larr; Graph</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="automata.html"
+                          title="Next page">&rarr; Automata</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="automata.html" title="Automata"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="graph.html" title="Graph"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Models</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Abhishek N. Kulkarni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
 </html>

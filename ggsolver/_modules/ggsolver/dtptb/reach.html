@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ggsolver.dtptb.reach &#8212; ggsolver 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+    
+    
+     
+        <script src="../../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ggsolver.dtptb.reach</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ggsolver.dtptb.reach</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">ggsolver.graph</span> <span class="k">as</span> <span class="nn">mod_graph</span>
+<span class="kn">import</span> <span class="nn">ggsolver.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">ggsolver.models</span> <span class="k">as</span> <span class="nn">models</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SWinReach"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinReach">[docs]</a><span class="k">class</span> <span class="nc">SWinReach</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Solver</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes sure winning region for player 1 or player 2 to reach a set of final states in a deterministic</span>
+<span class="sd">    two-player turn-based game.</span>
+
+<span class="sd">    Implements Zielonka&#39;s recursive algorithm.</span>
+
+<span class="sd">    :param graph: (Graph or SubGraph instance) A graph or subgraph of a deterministic two-player turn-based game.</span>
+<span class="sd">    :param final: (Iterable) The set of final states. By default, the final states are determined using</span>
+<span class="sd">        node property &quot;final&quot; of the graph.</span>
+<span class="sd">    :param player: (int) The player who has the reachability objective.</span>
+<span class="sd">        Value should be 1 for player 1, and 2 for player 2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">player</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;is_deterministic&quot;</span><span class="p">]:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dtptb.SWinReach expects deterministic game graph. Input parameters: &quot;</span>
+                                           <span class="sa">f</span><span class="s2">&quot;is_deterministic=</span><span class="si">{</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;is_deterministic&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
+                                           <span class="sa">f</span><span class="s2">&quot;is_probabilistic=</span><span class="si">{</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;is_probabilistic&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;is_turn_based&quot;</span><span class="p">]:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">ColoredMsg</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dtptb.SWinReach expects turn-based game graph. Input parameters: &quot;</span>
+                                           <span class="sa">f</span><span class="s2">&quot;is_turn_based=</span><span class="si">{</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;is_turn_based&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">))</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">SWinReach</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_player</span> <span class="o">=</span> <span class="n">player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final</span> <span class="o">=</span> <span class="n">final</span> <span class="k">if</span> <span class="n">final</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_final_states</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">[</span><span class="s2">&quot;turn&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span> <span class="o">=</span> <span class="n">mod_graph</span><span class="o">.</span><span class="n">NodePropertyMap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span>
+
+<div class="viewcode-block" id="SWinReach.reset"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinReach.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Resets the solver to initial state. &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SWinReach</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span> <span class="o">=</span> <span class="n">mod_graph</span><span class="o">.</span><span class="n">NodePropertyMap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_solved</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="SWinReach.get_final_states"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinReach.get_final_states">[docs]</a>    <span class="k">def</span> <span class="nf">get_final_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Determines the final states using &quot;final&quot; property of the input graph. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">uid</span> <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()[</span><span class="s2">&quot;final&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]}</span></div>
+
+<div class="viewcode-block" id="SWinReach.solve"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinReach.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Implements Zielonka&#39;s recursive algorithm to determine winning nodes and edges for each player. &quot;&quot;&quot;</span>
+        <span class="c1"># Reset solver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="c1"># Level sets (list of sets)</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">win_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_final</span><span class="p">)</span>
+
+        <span class="c1"># Initialize rank, node/edge_winner for final states</span>
+        <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">win_nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">rank</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_node_winner</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_edge_winner</span><span class="p">[</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span>
+
+        <span class="c1"># Zielonka&#39;s recursive algorithm</span>
+        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">number_of_visible_nodes</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Pointed graphify adding edges&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">progress_bar</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">predecessors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">win_nodes</span><span class="p">))))</span>
+
+                <span class="n">pre_p</span> <span class="o">=</span> <span class="p">{</span><span class="n">uid</span> <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">predecessors</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_turn</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span><span class="p">}</span>
+                <span class="n">pre_np</span> <span class="o">=</span> <span class="n">predecessors</span> <span class="o">-</span> <span class="n">pre_p</span>
+                <span class="n">pre_np</span> <span class="o">=</span> <span class="p">{</span><span class="n">uid</span> <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">pre_np</span> <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">uid</span><span class="p">))</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">win_nodes</span><span class="p">)}</span>
+
+                <span class="n">next_level</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">pre_p</span><span class="p">,</span> <span class="n">pre_np</span><span class="p">)</span> <span class="o">-</span> <span class="n">win_nodes</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_level</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+                <span class="n">rank</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">next_level</span><span class="p">:</span>
+                    <span class="c1"># Associate winner with nodes</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">rank</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_node_winner</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span>
+
+                    <span class="c1"># Update progress_bar</span>
+                    <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+                    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_edge_winner</span><span class="p">[</span><span class="n">uid</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span> <span class="k">if</span> <span class="n">vid</span> <span class="ow">in</span> <span class="n">win_nodes</span> <span class="k">else</span> \
+                            <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+
+                <span class="n">win_nodes</span> <span class="o">|=</span> <span class="n">next_level</span>
+
+            <span class="c1"># States not in win_nodes are winning for np.</span>
+            <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span> <span class="o">-</span> <span class="n">win_nodes</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_node_winner</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Mark the game to be solved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_solved</span> <span class="o">=</span> <span class="kc">True</span></div></div>
+
+
+<div class="viewcode-block" id="SWinSafe"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinSafe">[docs]</a><span class="k">class</span> <span class="nc">SWinSafe</span><span class="p">(</span><span class="n">SWinReach</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes sure winning region for player 1 or player 2 to remain within a set of final states in a deterministic</span>
+<span class="sd">    two-player turn-based game.</span>
+
+<span class="sd">    Solves the dual reachability game to determine the winning nodes and edges in the safety game.</span>
+
+<span class="sd">    :param graph: (Graph or SubGraph instance) A graph or subgraph of a deterministic two-player turn-based game.</span>
+<span class="sd">    :param final: (Iterable) The set of final states. By default, the final states are determined using</span>
+<span class="sd">        node property &quot;final&quot; of the graph.</span>
+<span class="sd">    :param player: (int) The player who has the reachability objective.</span>
+<span class="sd">        Value should be 1 for player 1, and 2 for player 2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">player</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SWinSafe</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final</span> <span class="o">=</span> <span class="n">final</span> <span class="k">if</span> <span class="n">final</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_final_states</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SWinSafe.get_final_states"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinSafe.get_final_states">[docs]</a>    <span class="k">def</span> <span class="nf">get_final_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Determines the final states using &quot;final&quot; property of the input graph. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">uid</span> <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()[</span><span class="s2">&quot;final&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]}</span></div>
+
+<div class="viewcode-block" id="SWinSafe.solve"><a class="viewcode-back" href="../../../modules/dtptb.html#ggsolver.dtptb.SWinSafe.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Solves the dual reachability game to solve the safety game. &quot;&quot;&quot;</span>
+
+        <span class="c1"># Reset solver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="c1"># Formulate and solve dual reachability game</span>
+        <span class="n">final</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final</span>
+        <span class="n">dual_player</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span>
+        <span class="n">dual_solver</span> <span class="o">=</span> <span class="n">SWinReach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">(),</span> <span class="n">final</span><span class="p">,</span> <span class="n">dual_player</span><span class="p">)</span>
+        <span class="n">dual_solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="c1"># Process the output back to safety game</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span> <span class="o">=</span> <span class="n">dual_solver</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node_winner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">[</span><span class="s2">&quot;node_winner&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edge_winner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="p">[</span><span class="s2">&quot;edge_winner&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Mark the game to be solved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_solved</span> <span class="o">=</span> <span class="kc">True</span></div></div>
+
+
+<span class="n">ASWinReach</span> <span class="o">=</span> <span class="n">SWinReach</span>
+<span class="n">ASWinSafe</span> <span class="o">=</span> <span class="n">SWinSafe</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ggsolver.dtptb.reach</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Abhishek N. Kulkarni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

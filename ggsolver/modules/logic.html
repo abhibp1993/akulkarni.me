@@ -1,0 +1,597 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Logic &#8212; ggsolver 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../examples.html" />
+    <link rel="prev" title="(mdp) One-Player Stochastic Games (MDP Games)" href="mdp.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../examples.html" title="Examples"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="mdp.html" title="(mdp) One-Player Stochastic Games (MDP Games)"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Logic</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition p.admonition-title {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<section id="logic">
+<h1>Logic<a class="headerlink" href="#logic" title="Permalink to this heading">¶</a></h1>
+<section id="automaton">
+<h2>Automaton<a class="headerlink" href="#automaton" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.</span></span><span class="sig-name descname"><span class="pre">Automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an Automaton.</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A} = (Q, \Sigma := 2^{AP}, \delta, q_0, F)\]</div>
+<p>In the <cite>Automaton</cite> class, each component is represented as a function.</p>
+<ul class="simple">
+<li><p>The set of states <span class="math notranslate nohighlight">\(Q\)</span> is represented by <cite>Automaton.states</cite> function,</p></li>
+<li><p>The set of atomic propositions <span class="math notranslate nohighlight">\(AP\)</span> is represented by <cite>Automaton.atoms</cite> function,</p></li>
+<li><p>The set of symbols <span class="math notranslate nohighlight">\(\Sigma\)</span> is represented by <cite>Automaton.sigma</cite> function,</p></li>
+<li><p>The transition function <span class="math notranslate nohighlight">\(\delta\)</span> is represented by <cite>Automaton.delta</cite> function,</p></li>
+<li><p>The initial state <span class="math notranslate nohighlight">\(q_0\)</span> is represented by <cite>Automaton.init_state</cite> function.</p></li>
+</ul>
+<p>An automaton may have one of the following acceptance conditions:</p>
+<ul class="simple">
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_REACH" title="ggsolver.logic.Automaton.ACC_REACH"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_REACH</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_SAFETY" title="ggsolver.logic.Automaton.ACC_SAFETY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_SAFETY</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_BUCHI" title="ggsolver.logic.Automaton.ACC_BUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_BUCHI</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_COBUCHI" title="ggsolver.logic.Automaton.ACC_COBUCHI"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_COBUCHI</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_PARITY" title="ggsolver.logic.Automaton.ACC_PARITY"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PARITY</span></code></a>, 0)</p></li>
+<li><p>(<a class="reference internal" href="#ggsolver.logic.Automaton.ACC_PREF_LAST" title="ggsolver.logic.Automaton.ACC_PREF_LAST"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_PREF_LAST</span></code></a>, None)</p></li>
+<li><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_ACC_PREF_MP</span></code>, None)</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_BUCHI">
+<span class="sig-name descname"><span class="pre">ACC_BUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Buchi'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_BUCHI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_COBUCHI">
+<span class="sig-name descname"><span class="pre">ACC_COBUCHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'co-Buchi'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_COBUCHI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_PARITY">
+<span class="sig-name descname"><span class="pre">ACC_PARITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_PARITY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_PREF_LAST">
+<span class="sig-name descname"><span class="pre">ACC_PREF_LAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">Last'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_PREF_LAST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_PREF_MP">
+<span class="sig-name descname"><span class="pre">ACC_PREF_MP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Preference</span> <span class="pre">MostPreferred'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_PREF_MP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_REACH">
+<span class="sig-name descname"><span class="pre">ACC_REACH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Reach'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_REACH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_SAFETY">
+<span class="sig-name descname"><span class="pre">ACC_SAFETY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Safety'</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_SAFETY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.ACC_TYPES">
+<span class="sig-name descname"><span class="pre">ACC_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['undefined',</span> <span class="pre">'Reach',</span> <span class="pre">'Safety',</span> <span class="pre">'Buchi',</span> <span class="pre">'co-Buchi',</span> <span class="pre">'Parity</span> <span class="pre">Min</span> <span class="pre">Even',</span> <span class="pre">'Preference</span> <span class="pre">Last',</span> <span class="pre">'Preference</span> <span class="pre">MostPreferred']</span></em><a class="headerlink" href="#ggsolver.logic.Automaton.ACC_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptance conditions supported by Automaton.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.acc_cond">
+<span class="sig-name descname"><span class="pre">acc_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.acc_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.acc_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptance condition of the automaton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(2-tuple) A value of type (acc_type, acc_set) where acc_type is from <a class="reference internal" href="#ggsolver.logic.Automaton.ACC_TYPES" title="ggsolver.logic.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>
+and acc_set is either an integer or a list of integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.acc_type">
+<span class="sig-name descname"><span class="pre">acc_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.acc_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.acc_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptance type of the automaton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A value from <a class="reference internal" href="#ggsolver.logic.Automaton.ACC_TYPES" title="ggsolver.logic.Automaton.ACC_TYPES"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton.ACC_TYPES</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list/tuple of atomic propositions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list of str) A list of atomic proposition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.final">
+<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.final" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the acceptance set associated with the given state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> – (an element of <cite>self.states()</cite>) A valid state.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(int) Acceptance set associated with the given state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.from_automaton">
+<span class="sig-name descname"><span class="pre">from_automaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="models.html#ggsolver.logic.base.Automaton" title="ggsolver.logic.base.Automaton"><span class="pre">Automaton</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.from_automaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.from_automaton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs an Automaton from another Automaton instance.
+The input automaton’s acceptance condition must match that of a current Automaton.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.is_complete">
+<span class="sig-name descname"><span class="pre">is_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.is_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.is_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the automaton complete? That is, is transition function well-defined at every state for any
+input symbol?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.num_acc_sets">
+<span class="sig-name descname"><span class="pre">num_acc_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.num_acc_sets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.num_acc_sets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of acceptance sets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.Automaton.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#Automaton.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.Automaton.sigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of alphabet of automaton. It is the powerset of atoms().</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="spotautomaton">
+<h2>SpotAutomaton<a class="headerlink" href="#spotautomaton" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.</span></span><span class="sig-name descname"><span class="pre">SpotAutomaton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>SpotAutomaton</cite> constructs an <a class="reference internal" href="#ggsolver.logic.Automaton" title="ggsolver.logic.Automaton"><code class="xref py py-class docutils literal notranslate"><span class="pre">Automaton</span></code></a> from an LTL specification string using
+<cite>spot</cite> (<a class="reference external" href="https://spot.lrde.epita.fr/">https://spot.lrde.epita.fr/</a>) with customizations for <cite>ggsolver</cite>.</p>
+<p><strong>Customizations:</strong> Since <cite>ggsolver</cite> contains several algorithms for reactive/controller synthesis,
+we prefer to construct deterministic automata. Given an LTL formula, <cite>SpotAutomaton</cite> automatically
+determines the best acceptance condition that would result in a deterministic automaton..</p>
+<p>Programmer’s note: The graphified version of automaton does not use PL formulas as edge labels.
+This is intentionally done to be able to run our codes on robots that may not have logic libraries installed.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.acc_cond">
+<span class="sig-name descname"><span class="pre">acc_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.acc_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.acc_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns acceptance condition according to ggsolver definitions:
+See <cite>ACC_REACH, …</cite> variables in Automaton class.
+See <a class="reference internal" href="#ggsolver.logic.SpotAutomaton.spot_acc_cond" title="ggsolver.logic.SpotAutomaton.spot_acc_cond"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpotAutomaton.spot_acc_cond()</span></code></a> for acceptance condition in spot’s nomenclature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.acc_name">
+<span class="sig-name descname"><span class="pre">acc_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.acc_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.acc_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of acceptance condition as per spot’s nomenclature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomic propositions appearing in LTL formula.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.delta">
+<span class="sig-name descname"><span class="pre">delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transition function of automaton. For a deterministic automaton, returns a single state. Otherwise,
+returns a list/tuple of states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – (object) A valid state.</p></li>
+<li><p><strong>inp</strong> – (list) List of atoms that are true (an element of sigma).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.final">
+<span class="sig-name descname"><span class="pre">final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.final" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maps every state to its acceptance set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.formula">
+<span class="sig-name descname"><span class="pre">formula</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>The LTL Formula.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.init_state">
+<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.init_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.init_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial state of automaton.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_complete">
+<span class="sig-name descname"><span class="pre">is_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the automaton complete?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_deterministic">
+<span class="sig-name descname"><span class="pre">is_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_deterministic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_deterministic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the automaton deterministic?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_inherently_weak">
+<span class="sig-name descname"><span class="pre">is_inherently_weak</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_inherently_weak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_inherently_weak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is it the case that accepting and rejecting cycles cannot be mixed in the same SCC?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_semi_deterministic">
+<span class="sig-name descname"><span class="pre">is_semi_deterministic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_semi_deterministic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_semi_deterministic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the automaton semi-deterministic?
+See <a class="reference external" href="https://spot.lrde.epita.fr/doxygen/namespacespot.html#a56b3f00b7b93deafb097cad595998783">https://spot.lrde.epita.fr/doxygen/namespacespot.html#a56b3f00b7b93deafb097cad595998783</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_state_based_acc">
+<span class="sig-name descname"><span class="pre">is_state_based_acc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_state_based_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_state_based_acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the acceptance condition state-based?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_stutter_invariant">
+<span class="sig-name descname"><span class="pre">is_stutter_invariant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_stutter_invariant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_stutter_invariant" title="Permalink to this definition">¶</a></dt>
+<dd><p>The property recognized by the automaton is stutter-invariant
+(see <a class="reference external" href="https://www.lrde.epita.fr/~adl/dl/adl/michaud.15.spin.pdf">https://www.lrde.epita.fr/~adl/dl/adl/michaud.15.spin.pdf</a>)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_terminal">
+<span class="sig-name descname"><span class="pre">is_terminal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_terminal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automaton is weak, accepting SCCs are complete, accepting edges may not go to rejecting SCCs.
+An automaton is weak if the transitions of an SCC all belong to the same acceptance sets.</p>
+<p>See <a class="reference external" href="https://spot.lrde.epita.fr/concepts.html">https://spot.lrde.epita.fr/concepts.html</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_unambiguous">
+<span class="sig-name descname"><span class="pre">is_unambiguous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_unambiguous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_unambiguous" title="Permalink to this definition">¶</a></dt>
+<dd><p>There is at most one run accepting a word (but it might be recognized several time).
+See <a class="reference external" href="https://spot.lrde.epita.fr/concepts.html">https://spot.lrde.epita.fr/concepts.html</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.is_weak">
+<span class="sig-name descname"><span class="pre">is_weak</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.is_weak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.is_weak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are transitions of an SCC all belong to the same acceptance sets?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.num_acc_sets">
+<span class="sig-name descname"><span class="pre">num_acc_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.num_acc_sets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.num_acc_sets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of acceptance sets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.spot_acc_cond">
+<span class="sig-name descname"><span class="pre">spot_acc_cond</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.spot_acc_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.spot_acc_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptance condition in spot’s nomenclature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.SpotAutomaton.states">
+<span class="sig-name descname"><span class="pre">states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#SpotAutomaton.states"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.SpotAutomaton.states" title="Permalink to this definition">¶</a></dt>
+<dd><p>States of automaton.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pl">
+<h2>PL<a class="headerlink" href="#pl" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.logic.PL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.</span></span><span class="sig-name descname"><span class="pre">PL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL" title="Permalink to this definition">¶</a></dt>
+<dd><p>PL formula is internally represented as spot.formula instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.PL.allsat">
+<span class="sig-name descname"><span class="pre">allsat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL.allsat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL.allsat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the set of all satisfying assignments to atoms of the given propositional logic formula.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Complexity: Exponential in the number of atoms.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.PL.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the list of atoms associated with PL formula.</p>
+<p>The list may contain atoms that do not appear in the formula, if the user has provided it.
+:return: (List[str]) List of atoms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.PL.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_atoms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a propositional logic formula given the set of true atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>true_atoms</strong> – (Iterable[str]) A propositional logic formula.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if formula is true, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.PL.simplify">
+<span class="sig-name descname"><span class="pre">simplify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL.simplify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplifies a propositional logic formula.</p>
+<p>We use the <cite>boolean_to_isop=True</cite> option for <cite>spot.simplify</cite>.
+See <a class="reference external" href="https://spot.lrde.epita.fr/doxygen/classspot_1_1tl__simplifier__options.html">https://spot.lrde.epita.fr/doxygen/classspot_1_1tl__simplifier__options.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(str) String representing simplified formula.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.PL.translate">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/base.html#PL.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.PL.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a propositional logic formula to an automaton.
+:return: (<a class="reference internal" href="#ggsolver.logic.SpotAutomaton" title="ggsolver.logic.SpotAutomaton"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpotAutomaton</span></code></a>) SpotAutomaton representing the automaton for PL formula.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="scltl">
+<h2>ScLTL<a class="headerlink" href="#scltl" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.logic.ScLTL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.</span></span><span class="sig-name descname"><span class="pre">ScLTL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/ltl.html#ScLTL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.ScLTL" title="Permalink to this definition">¶</a></dt>
+<dd><p>ScLTL formula is internally represented as spot.formula instance.</p>
+</dd></dl>
+
+</section>
+<section id="ltl">
+<h2>LTL<a class="headerlink" href="#ltl" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ggsolver.logic.LTL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ggsolver.logic.</span></span><span class="sig-name descname"><span class="pre">LTL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/ltl.html#LTL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.LTL" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTL formula is internally represented as spot.formula instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.LTL.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_atoms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/ltl.html#LTL.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.LTL.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a propositional logic formula given the set of true atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>true_atoms</strong> – (Iterable[str]) A propositional logic formula.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if formula is true, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ggsolver.logic.LTL.simplify">
+<span class="sig-name descname"><span class="pre">simplify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ggsolver/logic/ltl.html#LTL.simplify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ggsolver.logic.LTL.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplifies a propositional logic formula.</p>
+<p>We use the <cite>boolean_to_isop=True</cite> option for <cite>spot.simplify</cite>.
+See <a class="reference external" href="https://spot.lrde.epita.fr/doxygen/classspot_1_1tl__simplifier__options.html">https://spot.lrde.epita.fr/doxygen/classspot_1_1tl__simplifier__options.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(str) String representing simplified formula.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Logic</a><ul>
+<li><a class="reference internal" href="#automaton">Automaton</a></li>
+<li><a class="reference internal" href="#spotautomaton">SpotAutomaton</a></li>
+<li><a class="reference internal" href="#pl">PL</a></li>
+<li><a class="reference internal" href="#scltl">ScLTL</a></li>
+<li><a class="reference internal" href="#ltl">LTL</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="mdp.html"
+                          title="Previous page">&larr; (mdp) One-Player Stochastic Games (MDP Games)</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="../examples.html"
+                          title="Next page">&rarr; Examples</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/logic.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../examples.html" title="Examples"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="mdp.html" title="(mdp) One-Player Stochastic Games (MDP Games)"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Logic</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Abhishek N. Kulkarni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
