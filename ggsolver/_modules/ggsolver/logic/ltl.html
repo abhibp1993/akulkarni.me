@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ggsolver.logic.ltl &#8212; ggsolver 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+    
+    
+     
+        <script src="../../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ggsolver.logic.ltl</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ggsolver.logic.ltl</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+
+<span class="kn">import</span> <span class="nn">spot</span>
+<span class="kn">import</span> <span class="nn">ggsolver.logic.base</span> <span class="k">as</span> <span class="nn">base</span>
+<span class="kn">from</span> <span class="nn">ggsolver.logic.formula</span> <span class="kn">import</span> <span class="n">BaseFormula</span><span class="p">,</span> <span class="n">ParsingError</span>
+<span class="kn">from</span> <span class="nn">ggsolver.logic.automata</span> <span class="kn">import</span> <span class="n">DFA</span>
+<span class="c1"># import ggsolver.interfaces.i_spot as i_spot</span>
+<span class="c1"># import ggsolver.logic.automata as automata</span>
+<span class="c1"># from ggsolver.util import apply_atoms_limit, powerset</span>
+
+
+<div class="viewcode-block" id="LTL"><a class="viewcode-back" href="../../../modules/logic.html#ggsolver.logic.LTL">[docs]</a><span class="k">class</span> <span class="nc">LTL</span><span class="p">(</span><span class="n">BaseFormula</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    LTL formula is internally represented as spot.formula instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="fm">__hash__</span> <span class="o">=</span> <span class="n">BaseFormula</span><span class="o">.</span><span class="fm">__hash__</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_str</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LTL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">f_str</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repr</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">f_str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_atoms</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_str</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">BaseFormula</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">are_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_str</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">f_str</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_collect_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">traversal</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">atoms_</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">is_literal</span><span class="p">():</span>
+                <span class="k">if</span> <span class="s2">&quot;!&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">to_str</span><span class="p">():</span>
+                    <span class="n">atoms_</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">to_str</span><span class="p">())</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repr</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">traversal</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span> <span class="o">|</span> <span class="n">atoms</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># IMPLEMENTATION OF ABSTRACT METHODS</span>
+    <span class="c1"># ==================================================================</span>
+    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">base</span><span class="o">.</span><span class="n">SpotAutomaton</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">f_str</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;To be implemented in future.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LTL.evaluate"><a class="viewcode-back" href="../../../modules/logic.html#ggsolver.logic.LTL.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">true_atoms</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates a propositional logic formula given the set of true atoms.</span>
+
+<span class="sd">        :param true_atoms: (Iterable[str]) A propositional logic formula.</span>
+<span class="sd">        :return: (bool) True if formula is true, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define a transform to apply to AST of spot.formula.</span>
+        <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">is_literal</span><span class="p">():</span>
+                <span class="k">if</span> <span class="s2">&quot;!&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">to_str</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">to_str</span><span class="p">()</span> <span class="ow">in</span> <span class="n">true_atoms</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="n">tt</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="n">ff</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
+
+        <span class="c1"># Apply the transform and return the result.</span>
+        <span class="c1"># Since every literal is replaced by true or false,</span>
+        <span class="c1">#   the transformed formula is guaranteed to be either true or false.</span>
+        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr</span><span class="p">)</span><span class="o">.</span><span class="n">is_tt</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span></div>
+
+    <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># SPECIAL METHODS OF PL CLASS</span>
+    <span class="c1"># ==================================================================</span>
+<div class="viewcode-block" id="LTL.simplify"><a class="viewcode-back" href="../../../modules/logic.html#ggsolver.logic.LTL.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Simplifies a propositional logic formula.</span>
+
+<span class="sd">        We use the `boolean_to_isop=True` option for `spot.simplify`.</span>
+<span class="sd">        See https://spot.lrde.epita.fr/doxygen/classspot_1_1tl__simplifier__options.html</span>
+
+<span class="sd">        :return: (str) String representing simplified formula.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr</span><span class="p">,</span> <span class="n">boolean_to_isop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">to_str</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="ScLTL"><a class="viewcode-back" href="../../../modules/logic.html#ggsolver.logic.ScLTL">[docs]</a><span class="k">class</span> <span class="nc">ScLTL</span><span class="p">(</span><span class="n">LTL</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ScLTL formula is internally represented as spot.formula instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="fm">__hash__</span> <span class="o">=</span> <span class="n">LTL</span><span class="o">.</span><span class="fm">__hash__</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_str</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ScLTL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">f_str</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+        <span class="n">mp_class</span> <span class="o">=</span> <span class="n">spot</span><span class="o">.</span><span class="n">mp_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mp_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">ParsingError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Given formula:</span><span class="si">{</span><span class="n">f_str</span><span class="si">}</span><span class="s2"> is not an ScLTL formula.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">BaseFormula</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">spot</span><span class="o">.</span><span class="n">are_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_str</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">f_str</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">aut</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ScLTL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
+        <span class="n">dfa</span> <span class="o">=</span> <span class="n">DFA</span><span class="p">()</span>
+        <span class="n">dfa</span><span class="o">.</span><span class="n">from_automaton</span><span class="p">(</span><span class="n">aut</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dfa</span>
+
+    <span class="k">def</span> <span class="nf">substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subs_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Will be implemented in future. &quot;</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../../index.html">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ggsolver.logic.ltl</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Abhishek N. Kulkarni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
