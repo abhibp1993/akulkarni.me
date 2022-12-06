@@ -76,3 +76,48 @@ An interesting consequence of preference-based planning in Markov decision proce
 
     - Sumukha Udupa, Abhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua, and Jie Fu, [https://arxiv.org/pdf/2204.01584 *Synthesizing Attack-Aware Control and Active Sensing Strategies under Reactive Sensor Attacks.*], IEEE Control System Letters (L-CSS), 2022. 
 
+
+== Past Research Projects 
+ 
+
+
+=== 1. Compositional Synthesis 
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+TODO. 
+
+*Publications*: 
+	
+~~~
+
+
+
+
+=== 2. Integrated Mission and Motion Planning under Temporal Logic Specifications
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.
+
+*Publications*: 
+	- Report. 
+
+~~~
+
+
+
+=== 3. Curio 
+
+~~~
+{}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
+
+
+
+*Outcomes*: 
+	- List salient featues. 
+~~~
+
+
