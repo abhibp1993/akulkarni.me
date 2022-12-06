@@ -4,7 +4,7 @@
 I am broadly interested in *formal methods and logic* and *game-theoretic decision making*. My research goal is to design *trustworthy and cognitively realistic autonomous systems* that enables them to exhibit human-like behaviors such as opportunism and deception. 
 
 
-=== 1. Game-theoretic Synthesis of Deceptive Strategies 
+== 1. Game-theoretic Synthesis of Deceptive Strategies 
 
 ~~~
 {}{img_left}{res/images/deception.png}{deception}{500px}
@@ -34,7 +34,7 @@ I am broadly interested in *formal methods and logic* and *game-theoretic decisi
     - Abhishek N. Kulkarni and Jie Fu, [res/papers/kulkarni2019opportunistic.pdf *Opportunistic Synthesis in Reactive Games under Information Asymmetry*], Conference on Decision and Control (CDC), 2019. 
 
 
-=== 2. Opportunistic Planning with Incomplete Preferences over Temporal Logic Objectives
+== 2. Opportunistic Planning with Incomplete Preferences over Temporal Logic Objectives
 
 ~~~
 {}{img_left}{images/opportunistic-synthesis.png}{oppsynth}{300px}
@@ -58,7 +58,7 @@ An interesting consequence of preference-based planning in Markov decision proce
     - Hazhar Rahmani, Abhishek N. Kulkarni and Jie Fu, [https://arxiv.org/pdf/2209.12267 *Probabilistic Planning with Partially Ordered Preferences over Temporal Goals*]IEEE International Conference on Robotics and Automation (ICRA), 2023. (Under Review)	
 
 
-=== 3. Design of Resilient Cyber-Physical Systems under Sensor Attacks
+== 3. Design of Resilient Cyber-Physical Systems under Sensor Attacks
 
 ~~~
 {}{img_left}{res/images/sensor-attack.jpeg}{sensor-attack}{400px}
