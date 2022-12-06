@@ -1,6 +1,7 @@
 # jemdoc: menu{MENU}{index.html}
 = Abhishek N. Kulkarni
 
+
 ~~~
 {}{img_left}{res/images/whatsapp-dp.jpg}{Abhishek}{180px}
 *Ph.D. Student*,
@@ -8,28 +9,27 @@
 \n[https://www.ufl.edu/ University of Florida],
 \nGainesville, FL, USA.
 \n\n *Email*: [a.kulkarni2@ufl.edu a.kulkarni2@ufl.edu] 
-\n\n *Profiles*: \[[https://github.com/abhibp1993 Github]\] \[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] \[[https://twitter.com/abhibp1993 Twitter]\] \[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] \[[https://www.researchgate.net/profile/Abhishek_Kulkarni25 ResearchGate]\] 
+\n\n *Profiles*: 
+\[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] 
+\[[https://github.com/abhibp1993 Github]\] 
+\[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] 
+\[[https://www.researchgate.net/profile/Abhishek_Kulkarni25 ResearchGate]\] 
 ~~~
 
 
-== Research Interests
+== Research 
 
-I am presently exploring the use of /formal methods/ and /automated reasoning/ to synthesize strategies for autonomous agents capable of /deception/. 
+My research focus is to employ *formal methods and logic* and *game-theory* to design *trustworthy and cognitively realistic autonomous systems* that enables them to exhibit human-like behaviors such as opportunism, deception, and preference-aware planning. 
 
+My current projects include: 
 
-My focus areas are:
-- Reactive Synthesis
-- Automated Reasoning
-- Game and Hypergame Theory 
-- Applications: Cybersecurity, Robot Motion Planning 
+    - *Game-theoretic Synthesis of Deceptive Strategies:* In a two-player adversarial interaction with asymmetric information, how can the player with superior information gain advantage over the opponent by employing deception? 
 
+    - *Opportunistic Planning with Incomplete Preferences over Temporal Logic Objectives:* Given an incomplete (i.e., partial) preference over a set of linear temporal logic (LTL) formulas expressing temporal goals for an agent, how to synthesize a strategy that achieves the most preferred goal while reasoning about the uncertainties in the stochastic environment?
 
-Please visit [publications.html my research and publications page] for detailed information about my ongoing research. 
+    - *Design of Resilient Cyber-Physical Systems under Sensor Attacks:* How to plan qualitatively (i.e., synthesize sure, almost-sure, positive winning strategies) in two-player partially observable stochastic games (POSG) in which the adversary can attack the observation function of the first player? 
 
-
-== Bio
-
-I am a fourth-year MS\/PhD candidate in Electrical and Computer Engineering department at [https://www.ufl.edu/ University of Florida] (UF). I transferred to UF from the Robotics Engineering department at [http://www.wpi.edu Worcester Polytechnic Institute (WPI)]. I earned my B.Tech. degree in Electronics and Telecommunications Engineering from [http://www.vit.edu Vishwakarma Institute of Technology (VIT)], Pune, India in 2016. At VIT, I founded the Cognitive Robotics and Intelligent Systems Lab (CRISTL), which was the first lab on campus to use an integrated cognitive science, machine learning and logic-based AI approach to design intelligent robots. While conducting research and teaching at CRISTL, I was intrigued by the question about /How to design an intelligent robot which can reason autonomously and, most importantly, in a provably-correct way?/ The quest to answer this question brought me to WPI, where under the guidance of [https://users.wpi.edu/~jfu2/ Prof. Jie Fu], I am exploring the formal methods approach (a logic-based AI approach) to allow autonomous agents to not only reason in a provably-correct way but also use advanced behaviors like deception to their advantage. At WPI, I am a member of [https://www.wpi.edu/academics/arts-sciences/resources/student-councils A&S Graduate Student Advisory Council] and also represent my department in the Graduate Student Government (GSG). 
+For more details, please see the [research.html Research] and [publications.html Publications] pages. 
 
 
 == News

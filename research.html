@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Research </title>
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Abhishek N. Kulkarni</div>
+<div class="menu-item"><a href="index.html" class="current">Home</a></div>
+<div class="menu-item"><a href="research.html">Research</a></div>
+<div class="menu-item"><a href="publications.html">Publications</a></div>
+<div class="menu-item"><a href="teaching.html">Teaching</a></div>
+<div class="menu-item"><a href="talks.html">Talks/Presentation</a></div>
+<div class="menu-item"><a href="cv.pdf">CV</a></div>
+<div class="menu-category">Software</div>
+<div class="menu-item"><a href="ggsolver/index.html" class="current">ggsolver</a></div>
+<div class="menu-item"><a href="software.html">Decoy&nbsp;Allocation</a></div>
+<div class="menu-item"><a href="https://github.com/abhibp1993/formal-tic-tac-toe">FormalTicTacToe</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Research </h1>
+</div>
+<p>I am broadly interested in <b>formal methods and logic</b> and <b>game-theoretic decision making</b>. My research goal is to design <b>trustworthy and cognitively realistic autonomous systems</b> that enables them to exhibit human-like behaviors such as opportunism and deception. </p>
+<h3>1. Game-theoretic Synthesis of Deceptive Strategies </h3>
+<table class="imgtable"><tr><td>
+<img src="res/images/deception.png" alt="deception" width="500px" />&nbsp;</td>
+<td align="left"><p><i>Central Question:</i> In a two-player adversarial interaction with asymmetric information, how can the player with superior information gain advantage over the opponent by employing deception? </p>
+<p><i>Idea:</i> In real-world, agents need the capability of making decisions with incomplete information. Incomplete information refers to situations in which the agent or its environment is unaware of the other agent's action capabilities, objectives (payoffs), the transition dynamics or the other agent's knowledge. On becoming aware of the misinformation of its opponent, the agent can leverage it to deceive the opponent and achieve a better outcome. </p>
+<p><i>Contributions:</i> In my research, I have developed hypergame theory for games on graphs (a.k.a., omega-regular hypergame) to model and (qualitatively) analyze two-player adversarial interactions under various classes of incomplete information. This includes definition of various solution concepts and design of algorithms to synthesize correct-by-construction deceptive strategies from linear temporal logic (LTL) specifications. </p>
+</td></tr></table>
+<p><b>Publications</b>: </p>
+<ul>
+<li><p>Abhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu, <a href="res/papers/kulkarni2020labeling.pdf"><b>Deceptive Labeling: Hypergames on Graphs for Stealthy Deception</b></a>, IEEE Control Systems Letters (L-CSS) 2020.</p>
+</li>
+</ul>
+<ul>
+<li><p>Lening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu, <a href="https:/arxiv.org/pdf/2007.15726"><b>Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.</b></a>, IEEE Transactions on Automation Science and Engineering (TASE).</p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni, Matthew Cohen and Jie Fu, <a href="res/papers/kulkarni2023decoy.pdf"><b>Decoy Allocation Games on Graphs: Achieving Safety by Hiding the Real and Revealing the Fiction</b></a>, Automatica (In preparation).</p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni and Jie Fu, <a href="https://arxiv.org/pdf/2008.03210"><b>A Theory of Hypergames on Graphs for Synthesizing Dynamic Cyber Defense with Deception</b></a>, Game Theory and Machine Learning for Cyber Security, Wiley-IEEE Press 2022. </p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni, Jie Fu, Huan Luo, Charles A. Kamhoua, Nandi O. Leslie, <a href="https://arxiv.org/pdf/2010.01208"><b>Decoy Placement Games on Graphs with Temporal Logic Objectives</b></a>, Conference on Decision and Game Theory for Security (GameSec) 2020. </p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni and Jie Fu, <a href="https://www.ijcai.org/Proceedings/2020/0031.pdf"><b>Synthesis of Deceptive Strategies in Reachability Games with Action Misperception</b></a>, International Joint Conference on Artificial Intelligence (IJCAI) 2020.</p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni and Jie Fu, <a href="res/papers/kulkarni2019opportunistic.pdf"><b>Opportunistic Synthesis in Reactive Games under Information Asymmetry</b></a>, Conference on Decision and Control (CDC), 2019. </p>
+</li>
+</ul>
+<h3>2. Opportunistic Planning with Incomplete Preferences over Temporal Logic Objectives</h3>
+<table class="imgtable"><tr><td>
+<img src="images/opportunistic-synthesis.png" alt="oppsynth" width="300px" />&nbsp;</td>
+<td align="left"><p><i>Central Question:</i> Given an incomplete (i.e., partial) preference over a set of linear temporal logic (LTL) formulas expressing temporal goals for an agent, how to synthesize a strategy that achieves the most preferred goal while reasoning about the uncertainties in the stochastic environment?</p>
+<p><i>Idea:</i> An cognitively realistic autonomous system must be able to simultaneously reason about multiple objectives and achieve the best outcome. A key challenge here is to be able reason with <i>incomplete preferences</i>. Incomplete preferences may be a result of <i>inescapability</i>; wherein the agent must make a decision under time and memory constraints, or <i>incomplete information</i>; wherein the agent does not know the user's complete preferences, or <i>incomparability</i>; i.e., when the outcomes are fundamentally incomparable.  </p>
+<p><i>Contributions:</i> In my research, I am developing an automata-theoretic approach by defining a new language that can express preferences over linear temporal logic (LTL) objectives. I have shown that such a language has an automata-theoretic representation which can be used to synthesize strategies that are guaranteed to achieve the best outcomes under qualitative and quantitative solution concepts. </p>
+<p>An interesting consequence of preference-based planning in Markov decision processes is that agents can exhibit opportunistic behaviors. </p>
+</td></tr></table>
+<p><b>Publications</b>: </p>
+<ul>
+<li><p>Abhishek N. Kulkarni and Jie Fu, <a href="res/papers/kulkarni2023automata.pdf"><b>Automata-theoretic Approach to Qualitative Planning in Stochastic Systems with Preferences over Temporal Logic Objectives</b></a>, To be submitted to Automatica.</p>
+</li>
+</ul>
+<ul>
+<li><p>Abhishek N. Kulkarni and Jie Fu, <a href="https://arxiv.org/pdf/2210.01878"><b>Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives</b></a>, IEEE American Control Conference (ACC), 2023. (Under Review)</p>
+</li>
+</ul>
+<ul>
+<li><p>Hazhar Rahmani, Abhishek N. Kulkarni and Jie Fu, <a href="https://arxiv.org/pdf/2209.12267"><b>Probabilistic Planning with Partially Ordered Preferences over Temporal Goals</b></a>IEEE International Conference on Robotics and Automation (ICRA), 2023. (Under Review)	</p>
+</li>
+</ul>
+<h3>3. Design of Resilient Cyber-Physical Systems under Sensor Attacks</h3>
+<table class="imgtable"><tr><td>
+<img src="res/images/sensor-attack.jpeg" alt="sensor-attack" width="400px" />&nbsp;</td>
+<td align="left"><p><i>Central Question:</i> How to plan qualitatively (i.e., synthesize sure, almost-sure, positive winning strategies) in two-player partially observable stochastic games (POSG) in which the adversary can attack the observation function of the first player? </p>
+<p><i>Contributions:</i> In addition to incomplete information, an autonomous agent must be able to reason with imperfect information (partial observation). In this collaborative research, we are developing algorithms to synthesize a strategy using which the agent can achieve its objective even under adversarial attacks. We study two cases: when agent is unaware that it is under attack, but assumes that sensor failures are probabilistic occurrence. And, when the agent is aware of adversary's presence and capabilities.    </p>
+</td></tr></table>
+<p><b>Publications</b>: </p>
+<ul>
+<li><p>Abhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu, <a href="https://arxiv.org/pdf/2104.00176"><b>Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.</b></a>, IEEE Conference on Decision and Control (CDC) 2021.</p>
+</li>
+</ul>
+<ul>
+<li><p>Sumukha Udupa, Abhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua, and Jie Fu, <a href="https://arxiv.org/pdf/2204.01584"><b>Synthesizing Attack-Aware Control and Active Sensing Strategies under Reactive Sensor Attacks.</b></a>, IEEE Control System Letters (L-CSS), 2022. </p>
+</li>
+</ul>
+<h2>Past Research Projects </h2>
+<h3>1. Compositional Synthesis </h3>
+<table class="imgtable"><tr><td>
+<img src="images/opportunistic-synthesis.png" alt="oppsynth" width="300px" />&nbsp;</td>
+<td align="left"><p>TODO. </p>
+<p><b>Publications</b>: </p>
+</td></tr></table>
+<h3>2. Integrated Mission and Motion Planning under Temporal Logic Specifications</h3>
+<table class="imgtable"><tr><td>
+<img src="images/opportunistic-synthesis.png" alt="oppsynth" width="300px" />&nbsp;</td>
+<td align="left"><p>The goal of this project is to develop models and methods for intelligent decision-making that leverage information for strategic advantages. The project introduces a variant of hypergames to capture temporally evolving strategic interactions in games with asymmetric information and complex mission specifications. We propose to integrate learning to predict the evolution of perception of the opponent about the other players’ payoffs. The integration of prediction and game-theoretic planning will serve the foundation to optimal policy synthesis methods, employing multiple deceptive mechanisms.</p>
+<p><b>Publications</b>: </p>
+<ul>
+<li><p>Report. </p>
+</li>
+</ul>
+</td></tr></table>
+<h3>3. Curio </h3>
+<table class="imgtable"><tr><td>
+<img src="images/opportunistic-synthesis.png" alt="oppsynth" width="300px" />&nbsp;</td>
+<td align="left"><p><b>Outcomes</b>: </p>
+<ul>
+<li><p>List salient featues. </p>
+</li>
+</ul>
+</td></tr></table>
+<div id="footer">
+<div id="footer-text">
+Page generated 2022-12-05 16:09:54 EST, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

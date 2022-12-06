@@ -1,38 +1,32 @@
 # jemdoc: menu{MENU}{index.html}
-= Publications
+= Research
+
+My primary research interest is in /formal methods (reactive synthesis)/ with applications to /robot decision-making/ and /cybersecurity/. I am particularly interested in exploring the use of temporal, spatial and epistemic logic in the synthesis of correct-by-construction strategies for autonomous agents. 
 
 
-== In preparation 
+Sections:
 
-- *Automata-theoretic Approach to Qualitative Planning in Stochastic Systems with Preferences over Temporal Logic Objectives* 
+- Working Papers/Preprints
+- Journal Papers
+- Conference Papers
+- Peer-reviewed Workshop
+- Technical/Project Reports
+- Talks/Presentations
+
+
+== Working Papers / Preprints
+
+- *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* [Submitted to ACC'23]
 \nAbhishek N. Kulkarni and Jie Fu
-\nAutomatica
-\n\[[res/papers/kulkarni2023automata.pdf PDF (draft)]\]
-
-- *Decoy Allocation Games on Graphs: Achieving Safety by Hiding the Real and Revealing the Fiction* 
-\nAbhishek N. Kulkarni, Matthew Cohen and Jie Fu
-\nAutomatica
-\n\[[res/papers/kulkarni2023decoy.pdf PDF (draft)]\]
-
-- *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*  
-\nAbhishek N. Kulkarni and Jie Fu
-\n\[[https://arxiv.org/pdf/2104.11676 PDF]\] 
-
-
-== Under review
-
-- *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* 
-\nAbhishek N. Kulkarni and Jie Fu
-\nIEEE American Control Conference (ACC), 2023.
-\n\[[https://arxiv.org/pdf/2210.01878 PDF]\]
+\n\[[https://arxiv.org/abs/2210.01878 arXiv]\]
 
 - *Probabilistic Planning with Partially Ordered Preferences over Temporal Goals* [Submitted to ICRA'23]
 \nHazhar Rahmani, Abhishek N. Kulkarni and Jie Fu
-\nIEEE International Conference on Robotics and Automation (ICRA), 2023.
-\n\[[https://arxiv.org/pdf/2209.12267 PDF]\]
+\n\[[https://arxiv.org/abs/2209.12267 arXiv]\]
 
-
-/A paper exploring the intersection of linear temporal logic, automata theory and curriculum learning has been submitted to ICAPS'23. The title of the paper is not mentioned as it is under double-blind review./
+- *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*  
+\nAbhishek N. Kulkarni and Jie Fu
+\n\[[https://arxiv.org/abs/2104.11676 arXiv]\] 
 
 
 == Journal Papers
@@ -41,20 +35,20 @@
 - *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* 
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
 \n/IEEE Transactions on Automation Science and Engineering (TASE)./ 
-\n\[[https://arxiv.org/pdf/2007.15726 PDF]\] 
+\n\[[https://arxiv.org/abs/2007.15726 arXiv]\] \[[res/bibtex/li2020dynamic.bib BibTeX]\]
 
 
 - *Synthesizing Attack-Aware Control and Active Sensing Strategies under Reactive Sensor Attacks.* \[Accepted\]
 \nSumukha Udupa, Abhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua, and Jie Fu
 \n/IEEE Control System Letters (L-CSS)./ 
-\n\[[https://arxiv.org/pdf/2204.01584 PDF]\]
+\n\[[https://arxiv.org/abs/2204.01584 arXiv]\]
 
 
 *2020*
 - *Deceptive Labeling: Hypergames on Graphs for Stealthy Deception*
 \nAbhishek N. Kulkarni, Huan Luo, Nandi O. Leslie, Charles A. Kamhoua, Jie Fu,
 \n/IEEE Control Systems Letters (L-CSS) 2020./
-\n\[[res/papers/kulkarni2020labeling.pdf PDF]\]
+\n\[[res/papers/kulkarni2020labeling.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/9136805 IEEEXplore]\] \[[res/bibtex/kulkarni2020labeling.bib BibTeX]\]
 
 
 == Book Chapters
@@ -64,7 +58,7 @@
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Book: Game Theory and Machine Learning for Cyber Security, Wiley-IEEE Press./ 
 \n\[[https://onlinelibrary.wiley.com/doi/book/10.1002/9781119723950 Book]\] 
-\[[https://arxiv.org/pdf/2008.03210 PDF]\] 
+\[[https://arxiv.org/abs/2008.03210 arXiv]\] \[[res/bibtex/kulkarni2021hypergames.bib BibTeX]\]
 
 
 == Conference Papers
@@ -73,39 +67,39 @@
 - *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* 
 \nAbhishek N. Kulkarni, Shuo Han, Nandi O. Leslie, Charles A. Kamhoua and Jie Fu
 \n/IEEE Conference on Decision and Control (CDC) 2021./ 
-\n\[[https://arxiv.org/pdf/2104.00176 PDF]\] 
+\n\[[https://arxiv.org/abs/2104.00176 arXiv]\] \[[https://ieeexplore.ieee.org/document/9683170 IEEEXplore]\]
 
 *2020*
 - *Decoy Placement Games on Graphs with Temporal Logic Objectives* 
 \nAbhishek N. Kulkarni, Jie Fu, Huan Luo, Charles A. Kamhoua, Nandi O. Leslie,
 \n/Conference on Decision and Game Theory for Security (GameSec) 2020./
-\n\[[https://arxiv.org/pdf/2010.01208 PDF]\] 
+\n\[[https://arxiv.org/abs/2010.01208 arXiv]\] \[[res/bibtex/kulkarni2020decoy.bib BibTeX]\]
 
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*
 \nAbhishek N. Kulkarni and Jie Fu,
 \n/International Joint Conference on Artificial Intelligence (IJCAI) 2020./ 
-\n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] 
+\n\[[https://www.ijcai.org/Proceedings/2020/0031.pdf PDF]\] \[[res/bibtex/kulkarni2020action.bib BibTeX]\]
 
 
 *2019*
 - *Opportunistic Synthesis in Reactive Games under Information Asymmetry*
 \nAbhishek N. Kulkarni and Jie Fu
 \n/Conference on Decision and Control (CDC), 2019./ 
-\n\[[res/papers/kulkarni2019opportunistic.pdf PDF]\] 
+\n\[[res/papers/kulkarni2019opportunistic.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/9029851 IEEEXplore]\] \[[res/bibtex/kulkarni2019opportunistic.bib BibTeX]\]
 
 
 *2018*
 - *A Compositional Approach to Reactive Games under Temporal Logic Specifications*
 \nAbhishek N. Kulkarni and Jie Fu
-\nIEEE American Control Conference (ACC), 2018./
-\n/\[[res/papers/kulkarni2018compositional.pdf PDF]\] 
+\nAnnual American Control Conference (ACC), 2018./
+\n/\[[res/papers/kulkarni2018compositional.pdf PDF]\] \[[https://ieeexplore.ieee.org/document/8431867 IEEEXplore]\] \[[res/bibtex/kulkarni2018compositional.bib BibTeX]\] 
 
 
 *2015*
 - *Dot matrix text recognition for industrial carton classification*
 \nSiddharth Nitin Patki, Madhuri Joshi and Abhishek N. Kulkarni
 \n/International Conference on Industrial Instrumentation and Control (ICIC), 2015./
-\n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] 
+\n\[[https://ieeexplore.ieee.org/document/7150847 IEEEXplore]\] \[[res/bibtex/patki2015classification.bib BibTeX]\] 
 
 
 *2014*
@@ -121,7 +115,7 @@
 - *Synthesis of Deceptive Cyberdefense with Temporal Logic Constraints*
 \nAbhishek N. Kulkarni and Jie Fu,
 \n/Workshop on Foundations of Computer Security (FCS) 2020./ 
-\n\[[res/papers/kulkarni2020cyberdefense.pdf PDF]\] 
+\n\[[res/papers/kulkarni2020cyberdefense.pdf PDF]\] \[[res/bibtex/kulkarni2020cyberdefense.bib BibTeX]\]
 
 
 
@@ -132,5 +126,20 @@
 \nAbhishek N. Kulkarni
 \n/Motion Planning (RBE 550)/
 \n\[[res/reports/kulkarni2017concavemsum.pdf PDF]\]
+
+
+== Talks/Presentations
+
+*2021* 
+- [https://artsandsciencegradtalks.wpi.edu/static/grad-talks.html /Designing Robots that Deceive: A Formal Methods Approach/] at Arts and Science Week at WPI. 
+
+*2020*
+- *[https://owenarden.github.io/fcs2020/ Foundations of Computer Security (FCS) Workshop]* at CSF 2020 conference. ([https://www.youtube.com/watch?v=PexLfs7nBKA video], [res/papers/kulkarni2020cyberdefense.pdf paper]).
+
+*2019*
+- *[res/slides/2019-12-04-PhDQualifier.pdf PhD Qualifier Presentation]* at WPI. 
+
+*2018*
+- *[res/slides/rhobetaepsilon2018.pdf An Informal Introduction to Formal Methods in Robotics]* at [https://rhobetaepsilon.com/ Rho Beta Epsilon] at WPI. 
 
 
