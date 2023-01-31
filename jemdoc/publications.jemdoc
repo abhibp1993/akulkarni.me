@@ -24,18 +24,6 @@
 
 == Journal Papers
 
-*2023*
-- *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* 
-\nAbhishek N. Kulkarni and Jie Fu
-\nIEEE American Control Conference (ACC), 2023.
-\n\[[https://arxiv.org/pdf/2210.01878 PDF]\]
-
-- *Probabilistic Planning with Partially Ordered Preferences over Temporal Goals*
-\nHazhar Rahmani, Abhishek N. Kulkarni and Jie Fu
-\nIEEE International Conference on Robotics and Automation (ICRA), 2023.
-\n\[[https://arxiv.org/pdf/2209.12267 PDF]\]
-
-
 *2022*
 - *Dynamic Hypergames for Synthesis of Deceptive Strategies with Temporal Logic Objectives.* 
 \nLening Li, Haoxiang Ma, Abhishek N. Kulkarni, Jie Fu
@@ -67,6 +55,18 @@
 
 
 == Conference Papers
+
+*2023*
+- *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* 
+\nAbhishek N. Kulkarni and Jie Fu
+\nIEEE American Control Conference (ACC), 2023.
+\n\[[https://arxiv.org/pdf/2210.01878 PDF]\]
+
+- *Probabilistic Planning with Partially Ordered Preferences over Temporal Goals*
+\nHazhar Rahmani, Abhishek N. Kulkarni and Jie Fu
+\nIEEE International Conference on Robotics and Automation (ICRA), 2023.
+\n\[[https://arxiv.org/pdf/2209.12267 PDF]\]
+
 
 *2021*
 - *Qualitative Planning in Imperfect Information Games with Active Sensing and Reactive Sensor Attacks: Cost of Unawareness.* 
