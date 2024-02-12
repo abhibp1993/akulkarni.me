@@ -2,12 +2,6 @@
 = Publications
 
 
-== In preparation 
-
-- *Automata-theoretic Approach to Qualitative Planning in Stochastic Systems with Preferences over Temporal Logic Objectives* 
-\nAbhishek N. Kulkarni and Jie Fu
-
-
 == Journal Papers
 
 *Under Review*
@@ -46,6 +40,13 @@
 
 
 == Conference Papers
+
+*2024*
+- *Logical Specifications-guided Dynamic Task Sampling for Reinforcement Learning Agents*
+\nYash Shukla, Tanushree Burman, Abhishek Kulkarni, Robert Wright, Alvaro Velasquez, and Jivko Sinapov 
+\nInternational Conference on Automated Planning and Scheduling (ICAPS), 2024.
+
+
 
 *2023*
 - *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* 
