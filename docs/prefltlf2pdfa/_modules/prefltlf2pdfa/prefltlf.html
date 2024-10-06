@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prefltlf2pdfa.prefltlf &mdash; prefltlf2pdfa 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            prefltlf2pdfa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../prefltlf2pdfa.html">prefltlf2pdfa package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#module-prefltlf2pdfa.prefltlf">prefltlf2pdfa.prefltlf module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_class"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_pref_edge"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_pref_edge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state_to_class"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_state_to_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_transition"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_transition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.deserialize"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_class_name"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_class_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_state_id"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_state_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_states"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_states()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.serialize"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.serialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf"><code class="docutils literal notranslate"><span class="pre">PrefLTLf</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.raw_spec"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.raw_spec</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.atoms"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.atoms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.alphabet"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.alphabet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.phi"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.phi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.relation"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.relation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.MAXIMAL_SEMANTICS"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.MAXIMAL_SEMANTICS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.deserialize"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.from_file"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.parse"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.parse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.serialize"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.translate"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.translate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#module-prefltlf2pdfa.semantics">prefltlf2pdfa.semantics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_exists_forall"><code class="docutils literal notranslate"><span class="pre">semantics_exists_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_forall_exists"><code class="docutils literal notranslate"><span class="pre">semantics_forall_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_forall_forall"><code class="docutils literal notranslate"><span class="pre">semantics_forall_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_mp_exists_forall"><code class="docutils literal notranslate"><span class="pre">semantics_mp_exists_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_mp_forall_exists"><code class="docutils literal notranslate"><span class="pre">semantics_mp_forall_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.semantics.semantics_mp_forall_forall"><code class="docutils literal notranslate"><span class="pre">semantics_mp_forall_forall()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#module-prefltlf2pdfa.utils">prefltlf2pdfa.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.utils.ltlf2dfa"><code class="docutils literal notranslate"><span class="pre">ltlf2dfa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.utils.maximal_outcomes"><code class="docutils literal notranslate"><span class="pre">maximal_outcomes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.utils.outcomes"><code class="docutils literal notranslate"><span class="pre">outcomes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.utils.vectorize"><code class="docutils literal notranslate"><span class="pre">vectorize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#module-prefltlf2pdfa.viz">prefltlf2pdfa.viz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.viz.paut2base64"><code class="docutils literal notranslate"><span class="pre">paut2base64()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.viz.paut2dot"><code class="docutils literal notranslate"><span class="pre">paut2dot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.viz.paut2png"><code class="docutils literal notranslate"><span class="pre">paut2png()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prefltlf2pdfa.html#prefltlf2pdfa.viz.paut2svg"><code class="docutils literal notranslate"><span class="pre">paut2svg()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../prefltlf2pdfa.html#module-prefltlf2pdfa">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">prefltlf2pdfa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">prefltlf2pdfa.prefltlf</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for prefltlf2pdfa.prefltlf</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module for handling preference LTLf formulas and converting them to preference automata.</span>
+
+<span class="sd">This module utilizes the `ltlf2dfa` library to parse and process LTLf formulas</span>
+<span class="sd">into preference deterministic finite automata (PDFA). It also provides functions for</span>
+<span class="sd">validating and manipulating preference automata.</span>
+
+<span class="sd">.. note:: The module checks for the presence of the `mona` tool, which is essential</span>
+<span class="sd">    for translating LTLf to PDFA. If `mona` is not found, a warning message is printed</span>
+<span class="sd">    to inform the user. In this case, the `translate` functionality may not work properly,</span>
+<span class="sd">    but the remaining functions work okay.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">lark.exceptions</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sympy</span>
+
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">ltlf2dfa.parser.ltlf</span> <span class="kn">import</span> <span class="n">LTLfParser</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">prefltlf2pdfa.utils</span> <span class="k">as</span> <span class="nn">utils</span>
+<span class="kn">from</span> <span class="nn">prefltlf2pdfa.semantics</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># logger.remove()</span>
+<span class="n">PARSER</span> <span class="o">=</span> <span class="n">LTLfParser</span><span class="p">()</span>
+
+<span class="c1"># Check ltlf2dfa is functioning properly and has access to mona.</span>
+<span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;mona --help&quot;</span>
+
+<span class="c1"># Run the command using subprocess</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;Usage: mona [options] &lt;filename&gt;&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+        <span class="n">YELLOW</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[33m&#39;</span>
+        <span class="n">RESET</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[0m&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">YELLOW</span><span class="si">}</span><span class="s2">Mona not found on your system. The tool may not translate LTLf to PDFA properly.</span><span class="si">{</span><span class="n">RESET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Mona not found on your system. The tool may not translate LTLf to PDFA properly.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Output and return code</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Return Code:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Output:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error (if any):&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PrefLTLf">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf">[docs]</a>
+<span class="k">class</span> <span class="nc">PrefLTLf</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a PrefLTLf (Preference Linear Temporal Logic over Finite Traces) formula.</span>
+
+<span class="sd">    The class is used to define, parse, and serialize PrefLTLf specifications,</span>
+<span class="sd">    as well as to translate the formulas into automata.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw_spec : str</span>
+<span class="sd">        The raw specification of the PrefLTLf formula.</span>
+
+<span class="sd">    atoms : set</span>
+<span class="sd">        Set of atomic propositions appearing in the PrefLTLf specification.</span>
+
+<span class="sd">    alphabet : list</span>
+<span class="sd">        A list representing the alphabet for the specification, or `None` if not provided.</span>
+
+<span class="sd">    phi : dict</span>
+<span class="sd">        A dictionary of LTLf formulas appearing in the PrefLTLf specification.</span>
+
+<span class="sd">    relation : set</span>
+<span class="sd">        A set of triples (PREF_TYPE, LTLf, LTLf) constructed based on the given PrefLTLf specification.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MAXIMAL_SEMANTICS</span> <span class="o">=</span> <span class="p">[</span><span class="n">semantics_mp_forall_exists</span><span class="p">,</span> <span class="n">semantics_mp_exists_forall</span><span class="p">,</span> <span class="n">semantics_mp_forall_forall</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the PrefLTLf formula.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        spec : str</span>
+<span class="sd">            The raw specification of the PrefLTLf formula.</span>
+
+<span class="sd">        alphabet : list, optional</span>
+<span class="sd">            The alphabet for the specification (default is None).</span>
+
+<span class="sd">        **kwargs</span>
+<span class="sd">            Additional options for parsing and handling the formula.</span>
+
+<span class="sd">            - skip_parse : bool, optional</span>
+<span class="sd">                If True, skips the parsing of the formula during initialization. Default is False.</span>
+
+<span class="sd">            - auto_complete : str, optional</span>
+<span class="sd">                Specifies how the formula should handle incomplete preferences when parsing. The acceptable options are:</span>
+
+<span class="sd">                * &quot;none&quot;: No auto-completion. The formula must be fully specified, and any incompleteness will raise an error.</span>
+<span class="sd">                * &quot;incomparable&quot;: If preferences are incomplete, auto-completes them by marking certain conditions as incomparable.</span>
+<span class="sd">                * &quot;minimal&quot;: Auto-completes the preferences by adding the minimal number of relations needed to make the preferences complete.</span>
+
+<span class="sd">                Default is &quot;none&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Class state variables (will be serialized)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span> <span class="o">=</span> <span class="n">spec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Set of atomic propositions appearing in PrefLTLf specification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span> <span class="k">if</span> <span class="n">alphabet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># Dict (indexed set) of LTLf formulas appearing in PrefLTLf specification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Set of triples (PREF_TYPE, LTLf, LTLf) constructed based on given PrefLTLf spec</span>
+        <span class="c1"># self.dfa = list()  # List (indexed set) of LTLf formulas appearing in PrefLTLf specification</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;skip_parse&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
+                <span class="n">auto_complete</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auto_complete&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f_str&quot;</span><span class="p">,</span> <span class="s2">&quot;atoms&quot;</span><span class="p">,</span> <span class="s2">&quot;alphabet&quot;</span><span class="p">,</span> <span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="s2">&quot;relation&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PrefLTLf</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">}</span> <span class="o">==</span>
+                    <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">})</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;PrefLTLf Formula at </span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;f_str&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">]</span>
+        <span class="c1"># self.dfa = obj_dict[&quot;dfa&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;relation&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">auto_complete</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrefLTLf.serialize">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.serialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Serializes the PrefLTLf formula into a JSON-compatible dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary representing the serialized PrefLTLf formula.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jsonable_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;f_str&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span><span class="p">,</span>
+            <span class="s2">&quot;atoms&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span>
+            <span class="s2">&quot;alphabet&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;phi&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+            <span class="s2">&quot;relation&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">),</span>
+            <span class="c1"># &quot;dfa&quot;: self.dfa</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">jsonable_dict</span></div>
+
+
+<div class="viewcode-block" id="PrefLTLf.deserialize">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.deserialize">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a PrefLTLf formula from a serialized dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj_dict : dict</span>
+<span class="sd">            A dictionary representing the serialized PrefLTLf formula.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PrefLTLf</span>
+<span class="sd">            A new instance of the PrefLTLf formula.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;f_str&quot;</span><span class="p">],</span> <span class="n">skip_parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">formula</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+        <span class="n">formula</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">formula</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">PARSER</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">formula</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;relation&quot;</span><span class="p">])</span>
+        <span class="c1"># formula.dfa = obj_dict[&quot;dfa&quot;]</span>
+        <span class="k">return</span> <span class="n">formula</span></div>
+
+
+<div class="viewcode-block" id="PrefLTLf.from_file">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.from_file">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_complete</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads a PrefLTLf formula from a file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fpath : str</span>
+<span class="sd">            The file path to read the formula from.</span>
+
+<span class="sd">        alphabet : list, optional</span>
+<span class="sd">            The alphabet for the specification (default is None).</span>
+
+<span class="sd">        auto_complete : str, optional</span>
+<span class="sd">            The auto-completion method to use (default is &quot;none&quot;).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PrefLTLf</span>
+<span class="sd">            A new instance of the PrefLTLf formula.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">auto_complete</span><span class="o">=</span><span class="n">auto_complete</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PrefLTLf.parse">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.parse">[docs]</a>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_complete</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the raw PrefLTLf formula and constructs the atomic propositions, relation, and LTLf formulas.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auto_complete : str, optional</span>
+<span class="sd">            The method to use for auto-completion (default is &quot;none&quot;).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple containing</span>
+<span class="sd">            - phi: Dictionary of {formula-id: LTLf Formula}</span>
+<span class="sd">            - model: Set of binary relation of form (a, b) representing a is weakly preferred to b.</span>
+<span class="sd">            - atoms: Set of strings representing atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing prefltlf formula with </span><span class="si">{</span><span class="n">auto_complete</span><span class="si">=}</span><span class="s2">: </span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check auto_complete inputs</span>
+        <span class="k">if</span> <span class="n">auto_complete</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;incomparable&quot;</span><span class="p">,</span> <span class="s2">&quot;minimal&quot;</span><span class="p">]:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unknown auto_complete value &#39;</span><span class="si">{</span><span class="n">auto_complete</span><span class="si">}</span><span class="s2">&#39; to parse function. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Accepted values are </span><span class="si">{</span><span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;incomparable&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;minimal&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;New auto_complete value is set to &#39;none&#39;.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">auto_complete</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+
+        <span class="c1"># # Parse header. Ensure that the spec is well-formed and a PrefLTLf formula.</span>
+        <span class="c1"># header = self._parse_header()</span>
+
+        <span class="c1"># Construct intermediate representation of standard spec</span>
+        <span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_spec_ir</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_lang_complete</span><span class="p">(</span><span class="n">phi</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">auto_complete</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+                <span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_complete</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span><span class="p">,</span> <span class="n">auto_complete</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The set of conditions phi = </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">}</span><span class="s2"> is not complete&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The set of conditions phi = </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">}</span><span class="s2"> is not complete&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Else, we have spec in standard format. Build model. (if user has specified ltlf formulas, add them to model)</span>
+        <span class="n">phi</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_partial_order</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span><span class="p">)</span>
+        <span class="c1"># print(f&quot;{phi=}&quot;)</span>
+        <span class="c1"># print(f&quot;{model=}&quot;)</span>
+
+        <span class="c1"># Construct set of atomic propositions</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">varphi</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">atoms</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">varphi</span><span class="o">.</span><span class="n">find_labels</span><span class="p">()))</span>
+
+        <span class="c1"># Return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms</span>
+
+        <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">atoms</span></div>
+
+
+<div class="viewcode-block" id="PrefLTLf.translate">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefLTLf.translate">[docs]</a>
+    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantics</span><span class="o">=</span><span class="n">semantics_mp_forall_exists</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Translates the PrefLTLf formula into a preference automaton under the given semantics.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        semantics : function, optional</span>
+<span class="sd">            The semantics function to use for translation (default is `semantics_mp_forall_exists`).</span>
+
+<span class="sd">        show_progress : bool, optional</span>
+<span class="sd">            Whether to show progress during translation (default is False).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PrefAutomaton</span>
+<span class="sd">            The resulting preference automaton.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Translating the formula to preference automaton under semantics=`</span><span class="si">{</span><span class="n">semantics</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">`:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Define preference automaton and set basic attributes</span>
+        <span class="n">aut</span> <span class="o">=</span> <span class="n">PrefAutomaton</span><span class="p">()</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span>
+
+        <span class="c1"># Translate LTLf formulas in self.phi to DFAs</span>
+        <span class="n">sorted_phi</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">dfa</span> <span class="o">=</span> <span class="p">[</span><span class="n">utils</span><span class="o">.</span><span class="n">ltlf2dfa</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_phi</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">dfa</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;PrefLTLf spec must have at least two LTLf formulas.&quot;</span>
+
+        <span class="c1"># Log all DFAs</span>
+        <span class="n">log_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Constructed Automata: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_phi</span><span class="p">)):</span>
+            <span class="n">log_message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">======== </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">[</span><span class="n">sorted_phi</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="si">}</span><span class="s2"> ========</span><span class="se">\n</span><span class="si">{</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">dfa</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">log_message</span><span class="p">)</span>
+
+        <span class="c1"># Compute union product of DFAs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construct_semi_automaton</span><span class="p">(</span><span class="n">aut</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">)</span>
+
+        <span class="c1"># Construct preference graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construct_preference_graph</span><span class="p">(</span><span class="n">aut</span><span class="p">,</span> <span class="n">semantics</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">)</span>
+
+        <span class="c1"># Return preference automaton</span>
+        <span class="k">return</span> <span class="n">aut</span></div>
+
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+
+    <span class="k">def</span> <span class="nf">_parse_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the header of the PrefLTLf specification.</span>
+
+<span class="sd">        The header should be in the form: `prefltlf &lt;num_formula&gt;`.</span>
+
+<span class="sd">        :raises ValueError: If the header is not well-formed or if the formula type is not &#39;prefltlf&#39;.</span>
+<span class="sd">        :return: A list containing the formula type and the number of formulas.</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stmts</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">stmts</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stmts</span> <span class="k">if</span> <span class="n">line</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)]</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">stmts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ill-formatted specification file. Header should be `prefltlf &lt;num_formula&gt;`, &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;where specifying &lt;num_formula&gt; is optional.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;prefltlf&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not a PrefLTLf formula. Likely a &#39;</span><span class="si">{</span><span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; formula.&quot;</span><span class="p">)</span>
+
+        <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">header</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+
+    <span class="k">def</span> <span class="nf">_parse_ltlf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the raw specification into LTLf formulas and extracts atomic propositions.</span>
+
+<span class="sd">        :param raw_spec: List of LTLf formula strings.</span>
+<span class="sd">        :type raw_spec: list</span>
+<span class="sd">        :return: A tuple containing a set of atomic propositions and a list of parsed LTLf formulas.</span>
+<span class="sd">        :rtype: tuple(set, list)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">raw_spec</span><span class="p">:</span>
+            <span class="n">ltlf</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="n">formula</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">phi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ltlf</span><span class="p">)</span>
+            <span class="n">atoms</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ltlf</span><span class="o">.</span><span class="n">find_labels</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">phi</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+
+    <span class="k">def</span> <span class="nf">_parse_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the relation part of the PrefLTLf specification.</span>
+
+<span class="sd">        :param raw_spec: List of preference relations (e.g., &#39;&gt;, &gt;=, ~, &lt;&gt;&#39;).</span>
+<span class="sd">        :type raw_spec: list</span>
+<span class="sd">        :raises AssertionError: If an unrecognized operator is encountered.</span>
+<span class="sd">        :return: A set of preference relations.</span>
+<span class="sd">        :rtype: set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">raw_spec</span><span class="p">:</span>
+            <span class="c1"># Split line into operator, left formula, right formula.</span>
+            <span class="n">rel</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Determine operator</span>
+            <span class="n">pref_type</span> <span class="o">=</span> <span class="n">rel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">assert</span> <span class="n">pref_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;~&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;The formula is ill-formed. Unrecognized operator `</span><span class="si">{</span><span class="n">pref_type</span><span class="si">}</span><span class="s2">`&quot;</span>
+
+            <span class="c1"># Determine formulas</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+            <span class="c1"># Add relation</span>
+            <span class="n">relation</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">pref_type</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">relation</span>
+
+    <span class="k">def</span> <span class="nf">_build_preorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relation_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builds the preorder relation based on the parsed specification.</span>
+
+<span class="sd">        :param relation_spec: Set of preference relations.</span>
+<span class="sd">        :type relation_spec: set</span>
+<span class="sd">        :return: A set representing the preorder relation.</span>
+<span class="sd">        :rtype: set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preorder</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1"># First, process the non-incomparability formulas because they add elements to preorder relation.</span>
+        <span class="k">for</span> <span class="n">pref_type</span><span class="p">,</span> <span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">relation_spec</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">phi1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, phi_1=</span><span class="si">{</span><span class="n">phi1</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">phi2</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, phi_2=</span><span class="si">{</span><span class="n">phi2</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+            <span class="k">if</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;&gt;&quot;</span> <span class="ow">or</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span>
+                <span class="n">preorder</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;~&quot;</span><span class="p">:</span>
+                <span class="n">preorder</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">))</span>
+                <span class="n">preorder</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">phi2</span><span class="p">,</span> <span class="n">phi1</span><span class="p">))</span>
+
+                <span class="c1"># Second, process the incomparability formulas because it removes elements to preorder relation.</span>
+        <span class="k">for</span> <span class="n">pref_type</span><span class="p">,</span> <span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">relation_spec</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">phi1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, phi_1=</span><span class="si">{</span><span class="n">phi1</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">phi2</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, phi_2=</span><span class="si">{</span><span class="n">phi2</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">preorder</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span><span class="w"> </span><span class="n">phi2</span><span class="p">)</span><span class="si">}</span><span class="s2"> is removed from preorder.&quot;</span><span class="p">)</span>
+                <span class="n">preorder</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">phi2</span><span class="p">,</span> <span class="n">phi1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">preorder</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">phi2</span><span class="p">,</span><span class="w"> </span><span class="n">phi1</span><span class="p">)</span><span class="si">}</span><span class="s2"> is removed from preorder.&quot;</span><span class="p">)</span>
+                <span class="n">preorder</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="n">phi2</span><span class="p">,</span> <span class="n">phi1</span><span class="p">))</span>
+
+                <span class="c1"># Reflexive closure</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)):</span>
+            <span class="n">preorder</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+            <span class="c1"># Transitive closure</span>
+        <span class="n">preorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitive_closure</span><span class="p">(</span><span class="n">preorder</span><span class="p">)</span>
+
+        <span class="c1"># Return preorder</span>
+        <span class="k">return</span> <span class="n">preorder</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+
+    <span class="k">def</span> <span class="nf">_transitive_closure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preorder</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the transitive closure of a preorder relation.</span>
+
+<span class="sd">        :param preorder: Set of pairs representing the preorder relation.</span>
+<span class="sd">        :type preorder: set</span>
+<span class="sd">        :return: A set representing the transitive closure of the preorder.</span>
+<span class="sd">        :rtype: set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">closure</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">preorder</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">new_relations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">closure</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">closure</span> <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">closure_until_now</span> <span class="o">=</span> <span class="n">closure</span> <span class="o">|</span> <span class="n">new_relations</span>
+            <span class="k">if</span> <span class="n">closure_until_now</span> <span class="o">==</span> <span class="n">closure</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">closure</span> <span class="o">=</span> <span class="n">closure_until_now</span>
+        <span class="k">return</span> <span class="n">closure</span>
+
+    <span class="k">def</span> <span class="nf">_construct_semi_automaton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aut</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a semi-automaton from a set of DFA states and transitions.</span>
+
+<span class="sd">        :param aut: A PrefAutomaton object where the semi-automaton will be stored.</span>
+<span class="sd">        :type aut: PrefAutomaton</span>
+<span class="sd">        :param show_progress: Whether to display a progress bar for the construction.</span>
+<span class="sd">        :type show_progress: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dfa</span> <span class="o">=</span> <span class="n">aut</span><span class="o">.</span><span class="n">dfa</span>
+
+        <span class="c1"># Initial state</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">dfa</span><span class="p">[</span><span class="s1">&#39;init_state&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">dfa</span> <span class="ow">in</span> <span class="n">dfa</span><span class="p">])</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">init_state</span> <span class="o">=</span> <span class="n">aut</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+        <span class="c1"># Visit reachable states</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">q0</span><span class="p">]</span>
+        <span class="n">explored</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">transitions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Constructing semi-automaton&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+                <span class="c1"># Visit next state</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">explored</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+                <span class="c1"># Add state to preference automaton</span>
+                <span class="n">aut</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+                <span class="c1"># Add transitions to product dfa</span>
+                <span class="c1"># Pick one outgoing edge from each of the sub-DFA states in q.</span>
+                <span class="k">for</span> <span class="n">condition_on_edges</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+                        <span class="o">*</span><span class="p">[</span><span class="n">dfa</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;transitions&#39;</span><span class="p">][</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">))]</span>
+                <span class="p">):</span>
+                    <span class="c1"># Define condition for synchronous transition of selected edges (AND-ing of all conditions)</span>
+                    <span class="n">cond</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sympify</span><span class="p">((</span><span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;) &amp; (&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">condition_on_edges</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">,</span> <span class="s2">&quot;~&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+                    <span class="c1"># If alphabet is provided, require that at least one symbol enables the condition.</span>
+                    <span class="k">if</span> <span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="ow">and</span>
+                            <span class="nb">all</span><span class="p">(</span>
+                                <span class="ow">not</span> <span class="n">cond</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">atom</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">true_atoms</span> <span class="k">else</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">})</span>
+                                <span class="k">for</span> <span class="n">true_atoms</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span>
+                            <span class="p">)</span>
+                    <span class="p">):</span>
+                        <span class="k">continue</span>
+
+                        <span class="c1"># If label is false, then the synchronous transition is not valid.</span>
+                    <span class="k">if</span> <span class="n">cond</span> <span class="o">==</span> <span class="n">sympy</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                        <span class="c1"># Otherwise, add transition</span>
+                    <span class="n">cond</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span><span class="o">.</span>
+                            <span class="n">replace</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span>
+                            <span class="n">replace</span><span class="p">(</span><span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">))</span>
+
+                    <span class="n">q_next</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">dfa</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;transitions&#39;</span><span class="p">][</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">condition_on_edges</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">))])</span>
+                    <span class="k">if</span> <span class="n">q_next</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">explored</span><span class="p">:</span>
+                        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_next</span><span class="p">)</span>
+
+                        <span class="c1"># Add transition to preference automaton</span>
+                    <span class="n">transitions</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">q</span><span class="p">,</span> <span class="n">q_next</span><span class="p">,</span> <span class="n">cond</span><span class="p">))</span>
+
+                <span class="c1"># Update tqdm progress bar</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">+</span> <span class="n">pbar</span><span class="o">.</span><span class="n">n</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cond</span> <span class="ow">in</span> <span class="n">transitions</span><span class="p">:</span>
+            <span class="n">aut</span><span class="o">.</span><span class="n">add_transition</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_construct_preference_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aut</span><span class="p">,</span> <span class="n">semantics</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a preference graph based on the automaton and the given semantics.</span>
+
+<span class="sd">        :param aut: A PrefAutomaton object where the preference graph will be stored.</span>
+<span class="sd">        :type aut: PrefAutomaton</span>
+<span class="sd">        :param semantics: A semantics function determining how preferences are interpreted.</span>
+<span class="sd">        :type semantics: function</span>
+<span class="sd">        :param show_progress: Whether to display a progress bar for the construction.</span>
+<span class="sd">        :type show_progress: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># dfa = self.dfa</span>
+        <span class="n">pg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+
+        <span class="c1"># Create partition and add nodes</span>
+        <span class="k">for</span> <span class="n">qid</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">aut</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Constructing preference graph nodes&quot;</span><span class="p">,</span>
+                <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span>
+        <span class="p">):</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="n">outcomes</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">outcomes</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">dfa</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">semantics</span> <span class="ow">in</span> <span class="n">PrefLTLf</span><span class="o">.</span><span class="n">MAXIMAL_SEMANTICS</span><span class="p">:</span>
+                <span class="n">outcomes</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">maximal_outcomes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
+
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">dfa</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
+            <span class="c1"># cls_id = aut.add_class(cls)</span>
+
+            <span class="c1"># Add node to temporary graph</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pg</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+                <span class="n">pg</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="p">{</span><span class="n">qid</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pg</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="bp">cls</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">qid</span><span class="p">)</span>
+
+            <span class="c1"># aut.add_state_to_class(cls_id, q)</span>
+
+        <span class="c1"># Create edges</span>
+        <span class="c1"># for source_id, target_id in itertools.product(aut.pref_graph.nodes(), aut.pref_graph.nodes()):</span>
+        <span class="k">for</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="n">pg</span><span class="o">.</span><span class="n">nodes</span><span class="p">()),</span>
+                <span class="n">total</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Constructing preference graph edges&quot;</span><span class="p">,</span>
+                <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span>
+        <span class="p">):</span>
+            <span class="c1"># source = aut.get_class_name(source_id)</span>
+            <span class="c1"># target = aut.get_class_name(target_id)</span>
+            <span class="k">if</span> <span class="n">semantics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+                <span class="c1"># aut.add_pref_edge(source_id, target_id)</span>
+                <span class="n">pg</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+        <span class="c1"># Merge partitions if two nodes are indifferent under constructed edge relation</span>
+        <span class="n">scc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">strongly_connected_components</span><span class="p">(</span><span class="n">pg</span><span class="p">)</span>
+
+        <span class="n">phi</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">[</span><span class="n">ltlf_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">ltlf_id</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+        <span class="n">state2node</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">scc</span><span class="p">:</span>
+            <span class="c1"># Define a class name and class id</span>
+            <span class="n">cls_name</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">component</span><span class="p">:</span>
+                <span class="n">cls_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="s2">&quot; &amp; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span> <span class="k">if</span> <span class="bp">cls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+            <span class="n">cls_name</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cls_name</span><span class="p">))</span>
+            <span class="n">cls_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PARSER</span><span class="p">(</span><span class="n">cls_name</span><span class="p">))</span>
+            <span class="n">cls_id</span> <span class="o">=</span> <span class="n">aut</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">cls_name</span><span class="p">)</span>
+
+            <span class="c1"># Add states to partition</span>
+            <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">component</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">pg</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="bp">cls</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]:</span>
+                    <span class="n">aut</span><span class="o">.</span><span class="n">add_state_to_class</span><span class="p">(</span><span class="n">cls_id</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+                    <span class="n">state2node</span><span class="p">[</span><span class="bp">cls</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls_id</span>
+
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pg</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="n">aut</span><span class="o">.</span><span class="n">add_pref_edge</span><span class="p">(</span><span class="n">state2node</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">state2node</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_construct_spec_ir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs an intermediate representation (IR) of the PrefLTLf specification.</span>
+
+<span class="sd">        The IR consists of:</span>
+<span class="sd">            1. LTLf formulas parsed from the specification.</span>
+<span class="sd">            2. The preference relation between formulas.</span>
+
+<span class="sd">        :raises ValueError: If a formula cannot be parsed.</span>
+<span class="sd">        :return: A tuple containing a dictionary of LTLf formulas and a list of preference relations.</span>
+<span class="sd">        :rtype: tuple(dict, list)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize outputs</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="c1"># Extract non-header lines from spec</span>
+        <span class="n">stmts</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_spec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">stmts</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stmts</span> <span class="k">if</span> <span class="n">line</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)]</span>
+        <span class="n">stmts</span> <span class="o">=</span> <span class="n">stmts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># Extract header</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_header</span><span class="p">()</span>
+        <span class="n">n_phi</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Construct phi: the set of LTLf formulas.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_phi</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="n">stmts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">lark</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">UnexpectedCharacters</span><span class="p">):</span>
+                    <span class="c1"># logger.debug(str(err))</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Could not parse &#39;</span><span class="si">{</span><span class="n">stmts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;. Possible reasons:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;1. Did you supply </span><span class="si">{</span><span class="n">n_phi</span><span class="si">}</span><span class="s2"> formulas as suggested by the specification header?</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;2. LTLf formula is ill-formed&quot;</span>
+                    <span class="p">)</span>
+
+        <span class="c1"># Eliminate formulas with equivalent languages</span>
+        <span class="n">equiv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_equivalent_ltlf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+        <span class="n">compact_phi</span><span class="p">,</span> <span class="n">replacement</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_equiv_ltlf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">equiv</span><span class="p">)</span>
+
+        <span class="c1"># Collect atomic preferences</span>
+        <span class="n">spec_ir</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">atomic_pref</span> <span class="ow">in</span> <span class="n">stmts</span><span class="p">[</span><span class="n">n_phi</span><span class="p">:]:</span>
+            <span class="n">pref_type</span><span class="p">,</span> <span class="n">l_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="o">=</span> <span class="n">atomic_pref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="n">l_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">l_index</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">r_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r_index</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">assert</span> <span class="n">pref_type</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">],</span> \
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pref_type</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s1"> is not a valid. Valid preference operators are </span><span class="si">{</span><span class="p">[</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;~&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="k">assert</span> <span class="n">l_index</span> <span class="ow">in</span> <span class="n">phi</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, l_index=</span><span class="si">{</span><span class="n">l_index</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="k">assert</span> <span class="n">r_index</span> <span class="ow">in</span> <span class="n">phi</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Index of LTLf formula out of bounds. |Phi|=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">, r_index=</span><span class="si">{</span><span class="n">l_index</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+            <span class="k">if</span> <span class="n">l_index</span> <span class="ow">in</span> <span class="n">replacement</span><span class="p">:</span>
+                <span class="n">l_index</span> <span class="o">=</span> <span class="n">replacement</span><span class="p">[</span><span class="n">l_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">r_index</span> <span class="ow">in</span> <span class="n">replacement</span><span class="p">:</span>
+                <span class="n">r_index</span> <span class="o">=</span> <span class="n">replacement</span><span class="p">[</span><span class="n">r_index</span><span class="p">]</span>
+
+            <span class="n">spec_ir</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">pref_type</span><span class="p">,</span> <span class="n">l_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">))</span>
+
+        <span class="c1"># Log constructed representation</span>
+        <span class="n">log_string</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l_index</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">compact_phi</span><span class="p">[</span><span class="n">l_index</span><span class="p">]</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">pref_type</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_index</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">compact_phi</span><span class="p">[</span><span class="n">r_index</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">pref_type</span><span class="p">,</span> <span class="n">l_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="ow">in</span> <span class="n">spec_ir</span>
+        <span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intermediate representation based on raw input: </span><span class="se">\n</span><span class="si">{</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">log_string</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Return intermediate representation</span>
+        <span class="k">return</span> <span class="n">compact_phi</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">spec_ir</span><span class="p">)</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="k">def</span> <span class="nf">_auto_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span><span class="p">,</span> <span class="n">auto_complete</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the automatic completion of a set of LTLf formulas `phi`.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :param spec_ir: Intermediate representation of preferences.</span>
+<span class="sd">        :param auto_complete: Specifies the auto-completion method to apply (&quot;minimal&quot; or &quot;incomparable&quot;).</span>
+<span class="sd">        :return: Tuple containing the updated `phi` and `spec_ir`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Determine completion formula</span>
+        <span class="n">completion_formula</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">varphi</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">varphi</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="n">completion_formula</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;!(</span><span class="si">{</span><span class="n">completion_formula</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">completion_formula</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="n">completion_formula</span><span class="p">)</span>
+
+        <span class="c1"># Add completion formula to phi.</span>
+        <span class="n">new_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">phi</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">new_id</span><span class="p">:</span> <span class="n">completion_formula</span><span class="p">})</span>
+
+        <span class="c1"># Update spec_ir based on input auto-complete method.</span>
+        <span class="c1">#   In case auto-complete type is incomparable, no update to spec_ir is necessary.</span>
+        <span class="k">if</span> <span class="n">auto_complete</span> <span class="o">==</span> <span class="s2">&quot;minimal&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">varphi</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">spec_ir</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="n">varphi</span><span class="p">,</span> <span class="n">new_id</span><span class="p">))</span>
+
+        <span class="c1"># Log constructed representation</span>
+        <span class="n">log_string</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l_index</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">l_index</span><span class="p">]</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">pref_type</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_index</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">r_index</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">pref_type</span><span class="p">,</span> <span class="n">l_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="ow">in</span> <span class="n">spec_ir</span>
+        <span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intermediate representation based on raw input: </span><span class="si">{</span><span class="n">log_string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Return intermediate representation</span>
+        <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">spec_ir</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="k">def</span> <span class="nf">_is_lang_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the language of a set of LTLf formulas is complete, i.e., whether it covers all possible behaviors.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :return: Boolean indicating whether the language is complete.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">varphi</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">varphi</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="n">equiv_formula</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+        <span class="n">dfa</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ltlf2dfa</span><span class="p">(</span><span class="n">equiv_formula</span><span class="p">)</span>
+
+        <span class="c1"># Check for universally true DFA</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">[</span><span class="s2">&quot;final_states&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_build_partial_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">pref_stmts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a partial order based on the provided preference statements and formulas.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :param pref_stmts: List of preference statements in the form (op, l_index, r_index).</span>
+<span class="sd">        :return: Tuple containing the updated `phi` and the constructed partial order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Construct P, P&#39;, I, J sets</span>
+        <span class="n">set_w</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">set_p</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">set_i</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">set_j</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pref_type</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span> <span class="ow">in</span> <span class="n">pref_stmts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span>
+                <span class="n">set_p</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span>
+                <span class="n">set_w</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;~&quot;</span><span class="p">:</span>
+                <span class="n">set_i</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+                <span class="n">set_i</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi2</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="n">pref_type</span> <span class="o">==</span> <span class="s2">&quot;&lt;&gt;&quot;</span><span class="p">:</span>
+                <span class="n">set_j</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+                <span class="n">set_j</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi2</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">))</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clauses from intermediate representation:</span><span class="se">\n</span><span class="si">{</span><span class="n">set_w</span><span class="si">=}</span><span class="s2"> </span><span class="se">\n</span><span class="si">{</span><span class="n">set_p</span><span class="si">=}</span><span class="s2"> </span><span class="se">\n</span><span class="si">{</span><span class="n">set_i</span><span class="si">=}</span><span class="s2"> </span><span class="se">\n</span><span class="si">{</span><span class="n">set_j</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Resolve W into P, I, J</span>
+        <span class="k">for</span> <span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span> <span class="ow">in</span> <span class="n">set_w</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_j</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Inconsistent specification: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt;= </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi2</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &lt;&gt; </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi2</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="p">(</span><span class="n">varphi2</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_p</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Inconsistent specification: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt;= </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi2</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi2</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">varphi1</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="p">(</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_p</span> <span class="o">|</span> <span class="n">set_i</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+            <span class="k">elif</span> <span class="p">(</span><span class="n">varphi2</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_w</span><span class="p">:</span>
+                <span class="n">set_i</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">set_p</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span><span class="p">))</span>
+
+        <span class="c1"># Transitive closure</span>
+        <span class="n">set_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitive_closure</span><span class="p">(</span><span class="n">set_p</span><span class="p">)</span>
+        <span class="n">set_i</span> <span class="o">|=</span> <span class="p">{(</span><span class="n">varphi</span><span class="p">,</span> <span class="n">varphi</span><span class="p">)</span> <span class="k">for</span> <span class="n">varphi</span> <span class="ow">in</span> <span class="n">phi</span><span class="p">}</span>
+        <span class="n">set_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitive_closure</span><span class="p">(</span><span class="n">set_i</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clauses after applying transitive and reflexive closures:</span><span class="se">\n</span><span class="si">{</span><span class="n">set_p</span><span class="si">=}</span><span class="s2"> </span><span class="se">\n</span><span class="si">{</span><span class="n">set_i</span><span class="si">=}</span><span class="s2"> </span><span class="se">\n</span><span class="si">{</span><span class="n">set_j</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Consistency check</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_p</span> <span class="k">for</span> <span class="n">varphi1</span> <span class="ow">in</span> <span class="n">phi</span><span class="p">):</span>
+            <span class="n">graph_</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+            <span class="n">graph_</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">graph_</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">set_p</span><span class="p">])</span>
+            <span class="n">cycles</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">simple_cycles</span><span class="p">(</span><span class="n">graph_</span><span class="p">))</span>
+            <span class="n">cycles</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">cycle</span><span class="p">))</span> <span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cycles</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Inconsistent specification: Cyclic preferences detected in P. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Cycles after transitive closure: </span><span class="se">\n</span><span class="si">{</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">cycles</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">varphi2</span><span class="p">,</span> <span class="n">varphi1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">set_p</span> <span class="k">for</span> <span class="n">varphi1</span><span class="p">,</span> <span class="n">varphi2</span> <span class="ow">in</span> <span class="n">set_p</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inconsistent specification: Strictness violated. &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">[[(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p1</span><span class="p">)]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">set_p</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p1</span><span class="p">)</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">set_p</span><span class="p">]</span><span class="si">}</span><span class="s2"> in P.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_p</span><span class="p">,</span> <span class="n">set_i</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inconsistent specification: </span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_p</span><span class="p">,</span><span class="w"> </span><span class="n">set_i</span><span class="p">)</span><span class="si">}</span><span class="s2"> common in P and I.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_p</span><span class="p">,</span> <span class="n">set_j</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inconsistent specification: </span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_p</span><span class="p">,</span><span class="w"> </span><span class="n">set_j</span><span class="p">)</span><span class="si">}</span><span class="s2"> common in P and J.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_i</span><span class="p">,</span> <span class="n">set_j</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inconsistent specification: </span><span class="si">{</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_i</span><span class="p">,</span><span class="w"> </span><span class="n">set_j</span><span class="p">)</span><span class="si">}</span><span class="s2"> common in I and J.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># # Merge any specifications with same language.</span>
+        <span class="c1"># equiv = self._find_equivalent_ltlf(phi)</span>
+        <span class="c1"># phi, model = self._process_equiv_ltlf(phi, set.union(set_p, set_i), equiv)</span>
+        <span class="c1"># logger.debug(f&quot;Merge language equivalent formulas:\n{phi=} \n{model=}&quot;)</span>
+
+        <span class="c1"># Apply reflexive closure</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set_p</span><span class="p">,</span> <span class="n">set_i</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">({(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">()})</span>
+
+        <span class="c1"># Apply transitive closure</span>
+        <span class="c1"># model = util.transitive_closure(model)</span>
+        <span class="c1"># print(phi)</span>
+        <span class="c1"># print(model)</span>
+
+        <span class="c1"># If spec is a preorder, but not a partial order, then construct a partial order. [add option to skip this]</span>
+        <span class="n">phi</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pre_to_partial_order</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+        <span class="n">log_model</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">l_index</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">r_index</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">l_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="ow">in</span> <span class="n">model</span><span class="p">}</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Partial order for input specification:</span><span class="se">\n</span><span class="si">{</span><span class="n">phi</span><span class="si">=}</span><span class="se">\n</span><span class="si">{</span><span class="n">model</span><span class="si">=}</span><span class="se">\n</span><span class="s2">model=</span><span class="si">{</span><span class="n">log_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">model</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="k">def</span> <span class="nf">_find_equivalent_ltlf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Identifies equivalent LTLf formulas from the given set of formulas.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :return: A set of tuples containing pairs of equivalent formulas.</span>
+
+<span class="sd">        .. note:: O(n^2) complexity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize output</span>
+        <span class="n">equiv_formulas</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1">#  Compare every formula with every other formula to identify equivalent LTLf formulas.</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)):</span>
+                <span class="c1"># Approach: Construct equivalence LTLf formula.</span>
+                <span class="c1">#   Check if DFA is universally true, i.e., has a single state which is accepting.</span>
+
+                <span class="c1"># Equivalence formula</span>
+                <span class="n">equiv_formula</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="si">}</span><span class="s2"> &lt;-&gt; </span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">dfa</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ltlf2dfa</span><span class="p">(</span><span class="n">equiv_formula</span><span class="p">)</span>
+
+                <span class="c1"># Check for universally true DFA</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfa</span><span class="p">[</span><span class="s2">&quot;final_states&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">equiv_formulas</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+
+                <span class="c1"># print(equiv_formula, dfa)</span>
+
+        <span class="k">return</span> <span class="n">equiv_formulas</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="k">def</span> <span class="nf">_process_equiv_ltlf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">equiv</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes and merges equivalent LTLf formulas into a single representative formula.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :param equiv: Set of tuples representing equivalent formulas.</span>
+<span class="sd">        :return: Tuple containing the new set of formulas and a dictionary for formula replacements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Construct equivalence graph</span>
+        <span class="n">equiv_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">equiv</span><span class="p">:</span>
+            <span class="n">equiv_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">equiv_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+        <span class="c1"># equiv_graph.add_edges_from(equiv)</span>
+        <span class="n">scc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">strongly_connected_components</span><span class="p">(</span><span class="n">equiv_graph</span><span class="p">))</span>
+
+        <span class="c1"># Construct new phi</span>
+        <span class="n">idx_to_remove</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">replacement</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">scc</span><span class="p">:</span>
+            <span class="n">keep_f</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">component</span> <span class="o">-</span> <span class="p">{</span><span class="n">keep_f</span><span class="p">}:</span>
+                <span class="n">replacement</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep_f</span>
+            <span class="n">idx_to_remove</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">component</span> <span class="o">-</span> <span class="p">{</span><span class="nb">min</span><span class="p">(</span><span class="n">component</span><span class="p">)})</span>
+
+        <span class="n">n_phi</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">idx_to_remove</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">n_phi</span><span class="p">,</span> <span class="n">replacement</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="k">def</span> <span class="nf">_pre_to_partial_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">preorder</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a preorder (which may contain indifferent alternatives) to a partial order by resolving indifference.</span>
+
+<span class="sd">        :param phi: Dictionary of LTLf formulas.</span>
+<span class="sd">        :param preorder: Set representing the preorder relations.</span>
+<span class="sd">        :return: Tuple containing the updated `phi` and the constructed partial order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize output</span>
+        <span class="n">partial_order</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1"># Construct preorder graph (might contain cycles)</span>
+        <span class="n">order_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+        <span class="n">order_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">preorder</span><span class="p">)</span>
+
+        <span class="c1"># Find strongly connected components</span>
+        <span class="n">scc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">strongly_connected_components</span><span class="p">(</span><span class="n">order_graph</span><span class="p">)</span>
+
+        <span class="c1"># Replace indifferent formulas with their disjunction</span>
+        <span class="n">max_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">replace</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">scc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">component</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># Construct disjunction of indifferent formulas in the `component`</span>
+                <span class="n">formulas</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">component</span><span class="p">)</span>
+                <span class="n">replacement_ltlf</span> <span class="o">=</span> <span class="n">PARSER</span><span class="p">(</span><span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formulas</span><span class="p">))</span>
+
+                <span class="c1"># Add new formula to phi</span>
+                <span class="n">phi</span><span class="p">[</span><span class="n">max_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">replacement_ltlf</span>
+
+                <span class="c1"># Remove indifferent formulas from phi</span>
+                <span class="n">max_index</span> <span class="o">=</span> <span class="n">max_index</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">component</span><span class="p">:</span>
+                    <span class="n">phi</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">replace</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_index</span>
+
+        <span class="c1"># Construct partial order from preorder by replacing indifferent formulas</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">preorder</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">partial_order</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+        <span class="c1"># Return</span>
+        <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">partial_order</span></div>
+
+
+
+<div class="viewcode-block" id="PrefAutomaton">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton">[docs]</a>
+<span class="k">class</span> <span class="nc">PrefAutomaton</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Automaton structure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dfa</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+        <span class="c1"># Helper attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_states</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inv_nodes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PrefAutomaton</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">states</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">atoms</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">alphabet</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">transitions</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">init_state</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">init_state</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;transitions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_state</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;init_state&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+
+        <span class="c1"># Construct preference graph</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;pref_graph&quot;</span><span class="p">][</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;pref_graph&quot;</span><span class="p">][</span><span class="s2">&quot;edges&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<div class="viewcode-block" id="PrefAutomaton.serialize">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.serialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Construct state serialization</span>
+        <span class="n">state2node</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">for</span> <span class="n">partition_label</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">]:</span>
+                <span class="c1"># sid = state2node[state]</span>
+                <span class="c1"># state_dict[sid][&quot;partition&quot;] = partition_label</span>
+                <span class="n">state_dict</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partition_label</span>
+
+        <span class="c1">#  Collect edges of preference graph</span>
+        <span class="n">pref_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+        <span class="n">pref_edges</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">pref_nodes</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="n">pref_edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="n">obj_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="n">state_dict</span><span class="p">,</span>
+            <span class="c1"># &quot;atoms&quot;: list(self.atoms),</span>
+            <span class="s2">&quot;atoms&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
+            <span class="c1"># &quot;alphabet&quot;: [list(symbol) for symbol in self.alphabet] if self.alphabet is not None else None,</span>
+            <span class="s2">&quot;alphabet&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">,</span>
+            <span class="s2">&quot;transitions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">,</span>
+            <span class="s2">&quot;init_state&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_state</span><span class="p">,</span>
+            <span class="s2">&quot;pref_graph&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="c1"># &quot;nodes&quot;: {u: {&quot;name&quot;: data[&quot;name&quot;], &quot;partition&quot;: {state2node[u] for u in data[&quot;partition&quot;]}}</span>
+                <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">]}</span>
+                          <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)},</span>
+                <span class="c1"># &quot;edges&quot;: {u: v for u, v in self.pref_graph.edges()}</span>
+                <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pref_edges</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">obj_dict</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.deserialize">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.deserialize">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">):</span>
+        <span class="n">aut</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">])</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;alphabet&quot;</span><span class="p">]))</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">transitions</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;transitions&quot;</span><span class="p">]</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">init_state</span> <span class="o">=</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;init_state&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;pref_graph&quot;</span><span class="p">][</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">aut</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">obj_dict</span><span class="p">[</span><span class="s2">&quot;pref_graph&quot;</span><span class="p">][</span><span class="s2">&quot;edges&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">:</span>
+                <span class="n">aut</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+
+        <span class="n">aut</span><span class="o">.</span><span class="n">_num_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aut</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">_num_nodes</span> <span class="o">=</span> <span class="n">aut</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+        <span class="n">aut</span><span class="o">.</span><span class="n">_inv_state</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">aut</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="c1"># aut._inv_nodes = {data[&quot;name&quot;]: k for k, data in aut.pref_graph.nodes(data=True)}</span>
+
+        <span class="k">return</span> <span class="n">aut</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.add_state">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_states</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">uid</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_num_states</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">uid</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.get_states">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_states">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">state2node</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">for</span> <span class="n">partition_label</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">]:</span>
+                    <span class="n">sid</span> <span class="o">=</span> <span class="n">state2node</span><span class="p">[</span><span class="n">state</span><span class="p">]</span>
+                    <span class="n">state_dict</span><span class="p">[</span><span class="n">sid</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partition_label</span>
+
+            <span class="k">return</span> <span class="n">state_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.add_transition">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_transition">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">cond</span><span class="p">):</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+        <span class="n">vid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">cond</span><span class="p">:</span> <span class="n">vid</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.get_state_id">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_state_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_state_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inv_state</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.add_class">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_class">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls_name</span><span class="p">):</span>
+        <span class="n">cls_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inv_nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cls_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cls_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_nodes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">cls_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="nb">set</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inv_nodes</span><span class="p">[</span><span class="n">cls_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls_id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_num_nodes</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">cls_id</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.add_state_to_class">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state_to_class">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_state_to_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls_id</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">cls_id</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">q</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.get_class_name">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.get_class_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_class_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls_id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">cls_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="PrefAutomaton.add_pref_edge">
+<a class="viewcode-back" href="../../prefltlf2pdfa.html#prefltlf2pdfa.prefltlf.PrefAutomaton.add_pref_edge">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_pref_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_id</span><span class="p">,</span> <span class="n">target_id</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span>
+            <span class="n">source_id</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cannot add preference edge. </span><span class="si">{</span><span class="n">source_id</span><span class="si">=}</span><span class="s2"> not in preference graph. &quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span>
+            <span class="n">target_id</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cannot add preference edge. </span><span class="si">{</span><span class="n">target_id</span><span class="si">=}</span><span class="s2"> not in preference graph. &quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pref_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">source_id</span><span class="p">,</span> <span class="n">target_id</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Abhishek N. Kulkarni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

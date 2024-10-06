@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to ggsolver’s documentation! &#8212; ggsolver 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/cloud.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+    
+    
+     
+        <script src="_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation Instructions" href="install.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="install.html" title="Installation Instructions"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Welcome to ggsolver’s documentation!</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition p.admonition-title {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<section id="welcome-to-ggsolver-s-documentation">
+<h1>Welcome to ggsolver’s documentation!<a class="headerlink" href="#welcome-to-ggsolver-s-documentation" title="Permalink to this heading">¶</a></h1>
+<p><cite>ggsolver</cite> is a python library containing set-based solvers for synthesis of winning strategies in two-player games on graphs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This project is under active development.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">ggsolver Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation Instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#docker-image-other-os">Docker Image (other OS)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/graph.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/models.html">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#automaton">Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#tsys">TSys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#game">Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#solver">Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#deterministicstrategy">DeterministicStrategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/models.html#nondeterministicstrategy">NonDeterministicStrategy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/automata.html">Automata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/automata.html#dfa-deterministic-finite-automaton">DFA: Deterministic Finite Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/automata.html#monitor-deterministic-safety-automaton">Monitor: Deterministic Safety Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/automata.html#dba-deterministic-buchi-automaton">DBA: Deterministic Buchi Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/automata.html#dcba-deterministic-co-buchi-automaton">DCBA: Deterministic co-Buchi Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/automata.html#dpa-deterministic-parity-automaton">DPA: Deterministic Parity Automaton</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/dtptb.html">(dtptb) Deterministic Two-Player Turn-based Games</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/dtptb.html#swinreach">SWinReach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/dtptb.html#swinsafe">SWinSafe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/dtptb.html#aswinreach">ASWinReach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/dtptb.html#aswinsafe">ASWinSafe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/mdp.html">(mdp) One-Player Stochastic Games (MDP Games)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/mdp.html#aswinreach">ASWinReach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/mdp.html#pwinreach">PWinReach</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/logic.html">Logic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/logic.html#automaton">Automaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/logic.html#spotautomaton">SpotAutomaton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/logic.html#pl">PL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/logic.html#scltl">ScLTL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/logic.html#ltl">LTL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/graphs.html">Graph class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/models_tsys.html">TSys class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/i_spot.html">SpotAutomaton class</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="#">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to ggsolver’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="install.html"
+                          title="Next page">&rarr; Installation Instructions</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="install.html" title="Installation Instructions"
+             >next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">ggsolver 0.1.6 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Welcome to ggsolver’s documentation!</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Abhishek N. Kulkarni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

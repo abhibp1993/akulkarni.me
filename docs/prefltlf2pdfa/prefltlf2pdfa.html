@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prefltlf2pdfa package &mdash; prefltlf2pdfa 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to prefltlf2pdfa’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            prefltlf2pdfa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">prefltlf2pdfa package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prefltlf2pdfa.prefltlf">prefltlf2pdfa.prefltlf module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_class"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_pref_edge"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_pref_edge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state_to_class"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_state_to_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_transition"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.add_transition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.deserialize"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_class_name"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_class_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_state_id"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_state_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_states"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.get_states()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.serialize"><code class="docutils literal notranslate"><span class="pre">PrefAutomaton.serialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf"><code class="docutils literal notranslate"><span class="pre">PrefLTLf</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.raw_spec"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.raw_spec</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.atoms"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.atoms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.alphabet"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.alphabet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.phi"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.phi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.relation"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.relation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.MAXIMAL_SEMANTICS"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.MAXIMAL_SEMANTICS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.deserialize"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.from_file"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.parse"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.parse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.serialize"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf.translate"><code class="docutils literal notranslate"><span class="pre">PrefLTLf.translate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prefltlf2pdfa.semantics">prefltlf2pdfa.semantics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_exists_forall"><code class="docutils literal notranslate"><span class="pre">semantics_exists_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_forall_exists"><code class="docutils literal notranslate"><span class="pre">semantics_forall_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_forall_forall"><code class="docutils literal notranslate"><span class="pre">semantics_forall_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_mp_exists_forall"><code class="docutils literal notranslate"><span class="pre">semantics_mp_exists_forall()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_mp_forall_exists"><code class="docutils literal notranslate"><span class="pre">semantics_mp_forall_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.semantics.semantics_mp_forall_forall"><code class="docutils literal notranslate"><span class="pre">semantics_mp_forall_forall()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prefltlf2pdfa.utils">prefltlf2pdfa.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.utils.ltlf2dfa"><code class="docutils literal notranslate"><span class="pre">ltlf2dfa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.utils.maximal_outcomes"><code class="docutils literal notranslate"><span class="pre">maximal_outcomes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.utils.outcomes"><code class="docutils literal notranslate"><span class="pre">outcomes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.utils.vectorize"><code class="docutils literal notranslate"><span class="pre">vectorize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prefltlf2pdfa.viz">prefltlf2pdfa.viz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.viz.paut2base64"><code class="docutils literal notranslate"><span class="pre">paut2base64()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.viz.paut2dot"><code class="docutils literal notranslate"><span class="pre">paut2dot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.viz.paut2png"><code class="docutils literal notranslate"><span class="pre">paut2png()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prefltlf2pdfa.viz.paut2svg"><code class="docutils literal notranslate"><span class="pre">paut2svg()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prefltlf2pdfa">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">prefltlf2pdfa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">prefltlf2pdfa package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/prefltlf2pdfa.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prefltlf2pdfa-package">
+<h1>prefltlf2pdfa package<a class="headerlink" href="#prefltlf2pdfa-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-prefltlf2pdfa.prefltlf">
+<span id="prefltlf2pdfa-prefltlf-module"></span><h2>prefltlf2pdfa.prefltlf module<a class="headerlink" href="#module-prefltlf2pdfa.prefltlf" title="Link to this heading"></a></h2>
+<p>Module for handling preference LTLf formulas and converting them to preference automata.</p>
+<p>This module utilizes the <cite>ltlf2dfa</cite> library to parse and process LTLf formulas
+into preference deterministic finite automata (PDFA). It also provides functions for
+validating and manipulating preference automata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The module checks for the presence of the <cite>mona</cite> tool, which is essential
+for translating LTLf to PDFA. If <cite>mona</cite> is not found, a warning message is printed
+to inform the user. In this case, the <cite>translate</cite> functionality may not work properly,
+but the remaining functions work okay.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.prefltlf.</span></span><span class="sig-name descname"><span class="pre">PrefAutomaton</span></span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.add_class">
+<span class="sig-name descname"><span class="pre">add_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.add_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_class" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.add_pref_edge">
+<span class="sig-name descname"><span class="pre">add_pref_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.add_pref_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_pref_edge" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.add_state">
+<span class="sig-name descname"><span class="pre">add_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.add_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.add_state_to_class">
+<span class="sig-name descname"><span class="pre">add_state_to_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.add_state_to_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_state_to_class" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.add_transition">
+<span class="sig-name descname"><span class="pre">add_transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.add_transition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.add_transition" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.deserialize">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.deserialize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.get_class_name">
+<span class="sig-name descname"><span class="pre">get_class_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.get_class_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_class_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.get_state_id">
+<span class="sig-name descname"><span class="pre">get_state_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.get_state_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_state_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.get_states">
+<span class="sig-name descname"><span class="pre">get_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.get_states"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.get_states" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefAutomaton.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefAutomaton.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefAutomaton.serialize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.prefltlf.</span></span><span class="sig-name descname"><span class="pre">PrefLTLf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a PrefLTLf (Preference Linear Temporal Logic over Finite Traces) formula.</p>
+<p>The class is used to define, parse, and serialize PrefLTLf specifications,
+as well as to translate the formulas into automata.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.raw_spec">
+<span class="sig-name descname"><span class="pre">raw_spec</span></span><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.raw_spec" title="Link to this definition"></a></dt>
+<dd><p>The raw specification of the PrefLTLf formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.atoms" title="Link to this definition"></a></dt>
+<dd><p>Set of atomic propositions appearing in the PrefLTLf specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.alphabet">
+<span class="sig-name descname"><span class="pre">alphabet</span></span><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.alphabet" title="Link to this definition"></a></dt>
+<dd><p>A list representing the alphabet for the specification, or <cite>None</cite> if not provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.phi">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.phi" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of LTLf formulas appearing in the PrefLTLf specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.relation">
+<span class="sig-name descname"><span class="pre">relation</span></span><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.relation" title="Link to this definition"></a></dt>
+<dd><p>A set of triples (PREF_TYPE, LTLf, LTLf) constructed based on the given PrefLTLf specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initializes the PrefLTLf formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> (<em>str</em>) – The raw specification of the PrefLTLf formula.</p></li>
+<li><p><strong>alphabet</strong> (<em>list</em><em>, </em><em>optional</em>) – The alphabet for the specification (default is None).</p></li>
+<li><p><strong>**kwargs</strong> – <p>Additional options for parsing and handling the formula.</p>
+<ul>
+<li><dl class="simple">
+<dt>skip_parse<span class="classifier">bool, optional</span></dt><dd><p>If True, skips the parsing of the formula during initialization. Default is False.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>auto_complete<span class="classifier">str, optional</span></dt><dd><p>Specifies how the formula should handle incomplete preferences when parsing. The acceptable options are:</p>
+<ul class="simple">
+<li><p>”none”: No auto-completion. The formula must be fully specified, and any incompleteness will raise an error.</p></li>
+<li><p>”incomparable”: If preferences are incomplete, auto-completes them by marking certain conditions as incomparable.</p></li>
+<li><p>”minimal”: Auto-completes the preferences by adding the minimal number of relations needed to make the preferences complete.</p></li>
+</ul>
+<p>Default is “none”.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.MAXIMAL_SEMANTICS">
+<span class="sig-name descname"><span class="pre">MAXIMAL_SEMANTICS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;function</span> <span class="pre">semantics_mp_forall_exists&gt;,</span> <span class="pre">&lt;function</span> <span class="pre">semantics_mp_exists_forall&gt;,</span> <span class="pre">&lt;function</span> <span class="pre">semantics_mp_forall_forall&gt;]</span></em><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.MAXIMAL_SEMANTICS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.deserialize">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.deserialize" title="Link to this definition"></a></dt>
+<dd><p>Creates a PrefLTLf formula from a serialized dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj_dict</strong> (<em>dict</em>) – A dictionary representing the serialized PrefLTLf formula.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new instance of the PrefLTLf formula.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf" title="prefltlf2pdfa.prefltlf.PrefLTLf">PrefLTLf</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.from_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_complete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.from_file" title="Link to this definition"></a></dt>
+<dd><p>Reads a PrefLTLf formula from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<em>str</em>) – The file path to read the formula from.</p></li>
+<li><p><strong>alphabet</strong> (<em>list</em><em>, </em><em>optional</em>) – The alphabet for the specification (default is None).</p></li>
+<li><p><strong>auto_complete</strong> (<em>str</em><em>, </em><em>optional</em>) – The auto-completion method to use (default is “none”).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new instance of the PrefLTLf formula.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefLTLf" title="prefltlf2pdfa.prefltlf.PrefLTLf">PrefLTLf</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auto_complete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses the raw PrefLTLf formula and constructs the atomic propositions, relation, and LTLf formulas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>auto_complete</strong> (<em>str</em><em>, </em><em>optional</em>) – The method to use for auto-completion (default is “none”).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing
+- phi: Dictionary of {formula-id: LTLf Formula}
+- model: Set of binary relation of form (a, b) representing a is weakly preferred to b.
+- atoms: Set of strings representing atoms.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.serialize" title="Link to this definition"></a></dt>
+<dd><p>Serializes the PrefLTLf formula into a JSON-compatible dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary representing the serialized PrefLTLf formula.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prefltlf2pdfa.prefltlf.PrefLTLf.translate">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantics=&lt;function</span> <span class="pre">semantics_mp_forall_exists&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/prefltlf.html#PrefLTLf.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.prefltlf.PrefLTLf.translate" title="Link to this definition"></a></dt>
+<dd><p>Translates the PrefLTLf formula into a preference automaton under the given semantics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>semantics</strong> (<em>function</em><em>, </em><em>optional</em>) – The semantics function to use for translation (default is <cite>semantics_mp_forall_exists</cite>).</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show progress during translation (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting preference automaton.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton" title="prefltlf2pdfa.prefltlf.PrefAutomaton">PrefAutomaton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-prefltlf2pdfa.semantics">
+<span id="prefltlf2pdfa-semantics-module"></span><h2>prefltlf2pdfa.semantics module<a class="headerlink" href="#module-prefltlf2pdfa.semantics" title="Link to this heading"></a></h2>
+<p>This module defines semantic evaluation functions for comparing two
+subsets of LTLf formulas given a preorder on LTLf formulas.</p>
+<dl class="simple">
+<dt>Functions:</dt><dd><ul class="simple">
+<li><p><cite>semantics_forall_exists</cite>: Evaluates under “forall_exists” condition.</p></li>
+<li><p><cite>semantics_exists_forall</cite>: Evaluates under “exists_forall” condition.</p></li>
+<li><p><cite>semantics_forall_forall</cite>: Evaluates under “forall_forall” condition.</p></li>
+<li><p><cite>semantics_mp_forall_exists</cite>: Evaluates under “forall_exists” condition on maximal elements of two subsets of LTLf formulas.</p></li>
+<li><p><cite>semantics_mp_exists_forall</cite>: Evaluates under “exists_forall” condition on maximal elements of two subsets of LTLf formulas.</p></li>
+<li><p><cite>semantics_mp_forall_forall</cite>: Evaluates under “forall_forall” condition on maximal elements of two subsets of LTLf formulas.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_exists_forall">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_exists_forall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_exists_forall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_exists_forall" title="Link to this definition"></a></dt>
+<dd><p>Check if there exists a formula in the source set such that all formulas
+in the target set satisfy the given preorder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_forall_exists">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_forall_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_forall_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_forall_exists" title="Link to this definition"></a></dt>
+<dd><p>Check if for all formulas in the source set, there exists a formula
+in the target set that satisfies the given preorder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_forall_forall">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_forall_forall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_forall_forall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_forall_forall" title="Link to this definition"></a></dt>
+<dd><p>Check if all formulas in the source set satisfy the preorder for all
+formulas in the target set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_mp_exists_forall">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_mp_exists_forall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_mp_exists_forall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_mp_exists_forall" title="Link to this definition"></a></dt>
+<dd><p>Check if there exists a maximal outcome in the source set such that all maximal
+outcomes in the target set satisfy the given preorder.</p>
+<p>This is a maximal-preorder variant of the <cite>semantics_exists_forall</cite> function,
+where the maximal outcomes of both the source and target sets are computed
+before evaluating the preorder condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>semantics_exists_forall: The base function for evaluating the condition.
+utils.maximal_outcomes: A utility function to compute maximal outcomes.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_mp_forall_exists">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_mp_forall_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_mp_forall_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_mp_forall_exists" title="Link to this definition"></a></dt>
+<dd><p>Check if for all maximal outcomes in the source set, there exists a maximal outcome
+in the target set that satisfies the given preorder.</p>
+<p>This is a maximal-preorder variant of the <cite>semantics_forall_exists</cite> function,
+where the maximal outcomes of both the source and target sets are computed
+before evaluating the preorder condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>semantics_forall_exists: The base function for evaluating the condition.
+utils.maximal_outcomes: A utility function to compute maximal outcomes.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.semantics.semantics_mp_forall_forall">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.semantics.</span></span><span class="sig-name descname"><span class="pre">semantics_mp_forall_forall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/semantics.html#semantics_mp_forall_forall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.semantics.semantics_mp_forall_forall" title="Link to this definition"></a></dt>
+<dd><p>Check if all maximal outcomes in the source set satisfy the preorder
+for all maximal outcomes in the target set.</p>
+<p>This is a maximal-preorder variant of the <cite>semantics_forall_forall</cite> function,
+where the maximal outcomes of both the source and target sets are computed
+before evaluating the preorder condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preorder</strong> (<em>list</em><em> of </em><em>tuple</em>) – The preorder defining the preference relation.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of binary values representing the source formulas.</p></li>
+<li><p><strong>target</strong> (<em>list</em>) – List of binary values representing the target formulas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the semantic condition is satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>semantics_forall_forall: The base function for evaluating the condition.
+utils.maximal_outcomes: A utility function to compute maximal outcomes.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-prefltlf2pdfa.utils">
+<span id="prefltlf2pdfa-utils-module"></span><h2>prefltlf2pdfa.utils module<a class="headerlink" href="#module-prefltlf2pdfa.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.utils.ltlf2dfa">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.utils.</span></span><span class="sig-name descname"><span class="pre">ltlf2dfa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ltlf_formula</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/utils.html#ltlf2dfa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.utils.ltlf2dfa" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.utils.maximal_outcomes">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.utils.</span></span><span class="sig-name descname"><span class="pre">maximal_outcomes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcomes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/utils.html#maximal_outcomes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.utils.maximal_outcomes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.utils.outcomes">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.utils.</span></span><span class="sig-name descname"><span class="pre">outcomes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/utils.html#outcomes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.utils.outcomes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.utils.vectorize">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.utils.</span></span><span class="sig-name descname"><span class="pre">vectorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcomes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/utils.html#vectorize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.utils.vectorize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-prefltlf2pdfa.viz">
+<span id="prefltlf2pdfa-viz-module"></span><h2>prefltlf2pdfa.viz module<a class="headerlink" href="#module-prefltlf2pdfa.viz" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.viz.paut2base64">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.viz.</span></span><span class="sig-name descname"><span class="pre">paut2base64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dot_semi_aut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_pref_graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/viz.html#paut2base64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.viz.paut2base64" title="Link to this definition"></a></dt>
+<dd><p>Convert the semi-automaton and preference graph images to base64 format. Useful for display on html pages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dot_semi_aut</strong> (<em>AGraph</em>) – The DOT representation of the semi-automaton.</p></li>
+<li><p><strong>dot_pref_graph</strong> (<em>AGraph</em>) – The DOT representation of the preference graph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing two base64 encoded strings (semi-automaton and preference graph).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.viz.paut2dot">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.viz.</span></span><span class="sig-name descname"><span class="pre">paut2dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton" title="prefltlf2pdfa.prefltlf.PrefAutomaton"><span class="pre">PrefAutomaton</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/viz.html#paut2dot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.viz.paut2dot" title="Link to this definition"></a></dt>
+<dd><p>Generate images for semi-automaton and preference graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paut</strong> (<a class="reference internal" href="#prefltlf2pdfa.prefltlf.PrefAutomaton" title="prefltlf2pdfa.prefltlf.PrefAutomaton"><em>PrefAutomaton</em></a>) – The preference automaton to convert.</p></li>
+<li><p><strong>kwargs</strong> – Additional options for customizing the representation.
+- show_sa_state (bool): If True, display the state names in the semi-automaton; otherwise, use state IDs.
+- show_class (bool): If True, append the state class to the state names in the semi-automaton.
+- show_color (bool): If True, apply a color palette to the nodes based on their partitions.
+- show_pg_state (bool): If True, display the names of nodes in the preference graph; otherwise, use node IDs.
+- engine (str): The drawing engine to use for rendering (default is “dot”).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing two images as base64 encoded strings (semi-automaton and preference graph).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.viz.paut2png">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.viz.</span></span><span class="sig-name descname"><span class="pre">paut2png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dot_semi_aut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_pref_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/viz.html#paut2png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.viz.paut2png" title="Link to this definition"></a></dt>
+<dd><p>Save the semi-automaton and preference graph as PNG images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dot_semi_aut</strong> (<em>AGraph</em>) – The DOT representation of the semi-automaton.</p></li>
+<li><p><strong>dot_pref_graph</strong> (<em>AGraph</em>) – The DOT representation of the preference graph.</p></li>
+<li><p><strong>fpath</strong> (<em>str</em>) – The file path where images should be saved.</p></li>
+<li><p><strong>fname</strong> (<em>str</em>) – The base name for the output files (without extension).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prefltlf2pdfa.viz.paut2svg">
+<span class="sig-prename descclassname"><span class="pre">prefltlf2pdfa.viz.</span></span><span class="sig-name descname"><span class="pre">paut2svg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dot_semi_aut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_pref_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/prefltlf2pdfa/viz.html#paut2svg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prefltlf2pdfa.viz.paut2svg" title="Link to this definition"></a></dt>
+<dd><p>Save the semi-automaton and preference graph as SVG images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dot_semi_aut</strong> (<em>AGraph</em>) – The DOT representation of the semi-automaton.</p></li>
+<li><p><strong>dot_pref_graph</strong> (<em>AGraph</em>) – The DOT representation of the preference graph.</p></li>
+<li><p><strong>fpath</strong> (<em>str</em>) – The file path where images should be saved.</p></li>
+<li><p><strong>fname</strong> (<em>str</em>) – The base name for the output files (without extension).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-prefltlf2pdfa">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-prefltlf2pdfa" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to prefltlf2pdfa’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Abhishek N. Kulkarni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
