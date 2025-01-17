@@ -32,7 +32,6 @@ I am deeply passionate about leveraging mathematical and computational rigor to 
 My currrent research employs *formal methods and logic* and *game-theory* to design *trustworthy and cognitively realistic autonomous systems* that enables them to exhibit human-like behaviors such as opportunism, deception, and preference-aware planning. 
 
 My current projects include: 
-
     - *Game-theoretic Synthesis of Deceptive Strategies:* In a two-player adversarial interaction with asymmetric information, how can the player with superior information gain advantage over the opponent by employing deception? 
 
     - *Opportunistic Planning with Incomplete Preferences over Temporal Logic Objectives:* Given an incomplete (i.e., partial) preference over a set of linear temporal logic (LTL) formulas expressing temporal goals for an agent, how to synthesize a strategy that achieves the most preferred goal while reasoning about the uncertainties in the stochastic environment?
