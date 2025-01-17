@@ -4,22 +4,32 @@
 
 ~~~
 {}{img_left}{res/images/whatsapp-dp.jpg}{Abhishek}{180px}
-*Ph.D. Student*,
-\n[https://www.ece.ufl.edu/ Electrical and Computer Engineering],
-\n[https://www.ufl.edu/ University of Florida],
-\nGainesville, FL, USA.
-\n\n *Email*: [a.kulkarni2@ufl.edu a.kulkarni2@ufl.edu] 
+*Postdoctoral Fellow*,
+\n[https://oden.utexas.edu/ Center for Autonomy, Oden Institute],
+\n[https://www.utexas.edu/ University of Texas at Austin],
+\nAustin, TX, USA.
+\n\n *Email*: [abhishek.kulkarni@austin.utexas.edu abhishek.kulkarni@austin.utexas.edu] 
 \n\n *Profiles*: 
 \[[https://scholar.google.com/citations?user=fVxqrBkAAAAJ&hl=en Google Scholar]\] 
 \[[https://github.com/abhibp1993 Github]\] 
-\[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\] 
-\[[https://www.researchgate.net/profile/Abhishek_Kulkarni25 ResearchGate]\] 
+\[[http://www.linkedin.com/in/abhibp1993 LinkedIn]\]  
 ~~~
+
+
+== About 
+
+I am a Postdoctoral Fellow at the [https://oden.utexas.edu/ Center for Autonomy] at the University of Texas at Austin, working with [https://autonomy.oden.utexas.edu/profiles/ufuk-topcu Prof. Ufuk Topcu]. 
+I earned my Ph.D. in Electrical and Computer Engineering from the [https://ufl.edu University of Florida], Gainesville, in 2023, under the guidance of [https://fujie.ece.ufl.edu/ Prof. Jie Fu]. 
+Prior to that, I completed an M.S. in Robotics Engineering at [https://www.wpi.edu/academics/departments/robotics-engineering Worcester Polytechnic Institute], Worcester, in 2021, also under the mentorship of [https://fujie.ece.ufl.edu/ Prof. Jie Fu].
+
+My research spans the interdisciplinary fields of computer science, control, and decision-making, with a strong emphasis on game theory, formal methods, motion planning, and multi-agent systems. Recently, my work has focused on advancing these foundations to address challenges in multi-agent systems and large-scale, LLM-driven games involving language-based negotiations.
+
+I am deeply passionate about leveraging mathematical and computational rigor to tackle real-world problems, particularly in the domains of autonomy, robotics, and the security of cyber-physical systems.
 
 
 == Research 
 
-My research focus is to employ *formal methods and logic* and *game-theory* to design *trustworthy and cognitively realistic autonomous systems* that enables them to exhibit human-like behaviors such as opportunism, deception, and preference-aware planning. 
+My currrent research employs *formal methods and logic* and *game-theory* to design *trustworthy and cognitively realistic autonomous systems* that enables them to exhibit human-like behaviors such as opportunism, deception, and preference-aware planning. 
 
 My current projects include: 
 
