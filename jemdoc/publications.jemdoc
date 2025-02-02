@@ -5,13 +5,9 @@
 == Journal Papers
 
 *Under Review*
-- *Integrated Resource Allocation and Strategy Synthesis in Safety Games on Graphs with Deception*
-\nAbhishek N. Kulkarni, Matthew S. Cohen, Charles A. Kamhoua, and Jie Fu
-\n/Aritificial Intelligence Journal/   
-
 - *Preference-Based Planning in Stochastic Environments: From Partially-Ordered Temporal Goals to Most Preferred Policies*
 \nHazhar Rahmani, Abhishek N Kulkarni, and Jie Fu
-\n/International Journal of Robotics Research/   
+\n/Automatica/   
 \n\[[https://arxiv.org/pdf/2403.18212.pdf PDF]\] 
 
 *2022*
@@ -45,19 +41,20 @@
 - *Sequential Decision Making in Stochastic Games with Incomplete Preferences over Temporal Objectives*
 \nAbhishek N. Kulkarni, Jie Fu and Ufuk Topcu
 \nAssociation for the Advancement of Artificial Intelligence Conference (AAAI), 2025.
-
+\n\[[https://arxiv.org/abs/2501.16291 PDF]\]
 
 *2024*
 
 - *Defining and Measuring Deception in Sequential Decision Systems: Application to Network Defense*
 \nYerin Kim, Alexander Benvenuti, Bo Chen, Mustafa Karabag, Abhishek Kulkarni, Nathaniel D Bastian, Ufuk Topcu, Matthew Hale
 \nIEEE Military Communications Conference (MILCOM), 2024.
+\n\[[https://ieeexplore.ieee.org/document/10773660/ PDF]\]
 
 
 - *Logical Specifications-guided Dynamic Task Sampling for Reinforcement Learning Agents*
 \nYash Shukla, Tanushree Burman, Abhishek Kulkarni, Robert Wright, Alvaro Velasquez, and Jivko Sinapov 
 \nInternational Conference on Automated Planning and Scheduling (ICAPS), 2024.
-
+\n\[[https://arxiv.org/abs/2402.03678 PDF]\]
 
 *2023*
 - *Opportunistic Qualitative Planning in Stochastic Systems with Incomplete Preferences over Reachability Objectives* 
@@ -156,6 +153,12 @@
 
 
 == Technical/Project Reports
+
+*2024*
+- *Integrated Resource Allocation and Strategy Synthesis in Safety Games on Graphs with Deception*
+\nAbhishek N. Kulkarni, Matthew S. Cohen, Charles A. Kamhoua, and Jie Fu
+ \n\[[https://arxiv.org/pdf/2407.14436 PDF]\] 
+
 
 *2021*
 - *Synthesis of Deceptive Strategies in Reachability Games with Action Misperception*  
